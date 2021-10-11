@@ -1,9 +1,6 @@
 "use strict";
 
-const {
-    db,
-    models: { User }
-} = require("../server/db");
+const {db, models: {User, Article} } = require('../server/db')\
 
 /**
  * seed - this function clears the database, updates tables to
@@ -16,8 +13,9 @@ const users = [
 ];
 
 async function seed() {
-    await db.sync({ force: true }); // clears db and matches models to tables
-    console.log("db synced!");
+
+  await db.sync({ force: true }) // clears db and matches models to tables
+  console.log('db synced!')
 
     // Creating Users
     await Promise.all(
@@ -26,14 +24,22 @@ async function seed() {
         })
     );
 
-    console.log(`seeded ${users.length} users`);
-    console.log(`seeded successfully`);
-    return {
-        users: {
-            cody: users[0],
-            murphy: users[1]
-        }
-    };
+   // Creating Articles
+   const articles = await Promise.all([
+    Article.create({ url: 'https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/'}),
+    Article.create({ url: 'https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig' }),
+  ])
+
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${articles.length} articles`)
+  console.log(`seeded successfully`)
+  
+  return {
+    users: {
+      cody: users[0],
+      murphy: users[1]
+    }
+  }
 }
 
 /*
