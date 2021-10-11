@@ -8,6 +8,17 @@ const setTab = (tab) => {
   }
 }
 // Thunks
+const fetchTab = () => {
+  return (dispatch) => {
+    try {
+      let queryOptions = { active: true, currentWindow: true}
+      let [tab] = await chrome.tabs.query(queryOptions)
+      dispatch(setTab(tab))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 // Reducer
 export default(state = {}, action) => {
   switch (action.type) {
