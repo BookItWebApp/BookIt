@@ -2,7 +2,7 @@
 
 const {
     db,
-    models: { User, Article, Tagging, UserArticle }
+    models: { User, Article, Tagging, UserArticle, Tag }
 } = require("../server/db");
 
 /**
@@ -34,46 +34,54 @@ async function seed() {
             return Tagging.create(tagging);
         })
     );
+  
 
-    // Creating Articles
-    const articles = await Promise.all([
-        Article.create({
-            url: "https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/"
-        }),
-        Article.create({
-            url: "https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig"
-        })
-    ]);
+  // Creating Articles
+  const articles = await Promise.all([
+    Article.create({
+      url: "https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/",
+    }),
+    Article.create({
+      url: "https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig",
+    }),
+  ]);
 
-    //Creating UserArticles
+  //Creating UserArticles
 
-    const userArticles = [
-        {
-            featured: false,
-            name: "Google",
-            userId: "123e4567-e89b-12d3-a456-426614174000",
-            articleId: 5,
-            readAt: null
-        }
-    ];
+  const userArticles = [
+    {
+      featured: false,
+      name: "Google",
+      userId: "123e4567-e89b-12d3-a456-426614174000",
+      articleId: 5,
+      readAt: null,
+    },
+  ];
 
-    await Promise.all(
-        userArticles.map((userArticle) => {
-            return UserArticle.create(userArticle);
-        })
-    );
+  await Promise.all(
+    userArticles.map((userArticle) => {
+      return UserArticle.create(userArticle);
+    })
+  );
+  
+  //Create Tags
+  const tags = await Promise.all([
+    Tag.create({ name: 'news'}),
+    Tag.create({ name: 'notNews' }),
+  ])
 
-    console.log(`seeded ${users.length} users`);
-    console.log(`seeded ${articles.length} articles`);
-    console.log(`seeded ${userArticles.length} userArticles`);
-    console.log(`seeded successfully`);
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${articles.length} articles`);
+  console.log(`seeded ${userArticles.length} userArticles`);
+  console.log(`seeded ${tags.length} tags`)
+  console.log(`seeded successfully`);
 
-    return {
-        users: {
-            cody: users[0],
-            murphy: users[1]
-        }
-    };
+  return {
+    users: {
+      cody: users[0],
+      murphy: users[1],
+    },
+  };
 }
 
 /*
