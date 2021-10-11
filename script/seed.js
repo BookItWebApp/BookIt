@@ -1,8 +1,9 @@
 "use strict";
 
 const {
-  db,
-  models: { User, Article, UserArticle },
+
+    db,
+    models: { User, Article, Tagging, UserArticle}
 } = require("../server/db");
 
 /**
@@ -15,6 +16,8 @@ const users = [
   { username: "murphy", password: "123", email: "murphy@email.com" },
 ];
 
+
+
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
@@ -25,6 +28,14 @@ async function seed() {
       return User.create(user);
     })
   );
+  
+    // Creating Taggings
+    await Promise.all(
+        taggings.map((tagging) => {
+            return Tagging.create(tagging);
+        })
+    );
+  
 
   // Creating Articles
   const articles = await Promise.all([
