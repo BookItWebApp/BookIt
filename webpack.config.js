@@ -1,5 +1,3 @@
-const isDev = process.env.NODE_ENV === "development";
-
 module.exports = {
   mode: isDev ? "development" : "production",
   entry: {
@@ -17,6 +15,7 @@ module.exports = {
   watchOptions: {
     ignored: /node_modules/
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -31,4 +30,4 @@ module.exports = {
       }
     ]
   }
-};
+}
