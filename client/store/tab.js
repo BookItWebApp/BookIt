@@ -8,7 +8,7 @@ const setTab = (tab) => {
   }
 }
 // Thunks
-const fetchTab = () => {
+export const fetchTab = () => {
   return (dispatch) => {
     try {
       let queryOptions = { active: true, currentWindow: true}
