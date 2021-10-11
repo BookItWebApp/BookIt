@@ -1,6 +1,14 @@
-const db = require("./db");
+//this is the access point for all things database related!
 
-// register models
-require("./models");
+const db = require('./db')
 
-module.exports = db;
+const User = require('./models/User')
+
+//associations could go here!
+
+module.exports = {
+  db,
+  models: {
+    User,
+  },
+}

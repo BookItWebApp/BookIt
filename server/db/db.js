@@ -1,37 +1,25 @@
-const Sequelize = require("sequelize");
-const pkg = require("../../package.json");
+const Sequelize = require('sequelize')
+const pkg = require('../../package.json')
 
-const databaseName =
-  pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
+const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
-let config;
+const config = {
+  logging: false
+};
 
-if (process.env.DATABASE_URL) {
-  config = {
-    logging: false,
-    ssl: true,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
+if(process.env.LOGGING === 'true'){
+  delete config.logging
+}
+
+//https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
+if(process.env.DATABASE_URL){
+  config.dialectOptions = {
+    ssl: {
+      rejectUnauthorized: false
     }
-  };
-} else {
-  config = {
-    logging: false
   };
 }
 
 const db = new Sequelize(
-  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
-  config
-);
-
-module.exports = db;
-
-// This is a global Mocha hook used for resource cleanup.
-// Otherwise, Mocha v4+ does not exit after tests.
-if (process.env.NODE_ENV === "test") {
-  after("close database connection", () => db.close());
-}
+  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`, config)
+module.exports = db
