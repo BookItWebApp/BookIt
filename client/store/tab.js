@@ -9,7 +9,7 @@ const setTab = (tab) => {
 }
 // Thunks
 export const fetchTab = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     try {
       let queryOptions = { active: true, currentWindow: true}
       let [tab] = await chrome.tabs.query(queryOptions)
