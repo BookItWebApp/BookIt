@@ -2,13 +2,13 @@ const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
   mode: isDev ? "development" : "production",
-  entry: [
-    "@babel/polyfill", // enables async-await
-    "./client/index.js"
-  ],
+  entry: {
+    bundle: __dirname + "/client/index.js", 
+    popup: __dirname + "/client/popup/index.js"
+  },
   output: {
     path: __dirname,
-    filename: "./public/bundle.js"
+    filename: "./public/[name].js"
   },
   resolve: {
     extensions: [".js", ".jsx"]
