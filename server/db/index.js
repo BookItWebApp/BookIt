@@ -4,7 +4,7 @@ const db = require("./db");
 
 const User = require("./models/User");
 const Article = require("./models/Article");
-const UserArticle = require("./models/userArticle");
+const UserArticle = require("./models/UserArticle");
 
 //associations could go here!
 
