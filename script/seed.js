@@ -1,6 +1,5 @@
 "use strict";
 
-
 const {
     db,
     models: { User, Article, Tagging, UserArticle, Tag}
@@ -35,7 +34,6 @@ async function seed() {
             return Tagging.create(tagging);
         })
     );
-  
 
   // Creating Articles
   const articles = await Promise.all([

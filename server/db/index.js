@@ -8,7 +8,6 @@ const Tagging = require("./models/Tagging");
 const Tag = require('./models/Tag')
 const UserArticle = require("./models/UserArticle");
 
-
 //associations could go here!
 
 module.exports = {
@@ -21,3 +20,4 @@ module.exports = {
         UserArticle
     }
 };
+
