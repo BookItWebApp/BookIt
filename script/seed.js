@@ -2,7 +2,7 @@
 
 const {
     db,
-    models: { User, Article, Tagging, UserArticle, Tag}
+    models: { User, Article, Tagging, UserArticle, Tag }
 } = require("../server/db");
 
 /**
@@ -11,23 +11,23 @@ const {
  */
 
 const users = [
-  { username: "cody", password: "123", email: "cody@email.com" },
-  { username: "murphy", password: "123", email: "murphy@email.com" },
+    { username: "cody", password: "123", email: "cody@email.com" },
+    { username: "murphy", password: "123", email: "murphy@email.com" }
 ];
 
-
+const taggings = [{ featured: true }, { featured: false }];
 
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+    await db.sync({ force: true }); // clears db and matches models to tables
+    console.log("db synced!");
 
-  // Creating Users
-  await Promise.all(
-    users.map((user) => {
-      return User.create(user);
-    })
-  );
-  
+    // Creating Users
+    await Promise.all(
+        users.map((user) => {
+            return User.create(user);
+        })
+    );
+
     // Creating Taggings
     await Promise.all(
         taggings.map((tagging) => {
@@ -89,17 +89,17 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
-  try {
-    await seed();
-  } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
-  } finally {
-    console.log("closing db connection");
-    await db.close();
-    console.log("db connection closed");
-  }
+    console.log("seeding...");
+    try {
+        await seed();
+    } catch (err) {
+        console.error(err);
+        process.exitCode = 1;
+    } finally {
+        console.log("closing db connection");
+        await db.close();
+        console.log("db connection closed");
+    }
 }
 
 /*
@@ -108,7 +108,7 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed();
+    runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
