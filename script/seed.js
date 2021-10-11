@@ -1,9 +1,9 @@
 "use strict";
 
-const {
 
+const {
     db,
-    models: { User, Article, Tagging, UserArticle}
+    models: { User, Article, Tagging, UserArticle, Tag}
 } = require("../server/db");
 
 /**
@@ -64,10 +64,17 @@ async function seed() {
       return UserArticle.create(userArticle);
     })
   );
+  
+  //Create Tags
+  const tags = await Promise.all([
+    Tag.create({ name: 'news'}),
+    Tag.create({ name: 'notNews' }),
+  ])
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${articles.length} articles`);
   console.log(`seeded ${userArticles.length} userArticles`);
+  console.log(`seeded ${tags.length} tags`)
   console.log(`seeded successfully`);
 
   return {
