@@ -1,7 +1,6 @@
 "use strict";
 
-const db = require("../server/db");
-const { User } = require("../server/db/models");
+const { db,  models:{User, Article }} = require("../server/db");
 
 async function seed() {
   await db.sync({ force: true });
@@ -12,7 +11,13 @@ async function seed() {
     User.create({ email: "murphy@email.com", password: "123" })
   ]);
 
+  const articles = await Promise.all([
+    Article.create({ url: "https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/"}),
+    Article.create({ url: "https://apnews.com/article/joe-biden-technology-business-china-russia-c9a698542ed95bfa49f9cee0e96ef9a6" })
+  ]);
+
   console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${articles.length} articles`);
   console.log(`seeded successfully`);
 }
 
