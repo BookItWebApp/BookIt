@@ -9,15 +9,22 @@ const {
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
+
+const users = [
+  { username: "cody", password: "123", email: "cody@email.com" },
+  { username: "murphy", password: "123", email: "murphy@email.com" },
+];
+
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
-    User.create({ username: "murphy", password: "123" }),
-  ]);
+  await Promise.all(
+    users.map((user) => {
+      return User.create(user);
+    })
+  );
 
   // Creating Articles
   const articles = await Promise.all([
