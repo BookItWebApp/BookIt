@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
+const Article = require("../models/Article")
 
 const UserArticle = db.define(
   "userArticle",
@@ -39,5 +40,18 @@ const UserArticle = db.define(
     ],
   }
 );
+
+//MODEL METHODS
+//Find all articles belonging to a particular user
+UserArticle.findAllByUser = function(currentUserId) {
+  return this.findAll({
+    where: { userId: currentUserId }}, {
+    include: {
+      model: Article,
+      as: 'URL'
+    }
+  }
+  )
+}
 
 module.exports = UserArticle;
