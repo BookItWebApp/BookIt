@@ -1,6 +1,9 @@
 "use strict";
 
-const {db, models: {User, Article} } = require('../server/db')
+const {
+    db,
+    models: { User, Article, Tagging }
+} = require("../server/db");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -12,10 +15,11 @@ const users = [
     { username: "murphy", password: "123", email: "murphy@email.com" }
 ];
 
-async function seed() {
+const taggings = [{ featured: true }, { featured: true }];
 
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
+async function seed() {
+    await db.sync({ force: true }); // clears db and matches models to tables
+    console.log("db synced!");
 
     // Creating Users
     await Promise.all(
@@ -23,23 +27,33 @@ async function seed() {
             return User.create(user);
         })
     );
+    // Creating Taggings
+    await Promise.all(
+        taggings.map((tagging) => {
+            return Tagging.create(tagging);
+        })
+    );
 
-   // Creating Articles
-   const articles = await Promise.all([
-    Article.create({ url: 'https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/'}),
-    Article.create({ url: 'https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig' }),
-  ])
+    // Creating Articles
+    const articles = await Promise.all([
+        Article.create({
+            url: "https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/"
+        }),
+        Article.create({
+            url: "https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig"
+        })
+    ]);
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${articles.length} articles`)
-  console.log(`seeded successfully`)
-  
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
-  }
+    console.log(`seeded ${users.length} users`);
+    console.log(`seeded ${articles.length} articles`);
+    console.log(`seeded successfully`);
+
+    return {
+        users: {
+            cody: users[0],
+            murphy: users[1]
+        }
+    };
 }
 
 /*
