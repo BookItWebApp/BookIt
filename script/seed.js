@@ -1,6 +1,6 @@
 "use strict";
 
-const {db, models: {User, Article} } = require('../server/db')
+const {db, models: {User, Article, Tag} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -30,10 +30,17 @@ async function seed() {
     Article.create({ url: 'https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig' }),
   ])
 
+  //Create Tags
+  const tags = await Promise.all([
+    Tag.create({ name: 'news'}),
+    Tag.create({ name: 'notNews' }),
+  ])
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${articles.length} articles`)
+  console.log(`seeded ${tags.length} tags`)
   console.log(`seeded successfully`)
-  
+
   return {
     users: {
       cody: users[0],
