@@ -14,7 +14,7 @@ const UserArticle = db.define(
     },
     featured: {
       type: Sequelize.BOOLEAN,
-      allowNull: false,
+      defaultValue: false,
     },
     name: {
       type: Sequelize.TEXT,
