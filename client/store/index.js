@@ -5,11 +5,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import tab from './tab'
 import userArticlesReducer from './UserArticles'
+import ArticlePreview from './SingleArticle'
 
 const reducer = combineReducers({
   auth,
   tab,
-  userArticles: userArticlesReducer })
+  userArticles: userArticlesReducer ,
+  metaData: ArticlePreview})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
