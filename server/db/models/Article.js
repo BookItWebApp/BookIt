@@ -29,9 +29,10 @@ const Article = db.define("article", {
 module.exports = Article;
 
 //METHODS
+//Instance Methods
 //Get open graph data
-Article.metaData = async function(targetUrl) {
-  const { body: html, url } = await got(targetUrl)
-  const metadata = await metascraper({ html, url })
-  return metadata
-}
+Article.prototype.metaData = async function (targetUrl) {
+  const { body: html, url } = await got(targetUrl);
+  const metadata = await metascraper({ html, url });
+  return metadata;
+};

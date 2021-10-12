@@ -15,11 +15,11 @@ const _previewArticle = (article) => {
 
 //THUNKS
 //get preview for single article
-export const previewArticle = (url) => {
+export const previewArticle = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/article/preview/", {
-        params: { url: url },
+      const response = await axios.get("/api/userArticles/meta/", {
+        params: { id: id },
       });
       console.log(response)
       dispatch(_previewArticle(response.data));
