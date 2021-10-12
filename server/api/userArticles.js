@@ -1,7 +1,7 @@
 //ROUTES FOR A SINGLE USERS ARTICLES
 const router = require("express").Router();
 const {
-  models: { UserArticle, Article },
+  models: { UserArticle, Article, Tagging, Tag },
 } = require("../db");
 
 module.exports = router;
@@ -10,16 +10,22 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
   try {
     const allArticles = await UserArticle.findAll({
-      attributes: ["featured", "name", "readAt", "createdAt"],
-      include: {
+      include: [
+        {
         model: Article,
-        attributes: ["id","url"],
-      }})
+        attributes: ["id","url"]},
+        {
+        model: Tagging,
+        include: {
+           model: Tag,
+            }
+          }]
+      })
     res.json(allArticles)
   } catch (err) {
     next(err);
   }
-});
+})
 
 //Retrieve all of a single user's articles
 router.get("/:id", async (req, res, next) => {

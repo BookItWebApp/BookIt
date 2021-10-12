@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const Article = require("../models/Article");
 const Tagging = require("../models/Tagging");
-const Tags = require("../models/Tag");
+const Tag = require("../models/Tag")
 
 const UserArticle = db.define(
   "userArticle",
@@ -48,20 +48,16 @@ const UserArticle = db.define(
 UserArticle.findAllByUser = function (currentUserId) {
   return this.findAll({
     where: { userId: currentUserId },
-    include: {
+    include:
+      [{
       model: Article,
-      as: "Article Url",
-      attributes: ["id", "url"],
+      attributes: ["id", "url"]},
+     {
+      model: Tagging,
       include: {
-        model: Tagging,
-        as: " Article Tags",
-        include: {
-          model: Tags,
-          as: "Tag Names"
-        }
-      },
-    },
-  });
-};
+        model: Tag,
+        },
+      }]
+  })}
 
 module.exports = UserArticle;
