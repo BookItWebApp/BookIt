@@ -5,10 +5,11 @@ import { getArticles } from "../store/userArticles";
 export function UserArticles() {
   //ref: https://thoughtbot.com/blog/using-redux-with-react-hooks
   const articles = useSelector((state) => state.userArticles);
+  const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getArticles("be7050ea-13ff-43ba-8fda-07db76a84b86"));
+    dispatch(getArticles(user.id));
   }, [dispatch]);
 
   return (
