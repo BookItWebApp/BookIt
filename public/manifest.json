@@ -6,5 +6,6 @@
   "action": {
     "default_popup": "popup.html"
   },
+  "homepage_url": "http://localhost:8080",
   "permissions": ["tabs"]
 }
