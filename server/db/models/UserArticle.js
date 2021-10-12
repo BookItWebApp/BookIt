@@ -43,15 +43,15 @@ const UserArticle = db.define(
 
 //MODEL METHODS
 //Find all articles belonging to a particular user
-UserArticle.findAllByUser = function(currentUserId) {
+UserArticle.findAllByUser = function (currentUserId) {
   return this.findAll({
-    where: { userId: currentUserId }}, {
+    attributes: ["featured", "name", "readAt", "createdAt"],
+    where: { userId: currentUserId },
     include: {
       model: Article,
-      as: 'URL'
-    }
-  }
-  )
-}
+      attributes: ["id","url"],
+    },
+  });
+};
 
 module.exports = UserArticle;
