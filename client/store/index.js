@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import tab from './tab'
-import userArticlesReducer from './UserArticles'
+import userArticlesReducer from './userArticles'
 import ArticlePreview from './SingleArticle'
 
 const reducer = combineReducers({

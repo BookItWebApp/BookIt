@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
-const Article = require("../models/Article")
+const Article = require("../models/Article");
+const Tagging = require("../models/Tagging");
+const Tag = require("../models/Tag")
 
 const UserArticle = db.define(
   "userArticle",
@@ -12,7 +14,7 @@ const UserArticle = db.define(
     },
     featured: {
       type: Sequelize.BOOLEAN,
-      allowNull: false,
+      defaultValue: false,
     },
     name: {
       type: Sequelize.TEXT,
@@ -45,13 +47,17 @@ const UserArticle = db.define(
 //Find all articles belonging to a particular user
 UserArticle.findAllByUser = function (currentUserId) {
   return this.findAll({
-    attributes: ["featured", "name", "readAt", "createdAt"],
     where: { userId: currentUserId },
-    include: {
+    include:
+      [{
       model: Article,
-      attributes: ["id","url"],
-    },
-  });
-};
+      attributes: ["id", "url"]},
+     {
+      model: Tagging,
+      include: {
+        model: Tag,
+        },
+      }]
+  })}
 
 module.exports = UserArticle;

@@ -16,10 +16,9 @@ const _getArticles = (articles) => {
 //THUNKS
 //get all articles for a singlue user
 export const getArticles = (id) => {
-   console.log('id',id)
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/userArticles/", {params:{userId: id}});
+      const response = await axios.get(`/api/userArticles/${id}`);
       dispatch(_getArticles(response.data));
     } catch (error) {
        console.log(error)
