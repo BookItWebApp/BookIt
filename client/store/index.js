@@ -12,10 +12,11 @@ const reducer = combineReducers({
   tab,
   userArticles: userArticlesReducer,
   tags: tagsReducer })
+});
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-)
-const store = createStore(reducer, middleware)
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+);
+const store = createStore(reducer, middleware);
 
-export default store
-export * from './auth'
+export default store;
+export * from './auth';

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getArticles } from "../store/userArticles";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getArticles } from '../store/userArticles';
 
 export function UserArticles() {
   //ref: https://thoughtbot.com/blog/using-redux-with-react-hooks
