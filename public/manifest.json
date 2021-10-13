@@ -4,10 +4,10 @@
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "popup.html",
-    "login_page": "AuthForm.js"
-
-
+    "default_popup": "popup.html"
   },
-  "permissions": ["tabs"]
+  "permissions": [
+    "tabs",
+    "http://localhost/*"
+  ]
 }
