@@ -13,6 +13,7 @@ const reducer = combineReducers({
   userArticles: userArticlesReducer,
   tags: tagsReducer,
 });
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
