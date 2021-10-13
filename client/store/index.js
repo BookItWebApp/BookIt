@@ -5,15 +5,19 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import tab from './tab'
 import userArticlesReducer from './userArticles'
+import tagsReducer from './tag'
 
 const reducer = combineReducers({
   auth,
   tab,
-  userArticles: userArticlesReducer })
-const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-)
-const store = createStore(reducer, middleware)
+  userArticles: userArticlesReducer,
+  tags: tagsReducer 
+})
 
-export default store
-export * from './auth'
+const middleware = composeWithDevTools(
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+);
+const store = createStore(reducer, middleware);
+
+export default store;
+export * from './auth';

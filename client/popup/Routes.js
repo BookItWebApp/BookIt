@@ -18,16 +18,18 @@ export default class Routes extends Component {
 
     return (
       <BrowserRouter>
-        {isLoggedIn ? (
+
+      <Route path="/" component={CreateArticle} />
+        {/* {isLoggedIn ? (
           <Switch>
-            <Route path="/createArticle" component={CreateArticle} />
+            <Route path="/CreateArticle" component={CreateArticle} />
           </Switch>
         ) : (
           <div>login</div>
           // <Switch>
           //   <Route path="/" component={CreateArticle} />
           // </Switch>
-        )}
+        )} */}
       </BrowserRouter>
     );
   }

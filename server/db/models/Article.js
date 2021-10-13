@@ -1,6 +1,6 @@
 //Articles DB
-const Sequelize = require('sequelize')
-const db = require ('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 //Articles must be unique, not empty or null, and must be URL
 const Article = db.define('article', {
@@ -12,8 +12,8 @@ const Article = db.define('article', {
       isUrl: true,
       notEmpty: true,
       notNull: true,
-    }
-  }
-})
+    },
+  },
+});
 
-module.exports = Article
+module.exports = Article;
