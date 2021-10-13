@@ -1,8 +1,8 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Tagging = db.define(
-  "tagging",
+  'tagging',
   {
     featured: {
       type: Sequelize.BOOLEAN,
@@ -13,7 +13,7 @@ const Tagging = db.define(
     indexes: [
       {
         unique: true,
-        fields: ["tagId", "userArticlesId"],
+        fields: ['tagId', 'userArticlesId'],
       },
     ],
   }

@@ -1,5 +1,5 @@
 // Constants
-const SET_TAB = "SET_TAB";
+const SET_TAB = 'SET_TAB';
 // Actions
 const setTab = (tab) => {
   return {
