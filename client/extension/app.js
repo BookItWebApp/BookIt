@@ -9,21 +9,24 @@ export default () => {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    await dispatch(getTags)
+    await dispatch(getTags())
     await dispatch(fetchTab());
   }, [dispatch]);
 
   return (
     <div>
-      <div>{tags}</div>
-      <label htmlFor="url">URL</label>
+      {/* <label htmlFor="urlPOST">URL</label> */}
       <form
-        name="url"
+        name="urlPOST"
         action="http://localhost:8080/api/articles/"
         method="POST"
-        target="_self"
-      >
-        <input type="url" type="text" name="url" value={tab.url}></input>
+        target="_self" >
+        <label htmlFor="url">URL</label>
+        <input type="url" type="text" name="url" value={tab.url}
+        />
+        <label htmlFor="tags">Tags</label>
+        <input type="tags" type="text" name="tags" value='hello'
+        />
         <input type="submit" />
       </form>
     </div>
