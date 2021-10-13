@@ -11,8 +11,7 @@ const reducer = combineReducers({
   auth,
   tab,
   userArticles: userArticlesReducer,
-  tags: tagsReducer,
-});
+  tags: tagsReducer })
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
