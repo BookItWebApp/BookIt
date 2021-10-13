@@ -14,16 +14,16 @@ export function UserArticles() {
 
   return (
     <div>
-    Articles
-    {articles.map((article) => {
-      return(
-        <div key={article.article.id} className="singleContainer">
-              <div>
-                <a href={article.article.url}>{article.name}</a>
-
-              </div>
+      Articles
+      {articles.map((article) => {
+        return (
+          <div key={article.article.id} className="singleContainer">
+            <div>
+              <a href={article.article.url}>{article.name}</a>
             </div>
-      )
-    })}
-  </div>)
+          </div>
+        );
+      })}
+    </div>
+  );
 }
