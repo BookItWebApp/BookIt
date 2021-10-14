@@ -55,3 +55,27 @@ router.post('/', async (req, res, next) => {
     next(err);
   }
 });
+
+// PUT /api/useArticles/:id
+router.put("/:id", async(req,res,next)=>{
+  try{
+    //
+    const updatedUserArticle = await UserArticle.update(req.body, {
+      where: {
+          id: req.params.id
+      },
+      returning: true
+    });
+    const [rowsUpdate, [userArticle]] = updatedUserArticle;
+    // console.log("USER ARRTICEL > ", userArticle)
+
+    if (!rowsUpdate) {
+      res.sendStatus(404);
+    }
+
+    res.status(200).json(userArticle);
+  }catch(err){
+    // console.log('> PUT /api/useArticles/ID ERR: ', err);
+    next(err)
+  }
+})
