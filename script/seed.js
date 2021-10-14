@@ -1,8 +1,10 @@
 'use strict';
 
+const Faker = require('faker');
+
 const {
   db,
-  models: { User, Article, Tagging, UserArticle, Tag },
+  models: { User, Article, Tagging, UserArticle, Tag, Author },
 } = require('../server/db');
 
 /**
@@ -25,14 +27,29 @@ async function seed() {
       return User.create(user);
     })
   );
+  // Creating Authors
+  let initialAuthors = [];
+  for (let i = 0; i < 100; i++) {
+    initialAuthors.push({
+      name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
+      bio: Faker.lorem.paragraph(),
+      photoUrl: `http://picsum.photos/200/300?random=${i + 1}`,
+    });
+  }
+
+  const authors = await Promise.all(
+    initialAuthors.map((author) => Author.create(author))
+  );
 
   // Creating Articles
   const articles = await Promise.all([
     Article.create({
       url: 'https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/',
+      authorId: authors[0].id,
     }),
     Article.create({
       url: 'https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig',
+      authorId: authors[1].id,
     }),
   ]);
 
@@ -80,6 +97,7 @@ async function seed() {
   );
 
   console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${authors.length} authors`);
   console.log(`seeded ${articles.length} articles`);
   console.log(`seeded ${userArticles.length} userArticles`);
   console.log(`seeded ${tags.length} tags`);
