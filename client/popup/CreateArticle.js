@@ -5,15 +5,13 @@ import { getTags } from "../store/tag";
 
 export default () => {
   const tab = useSelector((state) => state.tab);
+  const user = useSelector((state)=> state.tab)
   const tags = useSelector((state) => state.tags);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getTags())
     dispatch(fetchTab());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getTags());
   }, [dispatch]);
 
   const indivTags = []
