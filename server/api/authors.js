@@ -7,7 +7,7 @@ const {
 // Middleware
 const validate = async (req, res, next) => {
   try {
-    if (req.headers.authorization !== process.env.SECRET) {
+    if (req.headers.adminAuth !== process.env.SECRET) {
       res.sendStatus(401);
     } else {
       next();
