@@ -7,6 +7,7 @@ const Article = require('./models/Article');
 const Tagging = require('./models/Tagging');
 const Tag = require('./models/Tag');
 const UserArticle = require('./models/UserArticle');
+const Author = require('./models/Author');
 
 //associations could go here!
 User.hasMany(UserArticle, { foreignKey: 'userId' });
@@ -21,6 +22,9 @@ Tagging.belongsTo(UserArticle, { foreignKey: 'userArticlesId' });
 Tag.hasMany(Tagging, { foreignKey: 'tagId' });
 Tagging.belongsTo(Tag, { foreignKey: 'tagId' });
 
+Author.hasMany(Article);
+Article.belongsTo(Author);
+
 module.exports = {
   db,
   models: {
@@ -29,5 +33,6 @@ module.exports = {
     Tag,
     Tagging,
     UserArticle,
+    Author,
   },
 };
