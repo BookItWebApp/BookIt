@@ -1,21 +1,24 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux'
-import {createLogger} from 'redux-logger'
-import thunkMiddleware from 'redux-thunk'
-import {composeWithDevTools} from 'redux-devtools-extension'
-import auth from './auth'
-import tab from './tab'
-import userArticlesReducer from './userArticles'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import auth from './auth';
+import tab from './tab';
+import userArticlesReducer from './userArticles';
+import tagsReducer from './tag';
 import ArticlePreview from './SingleArticle'
 
 const reducer = combineReducers({
   auth,
   tab,
-  userArticles: userArticlesReducer ,
-  metaData: ArticlePreview})
-const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-)
-const store = createStore(reducer, middleware)
+  userArticles: userArticlesReducer,
+  tags: tagsReducer,
+  metaData: ArticlePreview })
 
-export default store
-export * from './auth'
+const middleware = composeWithDevTools(
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+);
+const store = createStore(reducer, middleware);
+
+export default store;
+export * from './auth';

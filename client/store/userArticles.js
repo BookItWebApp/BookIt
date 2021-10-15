@@ -1,8 +1,7 @@
-
-import axios from "axios";
+import axios from 'axios';
 
 //ACTION TYPES
-const GET_ARTICLES = "GET_ARTICLES";
+const GET_ARTICLES = 'GET_ARTICLES';
 
 //ACTION CREATORS
 //Get all articles for a single user
@@ -21,7 +20,7 @@ export const getArticles = (id) => {
       const response = await axios.get(`/api/userArticles/${id}`);
       dispatch(_getArticles(response.data));
     } catch (error) {
-       console.log(error)
+      console.log(error);
     }
   };
 };

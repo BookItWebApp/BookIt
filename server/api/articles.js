@@ -1,7 +1,7 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Article },
-} = require("../db/index");
+} = require('../db/index');
 
 const getallArticles = async (req, res, next) => {
   try {
@@ -27,7 +27,7 @@ const postArticle = async (req, res, next) => {
   }
 };
 
-router.get("/", getallArticles);
-router.post("/", postArticle);
+router.get('/', getallArticles);
+router.post('/', postArticle);
 
 module.exports = router;

@@ -1,20 +1,19 @@
-require("dotenv").config();
+require('dotenv').config();
 
 module.exports = {
-  target: 'node',
-  mode: process.env.DEV ? "development" : "production",
+  mode: process.env.DEV ? 'development' : 'production',
   entry: {
-    bundle: __dirname + "/client/index.js",
-    popup: __dirname + "/client/popup/index.js",
+    bundle: __dirname + '/client/index.js',
+    popup: __dirname + '/client/popup/index.js',
   },
   output: {
     path: __dirname,
-    filename: "./public/[name].js",
+    filename: './public/[name].js',
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   watchOptions: {
     ignored: /node_modules/,
   },
@@ -25,9 +24,9 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-react"],
+            presets: ['@babel/preset-react'],
           },
         },
       },

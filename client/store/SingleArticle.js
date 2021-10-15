@@ -15,13 +15,12 @@ const _previewArticle = (article) => {
 
 //THUNKS
 //get preview for single article
-export const previewArticle = (id) => {
+export const previewArticle = (articleUrl) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/userArticles/meta/", {
-        params: { id: id },
+      const response = await axios.get("/api/article/preview", {
+        params: { url: articleUrl },
       });
-      console.log(response)
       dispatch(_previewArticle(response.data));
     } catch (error) {
       console.log(error);
@@ -37,7 +36,7 @@ const initialState = [];
 export default function ArticlePreview(state = initialState, action) {
   switch (action.type) {
     case PREVIEW_ARTICLE:
-      return [state, ...action.article];
+      return [...state, action.article];
     default:
       return state;
   }

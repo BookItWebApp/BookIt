@@ -1,9 +1,11 @@
-"use strict";
+'use strict';
+
+const Faker = require('faker');
 
 const {
   db,
-  models: { User, Article, Tagging, UserArticle, Tag },
-} = require("../server/db");
+  models: { User, Article, Tagging, UserArticle, Tag, Author },
+} = require('../server/db');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -11,13 +13,13 @@ const {
  */
 
 const users = [
-  { username: "cody", password: "123", email: "cody@email.com" },
-  { username: "murphy", password: "123", email: "murphy@email.com" },
+  { username: 'cody', password: '123', email: 'cody@email.com' },
+  { username: 'murphy', password: '123', email: 'murphy@email.com' },
 ];
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  console.log('db synced!');
 
   // Creating Users
   const usersSeedResult = await Promise.all(
@@ -25,14 +27,29 @@ async function seed() {
       return User.create(user);
     })
   );
+  // Creating Authors
+  let initialAuthors = [];
+  for (let i = 0; i < 100; i++) {
+    initialAuthors.push({
+      name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
+      bio: Faker.lorem.paragraph(),
+      photoUrl: `http://picsum.photos/200/300?random=${i + 1}`,
+    });
+  }
+
+  const authors = await Promise.all(
+    initialAuthors.map((author) => Author.create(author))
+  );
 
   // Creating Articles
   const articles = await Promise.all([
     Article.create({
-      url: "https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/",
+      url: 'https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/',
+      authorId: authors[0].id,
     }),
     Article.create({
-      url: "https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig",
+      url: 'https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig',
+      authorId: authors[1].id,
     }),
   ]);
 
@@ -41,14 +58,14 @@ async function seed() {
   const userArticles = [
     {
       featured: false,
-      name: "Google",
+      name: 'Google',
       userId: usersSeedResult[0].id,
       articleId: 1,
       readAt: null,
     },
     {
       featured: false,
-      name: "Wikipedia",
+      name: 'Wikipedia',
       userId: usersSeedResult[1].id,
       articleId: 1,
       readAt: null,
@@ -63,8 +80,8 @@ async function seed() {
 
   //Create Tags
   const tags = await Promise.all([
-    Tag.create({ name: "news" }),
-    Tag.create({ name: "notNews" }),
+    Tag.create({ name: 'news' }),
+    Tag.create({ name: 'notNews' }),
   ]);
 
   // Creating Taggings
@@ -80,6 +97,7 @@ async function seed() {
   );
 
   console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${authors.length} authors`);
   console.log(`seeded ${articles.length} articles`);
   console.log(`seeded ${userArticles.length} userArticles`);
   console.log(`seeded ${tags.length} tags`);
@@ -99,16 +117,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
+  console.log('seeding...');
   try {
     await seed();
   } catch (err) {
     console.error(err);
     process.exitCode = 1;
   } finally {
-    console.log("closing db connection");
+    console.log('closing db connection');
     await db.close();
-    console.log("db connection closed");
+    console.log('db connection closed');
   }
 }
 
