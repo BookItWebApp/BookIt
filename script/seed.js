@@ -5,7 +5,16 @@ const fakerHelper = require('./fakerHelper');
 
 const {
   db,
-  models: { User, Article, Tagging, UserArticle, Tag, Author },
+  models: {
+    User,
+    Article,
+    Tagging,
+    UserArticle,
+    Tag,
+    Author,
+    Sharing,
+    SharingDetail,
+  },
 } = require('../server/db');
 
 /**
@@ -71,11 +80,43 @@ async function seed() {
     tagId: tags[Math.floor(Math.random() * tags.length)].id,
   }));
 
+  // Creating Sharings
+  const sharings = [
+    { userId: knownUsers[0].id, sharingUrl: 'url1', userMessage: 'text1' },
+    { userId: knownUsers[1].id, sharingUrl: 'url2', userMessage: 'text2' },
+  ];
+
+  const sharingSeedResult = await Promise.all(
+    sharings.map((sharing) => {
+      return Sharing.create(sharing);
+    })
+  );
+
+  // Creating SharingDetails
+  const sharingDetails = [
+    {
+      sharingId: sharingSeedResult[0].id,
+      userArticlesId: userArticles[0].id,
+    },
+    {
+      sharingId: sharingSeedResult[0].id,
+      userArticlesId: userArticles[1].id,
+    },
+  ];
+
+  await Promise.all(
+    sharingDetails.map((sharingDetail) => {
+      return SharingDetail.create(sharingDetail);
+    })
+  );
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${authors.length} authors`);
   console.log(`seeded ${articles.length} articles`);
   console.log(`seeded ${userArticles.length} userArticles`);
   console.log(`seeded ${tags.length} tags`);
+  console.log(`seeded ${sharings.length} sharings`);
+  console.log(`seeded ${sharingDetails.length} sharing details`);
   console.log(`seeded ${taggings.length} taggings`);
   console.log(`seeded successfully`);
 
