@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 'use strict';
 
 const Faker = require('faker');
@@ -29,7 +27,6 @@ const knownUsersInit = [
   { username: 'murphy', password: '123', email: 'murphy@email.com' },
 ];
 
->>>>>>> 59c01b9d6a3185158ef3eaefa9c95c420ee34cd2
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log('db synced!');
