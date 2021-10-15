@@ -22,10 +22,7 @@ export function UserArticles() {
       {articles.map((article) => {
         return (
           <div key={article.article.id} className="singleContainer">
-            <div>
-              {/* <a href={article.article.url}>{article.name}</a> */}
-              <SingleArticle article = {article}/>
-            </div>
+            <SingleArticle article = {article}/>
           </div>
         );
       })}
