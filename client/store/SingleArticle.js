@@ -37,7 +37,7 @@ const initialState = [];
 export default function ArticlePreview(state = initialState, action) {
   switch (action.type) {
     case PREVIEW_ARTICLE:
-      return action.article;
+      return [state, ...action.article];
     default:
       return state;
   }

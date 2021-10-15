@@ -1,17 +1,22 @@
-import React, {useEffect} from "react";
-import { useDispatch} from "react-redux";
-import {previewArticle} from '../store/SingleArticle'
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { previewArticle } from "../store/SingleArticle";
 
+export default function SingleArticle(props) {
+  const article = props.article.article;
+  const [metaData, setMetaData] = useState();
+  const dispatch = useDispatch();
 
-// export function SingleArticle(props) {
-//   const articleurl = props.article.article.url;
-//   // const [metaData, setMetaData] = useState();
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(previewArticle(articleurl)
-//   )},[dispatch])
-
-
-//   return ((<div>Hello</div>))
-// }
+  // useEffect(() => {
+  //   dispatch(previewArticle(article.url));
+  // }, [dispatch]);
+  // console.log(article)
+  return (
+    <div id ='container'>
+      hello?
+      
+      {article.name}
+      <a href={article.url}>{article.name}</a>
+    </div>
+  )
+}
