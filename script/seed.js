@@ -1,5 +1,4 @@
 'use strict';
-
 const Faker = require('faker');
 
 const {
@@ -12,112 +11,220 @@ const {
  *      match the models, and populates the database.
  */
 
-const users = [
-  { username: 'cody', password: '123', email: 'cody@email.com' },
-  { username: 'murphy', password: '123', email: 'murphy@email.com' },
-];
+//Parameters
+let userCount = 250
+let articleCount = 500
+let authorCount = 100
+let readArticlesPerc = (articleCount*0.30)
+let userArticlesCount = (articleCount * 5)
+let tagCount = 700
+let MaxTaggingsCount = 5000
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log('db synced!');
 
-  // Creating Users
-  const usersSeedResult = await Promise.all(
-    users.map((user) => {
+  //Random Number Generator
+  function getRandomArbitrary(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+  }
+
+  //Create Users
+  //generate hardcorded UUIDs for linking
+
+  let initialUsers = [];
+  for (let i = 0; i < userCount; i++) {
+    initialUsers.push({
+      username: `${Faker.internet.userName()}`,
+      test: Faker.internet.password(),
+      email: Faker.internet.email(),
+    });
+  }
+  console.log('Seeding Users...');
+  //seed users
+  const users = await Promise.all(
+    initialUsers.map((user) => {
       return User.create(user);
     })
   );
+
   // Creating Authors
   let initialAuthors = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < authorCount; i++) {
     initialAuthors.push({
       name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
       bio: Faker.lorem.paragraph(),
       photoUrl: `http://picsum.photos/200/300?random=${i + 1}`,
     });
   }
-
+  console.log('Seeding Authors...');
+  //seed authors
   const authors = await Promise.all(
     initialAuthors.map((author) => Author.create(author))
   );
 
-  // Creating Articles
-  const articles = await Promise.all([
-    Article.create({
-      url: 'https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/',
-      authorId: authors[0].id,
-    }),
-    Article.create({
-      url: 'https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig',
-      authorId: authors[1].id,
-    }),
-  ]);
+  // Create Articles
+  //enfore unique urls
+  let urlsList = [];
+  function generateUniqueURL() {
+    let startLength = urlsList.length;
+    while (startLength === urlsList.length) {
+      let url = Faker.internet.url();
+      if (urlsList.indexOf(url) > -1) {
+        continue;
+      } else {
+        urlsList.push(url);
+        return url;
+      }
+    }
+  }
 
-  //Creating UserArticles
-
-  const userArticles = [
-    {
-      featured: false,
-      name: 'Google',
-      userId: usersSeedResult[0].id,
-      articleId: 1,
-      readAt: null,
-    },
-    {
-      featured: false,
-      name: 'Wikipedia',
-      userId: usersSeedResult[1].id,
-      articleId: 1,
-      readAt: null,
-    },
-  ];
-
-  const userArticleSeedResult = await Promise.all(
-    userArticles.map((userArticle) => {
-      return UserArticle.create(userArticle);
-    })
+  console.log('Seeding Articles...');
+  //create articles
+  let initialArticles = [];
+  for (let i = 0; i < articleCount; i++) {
+    initialArticles.push({
+      url: generateUniqueURL(),
+      authorId: authors[getRandomArbitrary(0,99)].id,
+    });
+  }
+  //seed articles
+  const articles = await Promise.all(
+    initialArticles.map((article) => Article.create(article))
   );
 
+  // Create userArticles
+  //generate readAt data including null value
+  let readDates = [];
+  for (let i = 0; i < readArticlesPerc; i++) {
+    let date = Faker.date.between('2015-01-01', '2021-10-05');
+    date = date.toString();
+    readDates.push(i % 2 === 0 ? null : date);
+  }
+
+  console.log('Seeding User Articles...');
+  let intitalUserArticles = [];
+  let articleUserPair = []
+  for (let i = 0; i < userArticlesCount; i++) {
+    let createDate = readDates[i]
+      ? Faker.date.past(5, readDates[i])
+      : Faker.date.past(5);
+    createDate = createDate.toString();
+
+    let userId =  users[getRandomArbitrary(0, 99)].id
+    let articleId = Faker.datatype.number({ min: 1, max: 99 })
+    let articleUser = `${articleId}-${userId}`
+
+    if(articleUserPair.indexOf(articleUser)===-1){
+      intitalUserArticles.push({
+        name: Faker.lorem.words(),
+        featured: Faker.datatype.boolean(),
+        private: Faker.datatype.boolean(),
+        articleId: articleId,
+        readAt: readDates[i],
+        createdAt: createDate,
+        userId: userId
+      }),
+      articleUserPair.push(
+        articleUser
+      )
+    }
+  }
+
+  //seed userArticles
+  const userArticles = await Promise.all(
+    intitalUserArticles.map((userArticle) => UserArticle.create(userArticle))
+  );
+
+  console.log('Seeding Tags...');
   //Create Tags
-  const tags = await Promise.all([
-    Tag.create({ name: 'news' }),
-    Tag.create({ name: 'notNews' }),
-  ]);
+  //enforce unique urls
+  let tagsList = [];
+  function generateUniqueTags() {
+    let startLength = tagsList.length;
+    while (startLength === tagsList.length) {
+      let tag = Faker.random.word();
+      if (tagsList.indexOf(tag) > -1) {
+        continue;
+      } else {
+        tagsList.push(tag);
+        return tag;
+      }
+    }
+  }
 
-  // Creating Taggings
-  const taggings = [
-    { featured: true, userArticlesId: userArticleSeedResult[0].id, tagId: 1 },
-    { featured: false, userArticlesId: userArticleSeedResult[0].id, tagId: 2 },
-  ];
+  let initialTags = [];
+  for (let i = 0; i < tagCount; i++) {
+    initialTags.push({
+      name: generateUniqueTags(),
+    });
+  }
+  //seed Tags
+  const tags = await Promise.all(initialTags.map((tag) => Tag.create(tag)));
 
-  await Promise.all(
-    taggings.map((tagging) => {
-      return Tagging.create(tagging);
-    })
-  );
+  console.log('seed taggings...')
+  //make sure every tag used at least once
+  let tagCheck = [];
+  tags.forEach((tag) => tagCheck.push(tag.name));
 
-  console.log(`seeded ${users.length} users`);
-  console.log(`seeded ${authors.length} authors`);
-  console.log(`seeded ${articles.length} articles`);
-  console.log(`seeded ${userArticles.length} userArticles`);
-  console.log(`seeded ${tags.length} tags`);
-  console.log(`seeded successfully`);
+  // CREATE TAGGINGS DB DATA
+  let initialTaggings = [];
+  let articleTagPairs = [];
+  //while a single tag hasn't been used and we haven't spent too long looping
+  while (tagCheck.length > 1 && initialTaggings.length < MaxTaggingsCount) {
+    //create random data for tag and article data
+    let tag = tags[getRandomArbitrary(0, tags.length - 1)];
+    let articleId = tagCheck.length %100 ===0 ? null:
+      userArticles[getRandomArbitrary(0, userArticles.length - 1)].id;
+      // console.log('tag',tag)
+    let tagId = tag.id;
+    // console.log('tagId',tagId)
+     let articleTag = `${articleId}${tagId}`;
+    //  console.log(articleTag)
+    //if article-pair hasn't been seen before push to to be created list articleTag)
+    if (articleTagPairs.indexOf(articleTag) === -1) {
+      initialTaggings.push({
+        featured: `${Faker.datatype.boolean()}`,
+        tagId: tagId,
+        userArticlesId: articleId,
+      });
+      //log article-tag pair for future check
+      articleTagPairs.push(
+        articleTag,
+      );
+      //remove added tag from tagCheck
+      let index = tagCheck.indexOf(tag.name);
+      if (index > -1) {
+        tagCheck.splice(index, 1);
+        // console.log('---')
+        // console.log('Tags left - ', tagCheck.length)
+        // console.log('Taggings created -', initialTaggings.length)
+      }
+    }
+  }
 
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
-}
+  const taggings = await Promise.all(
+      initialTaggings.map((tag) => Tagging.create(tag))
+    );
+
+    console.log(`seeded ${users.length} users`);
+    console.log(`seeded ${authors.length} authors`);
+    console.log(`seeded ${articles.length} articles`);
+    console.log(`seeded ${userArticles.length} userArticles`);
+    console.log(`seeded ${tags.length} tags`);
+    console.log(`seeded ${taggings.length} taggings`);
+    console.log(`seeded successfully`);
+  }
+
 
 /*
- We've separated the `seed` function from the `runSeed` function.
- This way we can isolate the error handling and exit trapping.
- The `seed` function is concerned only with modifying the database.
-*/
+  We've separated the `seed` function from the `runSeed` function.
+  This way we can isolate the error handling and exit trapping.
+  The `seed` function is concerned only with modifying the database.
+  */
 async function runSeed() {
-  console.log('seeding...');
   try {
     await seed();
   } catch (err) {

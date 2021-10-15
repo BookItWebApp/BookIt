@@ -9,7 +9,6 @@ const Tag = db.define('tag', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      len: [1, 16],
       notContains: [' '],
     },
   },
