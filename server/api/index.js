@@ -8,9 +8,9 @@ router.use("/tags", require("./tags"));
 router.use("/taggings", require("./taggings"));
 router.use('/article', require('./article'))
 router.use("/articles", require("./articles"));
+router.use('/userArticles', require('./userArticles'));
 router.use('/userArticles', require('./userArticles'))
-
-
+router.use('/sharings', require('./sharings'));
 
 
 router.use((req, res, next) => {
