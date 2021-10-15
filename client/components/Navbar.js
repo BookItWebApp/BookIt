@@ -2,19 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import MainMenu from './Navigation/MainMenu';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>FS-App-Template</h1>
+  <div className="nav-sidebar--wrapper">
     <nav>
       {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
+        <MainMenu handleClick={handleClick}/>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
@@ -23,7 +17,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         </div>
       )}
     </nav>
-    <hr />
   </div>
 );
 
