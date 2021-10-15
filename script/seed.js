@@ -82,8 +82,8 @@ async function seed() {
 
   // Creating Sharings
   const sharings = [
-    { userId: usersSeedResult[0].id, sharingUrl: 'url1', userMessage: 'text1' },
-    { userId: usersSeedResult[1].id, sharingUrl: 'url2', userMessage: 'text2' },
+    { userId: knownUsers[0].id, sharingUrl: 'url1', userMessage: 'text1' },
+    { userId: knownUsers[1].id, sharingUrl: 'url2', userMessage: 'text2' },
   ];
 
   const sharingSeedResult = await Promise.all(
@@ -96,11 +96,11 @@ async function seed() {
   const sharingDetails = [
     {
       sharingId: sharingSeedResult[0].id,
-      userArticlesId: userArticleSeedResult[0].id,
+      userArticlesId: userArticles[0].id,
     },
     {
       sharingId: sharingSeedResult[0].id,
-      userArticlesId: userArticleSeedResult[1].id,
+      userArticlesId: userArticles[1].id,
     },
   ];
 
