@@ -19,3 +19,44 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.app-container{
+  width: 100%;
+}
+
+.nav-sidebar--wrapper{
+  float: left;
+  width: 19%;
+  height: 100%;
+  display: flex;
+  border: 2px solid black;
+
+  /* justify-content: center; */
+  /* align-items: center; */
+  flex-direction: row;
+}
+
+.routes-div--wrapper{
+  float: right;
+  width: 80%;
+  height: 100%;
+  border: 2px solid black;
+}
+
+.top-section--wrapper{
+  border: 2px solid black;
+  padding: 5px;
+}
+.top_navbar{
+  display: flex;
+  justify-content: space-between;
+  /* align-items: flex-end; */
+  flex-direction: row;
+}
+.top-navbar-links{
+  border: 2px solid black;
+}
+.menu-filter--form{
+  display: flex;
+  flex-direction: column;
+}
