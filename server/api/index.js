@@ -8,6 +8,7 @@ router.use('/tags', require('./tags'));
 router.use('/taggings', require('./taggings'));
 router.use('/articles', require('./articles'));
 router.use('/userArticles', require('./userArticles'));
+router.use('/sharings', require('./sharings'));
 
 router.use((req, res, next) => {
   const error = new Error('Not Found');

@@ -20,6 +20,10 @@ const UserArticle = db.define(
       type: Sequelize.TEXT,
       allowNull: false,
     },
+    note: {
+      type: Sequelize.TEXT,
+      allowNull: true,
+    },
     userId: {
       type: Sequelize.UUID,
       allowNull: false,
