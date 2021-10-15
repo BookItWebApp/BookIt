@@ -1,6 +1,7 @@
 'use strict';
 
 const Faker = require('faker');
+const fakerHelper = require('./fakerHelper');
 
 const {
   db,
@@ -21,7 +22,7 @@ const {
  *      match the models, and populates the database.
  */
 
-const users = [
+const knownUsersInit = [
   { username: 'cody', password: '123', email: 'cody@email.com' },
   { username: 'murphy', password: '123', email: 'murphy@email.com' },
 ];
@@ -30,82 +31,54 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log('db synced!');
 
-  // Creating Users
-  const usersSeedResult = await Promise.all(
-    users.map((user) => {
+  // Creating Known Users
+  const knownUsers = await Promise.all(
+    knownUsersInit.map((user) => {
       return User.create(user);
     })
   );
-  // Creating Authors
-  let initialAuthors = [];
-  for (let i = 0; i < 100; i++) {
-    initialAuthors.push({
-      name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
-      bio: Faker.lorem.paragraph(),
-      photoUrl: `http://picsum.photos/200/300?random=${i + 1}`,
-    });
-  }
 
-  const authors = await Promise.all(
-    initialAuthors.map((author) => Author.create(author))
-  );
+  // Creating Random Users
+  const randomUsers = await fakerHelper(98, User, () => ({
+    username: Faker.internet.userName(),
+    password: Faker.internet.password(),
+    email: Faker.internet.email(),
+  }));
+
+  const users = [...knownUsers, ...randomUsers];
+
+  // Creating Authors
+  const authors = await fakerHelper(100, Author, () => ({
+    name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
+    bio: Faker.lorem.paragraph(),
+    photoUrl: `http://picsum.photos/200/300?random=${Math.floor(
+      Math.random() * 100
+    )}}`,
+  }));
 
   // Creating Articles
-  const articles = await Promise.all([
-    Article.create({
-      url: 'https://www.reuters.com/world/americas/exclusive-major-coffee-buyers-face-losses-colombia-farmers-fail-deliver-2021-10-11/',
-      authorId: authors[0].id,
-    }),
-    Article.create({
-      url: 'https://www.vox.com/22709339/james-bond-no-time-die-review-daniel-craig',
-      authorId: authors[1].id,
-    }),
-  ]);
+  const articles = await fakerHelper(100, Article, () => ({
+    url: Faker.internet.url(),
+    authorId: authors[Math.floor(Math.random() * authors.length)].id,
+  }));
 
   //Creating UserArticles
-
-  const userArticles = [
-    {
-      featured: false,
-      name: 'Google',
-      note: 'note1',
-      userId: usersSeedResult[0].id,
-      articleId: 1,
-      readAt: null,
-    },
-    {
-      featured: false,
-      name: 'Wikipedia',
-      note: 'note2',
-      userId: usersSeedResult[1].id,
-      articleId: 1,
-      readAt: null,
-    },
-  ];
-
-  const userArticleSeedResult = await Promise.all(
-    userArticles.map((userArticle) => {
-      return UserArticle.create(userArticle);
-    })
-  );
+  const userArticles = await fakerHelper(100, UserArticle, () => ({
+    name: Faker.internet.domainName(),
+    userId: users[Math.floor(Math.random() * users.length)].id,
+    articleId: articles[Math.floor(Math.random() * articles.length)].id,
+  }));
 
   //Create Tags
-  const tags = await Promise.all([
-    Tag.create({ name: 'news' }),
-    Tag.create({ name: 'notNews' }),
-  ]);
+  const tags = await fakerHelper(100, Tag, () => ({
+    name: Faker.random.word(),
+  }));
 
-  // Creating Taggings
-  const taggings = [
-    { featured: true, userArticlesId: userArticleSeedResult[0].id, tagId: 1 },
-    { featured: false, userArticlesId: userArticleSeedResult[0].id, tagId: 2 },
-  ];
-
-  await Promise.all(
-    taggings.map((tagging) => {
-      return Tagging.create(tagging);
-    })
-  );
+  const taggings = await fakerHelper(100, Tagging, () => ({
+    userArticlesId:
+      userArticles[Math.floor(Math.random() * userArticles.length)].id,
+    tagId: tags[Math.floor(Math.random() * tags.length)].id,
+  }));
 
   // Creating Sharings
   const sharings = [
@@ -144,6 +117,7 @@ async function seed() {
   console.log(`seeded ${tags.length} tags`);
   console.log(`seeded ${sharings.length} sharings`);
   console.log(`seeded ${sharingDetails.length} sharing details`);
+  console.log(`seeded ${taggings.length} taggings`);
   console.log(`seeded successfully`);
 
   return {
