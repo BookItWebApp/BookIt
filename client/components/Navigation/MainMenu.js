@@ -1,0 +1,32 @@
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+import Header from './Header';
+import FormFilters from './FormFilters';
+import TagFilter from './TagFilter';
+
+const MainMenu = ({handleClick}) => {
+  // const [checkedState, setCheckedState] = useState(
+  //   new Array(filterArr.length).fill(false)
+  // );
+
+  return (
+  <div>
+      <nav>
+      <Header />
+        <div>
+          <h1>Select Tags</h1>
+          <TagFilter />
+          <h1>Select Filters</h1>
+          <FormFilters />
+        </div>
+        <div>
+        <a href="#" onClick={handleClick}>
+             Logout
+         </a>
+        </div>
+      </nav>
+  </div>
+  )
+}
+
+export default MainMenu
