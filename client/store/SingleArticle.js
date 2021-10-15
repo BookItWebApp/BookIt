@@ -6,22 +6,23 @@ const PREVIEW_ARTICLE = "PREVIEW_ARTICLES";
 
 //ACTION CREATORS
 //Display preview for a single article
-const _previewArticle = (article) => {
+const _previewArticle = (article, articleId) => {
   return {
     type: PREVIEW_ARTICLE,
-    article,
+    article: {...article, articleId}
   };
 };
 
 //THUNKS
 //get preview for single article
-export const previewArticle = (articleUrl) => {
+//take article id passed from function and return
+export const previewArticle = (articleUrl, articleId) => {
   return async (dispatch) => {
     try {
       const response = await axios.get("/api/article/preview", {
         params: { url: articleUrl },
       });
-      dispatch(_previewArticle(response.data));
+      dispatch(_previewArticle(response.data, articleId));
     } catch (error) {
       console.log(error);
     }

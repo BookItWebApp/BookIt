@@ -8,10 +8,9 @@ export function SingleArticle(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(previewArticle(article.article.url, article.userId));
+    dispatch(previewArticle(article.article.url, article.id));
   }, [dispatch]);
 
-  console.log(article)
   return (
     <div>
       <h2>{articleData.title}</h2>
