@@ -199,9 +199,11 @@ async function seed() {
       let index = tagCheck.indexOf(tag.name);
       if (index > -1) {
         tagCheck.splice(index, 1);
-        console.log('---')
-        console.log('Tags left - ', tagCheck.length)
-        console.log('Taggings created -', initialTaggings.length)
+
+        //TAGGINGS visibiliy calls. Uncomment if you want to see the calls for tagging counts
+        // console.log('---')
+        // console.log('Tags left - ', tagCheck.length)
+        // console.log('Taggings created -', initialTaggings.length)
       }
     }
   }
