@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
+import AuthorPage from './components/AuthorPage';
 import Home from './components/Home';
 import { UserArticles } from './components/UserArticles';
 import { me } from './store';
@@ -27,6 +28,7 @@ class Routes extends Component {
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
+            <Route path="/authors/:id" exact component={AuthorPage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
           </Switch>

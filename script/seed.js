@@ -53,7 +53,7 @@ async function seed() {
     bio: Faker.lorem.paragraph(),
     photoUrl: `http://picsum.photos/200/300?random=${Math.floor(
       Math.random() * 100
-    )}}`,
+    )}`,
   }));
 
   // Creating Articles
