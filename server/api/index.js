@@ -8,6 +8,7 @@ router.use('/tags', require('./tags'));
 router.use('/taggings', require('./taggings'));
 router.use('/articles', require('./articles'));
 router.use('/userArticles', require('./userArticles'));
+router.use('/authors', require('./authors'));
 router.use('/sharings', require('./sharings'));
 
 router.use((req, res, next) => {
