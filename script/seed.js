@@ -15,10 +15,10 @@ const {
 let userCount = 250
 let articleCount = 500
 let authorCount = 100
-let readArticlesPerc = (articleCount*0.30)
+let readArticlesModulo = 2 //divisor - the large the number the lower the % read
 let userArticlesCount = (articleCount * 5)
 let tagCount = 700
-let MaxTaggingsCount = 5000
+let MaxTaggingsCount = 3000
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -32,17 +32,21 @@ async function seed() {
   }
 
   //Create Users
-  //generate hardcorded UUIDs for linking
-
+  console.log('Seeding Users...');
+  //Test User
   let initialUsers = [];
-  for (let i = 0; i < userCount; i++) {
+  initialUsers.push({
+    username: 'cody',
+    password: '123',
+    email: 'codytest@fullstackacademy.com'})
+  //seed users
+  for (let i = 2; i < userCount; i++) {
     initialUsers.push({
       username: `${Faker.internet.userName()}`,
-      test: Faker.internet.password(),
+      password: Faker.internet.password(),
       email: Faker.internet.email(),
     });
   }
-  console.log('Seeding Users...');
   //seed users
   const users = await Promise.all(
     initialUsers.map((user) => {
@@ -98,10 +102,10 @@ async function seed() {
   // Create userArticles
   //generate readAt data including null value
   let readDates = [];
-  for (let i = 0; i < readArticlesPerc; i++) {
+  for (let i = 0; i < userArticlesCount; i++) {
     let date = Faker.date.between('2015-01-01', '2021-10-05');
     date = date.toString();
-    readDates.push(i % 2 === 0 ? null : date);
+    readDates.push(i % readArticlesModulo === 0 ? null : date);
   }
 
   console.log('Seeding User Articles...');
@@ -178,11 +182,8 @@ async function seed() {
     let tag = tags[getRandomArbitrary(0, tags.length - 1)];
     let articleId = tagCheck.length %100 ===0 ? null:
       userArticles[getRandomArbitrary(0, userArticles.length - 1)].id;
-      // console.log('tag',tag)
     let tagId = tag.id;
-    // console.log('tagId',tagId)
      let articleTag = `${articleId}${tagId}`;
-    //  console.log(articleTag)
     //if article-pair hasn't been seen before push to to be created list articleTag)
     if (articleTagPairs.indexOf(articleTag) === -1) {
       initialTaggings.push({
@@ -198,9 +199,9 @@ async function seed() {
       let index = tagCheck.indexOf(tag.name);
       if (index > -1) {
         tagCheck.splice(index, 1);
-        // console.log('---')
-        // console.log('Tags left - ', tagCheck.length)
-        // console.log('Taggings created -', initialTaggings.length)
+        console.log('---')
+        console.log('Tags left - ', tagCheck.length)
+        console.log('Taggings created -', initialTaggings.length)
       }
     }
   }
@@ -236,7 +237,6 @@ async function runSeed() {
     console.log('db connection closed');
   }
 }
-
 /*
   Execute the `seed` function, IF we ran this module directly (`node seed`).
   `Async` functions always return a promise, so we can use `catch` to handle
