@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
+import SingleArticle from './components/SingleArticle';
 import { UserArticles } from './components/UserArticles';
 import { AddMessage } from './components/sharing/AddMessage';
 import { SharingLink } from './components/sharing/SharingLink';
@@ -21,7 +22,7 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div>
+      <div className="routes-div--wrapper">
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={UserArticles} />

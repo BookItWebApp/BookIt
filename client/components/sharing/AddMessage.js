@@ -7,9 +7,10 @@ export function AddMessage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [message, setMessage] = useState('');
+
   function clickHandlerAdd(e) {
-    const val = document.querySelector('input').value;
-    dispatch(_setMessage(val));
+    dispatch(_setMessage(message));
     history.push('/share/sharinglink');
   }
 
@@ -20,7 +21,10 @@ export function AddMessage() {
   return (
     <div>
       <p>Would like to add a message?</p>
-      <input id="messageInput"></input>
+      <input
+        id="messageInput"
+        onChange={(e) => setMessage(e.target.value)}
+      ></input>
       <button onClick={(e) => clickHandlerAdd(e)} id="addMessage">
         Add message
       </button>

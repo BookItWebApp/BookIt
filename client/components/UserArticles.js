@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getArticles } from '../store/userArticles';
 import { SingleArticle } from './SingleArticle';
 import { useHistory } from 'react-router-dom';
+import Topbar from './Navigation/Topbar';
 
 export function UserArticles() {
   //ref: https://thoughtbot.com/blog/using-redux-with-react-hooks
@@ -21,14 +22,12 @@ export function UserArticles() {
 
   return (
     <div>
+      <Topbar />
       Articles
       {articles.map((article) => {
         return (
           <div key={article.article.id} className="singleContainer">
-            <div>
-              {/* <a href={article.article.url}>{article.name}</a> */}
-              <SingleArticle article={article} />
-            </div>
+            <SingleArticle article={article} />
           </div>
         );
       })}

@@ -7,13 +7,17 @@ import tab from './tab';
 import userArticlesReducer from './userArticles';
 import tagsReducer from './tag';
 import sharingsReducer from './sharing';
+import singleAuthor from './singleAuthor';
+import ArticlePreview from './SingleArticle';
 
 const reducer = combineReducers({
   auth,
   tab,
+  singleAuthor,
   userArticles: userArticlesReducer,
   tags: tagsReducer,
   sharings: sharingsReducer,
+  metaData: ArticlePreview,
 });
 
 const middleware = composeWithDevTools(
