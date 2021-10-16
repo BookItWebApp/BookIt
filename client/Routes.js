@@ -4,6 +4,9 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import { UserArticles } from './components/UserArticles';
+import { AddMessage } from './components/sharing/AddMessage';
+import { SharingLink } from './components/sharing/SharingLink';
+import { ViewSharing } from './components/sharing/ViewSharing';
 import { me } from './store';
 
 /**
@@ -22,6 +25,9 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={UserArticles} />
+            <Route exact path="/share/message" component={AddMessage} />
+            <Route exact path="/share/sharinglink" component={SharingLink} />
+            <Route path="/share/get" component={ViewSharing} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -29,6 +35,7 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/share/get" component={ViewSharing} />
           </Switch>
         )}
       </div>
