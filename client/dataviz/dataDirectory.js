@@ -8,11 +8,13 @@ class DataDirectory extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
+
   render() {
+    console.log(this.props)
     return (
       <div>
         <div>Choose a Data Viz</div>
-        <Link to="/metrics/table1" state={this.props}>
+        <Link to="/metrics/table1" state={{All: this.props}}>
           Test Table
         </Link>
         <Switch>

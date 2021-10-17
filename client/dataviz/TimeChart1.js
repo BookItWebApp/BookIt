@@ -1,16 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Plot from 'react-plotly.js';
+import { useLocation } from 'react-router-dom'
 
 
-export class TimeChartOne extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+export function TimeChartOne () {
 
-  render() {
-    console.log(this.props)
-    return (
+  let location = useLocation()
+  console.log(location)
+
+  return(
       <Plot
         data={[
           {
@@ -24,7 +23,5 @@ export class TimeChartOne extends React.Component {
         ]}
         layout={ {width: 320, height: 240, title: 'Lets Look At Articles Read Over Time'} }
       />
-    );
-  }
-}
-
+  )
+      }
