@@ -3,6 +3,7 @@ const db = require('../db');
 const Article = require('../models/Article');
 const Tagging = require('../models/Tagging');
 const Tag = require('../models/Tag');
+const Author = require('./Author');
 
 const UserArticle = db.define(
   'userArticle',
@@ -39,7 +40,7 @@ const UserArticle = db.define(
     isPrivate: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
-    }
+    },
   },
   {
     indexes: [
@@ -60,6 +61,10 @@ UserArticle.findAllByUser = function (currentUserId) {
       {
         model: Article,
         attributes: ['id', 'url'],
+        include: {
+          model: Author,
+          attributes: ['id', 'name'],
+        },
       },
       {
         model: Tagging,
