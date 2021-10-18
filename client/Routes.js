@@ -6,6 +6,7 @@ import Home from './components/Home';
 import SingleArticle from './components/SingleArticle';
 import { UserArticles } from './components/UserArticles';
 import { me } from './store';
+import dataDirectory from './dataviz/dataDirectory';
 
 /**
  * COMPONENT
@@ -23,6 +24,7 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={UserArticles} />
+            <Route path="/metrics" component={dataDirectory} />
             <Redirect to="/home" />
           </Switch>
         ) : (
