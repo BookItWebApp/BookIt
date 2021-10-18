@@ -17,6 +17,7 @@ export function SharingLink() {
   });
   const dispatch = useDispatch();
   const history = useHistory();
+  const url = window.location.href;
 
   function clickHandlerGenerateLink() {
     dispatch(setSharing(userId, articlesIdList, userMessage));
@@ -24,7 +25,7 @@ export function SharingLink() {
   }
 
   function copyToClipboard() {
-    copyTextToClipboard(`http://localhost:8080/share/get/${sharingId}`);
+    copyTextToClipboard(`${url}/${sharingId}`);
     alert('Copied!');
   }
 
@@ -53,7 +54,7 @@ export function SharingLink() {
         <div>
           <div>Here is the link you can share with your Friend!</div>
           <div id="generatedLink">
-            http://localhost:8080/sharings/get/{sharingId}
+            {url}/{sharingId}
           </div>
           <button onClick={() => copyToClipboard()} id="copyToClipboard">
             Copy Link to the Clipboard

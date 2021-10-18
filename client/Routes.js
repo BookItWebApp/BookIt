@@ -28,7 +28,7 @@ class Routes extends Component {
             <Route path="/home" component={UserArticles} />
             <Route exact path="/share/message" component={AddMessage} />
             <Route exact path="/share/sharinglink" component={SharingLink} />
-            <Route path="/share/get" component={ViewSharing} />
+            <Route path="/share/sharinglink" component={ViewSharing} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -36,7 +36,7 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/share/get" component={ViewSharing} />
+            <Route path="/share/sharinglink" component={ViewSharing} />
           </Switch>
         )}
       </div>
