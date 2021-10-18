@@ -42,3 +42,4 @@ export default function ArticlePreview(state = initialState, action) {
       return state;
   }
 }
+

@@ -7,6 +7,7 @@ import SingleArticle from './components/SingleArticle';
 import  {UserArticles}  from './components/UserArticles';
 import CreateArticle from "./components/CreateArticle"
 import { me } from './store';
+import dataDirectory from './dataviz/dataDirectory';
 
 /**
  * COMPONENT
@@ -25,6 +26,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={UserArticles} />
             <Route path="/create" component={CreateArticle} />
+            <Route path="/metrics" component={dataDirectory} />
             <Redirect to="/home" />
           </Switch>
         ) : (
