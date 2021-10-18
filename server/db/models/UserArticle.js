@@ -36,6 +36,10 @@ const UserArticle = db.define(
       type: Sequelize.DATE,
       allowNull: true,
     },
+    isPrivate: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    }
   },
   {
     indexes: [

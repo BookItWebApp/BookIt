@@ -4,26 +4,26 @@ const db = require("../db");
 
 //generateopen graph data
 const metascraper = require("metascraper")([
-  require("metascraper-description")(),
-  require("metascraper-image")(),
-  require("metascraper-logo")(),
-  require("metascraper-publisher")(),
-  require("metascraper-title")(),
+    require("metascraper-description")(),
+    require("metascraper-image")(),
+    require("metascraper-logo")(),
+    require("metascraper-publisher")(),
+    require("metascraper-title")()
 ]);
 const got = require("got");
 
 //Articles must be unique, not empty or null, and must be URL
 const Article = db.define("article", {
-  url: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true,
-    validate: {
-      isUrl: true,
-      notEmpty: true,
-      notNull: true,
-    },
-  },
+    url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        // unique: true,
+        validate: {
+            isUrl: true,
+            notEmpty: true,
+            notNull: true
+        }
+    }
 });
 
 module.exports = Article;
@@ -32,7 +32,7 @@ module.exports = Article;
 //Instance Methods
 //Get open graph data
 Article.prototype.metaData = async function (targetUrl) {
-  const { body: html, url } = await got(targetUrl);
-  const metadata = await metascraper({ html, url });
-  return metadata;
+    const { body: html, url } = await got(targetUrl);
+    const metadata = await metascraper({ html, url });
+    return metadata;
 };

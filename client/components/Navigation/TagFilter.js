@@ -1,45 +1,52 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const TagFilter = () => {
-  return (
-    <>
-          <form className="tag-filter--form">
-              <div className="tag-check">
-                <label className="tag-check-label">
-                  <input type="checkbox"
-                    // checked={}
-                    // onChange={}
-                    className="tag-check-input"
-                    />
-                    Tag 1
-                  </label>
-                </div>
-                <div className="tag-check">
-                <label className="tag-check-label">
-                  <input type="checkbox"
-                    // checked={}
-                    // onChange={}
-                    className="tag-check-input"
-                    />
-                    Tag 2
-                  </label>
-                </div>
-                <div className="tag-check">
-                <label className="tag-check-label">
-                  <input type="checkbox"
-                    // checked={}
-                    // onChange={}
-                    className="tag-check-input"
-                    />
-                    Tag 3
-                  </label>
-                </div>
-                  <div>
-                    <input type="submit" value="Submit" />
-                  </div>
-                </form>
-    </>
-  )
-}
+    // const userArticles = useSelector((state) => state.userArticles);
+    // console.log("TAG FILTER USER_ARTICLES", userArticles);
 
-export default TagFilter
+    return (
+        <>
+            <form className="tag-filter--form">
+                <div className="tag-check">
+                    <label className="tag-check-label">
+                        <input
+                            type="checkbox"
+                            // checked={}
+                            // onChange={}
+                            className="tag-check-input"
+                        />
+                        Tag 1
+                    </label>
+                </div>
+                <div className="tag-check">
+                    <label className="tag-check-label">
+                        <input
+                            type="checkbox"
+                            // checked={}
+                            // onChange={}
+                            className="tag-check-input"
+                        />
+                        Tag 2
+                    </label>
+                </div>
+                <div className="tag-check">
+                    <label className="tag-check-label">
+                        <input
+                            type="checkbox"
+                            // checked={}
+                            // onChange={}
+                            className="tag-check-input"
+                        />
+                        Tag 3
+                    </label>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+        </>
+    );
+};
+
+export default TagFilter;
