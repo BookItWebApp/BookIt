@@ -41,7 +41,7 @@ router.post('/:userId', async (req, res, next) => {
         return SharingDetail.create(
           {
             sharingId: sharingId,
-            userArticlesId: article.id,
+            userArticlesId: article,
           },
           { transaction: t }
         );
@@ -50,7 +50,7 @@ router.post('/:userId', async (req, res, next) => {
 
     await t.commit();
 
-    res.json(sharing);
+    res.json(sharingId);
   } catch (err) {
     await t.rollback();
     next(err);
