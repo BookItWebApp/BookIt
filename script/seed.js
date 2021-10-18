@@ -59,8 +59,12 @@ async function seed() {
   // Creating Articles
   const articles = await fakerHelper(100, Article, () => ({
     url: Faker.internet.url(),
-    authorId: authors[Math.floor(Math.random() * authors.length)].id,
   }));
+
+  // Creating credits
+  for (let i = articles.length - 1; i > 0; i--) {
+    articles[i].addAuthors([authors[i], authors[i - 1]]);
+  }
 
   //Creating UserArticles
   const userArticles = await fakerHelper(100, UserArticle, () => ({

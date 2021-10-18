@@ -4,8 +4,13 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import AuthorPage from './components/AuthorPage';
 import Home from './components/Home';
+import SingleArticle from './components/SingleArticle';
 import { UserArticles } from './components/UserArticles';
+import { AddMessage } from './components/sharing/AddMessage';
+import { SharingLink } from './components/sharing/SharingLink';
+import { ViewSharing } from './components/sharing/ViewSharing';
 import { me } from './store';
+import dataDirectory from './dataviz/dataDirectory';
 
 /**
  * COMPONENT
@@ -19,22 +24,26 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div>
+      <div className="routes-div--wrapper">
         {isLoggedIn ? (
           <Switch>
-            <Route path="/" component={UserArticles} />
+            <Route path="/home" component={UserArticles} />
+            <Route exact path="/share/message" component={AddMessage} />
+            <Route exact path="/share/sharinglink" component={SharingLink} />
+            <Route path="/share/sharinglink" component={ViewSharing} />
+            <Route path="/metrics" component={dataDirectory} />
+            <Route path="/authors/:id" exact component={AuthorPage} />
+            <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/share/sharinglink" component={ViewSharing} />
+            <Route path="/authors/:id" exact component={AuthorPage} />
           </Switch>
         )}
-        <Switch>
-          <Route path="/authors/:id" exact component={AuthorPage} />
-          <Redirect to="/" />
-        </Switch>
       </div>
     );
   }
