@@ -17,7 +17,7 @@ module.exports = {
   watchOptions: {
     ignored: /node_modules/,
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -29,6 +29,10 @@ module.exports = {
             presets: ['@babel/preset-react'],
           },
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

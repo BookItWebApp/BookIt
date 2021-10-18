@@ -20,6 +20,10 @@ export function UserArticles() {
     history.push('/share/message');
   }
 
+  function clickHandlerTabView() {
+    history.push('/home/tab');
+  }
+
   return (
     <div>
       <Topbar />
@@ -31,6 +35,9 @@ export function UserArticles() {
           </div>
         );
       })}
+      <button onClick={(e) => clickHandlerTabView()} id="tabViewButton">
+        Show me table view
+      </button>
       <button onClick={(e) => clickHandlerShare()} id="shareButton">
         Share list with my friends!
       </button>

@@ -9,6 +9,7 @@ import { AddMessage } from './components/sharing/AddMessage';
 import { SharingLink } from './components/sharing/SharingLink';
 import { ViewSharing } from './components/sharing/ViewSharing';
 import { me } from './store';
+import { UserArticlesTab } from './components/UserArticlesTab';
 
 /**
  * COMPONENT
@@ -25,7 +26,8 @@ class Routes extends Component {
       <div className="routes-div--wrapper">
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={UserArticles} />
+            <Route exact path="/home" component={UserArticles} />
+            <Route exact path="/home/tab" component={UserArticlesTab} />
             <Route exact path="/share/message" component={AddMessage} />
             <Route exact path="/share/sharinglink" component={SharingLink} />
             <Route path="/share/get" component={ViewSharing} />
