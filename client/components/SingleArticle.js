@@ -8,9 +8,6 @@ export function SingleArticle(props) {
 
     const article = props.article;
     const taggings = article.taggings;
-    console.log("@ ARTICLE> ", article);
-    console.log("@ TAGGINGS> ", taggings);
-    // console.log("@ METADATA> ", articleData);
 
     useEffect(() => {
         dispatch(previewArticle(article.article.url, article.id));
@@ -31,8 +28,8 @@ export function SingleArticle(props) {
             })}
             <br />
             <span>
-                <button>mark</button> <button>star</button>{" "}
-                <button>share</button>{" "}
+                <button>mark</button>
+                <button>share</button>
             </span>
         </div>
     );

@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import Topbar from "./Navigation/Topbar";
 import { createNewArticle, getArticles } from "../store/userArticles";
 
@@ -11,7 +10,6 @@ class CreateArticle extends React.Component {
             name: "",
             url: "",
             isPrivate: false,
-            // tags: ""
             tags: [""]
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +36,7 @@ class CreateArticle extends React.Component {
     }
 
     addTagPlaceHolder(e) {
+        // e.preventDefault();
         console.log("CREATE ADD_TAG_ STATE", this.state);
         const { tags } = this.state;
         tags.push("");
@@ -54,10 +53,6 @@ class CreateArticle extends React.Component {
 
     render() {
         const { name, url, isPrivate, tags } = this.state;
-        // console.log("_CREATE STATE > ", this.state);
-        // console.log("_CREATE PROPS > ", this.props);
-        // console.log("_CREATE USER ID> ", this.props.auth.id)
-
         return (
             <>
                 <Topbar />
@@ -101,13 +96,9 @@ class CreateArticle extends React.Component {
                                 </div>
                             );
                         })}
-                        <button onClick={this.addTagPlaceHolder}>+</button>
-                        {/* <label htmlFor="tags">Add tag</label>
-                        <input
-                            name="tags"
-                            value={tags}
-                            onChange={this.handleChange}
-                        /> */}
+                        <button type="button" onClick={this.addTagPlaceHolder}>
+                            +
+                        </button>
                         <br />
                         <button type="submit">Create Article</button>
                     </form>
@@ -118,7 +109,6 @@ class CreateArticle extends React.Component {
 }
 
 const mapState = (state) => {
-    console.log("CREATE MAP_STATE > ", state);
     return {
         auth: state.auth,
         userArticles: state.userArticles
@@ -134,26 +124,3 @@ const mapDispatch = (dispatch, { history }) => {
 };
 
 export default connect(mapState, mapDispatch)(CreateArticle);
-
-// FORM I NEED:
-{
-    /* <form onSubmit={this.handleSubmit}>
-<label htmlFor="name">Article name:</label>
-<input name="name" value={name} type="text" onChange={this.handleChange} />
-<br />
-
-<label htmlFor="url">URL:</label>
-<input name="url" value={url} required onChange={this.handleChange} />
-<br />
-
-<label htmlFor="public">Private:</label>
-<input name="private" value={private} onChange={this.handleChange} />
-<br />
-
-<label htmlFor="tags">Add tag</label>
-<input name="tags" value={tags} onChange={this.handleChange} />
-<br />
-
-<button type="submit">Create Article</button>
-</form> */
-}

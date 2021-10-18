@@ -17,7 +17,7 @@ const Article = db.define("article", {
     url: {
         type: Sequelize.STRING,
         allowNull: false,
-        // unique: true,
+        unique: true,
         validate: {
             isUrl: true,
             notEmpty: true,

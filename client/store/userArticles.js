@@ -47,14 +47,10 @@ export const getArticles = (id) => {
 export const createNewArticle = (article, userId, history) => {
     return async (dispatch) => {
         try {
-            console.log("THUNK PASSED-IN CREATE DATA > ", article);
-
             const { data } = await axios.post(`/api/articles`, {
                 article,
                 userId
             });
-            console.log("THUNK CREATE DATA > ", data);
-
             dispatch(_createArticle(data));
             history.push("/home");
         } catch (err) {

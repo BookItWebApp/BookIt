@@ -1,10 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
 const TagFilter = () => {
-    // const userArticles = useSelector((state) => state.userArticles);
-    // console.log("TAG FILTER USER_ARTICLES", userArticles);
-
     return (
         <>
             <form className="tag-filter--form">
