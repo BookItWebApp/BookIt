@@ -9,6 +9,7 @@ import { AddMessage } from './components/sharing/AddMessage';
 import { SharingLink } from './components/sharing/SharingLink';
 import { ViewSharing } from './components/sharing/ViewSharing';
 import { me } from './store';
+import dataDirectory from './dataviz/dataDirectory';
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ class Routes extends Component {
             <Route exact path="/share/message" component={AddMessage} />
             <Route exact path="/share/sharinglink" component={SharingLink} />
             <Route path="/share/sharinglink" component={ViewSharing} />
+            <Route path="/metrics" component={dataDirectory} />
             <Redirect to="/home" />
           </Switch>
         ) : (

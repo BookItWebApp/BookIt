@@ -9,6 +9,7 @@ import tagsReducer from './tag';
 import sharingsReducer from './sharing';
 import singleAuthor from './singleAuthor';
 import ArticlePreview from './SingleArticle';
+import ArticlesReducer from './articles';
 
 const reducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   tags: tagsReducer,
   sharings: sharingsReducer,
   metaData: ArticlePreview,
+  allArticles: ArticlesReducer,
 });
 
 const middleware = composeWithDevTools(
