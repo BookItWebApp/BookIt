@@ -11,7 +11,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(fetchAuthor(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div className="authorPage">

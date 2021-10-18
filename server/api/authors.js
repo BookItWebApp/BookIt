@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Op } = require('sequelize');
 
 const {
   models: { Author, Article, UserArticle, Tagging, Tag },
@@ -23,10 +24,20 @@ const getSingle = async (req, res, next) => {
     const author = await Author.findByPk(req.params.id, {
       include: {
         model: Article,
-        include: {
-          model: UserArticle,
-          include: { model: Tagging, include: Tag },
-        },
+        include: [
+          {
+            model: UserArticle,
+            include: { model: Tagging, include: Tag },
+          },
+          {
+            model: Author,
+            where: {
+              id: {
+                [Op.not]: req.params.id,
+              },
+            },
+          },
+        ],
       },
     });
     if (author) {
