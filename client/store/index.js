@@ -6,9 +6,10 @@ import auth from './auth';
 import tab from './tab';
 import userArticlesReducer from './userArticles';
 import tagsReducer from './tag';
+import sharingsReducer from './sharing';
 import singleAuthor from './singleAuthor';
-import ArticlePreview from './SingleArticle'
-import ArticlesReducer from './articles'
+import ArticlePreview from './SingleArticle';
+import ArticlesReducer from './articles';
 
 const reducer = combineReducers({
   auth,
@@ -16,8 +17,10 @@ const reducer = combineReducers({
   singleAuthor,
   userArticles: userArticlesReducer,
   tags: tagsReducer,
+  sharings: sharingsReducer,
   metaData: ArticlePreview,
-  allArticles: ArticlesReducer })
+  allArticles: ArticlesReducer,
+});
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
