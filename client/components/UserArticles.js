@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getArticles } from "../store/userArticles";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleArticle } from "./SingleArticle";
 import Topbar from "./Navigation/Topbar";
+import { useHistory } from 'react-router-dom';
+import { getUserArticles } from '../store/userArticles';
 
 export function UserArticles() {
-    //ref: https://thoughtbot.com/blog/using-redux-with-react-hooks
-    const articles = useSelector((state) => state.userArticles);
-    const user = useSelector((state) => state.auth);
-    const dispatch = useDispatch();
+      const articles = useSelector((state) => state.userArticles);
+      const user = useSelector((state) => state.auth);
+      const dispatch = useDispatch();
+      const history = useHistory();
 
     useEffect(() => {
-        dispatch(getArticles(user.id));
-    }, [dispatch]);
+      dispatch(getUserArticles(user.id));
+     }, [dispatch]);
 
-    // console.log("ARTICLES > ", articles);
-    // console.log("ARTICLES USER > ", user);
+      function clickHandlerShare() {
+        history.push('/share/message');
+      }
 
     if (articles.length === 0) {
         return (
@@ -38,7 +40,6 @@ export function UserArticles() {
             <h3>Articles</h3>
             <div className="display-articles--container">
                 {articles.map((article) => {
-                    console.log("ARTICLE===", article);
                     return (
                         <div key={article.id} className="singleContainer">
                             <SingleArticle article={article} />
@@ -46,11 +47,9 @@ export function UserArticles() {
                     );
                 })}
             </div>
-            <Link to="/sharelist">
-                <p className="user-articles--share-list">
-                    Share my list with friends
-                </p>
-            </Link>
+            <button onClick={(e) => clickHandlerShare()} id="shareButton">
+              Share list with my friends!
+            </button>
         </div>
     );
 }
