@@ -24,8 +24,8 @@ Tagging.belongsTo(UserArticle, { foreignKey: 'userArticlesId' });
 Tag.hasMany(Tagging, { foreignKey: 'tagId' });
 Tagging.belongsTo(Tag, { foreignKey: 'tagId' });
 
-Author.hasMany(Article);
-Article.belongsTo(Author);
+Author.belongsToMany(Article, { through: 'credits' });
+Article.belongsToMany(Author, { through: 'credits' });
 
 User.hasMany(Sharing, { foreignKey: 'userId' });
 Sharing.belongsTo(User,{ foreignKey: 'userId' });
