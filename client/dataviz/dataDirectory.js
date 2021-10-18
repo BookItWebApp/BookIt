@@ -2,19 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { TimeChartOne } from './TimeChart1';
+import { me } from '../store';
 import { getArticles } from '../store/articles';
+import { getUserArticles } from '../store/userArticles';
 
 class DataDirectory extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.allArticles.length != prevProps.allArticles.length
+      || this.props.userArticles.lenth != prevProps.userArticles.lenth) {
+      this.props.UserArticles(this.props.userId)
+    }
+  }
+
   render() {
     return (
       <div>
         <div>Choose a Data Viz</div>
-        <Link to="/metrics/table1" state={this.props}>
-          Test Table
-        </Link>
+        <Link to="/metrics/table1">Test Table</Link>
         <Switch>
           <Route path="/metrics/table1" component={TimeChartOne} />
           <Redirect to="/metrics" />
@@ -29,17 +36,19 @@ class DataDirectory extends Component {
  */
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
+    userId: state.auth.id,
     allArticles: state.allArticles,
+    userArticles: state.userArticles,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
+      dispatch(me());
       dispatch(getArticles());
     },
+    UserArticles: (id) => dispatch(getUserArticles(id))
   };
 };
 
