@@ -5,10 +5,13 @@ import { Login, Signup } from './components/AuthForm';
 import AuthorPage from './components/AuthorPage';
 import Home from './components/Home';
 import SingleArticle from './components/SingleArticle';
+
+import CreateArticle from "./components/CreateArticle"
 import { UserArticles } from './components/UserArticles';
 import { AddMessage } from './components/sharing/AddMessage';
 import { SharingLink } from './components/sharing/SharingLink';
 import { ViewSharing } from './components/sharing/ViewSharing';
+
 import { me } from './store';
 import dataDirectory from './dataviz/dataDirectory';
 
@@ -28,6 +31,7 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={UserArticles} />
+            <Route path="/create" component={CreateArticle} />
             <Route exact path="/share/message" component={AddMessage} />
             <Route exact path="/share/sharinglink" component={SharingLink} />
             <Route path="/share/sharinglink" component={ViewSharing} />

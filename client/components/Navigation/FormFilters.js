@@ -14,7 +14,6 @@ const FormFilters = () => {
               Public
             </label>
           </div>
-
           <div className="form-check">
             <label className="form-check-label">
               <input type="checkbox"
