@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticles } from '../store/userArticles';
-import { SingleArticle } from './SingleArticle';
 import { useHistory } from 'react-router-dom';
+import { getUserArticles } from '../store/userArticles';
+import {SingleArticle} from './SingleArticle'
 import Topbar from './Navigation/Topbar';
 
 export function UserArticles() {
@@ -13,7 +13,7 @@ export function UserArticles() {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getArticles(user.id));
+    dispatch(getUserArticles(user.id));
   }, [dispatch]);
 
   function clickHandlerShare() {
