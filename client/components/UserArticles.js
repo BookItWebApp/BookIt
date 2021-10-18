@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getArticles } from "../store/userArticles";
-import { useDispatch, useSelector } from "react-redux";
-import { SingleArticle } from "./SingleArticle";
-import Topbar from "./Navigation/Topbar";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserArticles } from '../store/userArticles';
+import {SingleArticle} from './SingleArticle'
+import Topbar from './Navigation/Topbar';
 
 export function UserArticles() {
     //ref: https://thoughtbot.com/blog/using-redux-with-react-hooks
@@ -11,12 +11,9 @@ export function UserArticles() {
     const user = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getArticles(user.id));
-    }, [dispatch]);
-
-    // console.log("ARTICLES > ", articles);
-    // console.log("ARTICLES USER > ", user);
+  useEffect(() => {
+    dispatch(getUserArticles(user.id));
+  }, [dispatch]);
 
     if (articles.length === 0) {
         return (

@@ -13,7 +13,7 @@ const _getArticles = (articles) => {
 };
 
 //THUNKS
-//get all articles for a singlue user
+//get all articles 
 export const getArticles = () => {
   return async (dispatch) => {
     try {

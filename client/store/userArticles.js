@@ -1,17 +1,17 @@
 import axios from "axios";
 
 //ACTION TYPES
-const GET_ARTICLES = "GET_ARTICLES";
+const GET_USER_ARTICLES = "GET_USER_ARTICLES";
 const CREATE_ARTICLE = "CREATE_ARTICLE";
 const UPDATE_ARTICLE = "UPDATE_ARTICLE";
 
 //ACTION CREATORS
 //Get all articles for a single user
-const _getArticles = (articles) => {
-    return {
-        type: GET_ARTICLES,
-        articles
-    };
+const _getUserArticles = (articles) => {
+  return {
+    type: GET_USER_ARTICLES,
+    articles,
+  };
 };
 
 // CREATE AN ARTICLE
@@ -32,15 +32,15 @@ const _updateArticle = (article) => {
 
 //THUNKS
 //get all articles for a singlue user
-export const getArticles = (id) => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(`/api/userArticles/${id}`);
-            dispatch(_getArticles(response.data));
-        } catch (error) {
-            console.log(error);
-        }
-    };
+export const getUserArticles = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/api/userArticles/${id}`);
+      dispatch(_getUserArticles(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
 
 // CREATE A SINGLE ARTICLE
@@ -84,7 +84,7 @@ const initialState = [];
 //Reducer
 export default function userArticleReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_ARTICLES:
+        case GET_USER_ARTICLES:
             return action.articles;
         case CREATE_ARTICLE:
             return [...state, action.article];
