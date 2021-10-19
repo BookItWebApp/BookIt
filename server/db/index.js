@@ -7,6 +7,9 @@ const Article = require('./models/Article');
 const Tagging = require('./models/Tagging');
 const Tag = require('./models/Tag');
 const UserArticle = require('./models/UserArticle');
+const Author = require('./models/Author');
+const Sharing = require('./models/Sharing');
+const SharingDetail = require('./models/SharingDetail');
 
 //associations could go here!
 User.hasMany(UserArticle, { foreignKey: 'userId' });
@@ -21,6 +24,21 @@ Tagging.belongsTo(UserArticle, { foreignKey: 'userArticlesId' });
 Tag.hasMany(Tagging, { foreignKey: 'tagId' });
 Tagging.belongsTo(Tag, { foreignKey: 'tagId' });
 
+Author.belongsToMany(Article, { through: 'credits' });
+Article.belongsToMany(Author, { through: 'credits' });
+
+User.hasMany(Sharing, { foreignKey: 'userId' });
+Sharing.belongsTo(User, { foreignKey: 'userId' });
+
+Sharing.hasMany(SharingDetail, { foreignKey: 'sharingId' });
+SharingDetail.belongsTo(Sharing, { foreignKey: 'sharingId' });
+
+UserArticle.hasMany(SharingDetail, { foreignKey: 'userArticlesId' });
+SharingDetail.belongsTo(UserArticle, { foreignKey: 'userArticlesId' });
+
+User.hasOne(Author);
+Author.belongsTo(User);
+
 module.exports = {
   db,
   models: {
@@ -29,5 +47,8 @@ module.exports = {
     Tag,
     Tagging,
     UserArticle,
+    Author,
+    Sharing,
+    SharingDetail,
   },
 };
