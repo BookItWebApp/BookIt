@@ -20,6 +20,10 @@ const UserArticle = db.define(
       type: Sequelize.TEXT,
       allowNull: false,
     },
+    note: {
+      type: Sequelize.TEXT,
+      allowNull: true,
+    },
     userId: {
       type: Sequelize.UUID,
       allowNull: false,
@@ -32,6 +36,10 @@ const UserArticle = db.define(
       type: Sequelize.DATE,
       allowNull: true,
     },
+    isPrivate: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    }
   },
   {
     indexes: [
