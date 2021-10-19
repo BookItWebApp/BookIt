@@ -4,12 +4,14 @@ import { fetchTab } from "../store/tab";
 import { getTags } from "../store/tag";
 
 export default () => {
+  //In Order: supplies URL, User info, and Tag info
   const tab = useSelector((state) => state.tab);
-  const user = useSelector((state)=> state.tab)
+  const user = useSelector((state)=> state.auth)
   const tags = useSelector((state) => state.tags);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //Current extension retrieves ALL tags instead of user Tags
     dispatch(getTags())
     dispatch(fetchTab());
   }, [dispatch]);
@@ -18,8 +20,8 @@ export default () => {
   tags.map((tags)=> {indivTags.push(tags.tag.name)})
 
   return (
+    //new article is submitted to DB based on simple form POST submission direct to URL
     <div>
-      {/* <label htmlFor="urlPOST">URL</label> */}
       <form
         name="urlPOST"
         action="http://localhost:8080/api/articles/"
