@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Article, UserArticle, Tag, Tagging },
+  models: { Article, UserArticle, Tag, Tagging, Author, User },
 } = require('../db/index');
 
 const getallArticles = async (req, res, next) => {
@@ -75,13 +75,46 @@ const postArticle = async (req, res, next) => {
   }
 };
 
-const validateAuthor = (req, res, next) => {
+/**
+ * Checks if the incoming request has an authorization header containing the
+ * token of a user who is also an author
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
+const validateAuthor = async (req, res, next) => {
   try {
-  } catch (error) {}
+    req.user = await User.findByToken(req.headers.authorization);
+    req.author = await Author.findOne({ where: { userId: req.user.id } });
+    if (req.author) {
+      next();
+    } else {
+      res.sendStatus(401);
+    }
+  } catch (error) {
+    next(error);
+  }
 };
 
-const setAuthor = (req, res, next) => {
+/**
+ * Sets one of the authors of the article in `req.params.id` as the currently
+ * logged in user
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ */
+const setAuthor = async (req, res, next) => {
   try {
+    const article = await Article.findByPk(req.params.id, {
+      include: [{ model: Author, attributes: ['id'] }],
+    });
+    if (!article) {
+      res.sendStatus(404);
+    } else {
+      const authors = article.authors.map((author) => author.id);
+      if (!authors.include(req.author.id)) {
+      }
+    }
   } catch (error) {
     console.log(error);
   }
@@ -89,6 +122,6 @@ const setAuthor = (req, res, next) => {
 
 router.get('/', getallArticles);
 router.post('/', postArticle);
-router.put('/:id');
+router.put('/:id', validateAuthor);
 
 module.exports = router;
