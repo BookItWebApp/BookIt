@@ -15,7 +15,7 @@ const getallArticles = async (req, res, next) => {
 // POST /api/articles
 const postArticle = async (req, res, next) => {
     try {
-        console.log("POST ARTICLE BODY: ", req.body);
+        // console.log("POST ARTICLE BODY: ", req.body);
 
         const url = req.body.article.url;
         const articleName = req.body.article.name;
@@ -27,7 +27,7 @@ const postArticle = async (req, res, next) => {
         const article = await Article.create({
             url: url
         });
-        console.log("ARTICLE IS CREATED: ", article);
+        // console.log("ARTICLE IS CREATED: ", article);
 
         // CREATE USER ARTICLE
         const userArticle = await UserArticle.create({
@@ -36,7 +36,7 @@ const postArticle = async (req, res, next) => {
             articleId: article.id,
             isPrivate: isPrivate
         });
-        console.log("=> USER_ARTICLE IS CREATED: ", userArticle);
+        // console.log("=> USER_ARTICLE IS CREATED: ", userArticle);
 
         // // CREATE TAGS/TAGGING
         await Promise.all(
@@ -44,7 +44,7 @@ const postArticle = async (req, res, next) => {
                 let tag = await Tag.create({
                     name: tagName
                 });
-                console.log("=> TAGS IS CREATED: ", tag);
+                // console.log("=> TAGS IS CREATED: ", tag);
                 return await Tagging.create({
                     tagId: tag.id,
                     userArticlesId: userArticle.id
@@ -66,7 +66,7 @@ const postArticle = async (req, res, next) => {
                 }
             ]
         });
-        console.log("ARTICLE TO SEND > ", createdArticle);
+        // console.log("ARTICLE TO SEND > ", createdArticle);
 
         res.json(createdArticle);
     } catch (error) {
