@@ -5,9 +5,6 @@ import FormFilters from './FormFilters';
 import TagFilter from './TagFilter';
 
 const MainMenu = ({handleClick}) => {
-  // const [checkedState, setCheckedState] = useState(
-  //   new Array(filterArr.length).fill(false)
-  // );
 
   return (
   <div>
