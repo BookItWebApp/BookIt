@@ -57,14 +57,14 @@ router.post('/', async (req, res, next) => {
 });
 
 // PUT /api/useArticles/:id
-router.put("/:id", async(req,res,next)=>{
-  try{
+router.put('/:id', async (req, res, next) => {
+  try {
     //
     const updatedUserArticle = await UserArticle.update(req.body, {
       where: {
-          id: req.params.id
+        id: req.params.id,
       },
-      returning: true
+      returning: true,
     });
     const [rowsUpdate, [userArticle]] = updatedUserArticle;
     // console.log("USER ARRTICEL > ", userArticle)
@@ -74,8 +74,8 @@ router.put("/:id", async(req,res,next)=>{
     }
 
     res.status(200).json(userArticle);
-  }catch(err){
+  } catch (err) {
     // console.log('> PUT /api/useArticles/ID ERR: ', err);
-    next(err)
+    next(err);
   }
-})
+});

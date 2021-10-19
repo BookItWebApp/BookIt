@@ -5,7 +5,7 @@ import { TimeChartOne } from './TimeChart1';
 import { me } from '../store';
 import { getArticles } from '../store/articles';
 import { getUserArticles } from '../store/userArticles';
-import { Calendar } from './CalendarHeatMap';
+import { Calendar } from './Calendar';
 
 class DataDirectory extends Component {
   componentDidMount() {
@@ -22,7 +22,8 @@ class DataDirectory extends Component {
     return (
       <div>
         <div>Choose a Data Viz</div>
-        <Link to="/metrics/table1">Test Table</Link>
+        <Link to="/metrics/table1">Time Table</Link>
+        <Link to="/metrics/table1">Calendar Table</Link>
         <Switch>
           <Route path="/metrics/table1" component={TimeChartOne} />
           <Route path="/metrics/table2" component={Calendar} />

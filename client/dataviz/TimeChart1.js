@@ -29,9 +29,7 @@ export function TimeChartOne() {
       (article) => article.readAt === date
     );
   });
-
   const xReadDates = Object.keys(SortedArticles);
-  console.log(SortedArticles)
 
   for (const [key, value] of Object.entries(SortedArticles)) {
     yReadCount.push(value.length);
