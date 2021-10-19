@@ -112,8 +112,12 @@ const setAuthor = async (req, res, next) => {
       res.sendStatus(404);
     } else {
       const authors = article.authors.map((author) => author.id);
-      if (!authors.include(req.author.id)) {
+      if (!authors.includes(req.author.id)) {
+        article.addAuthor(req.author);
+        await article.save();
+        res.status(201);
       }
+      res.send(article);
     }
   } catch (error) {
     console.log(error);
@@ -122,6 +126,6 @@ const setAuthor = async (req, res, next) => {
 
 router.get('/', getallArticles);
 router.post('/', postArticle);
-router.put('/:id', validateAuthor);
+router.put('/:id', validateAuthor, setAuthor);
 
 module.exports = router;
