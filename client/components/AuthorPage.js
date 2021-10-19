@@ -4,7 +4,18 @@ import { useParams } from 'react-router-dom';
 import { fetchAuthor } from '../store/singleAuthor';
 import ArticleList from './ArticleList';
 
-export default () => {
+/**
+ * @returns { JSX.Element } returns a React Component that displays an author
+ * given the id in the url.
+ *
+ * Dispatches a thunk to `/api/author/:id` on changes to react store, or the id
+ * given to the url (helps when changing authors within the page)
+ *
+ * React component comprises of a div containing basic author info (photo, name,
+ * bio) and a {@link ArticleList list of articles} containing
+ * {@link AuthorArticleItem information about that article}
+ */
+const AuthorPage = () => {
   const { id } = useParams();
   const author = useSelector((state) => state.singleAuthor);
   const dispatch = useDispatch();
@@ -33,3 +44,5 @@ export default () => {
     </div>
   );
 };
+
+export default AuthorPage;
