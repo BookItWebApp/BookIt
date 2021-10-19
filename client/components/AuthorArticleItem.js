@@ -2,7 +2,17 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import tagList, { sortTags } from '../helpers/tagList';
 
-export default ({ article }) => {
+/**
+ * @returns { JSX.Element } returns a React Element that displays a single
+ * article with information relavent to the currently selected author who wrote
+ * it.
+ *
+ * Contains the following information:
+ * - URL
+ * - Co-Authors (If any)
+ * - Popular tags (If tagged, sorted by {@link tagList})
+ */
+const AuthorArticleItem = ({ article }) => {
   const popularTags = sortTags(tagList(article));
 
   return (
@@ -33,3 +43,5 @@ export default ({ article }) => {
     </div>
   );
 };
+
+export default AuthorArticleItem;
