@@ -75,7 +75,20 @@ const postArticle = async (req, res, next) => {
   }
 };
 
+const validateAuthor = (req, res, next) => {
+  try {
+  } catch (error) {}
+};
+
+const setAuthor = (req, res, next) => {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 router.get('/', getallArticles);
 router.post('/', postArticle);
+router.put('/:id');
 
 module.exports = router;
