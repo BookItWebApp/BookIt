@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Topbar from "./Navigation/Topbar";
-import { createNewArticle, getUserArticles } from "../store/userArticles";
+import { createNewArticle } from "../store/userArticles";
 
 class CreateArticle extends React.Component {
     constructor(props) {
@@ -118,8 +118,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch, { history }) => {
     return {
         createNewArticle: (article, userId) =>
-            dispatch(createNewArticle(article, userId, history)),
-        getUserArticles: (id) => dispatch(getUserArticles(id))
+            dispatch(createNewArticle(article, userId, history))
+
     };
 };
 
