@@ -6,6 +6,7 @@ import { me } from '../store';
 import { getArticles } from '../store/articles';
 import { getUserArticles } from '../store/userArticles';
 import { Calendar } from './Calendar';
+import { ReadRatio } from './readUnread';
 
 class DataDirectory extends Component {
   componentDidMount() {
@@ -23,10 +24,12 @@ class DataDirectory extends Component {
       <div>
         <div>Choose a Data Viz</div>
         <Link to="/metrics/table1">Time Table</Link>
-        <Link to="/metrics/table1">Calendar Table</Link>
+        <Link to="/metrics/table2">Calendar Table</Link>
+        <Link to="/metrics/table3">Read Ratio Table</Link>
         <Switch>
           <Route path="/metrics/table1" component={TimeChartOne} />
           <Route path="/metrics/table2" component={Calendar} />
+          <Route path="/metrics/table3" component={ReadRatio} />
           <Redirect to="/metrics" />
         </Switch>
       </div>
