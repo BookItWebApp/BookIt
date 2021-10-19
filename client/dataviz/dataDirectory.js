@@ -6,7 +6,7 @@ import { me } from '../store';
 import { getArticles } from '../store/articles';
 import { getUserArticles } from '../store/userArticles';
 import { Calendar } from './Calendar';
-import { ReadRatio } from './readUnread';
+import { TagRatio } from './TagPerc';
 
 class DataDirectory extends Component {
   componentDidMount() {
@@ -29,7 +29,7 @@ class DataDirectory extends Component {
         <Switch>
           <Route path="/metrics/table1" component={TimeChartOne} />
           <Route path="/metrics/table2" component={Calendar} />
-          <Route path="/metrics/table3" component={ReadRatio} />
+          <Route path="/metrics/table3" component={TagRatio} />
           <Redirect to="/metrics" />
         </Switch>
       </div>

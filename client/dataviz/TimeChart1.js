@@ -24,9 +24,6 @@ export function TimeChartOne() {
     return article;
   });
 
-  console.log('hello',dateCleanedArticles)
-
-
   const allArticlesCleaned = userArticles.map((article) => {
     if (article.readAt!==null){
     article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
