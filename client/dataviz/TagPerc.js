@@ -67,9 +67,11 @@ export function TagRatio() {
     const tagTrace = {
       labels: articleTagsList,
       values: yTags,
-      name: articleTagsList[i],
+      name: 'Your Tags',
       type: 'pie',
     };
+
+    console.log(tagTrace)
   }
 
 
