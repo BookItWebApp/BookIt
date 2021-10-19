@@ -122,5 +122,4 @@ const mapDispatch = (dispatch, { history }) => {
 
     };
 };
-
 export default connect(mapState, mapDispatch)(CreateArticle);
