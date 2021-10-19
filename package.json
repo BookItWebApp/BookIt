@@ -21,7 +21,9 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@ag-grid-enterprise/all-modules": "^26.1.0",
     "ag-grid-community": "^26.1.0",
+    "ag-grid-enterprise": "^26.1.0",
     "ag-grid-react": "^26.1.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
