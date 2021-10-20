@@ -38,15 +38,14 @@ router.get("/:id", async (req, res, next) => {
         //
         const { id } = req.params;
         const userArticles = await UserArticle.findAllTaggingsByUser(id);
-        console.log(
-            ">> ROUTER GET TAGS OF USER_ARTICLES > ",
-            JSON.stringify(userArticles)
-        );
+        // console.log(
+        //     ">> ROUTER GET TAGS OF USER_ARTICLES > ",
+        //     JSON.stringify(userArticles)
+        // );
 
         const name = userArticles
             .flatMap((item) => item.taggings)
             .map((item) => item.tag.name);
-        console.log(">>>", JSON.stringify(name));
 
         if (!name) {
             res.sendStatus(404);

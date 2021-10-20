@@ -55,7 +55,7 @@ const TagFilter = () => {
                         <input
                             type="checkbox"
                             // checked={isPrivate}
-                            onChange={(e) => onTagSelected(e, "Private")}
+                            onChange={(e) => onTagSelected(e, "isPrivate")}
                             className="form-check-input"
                         />
                         Private
@@ -68,7 +68,7 @@ const TagFilter = () => {
                             type="checkbox"
                             // checked={isRead}
                             // onChange={onChangeRead}
-                            onChange={(e) => onTagSelected(e, "Read")}
+                            onChange={(e) => onTagSelected(e, "readAt")}
                             className="form-check-input"
                         />
                         Read
