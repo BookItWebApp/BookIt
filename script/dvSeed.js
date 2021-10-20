@@ -1,9 +1,17 @@
 'use strict';
 const Faker = require('faker');
+const urlArry = require('./urlSeedData');
 
 const {
   db,
-  models: { User, Article, Tagging, UserArticle, Tag, Author },
+  models: {     User,
+    Article,
+    Tagging,
+    UserArticle,
+    Tag,
+    Author,
+    Sharing,
+    SharingDetail },
 } = require('../server/db');
 
 /**
@@ -12,13 +20,13 @@ const {
  */
 
 //Parameters
-let userCount = 250
-let articleCount = 500
-let authorCount = 100
-let readArticlesModulo = 2 //divisor - the large the number the lower the % read
-let userArticlesCount = (articleCount * 5)
-let tagCount = 700
-let MaxTaggingsCount = 3000
+let userCount = 250;
+let articleCount = 500; //Max: 5000
+let authorCount = 100;
+let readArticlesModulo = 2; //divisor - the large the number the lower the % read
+let userArticlesCount = articleCount * 5;
+let tagCount = 700;
+let MaxTaggingsCount = 3000;
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -38,7 +46,8 @@ async function seed() {
   initialUsers.push({
     username: 'cody',
     password: '123',
-    email: 'codytest@fullstackacademy.com'})
+    email: 'codytest@fullstackacademy.com',
+  });
   //seed users
   for (let i = 2; i < userCount; i++) {
     initialUsers.push({
@@ -69,35 +78,24 @@ async function seed() {
     initialAuthors.map((author) => Author.create(author))
   );
 
-  // Create Articles
-  //enfore unique urls
-  let urlsList = [];
-  function generateUniqueURL() {
-    let startLength = urlsList.length;
-    while (startLength === urlsList.length) {
-      let url = Faker.internet.url();
-      if (urlsList.indexOf(url) > -1) {
-        continue;
-      } else {
-        urlsList.push(url);
-        return url;
-      }
-    }
-  }
-
   console.log('Seeding Articles...');
   //create articles
   let initialArticles = [];
   for (let i = 0; i < articleCount; i++) {
     initialArticles.push({
-      url: generateUniqueURL(),
-      authorId: authors[getRandomArbitrary(0,99)].id,
+      url: urlArry[i],
+      authorId: authors[getRandomArbitrary(0, 99)].id,
     });
   }
   //seed articles
   const articles = await Promise.all(
     initialArticles.map((article) => Article.create(article))
   );
+  console.log('Seeding Credits...')
+  // Creating credits - FROM SEED.js
+  for (let i = articles.length - 1; i > 0; i--) {
+    articles[i].addAuthors([authors[i], authors[i - 1]]);
+  }
 
   // Create userArticles
   //generate readAt data including null value
@@ -110,18 +108,18 @@ async function seed() {
 
   console.log('Seeding User Articles...');
   let intitalUserArticles = [];
-  let articleUserPair = []
+  let articleUserPair = [];
   for (let i = 0; i < userArticlesCount; i++) {
     let createDate = readDates[i]
       ? Faker.date.past(5, readDates[i])
       : Faker.date.past(5);
     createDate = createDate.toString();
 
-    let userId =  users[getRandomArbitrary(0, 99)].id
-    let articleId = Faker.datatype.number({ min: 1, max: 99 })
-    let articleUser = `${articleId}-${userId}`
+    let userId = users[getRandomArbitrary(0, 99)].id;
+    let articleId = Faker.datatype.number({ min: 1, max: 99 });
+    let articleUser = `${articleId}-${userId}`;
 
-    if(articleUserPair.indexOf(articleUser)===-1){
+    if (articleUserPair.indexOf(articleUser) === -1) {
       intitalUserArticles.push({
         name: Faker.lorem.words(),
         featured: Faker.datatype.boolean(),
@@ -129,11 +127,9 @@ async function seed() {
         articleId: articleId,
         readAt: readDates[i],
         createdAt: createDate,
-        userId: userId
+        userId: userId,
       }),
-      articleUserPair.push(
-        articleUser
-      )
+        articleUserPair.push(articleUser);
     }
   }
 
@@ -168,7 +164,39 @@ async function seed() {
   //seed Tags
   const tags = await Promise.all(initialTags.map((tag) => Tag.create(tag)));
 
-  console.log('seed taggings...')
+  console.log('Seeding Sharings...')
+  // Creating Sharings -- FROM Seed.js
+  const sharings = [
+    { userId: users[0].id, sharingUrl: 'url1', userMessage: 'text1' },
+  ];
+
+  // Creating Sharings -- FROM Seed.js
+  const sharingSeedResult = await Promise.all(
+    sharings.map((sharing) => {
+      return Sharing.create(sharing);
+    })
+  );
+
+  console.log('Seeding Sharings Details...')
+  // Creating SharingDetails -- FROM Seed.js
+  const sharingDetails = [
+    {
+      sharingId: sharingSeedResult[0].id,
+      userArticlesId: userArticles[0].id,
+    },
+    {
+      sharingId: sharingSeedResult[0].id,
+      userArticlesId: userArticles[1].id,
+    },
+  ];
+
+  await Promise.all(
+    sharingDetails.map((sharingDetail) => {
+      return SharingDetail.create(sharingDetail);
+    })
+  );
+
+  console.log('seed taggings...');
   //make sure every tag used at least once
   let tagCheck = [];
   tags.forEach((tag) => tagCheck.push(tag.name));
@@ -180,10 +208,12 @@ async function seed() {
   while (tagCheck.length > 1 && initialTaggings.length < MaxTaggingsCount) {
     //create random data for tag and article data
     let tag = tags[getRandomArbitrary(0, tags.length - 1)];
-    let articleId = tagCheck.length %100 ===0 ? null:
-      userArticles[getRandomArbitrary(0, userArticles.length - 1)].id;
+    let articleId =
+      tagCheck.length % 100 === 0
+        ? null
+        : userArticles[getRandomArbitrary(0, userArticles.length - 1)].id;
     let tagId = tag.id;
-     let articleTag = `${articleId}${tagId}`;
+    let articleTag = `${articleId}${tagId}`;
     //if article-pair hasn't been seen before push to to be created list articleTag)
     if (articleTagPairs.indexOf(articleTag) === -1) {
       initialTaggings.push({
@@ -192,9 +222,7 @@ async function seed() {
         userArticlesId: articleId,
       });
       //log article-tag pair for future check
-      articleTagPairs.push(
-        articleTag,
-      );
+      articleTagPairs.push(articleTag);
       //remove added tag from tagCheck
       let index = tagCheck.indexOf(tag.name);
       if (index > -1) {
@@ -209,18 +237,17 @@ async function seed() {
   }
 
   const taggings = await Promise.all(
-      initialTaggings.map((tag) => Tagging.create(tag))
-    );
+    initialTaggings.map((tag) => Tagging.create(tag))
+  );
 
-    console.log(`seeded ${users.length} users`);
-    console.log(`seeded ${authors.length} authors`);
-    console.log(`seeded ${articles.length} articles`);
-    console.log(`seeded ${userArticles.length} userArticles`);
-    console.log(`seeded ${tags.length} tags`);
-    console.log(`seeded ${taggings.length} taggings`);
-    console.log(`seeded successfully`);
-  }
-
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${authors.length} authors`);
+  console.log(`seeded ${articles.length} articles`);
+  console.log(`seeded ${userArticles.length} userArticles`);
+  console.log(`seeded ${tags.length} tags`);
+  console.log(`seeded ${taggings.length} taggings`);
+  console.log(`seeded successfully`);
+}
 
 /*
   We've separated the `seed` function from the `runSeed` function.
