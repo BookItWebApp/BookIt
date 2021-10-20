@@ -15,6 +15,12 @@ export function SingleArticle(props) {
         dispatch(previewArticle(article.article.url, article.id));
     }, [dispatch]);
 
+    function markAsCompleted() {
+        // alert("trying to complete item with an id of " + user.id);
+        article.readAt = new Date().toISOString();
+        console.log("MARK AS REEAD > ", article);
+        dispatch(markUserArticle(user.id, article));
+    }
     //
     return (
         <div className="single-article--container">
@@ -22,7 +28,7 @@ export function SingleArticle(props) {
                 Title: {article.name}
                 <br />
             </a>
-            Private: {article.isPrivate}
+            Private: {article.isPrivate ? "True" : "False"}
             <br />
             Tags:
             {taggings.map((tagging, idx) => {
@@ -30,9 +36,10 @@ export function SingleArticle(props) {
             })}
             <br />
             <span>
-                {/* <button onClick={handleComplete}>mark</button> */}
+                <button onClick={markAsCompleted}>mark</button>
                 <button>share</button>
             </span>
+            <span>{article.readAt ? "Read" : "Unread"}</span>
         </div>
     );
 }
