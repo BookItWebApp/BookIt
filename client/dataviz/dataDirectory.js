@@ -1,13 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect, Link } from "react-router-dom";
-import { TimeChartOne } from "./TimeChart1";
-import { me } from "../store";
-import { getArticles } from "../store/articles";
-import { getUserArticles } from "../store/userArticles";
-import { Calendar } from "./Calendar";
-import { TagRatio } from "./TagPerc";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
+import { TimeChartOne } from './TimeChart1';
+import { me } from '../store';
+import { getArticles } from '../store/articles';
+import { getUserArticles } from '../store/userArticles';
+import { Calendar } from './Calendar';
+import { TagRatio } from './TagPerc';
+import { Indicator } from './indicator';
 import Topbar from "../components/Navigation/Topbar";
+
 
 class DataDirectory extends Component {
     componentDidMount() {
