@@ -60,17 +60,20 @@ export const createNewArticle = (article, userId, history) => {
 };
 
 // UPDATE A USER ARTICLE AS READ
-export const markUserArticle = (articleId, updates, history) => {
+export const markUserArticle = (userId, article) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(
-                `/api/userArticles/${articleId}`,
-                updates
-            );
-            // console.log("THUNK UPDATE DATA > ", data);
+            console.log("UPDATE USER_ID > ", userId);
+            console.log("UPDATE ARTICLE > ", article);
+
+            const { data } = await axios.put(`/api/userArticles/${userId}`, {
+                article,
+                userId
+            });
+            console.log("THUNK UPDATE DATA > ", data);
 
             dispatch(_readUserArticle(data));
-            history.push("/home");
+            // history.push("/home");
         } catch (err) {
             console.log("UPDATE ATICLE ERR:", err);
         }
