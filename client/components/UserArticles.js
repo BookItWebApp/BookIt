@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { SingleArticle } from "./SingleArticle";
-import Topbar from "./Navigation/Topbar";
-import { useHistory } from "react-router-dom";
-import { getUserArticles } from "../store/userArticles";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { SingleArticle } from './SingleArticle';
+import Topbar from './Navigation/Topbar';
+import { useHistory } from 'react-router-dom';
+import { getUserArticles } from '../store/userArticles';
 
 export function UserArticles() {
     const articles = useSelector((state) => state.userArticles);
@@ -24,9 +24,13 @@ export function UserArticles() {
     useEffect(() => {
         dispatch(getUserArticles(user.id));
     }, [dispatch]);
-
+    //
     function clickHandlerShare() {
         history.push("/share/message");
+    }
+
+    function clickHandlerTabView() {
+        history.push("/home/tab");
     }
 
     function validateFilter(article) {
@@ -76,9 +80,13 @@ export function UserArticles() {
                         );
                     })}
             </div>
+            <button onClick={(e) => clickHandlerTabView()} id="tabViewButton">
+                Show me table view
+            </button>
             <button onClick={(e) => clickHandlerShare()} id="shareButton">
                 Share list with my friends!
             </button>
         </div>
     );
 }
+

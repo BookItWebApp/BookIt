@@ -1,52 +1,109 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
 
 export function TimeChartOne() {
   const userArticles = useSelector((state) => state.userArticles);
   const SortedArticles = {};
-  const yReadCount = [];
+  const sortedaddedArticles = {}
+  const yReadTotal = [];
   const dateList = [];
   const data = []
+  const addedDateList= []
+  let yhelperAdd = []
+  const yTotalArticles =[]
 
   //Get individual read articles Count
   const readArticles = userArticles.filter(
     (article) => article.readAt !== null
   );
-
+  //Data Cleaning
   const dateCleanedArticles = readArticles.map((article) => {
-    article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
+    DateTime.fromISO(article).toFormat('yyyy-MM-dd')
     return article;
+  });
+
+  const allArticlesCleaned = userArticles.map((article) => {
+    if (article.readAt!==null){
+    article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
+    return article}
+    else{
+      return article
+    }
   });
 
   dateCleanedArticles.map((article) => {
     dateList.push(article.readAt);
   });
+
+  allArticlesCleaned.map((article) => {
+    addedDateList.push(article.createdAt);
+  });
+
+  addedDateList.sort()
+
   dateList.sort();
+
 
   dateList.map((date) => {
     SortedArticles[date] = dateCleanedArticles.filter(
       (article) => article.readAt === date
     );
   });
+  addedDateList.map((date) => {
+    sortedaddedArticles[date] = allArticlesCleaned.filter(
+      (article) => article.createdAt === date
+    );
+  });
 
   const xReadDates = Object.keys(SortedArticles);
-  console.log(SortedArticles)
+  const xAddedDates =Object.keys(sortedaddedArticles)
 
-  for (const [key, value] of Object.entries(SortedArticles)) {
-    yReadCount.push(value.length);
+  for (const [key, value] of Object.entries(sortedaddedArticles)) {
+    yhelperAdd.push(value.length);
   }
 
-  const articleTrace = {
+  for (let i =0; i <yhelperAdd.length; i++) {
+    if(i===0){
+    yTotalArticles.push(yhelperAdd[i])}
+    else{
+      yTotalArticles.push(yTotalArticles[i-1]+yhelperAdd[i])}
+    }
+
+  yhelperAdd=[]
+  for (const [key, value] of Object.entries(SortedArticles)) {
+    yhelperAdd.push(value.length);
+  }
+
+  for (let i =0; i <yhelperAdd.length; i++) {
+    if(i===0){
+      yReadTotal.push(yhelperAdd[i])}
+    else{
+      yReadTotal.push(yTotalArticles[i-1]+yhelperAdd[i])}
+    }
+
+  const readArticleTrace = {
     x: xReadDates,
-    y: yReadCount,
+    y: yReadTotal,
     name: 'Total Read',
     type: 'scatter',
     mode: 'lines',
-    marker: { color: 'red' },
+    marker: { color: 'blue' },
+    fill: 'tozeroy'
   };
 
-  data.push(articleTrace)
+  const addedArticleTrace = {
+    x: xAddedDates,
+    y: yTotalArticles,
+    name: 'Total Added',
+    type: 'scatter',
+    mode: 'lines',
+    marker: { color: 'red' },
+    fill: 'tozeroy'
+  };
+
+  data.push(readArticleTrace, addedArticleTrace)
 
   const tagData = [];
   //Get individual read articles Tags
@@ -64,7 +121,6 @@ export function TimeChartOne() {
     }
     yTagCount[key] = dateTags;
   }
-  console.log(articleTagsList);
 
   //build trace for each tag name
   for (let i = 0; i < articleTagsList.length; i++) {
@@ -132,4 +188,5 @@ export function TimeChartOne() {
       }}
     />
   );
-}
+  }
+

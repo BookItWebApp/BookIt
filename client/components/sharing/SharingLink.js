@@ -4,17 +4,20 @@ import {
   setSharing,
   _clearMessage,
   _clearSharingId,
+  _clearFilteredArticlesStore,
 } from '../../store/sharing';
 import { useHistory } from 'react-router-dom';
 
 export function SharingLink() {
   const sharingId = useSelector((state) => state.sharings.sharingId);
   const userId = useSelector((state) => state.auth.id);
-  const articles = useSelector((state) => state.userArticles);
+  const articlesIdList = useSelector(
+    (state) => state.sharings.filteredArticles
+  );
   const userMessage = useSelector((state) => state.sharings.messageText);
-  const articlesIdList = articles.map((article) => {
-    return article.id;
-  });
+  // const articlesIdList = articles.map((article) => {
+  //   return article.id;
+  // });
   const dispatch = useDispatch();
   const history = useHistory();
   const url = window.location.href;
@@ -41,6 +44,7 @@ export function SharingLink() {
 
   function clickHandlerHome() {
     dispatch(_clearSharingId());
+    dispatch(_clearFilteredArticlesStore());
     history.push('/home');
   }
 
