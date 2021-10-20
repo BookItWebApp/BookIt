@@ -10,13 +10,17 @@ const MainMenu = ({ handleClick }) => {
             <nav>
                 <Header />
                 <div>
-                    <h1>Select Tags</h1>
+                    <div className="sidebar-tags-selector-div">
+                        <h1>Select Tags</h1>
+                    </div>
                     <TagFilter />
                 </div>
-                <div>
-                    <a href="#" onClick={handleClick}>
-                        Logout
-                    </a>
+                <div className="log-out-btn-container">
+                    <div className="log-out-btn">
+                        <a href="#" onClick={handleClick}>
+                            Logout
+                        </a>
+                    </div>
                 </div>
             </nav>
         </div>

@@ -25,7 +25,9 @@ export function SingleArticle(props) {
     return (
         <div className="single-article--container">
             <a href={article.url}>
-                Title: {article.name}
+                <span className="title-name--single-article">
+                    Title: {article.name}
+                </span>
                 <br />
             </a>
             Private: {article.isPrivate ? "True" : "False"}

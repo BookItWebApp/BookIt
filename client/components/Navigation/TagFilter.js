@@ -32,58 +32,53 @@ const TagFilter = () => {
     };
 
     return (
-        <>
-            <form className="tag-filter--form">
-                {userTags.tags.map((tag, idx) => {
-                    // console.log("TAG > ", tag);
-                    return (
-                        <div className="tag-check" key={idx}>
-                            <label className="tag-check-label">
-                                <input
-                                    type="checkbox"
-                                    onChange={(e) => onTagSelected(e, tag)}
-                                    className="tag-check-input"
-                                />
-                                {tag}
-                            </label>
-                        </div>
-                    );
-                })}
+        <form className="tag-filter--form">
+            {userTags.tags.map((tag, idx) => {
+                // console.log("TAG > ", tag);
+                return (
+                    <div className="tag-check" key={idx}>
+                        <label className="tag-check-label">
+                            <input
+                                type="checkbox"
+                                onChange={(e) => onTagSelected(e, tag)}
+                                className="tag-check-input"
+                            />
+                            {tag}
+                        </label>
+                    </div>
+                );
+            })}
 
-                <div className="form-check">
-                    <label className="form-check-label">
-                        <input
-                            type="checkbox"
-                            // checked={isPrivate}
-                            onChange={(e) => onTagSelected(e, "isPrivate")}
-                            className="form-check-input"
-                        />
-                        Private
-                    </label>
-                </div>
-
-                <div className="form-check">
-                    <label className="form-check-label">
-                        <input
-                            type="checkbox"
-                            // checked={isRead}
-                            // onChange={onChangeRead}
-                            onChange={(e) => onTagSelected(e, "readAt")}
-                            className="form-check-input"
-                        />
-                        Read
-                    </label>
-                </div>
-
-                <div>
+            <div className="tag-check">
+                <label className="tag-check-label">
                     <input
-                        type="button"
-                        value="Submit"
-                        onClick={onsubmitFilter}
+                        type="checkbox"
+                        // checked={isPrivate}
+                        onChange={(e) => onTagSelected(e, "isPrivate")}
+                        className="tag-check-input"
                     />
-                </div>
-            </form>
-        </>
+                    Private
+                </label>
+            </div>
+
+            <div className="tag-check">
+                <label className="tag-check-label">
+                    <input
+                        type="checkbox"
+                        // checked={isRead}
+                        // onChange={onChangeRead}
+                        onChange={(e) => onTagSelected(e, "readAt")}
+                        className="tag-check-input"
+                    />
+                    Read
+                </label>
+            </div>
+
+            <div>
+                <input type="button" value="Submit" onClick={onsubmitFilter} />
+            </div>
+        </form>
+        // </div>
     );
 };
 
