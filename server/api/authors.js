@@ -5,7 +5,20 @@ const {
   models: { Author, Article, UserArticle, Tagging, Tag },
 } = require('../db');
 
+/**
+ * @typedef {import('express').Request} Request
+ * @typedef {import('express').Response} Response
+ * @typedef {import('express').NextFunction} NextFunction
+ */
+
 // Middleware
+/**
+ * Checks if the adminAuth header is set the the secret found in the
+ * environment variables.
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 const validate = async (req, res, next) => {
   try {
     if (req.headers.adminAuth !== process.env.SECRET) {
@@ -19,6 +32,13 @@ const validate = async (req, res, next) => {
 };
 
 // GET
+/**
+ * Gets a single author by id, includes articles (which itself includes all user
+ * articles, taggings, tags, and co-authors associated)
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 const getSingle = async (req, res, next) => {
   try {
     const author = await Author.findByPk(req.params.id, {
@@ -50,6 +70,12 @@ const getSingle = async (req, res, next) => {
   }
 };
 
+/**
+ * returns a list of all authors
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 const getAll = async (req, res, next) => {
   try {
     const authors = await Author.findAll({
@@ -66,7 +92,17 @@ const getAll = async (req, res, next) => {
     next(error);
   }
 };
+
 // POST
+/**
+ * Creates a new author `req.body` should contain:
+ * - `name: string`
+ * - `bio: text?`
+ * - `photoUrl: string?`
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 const postAuthor = async (req, res, next) => {
   try {
     const author = await Author.create(req.body);
@@ -77,6 +113,16 @@ const postAuthor = async (req, res, next) => {
 };
 
 // PUT
+/**
+ * Sends an author with changed attributes according to the paramters given to
+ * `req.body` Accepts:
+ * - `name: string`
+ * - `bio: text?`
+ * - `photoUrl: string?`
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 const putAuthor = async (req, res, next) => {
   try {
     await Author.update(req.body, {
@@ -98,7 +144,15 @@ const putAuthor = async (req, res, next) => {
     next(error);
   }
 };
+
 // DELETE
+
+/**
+ * Deletes the author requested and sends back http code 204 if successful
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 const deleteAuthor = async (req, res, next) => {
   try {
     await Author.destroy({ where: { id: req.params.id } });
