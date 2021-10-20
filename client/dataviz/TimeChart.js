@@ -105,45 +105,45 @@ export function TimeChart() {
 
   data.push(readArticleTrace, addedArticleTrace)
 
-  const tagData = [];
-  //Get individual read articles Tags
-  const yTagCount = [];
-  const articleTagsList = [];
+  // const tagData = [];
+  // //Get individual read articles Tags
+  // const yTagCount = [];
+  // const articleTagsList = [];
 
-  //Coordinated of tags, per tag, per day
-  for (const [key, value] of Object.entries(SortedArticles)) {
-    const dateTags = [];
-    for (const article of value) {
-      article.taggings.map(
-        (tag) =>
-          dateTags.push(tag.tag.name) && articleTagsList.push(tag.tag.name)
-      );
-    }
-    yTagCount[key] = dateTags;
-  }
+  // //Coordinated of tags, per tag, per day
+  // for (const [key, value] of Object.entries(SortedArticles)) {
+  //   const dateTags = [];
+  //   for (const article of value) {
+  //     article.taggings.map(
+  //       (tag) =>
+  //         dateTags.push(tag.tag.name) && articleTagsList.push(tag.tag.name)
+  //     );
+  //   }
+  //   yTagCount[key] = dateTags;
+  // }
 
-  //build trace for each tag name
-  for (let i = 0; i < articleTagsList.length; i++) {
-    const yTags = [];
-    const tagDateMap = {};
-    for (const day in yTagCount) {
-      tagDateMap[day] = yTagCount[day].filter(
-        (tag) => tag === articleTagsList[i]
-      );
-    }
-    for (const [key, value] of Object.entries(tagDateMap)) {
-      yTags.push(value.length);
-    }
-    const tagTrace = {
-      x: xReadDates,
-      y: yTags,
-      name: articleTagsList[i],
-      type: 'scatter',
-      mode: 'markers',
-      market: {opacity: .75}
-    };
-    data.push(tagTrace);
-  }
+  // //build trace for each tag name
+  // for (let i = 0; i < articleTagsList.length; i++) {
+  //   const yTags = [];
+  //   const tagDateMap = {};
+  //   for (const day in yTagCount) {
+  //     tagDateMap[day] = yTagCount[day].filter(
+  //       (tag) => tag === articleTagsList[i]
+  //     );
+  //   }
+  //   for (const [key, value] of Object.entries(tagDateMap)) {
+  //     yTags.push(value.length);
+  //   }
+  //   const tagTrace = {
+  //     x: xReadDates,
+  //     y: yTags,
+  //     name: articleTagsList[i],
+  //     type: 'scatter',
+  //     mode: 'markers',
+  //     market: {opacity: .75}
+  //   };
+  //   data.push(tagTrace);
+  // }
 
 
 
