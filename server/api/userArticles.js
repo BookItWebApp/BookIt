@@ -63,6 +63,7 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         //
+        console.log("UPDATE_MARK USER_ARTICLE BODY > ", req.body);
         const updatedUserArticle = await UserArticle.update(req.body, {
             where: {
                 id: req.params.id

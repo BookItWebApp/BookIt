@@ -56,6 +56,16 @@ async function seed() {
     )}}`,
   }));
 
+  // Creating Cody author relationship
+  await Author.create({
+    name: 'Cody',
+    bio: Faker.lorem.paragraph(),
+    photoUrl: `http://picsum.photos/200/300?random=${Math.floor(
+      Math.random() * 100
+    )}`,
+    userId: knownUsers[0].id,
+  });
+
   // Creating Articles
   const articles = await fakerHelper(100, Article, () => ({
     url: Faker.internet.url(),
