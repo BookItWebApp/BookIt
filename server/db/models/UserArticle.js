@@ -1,8 +1,9 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
-const Article = require("../models/Article");
-const Tagging = require("../models/Tagging");
-const Tag = require("../models/Tag");
+const Sequelize = require('sequelize');
+const db = require('../db');
+const Article = require('../models/Article');
+const Tagging = require('../models/Tagging');
+const Tag = require('../models/Tag');
+const Author = require('./Author');
 
 const UserArticle = db.define(
     "userArticle",
@@ -54,23 +55,25 @@ const UserArticle = db.define(
 //MODEL METHODS
 //Find all articles belonging to a particular user
 UserArticle.findAllByUser = function (currentUserId) {
-    return this.findAll({
-        where: { userId: currentUserId },
-        include: [
-            {
-                model: Article,
-                attributes: ["id", "url"]
-            },
-            {
-                model: Tagging,
-                include: {
-                    model: Tag
-                }
-            }
-        ]
-    });
-};
-
+  return this.findAll({
+    where: { userId: currentUserId },
+    include: [
+      {
+        model: Article,
+        attributes: ['id', 'url'],
+        include: {
+          model: Author,
+          attributes: ['id', 'name'],
+        },
+      },
+      {
+        model: Tagging,
+        include: {
+          model: Tag,
+        },
+      },
+    ],
+  })};
 UserArticle.findAllTaggingsByUser = function (currentUserId) {
     return this.findAll({
         attributes: [],
