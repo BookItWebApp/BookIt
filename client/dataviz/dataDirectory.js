@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
-import { TimeChartOne } from './TimeChart1';
+import { TimeChart } from './TimeChart';
 import { me } from '../store';
 import { getArticles } from '../store/articles';
 import { getUserArticles } from '../store/userArticles';
 import { Calendar } from './Calendar';
-import { TagRatio } from './TagPerc';
+import { TagRatio } from './TagRatio';
+import { Indicator } from './indicator';
+import { UserMetrics } from './UserMetrics';
 
 class DataDirectory extends Component {
   componentDidMount() {
@@ -22,18 +24,9 @@ class DataDirectory extends Component {
   render() {
     return (
       <div>
-        <div>Choose a Data Viz</div>
-        <Link to="/metrics/table1">Time Table</Link>
-        <Link to="/metrics/table2">Calendar Table</Link>
-        <Link to="/metrics/table3">Read Ratio Table</Link>
-        <Switch>
-          <Route path="/metrics/table1" component={TimeChartOne} />
-          <Route path="/metrics/table2" component={Calendar} />
-          <Route path="/metrics/table3" component={TagRatio} />
-          <Redirect to="/metrics" />
-        </Switch>
+        <UserMetrics/>
       </div>
-    );
+    )
   }
 }
 
