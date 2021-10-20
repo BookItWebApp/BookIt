@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticles } from '../store/userArticles';
 import { SingleArticle } from './SingleArticle';
-import { useHistory } from 'react-router-dom';
 import Topbar from './Navigation/Topbar';
+import { useHistory } from 'react-router-dom';
+import { getUserArticles } from '../store/userArticles';
 
 export function UserArticles() {
-  //ref: https://thoughtbot.com/blog/using-redux-with-react-hooks
   const articles = useSelector((state) => state.userArticles);
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getArticles(user.id));
+    dispatch(getUserArticles(user.id));
   }, [dispatch]);
 
   function clickHandlerShare() {
@@ -24,17 +24,31 @@ export function UserArticles() {
     history.push('/home/tab');
   }
 
+  if (articles.length === 0) {
+    return (
+      <div>
+        <Topbar />
+        <h3>You don't have any articles.</h3>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Topbar />
-      Articles
-      {articles.map((article) => {
-        return (
-          <div key={article.article.id} className="singleContainer">
-            <SingleArticle article={article} />
-          </div>
-        );
-      })}
+      <Link to="/tableview">
+        <p className="user-articles--display-view">Show me table view</p>
+      </Link>
+      <h3>Articles</h3>
+      <div className="display-articles--container">
+        {articles.map((article) => {
+          return (
+            <div key={article.id} className="singleContainer">
+              <SingleArticle article={article} />
+            </div>
+          );
+        })}
+      </div>
       <button onClick={(e) => clickHandlerTabView()} id="tabViewButton">
         Show me table view
       </button>

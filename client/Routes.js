@@ -4,12 +4,16 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import SingleArticle from './components/SingleArticle';
+
+import CreateArticle from './components/CreateArticle';
 import { UserArticles } from './components/UserArticles';
 import { AddMessage } from './components/sharing/AddMessage';
 import { SharingLink } from './components/sharing/SharingLink';
 import { ViewSharing } from './components/sharing/ViewSharing';
+
 import { me } from './store';
 import { UserArticlesTab } from './components/UserArticlesTab';
+import dataDirectory from './dataviz/dataDirectory';
 
 /**
  * COMPONENT
@@ -28,9 +32,11 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/home" component={UserArticles} />
             <Route exact path="/home/tab" component={UserArticlesTab} />
+            <Route path="/create" component={CreateArticle} />
             <Route exact path="/share/message" component={AddMessage} />
             <Route exact path="/share/sharinglink" component={SharingLink} />
-            <Route path="/share/get" component={ViewSharing} />
+            <Route path="/share/sharinglink" component={ViewSharing} />
+            <Route path="/metrics" component={dataDirectory} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -38,7 +44,7 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/share/get" component={ViewSharing} />
+            <Route path="/share/sharinglink" component={ViewSharing} />
           </Switch>
         )}
       </div>

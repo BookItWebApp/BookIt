@@ -1,62 +1,96 @@
 body {
-  font-family: sans-serif;
+    font-family: sans-serif;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 label {
-  display: block;
+    display: block;
 }
 
 nav a {
-  display: inline-block;
-  margin: 1em;
+    display: inline-block;
+    margin: 1em;
 }
 
 form div {
-  margin: 1em;
-  display: inline-block;
+    margin: 1em;
+    display: inline-block;
 }
 
-.app-container{
-  width: 100%;
+.app-container {
+    width: 100%;
 }
 
-.nav-sidebar--wrapper{
-  float: left;
-  width: 19%;
-  height: 100%;
-  display: flex;
-  border: 2px solid black;
+.nav-sidebar--wrapper {
+    float: left;
+    width: 19%;
+    height: 100%;
+    display: flex;
+    border: 2px solid black;
 
-  /* justify-content: center; */
-  /* align-items: center; */
-  flex-direction: row;
-}
-
-.routes-div--wrapper{
-  float: right;
-  width: 80%;
-  height: 100%;
-  border: 2px solid black;
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-direction: row;
 }
 
-.top-section--wrapper{
-  border: 2px solid black;
-  padding: 5px;
+.routes-div--wrapper {
+    float: right;
+    width: 80%;
+    height: 100%;
+    border: 2px solid black;
 }
-.top_navbar{
-  display: flex;
-  justify-content: space-between;
-  /* align-items: flex-end; */
-  flex-direction: row;
+
+.top-section--wrapper {
+    border: 2px solid black;
+    padding: 5px;
 }
-.top-navbar-links{
-  border: 2px solid black;
+.top_navbar {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+    flex-direction: row;
 }
-.menu-filter--form{
-  display: flex;
-  flex-direction: column;
+.top-navbar-links {
+    border: 2px solid black;
+}
+.menu-filter--form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------------------------USER ARTICLES ----------------*/
+.display-articles--container {
+    border: 2px solid blue;
+    /* width: 100%; */
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.user-articles--display-view {
+    border: 2px solid black;
+    color: black;
+    width: 120px;
+    margin: 5px;
+}
+
+.user-articles--share-list {
+    border: 2px solid black;
+    color: black;
+    width: 120px;
+    margin: 5px;
+}
+
+/* --------------------------------------SINGLE ARTICLE ----------------*/
+.singleContainer {
+    border: 2px solid black;
+    display: inline-block;
+    /* flex: 1;
+    width: 10%; */
+    margin: 5px;
+    height: 75px;
+    padding: 10px;
 }

@@ -56,11 +56,25 @@ async function seed() {
     )}}`,
   }));
 
+  // Creating Cody author relationship
+  await Author.create({
+    name: 'Cody',
+    bio: Faker.lorem.paragraph(),
+    photoUrl: `http://picsum.photos/200/300?random=${Math.floor(
+      Math.random() * 100
+    )}`,
+    userId: knownUsers[0].id,
+  });
+
   // Creating Articles
   const articles = await fakerHelper(100, Article, () => ({
     url: Faker.internet.url(),
-    authorId: authors[Math.floor(Math.random() * authors.length)].id,
   }));
+
+  // Creating credits
+  for (let i = articles.length - 1; i > 0; i--) {
+    articles[i].addAuthors([authors[i], authors[i - 1]]);
+  }
 
   //Creating UserArticles
   const userArticles = await fakerHelper(100, UserArticle, () => ({
