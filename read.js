@@ -10,14 +10,13 @@ export function UserArticles() {
     const articles = useSelector((state) => state.userArticles);
     const filteredTags = useSelector((state) => state.tags.filteredTags);
     const user = useSelector((state) => state.auth);
-    console.log("USER IS ", user);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     console.log("ALL ARTICLES > ", articles);
     articles.forEach((element) => {
-        // console.log("EACH ELEM > ", element);
+        console.log("EACH ELEM > ", element);
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
@@ -54,7 +53,7 @@ export function UserArticles() {
 
     if (articles.length === 0) {
         return (
-            <div className="user-articles--username-div">
+            <div>
                 <Topbar />
                 <h3>You don't have any articles.</h3>
             </div>
@@ -64,12 +63,12 @@ export function UserArticles() {
     return (
         <div>
             <Topbar />
-            <div className="user-articles--username-div">
-                <h3>
-                    {user.username[0].toUpperCase() + user.username.slice(1)}'s
-                    articles
-                </h3>
-            </div>
+            <Link to="/tableview">
+                <p className="user-articles--display-view">
+                    Show me table view
+                </p>
+            </Link>
+            <h3>Articles</h3>
             <div className="display-articles--container">
                 {articles
                     .filter((article) => validateFilter(article))
