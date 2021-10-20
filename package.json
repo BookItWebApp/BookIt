@@ -34,6 +34,7 @@
     "history": "^4.9.0",
     "ify-loader": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
+    "luxon": "^2.0.2",
     "metascraper": "^5.24.9",
     "metascraper-description": "^5.24.9",
     "metascraper-image": "^5.24.9",
@@ -44,11 +45,11 @@
     "net": "^1.0.2",
     "open-graph": "^0.2.6",
     "pg": "^8.5.1",
-    "sequelize": "^6.7.0",
-    "utf-8-validate": "^5.0.6",
     "plotly.js": "^2.5.1",
     "plotly.js-dist": "^2.5.1",
-    "react-plotly.js": "^2.5.1"
+    "react-plotly.js": "^2.5.1",
+    "sequelize": "^6.7.0",
+    "utf-8-validate": "^5.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
