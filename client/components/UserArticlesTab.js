@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticles } from '../store/userArticles';
+import { getUserArticles } from '../store/userArticles';
 import { SingleArticle } from './SingleArticle';
 import { useHistory } from 'react-router-dom';
 import Topbar from './Navigation/Topbar';
@@ -18,7 +18,7 @@ export function UserArticlesTab() {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getArticles(user.id));
+    dispatch(getUserArticles(user.id));
   }, [dispatch]);
 
   function clickHandlerShare() {
