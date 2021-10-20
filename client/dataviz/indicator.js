@@ -2,11 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
+import { render } from 'react-dom';
 
 export function Indicator() {
   const userArticles = useSelector((state) => state.userArticles);
   const dateList =[]
   const SortedArticles = []
+
 
    //Get individual read articles Count
    const readArticles = userArticles.filter(
@@ -24,15 +26,13 @@ export function Indicator() {
       (article) => article.readAt === date
     )})
 
-    console.log(SortedArticles)
-
   //get this weeks time
   const thisWeekStart = DateTime.now().startOf('week').toISO();
   const timeNow = DateTime.now().toISO();
   const lastWeekStart = DateTime.now().startOf('week').minus({ days: 7 }).toISO()
 
+  const articlesThisWk = []
   //get article count read this week
-   const articlesThisWk = []
   Object.keys(SortedArticles).map(key =>
     {let keyDate = DateTime.fromISO(key).toISO()
       if(keyDate>=thisWeekStart){
@@ -48,27 +48,28 @@ Object.keys(SortedArticles).map(key =>
       articlesLastWk.push(SortedArticles[key])
 }
 })
-
-  console.log(articlesLastWk)
-
   const indicatorTrace = [{
     type: "indicator",
     mode: "number+delta",
     value: articlesThisWk.length,
     delta:{reference: articlesLastWk.length, position: "top"}}]
 
-
-
-
-
   return(
+    <div>
     <Plot
     data ={indicatorTrace}
     layout ={{
       title: "Articles This Week"
-    }}
-
-    />
-
+    }}/>
+   <div align="center">
+     Articles Read This Week:
+   {articlesThisWk.map((article) => {
+     return(
+      <div key={article.id}>
+        <a href={article.url}>Title: {article.name}</a>
+      </div>
+   )})}
+  </div>
+  </div>
   )
 }
