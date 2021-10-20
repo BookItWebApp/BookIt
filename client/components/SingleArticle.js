@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { previewArticle } from "../store/SingleArticle";
+import { markUserArticle } from "../store/userArticles";
 
 export function SingleArticle(props) {
     const dispatch = useDispatch();
     const articleData = useSelector((state) => state.metaData);
+    const user = useSelector((state) => state.auth);
 
     const article = props.article;
     const taggings = article.taggings;
@@ -28,7 +30,7 @@ export function SingleArticle(props) {
             })}
             <br />
             <span>
-                <button>mark</button>
+                {/* <button onClick={handleComplete}>mark</button> */}
                 <button>share</button>
             </span>
         </div>

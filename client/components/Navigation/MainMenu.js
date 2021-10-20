@@ -1,29 +1,26 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import Header from './Header';
-import FormFilters from './FormFilters';
-import TagFilter from './TagFilter';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Header from "./Header";
+import FormFilters from "./FormFilters";
+import TagFilter from "./TagFilter";
 
-const MainMenu = ({handleClick}) => {
-
-  return (
-  <div>
-      <nav>
-      <Header />
+const MainMenu = ({ handleClick }) => {
+    return (
         <div>
-          <h1>Select Tags</h1>
-          <TagFilter />
-          <h1>Select Filters</h1>
-          <FormFilters />
+            <nav>
+                <Header />
+                <div>
+                    <h1>Select Tags</h1>
+                    <TagFilter />
+                </div>
+                <div>
+                    <a href="#" onClick={handleClick}>
+                        Logout
+                    </a>
+                </div>
+            </nav>
         </div>
-        <div>
-        <a href="#" onClick={handleClick}>
-             Logout
-         </a>
-        </div>
-      </nav>
-  </div>
-  )
-}
+    );
+};
 
-export default MainMenu
+export default MainMenu;

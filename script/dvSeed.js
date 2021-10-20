@@ -1,5 +1,7 @@
 'use strict';
 const Faker = require('faker');
+const urlArry = require( "./urlSeedData")
+
 
 const {
   db,
@@ -13,12 +15,16 @@ const {
 
 //Parameters
 let userCount = 250
-let articleCount = 500
+let articleCount = 500 //Max: 5000
 let authorCount = 100
 let readArticlesModulo = 2 //divisor - the large the number the lower the % read
 let userArticlesCount = (articleCount * 5)
 let tagCount = 700
 let MaxTaggingsCount = 3000
+
+
+
+
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -71,26 +77,26 @@ async function seed() {
 
   // Create Articles
   //enfore unique urls
-  let urlsList = [];
-  function generateUniqueURL() {
-    let startLength = urlsList.length;
-    while (startLength === urlsList.length) {
-      let url = Faker.internet.url();
-      if (urlsList.indexOf(url) > -1) {
-        continue;
-      } else {
-        urlsList.push(url);
-        return url;
-      }
-    }
-  }
+  // let urlsList = [];
+  // function generateUniqueURL() {
+  //   let startLength = urlsList.length;
+  //   while (startLength === urlsList.length) {
+  //     let url = Faker.internet.url();
+  //     if (urlsList.indexOf(url) > -1) {
+  //       continue;
+  //     } else {
+  //       urlsList.push(url);
+  //       return url;
+  //     }
+  //   }
+  // }
 
   console.log('Seeding Articles...');
   //create articles
   let initialArticles = [];
   for (let i = 0; i < articleCount; i++) {
     initialArticles.push({
-      url: generateUniqueURL(),
+      url: urlArry[i],
       authorId: authors[getRandomArbitrary(0,99)].id,
     });
   }

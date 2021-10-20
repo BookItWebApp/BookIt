@@ -8,9 +8,16 @@ import { getUserArticles } from '../store/userArticles';
 
 export function UserArticles() {
   const articles = useSelector((state) => state.userArticles);
+  const filteredTags = useSelector((state) => state.tags.filteredTags);
+
   const user = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  articles.forEach((element) => {
+    const tags = element.taggings.map((item) => item.tag.name);
+    element.tags = tags;
+  });
 
   useEffect(() => {
     dispatch(getUserArticles(user.id));
@@ -33,6 +40,18 @@ export function UserArticles() {
     );
   }
 
+  function validateFilter(tags) {
+    if (filteredTags && filteredTags.length > 0) {
+      // CHECK IF FILTEREDTAGS ARRAY CONTAIN ANY ELEMENT OF TAGS ARRAY
+      // RETURN TRUE IF ANY ARTICLE CONTAINS THE FILTER TAGS
+      const tag = tags.find((tag) => filteredTags.includes(tag));
+      // console.log("tag is", tag);
+      return tag != undefined;
+    }
+    // RETURN FALSE ARTICLE WITHOUT FILTERED LIST TAGS
+    return true;
+  }
+
   return (
     <div>
       <Topbar />
@@ -41,13 +60,15 @@ export function UserArticles() {
       </Link>
       <h3>Articles</h3>
       <div className="display-articles--container">
-        {articles.map((article) => {
-          return (
-            <div key={article.id} className="singleContainer">
-              <SingleArticle article={article} />
-            </div>
-          );
-        })}
+        {articles
+          .filter((article) => validateFilter(article.tags))
+          .map((article) => {
+            return (
+              <div key={article.id} className="singleContainer">
+                <SingleArticle article={article} />
+              </div>
+            );
+          })}
       </div>
       <button onClick={(e) => clickHandlerTabView()} id="tabViewButton">
         Show me table view
@@ -58,3 +79,28 @@ export function UserArticles() {
     </div>
   );
 }
+
+// return (
+//   <div>
+//     <Topbar />
+//     <Link to="/tableview">
+//       <p className="user-articles--display-view">Show me table view</p>
+//     </Link>
+//     <h3>Articles</h3>
+//     <div className="display-articles--container">
+//       {articles.map((article) => {
+//         return (
+//           <div key={article.id} className="singleContainer">
+//             <SingleArticle article={article} />
+//           </div>
+//         );
+//       })}
+//     </div>
+//     <button onClick={(e) => clickHandlerTabView()} id="tabViewButton">
+//       Show me table view
+//     </button>
+//     <button onClick={(e) => clickHandlerShare()} id="shareButton">
+//       Share list with my friends!
+//     </button>
+//   </div>
+// );
