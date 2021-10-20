@@ -7,6 +7,7 @@ import { getArticles } from '../store/articles';
 import { getUserArticles } from '../store/userArticles';
 import { Calendar } from './Calendar';
 import { TagRatio } from './TagPerc';
+import { Indicator } from './indicator';
 
 class DataDirectory extends Component {
   componentDidMount() {
@@ -25,11 +26,13 @@ class DataDirectory extends Component {
         <div>Choose a Data Viz</div>
         <Link to="/metrics/table1">Time Table</Link>
         <Link to="/metrics/table2">Calendar Table</Link>
-        <Link to="/metrics/table3">Read Ratio Table</Link>
+        <Link to="/metrics/table3">Tag Ratio</Link>
+        <Link to="/metrics/table4">Read Indicator</Link>
         <Switch>
           <Route path="/metrics/table1" component={TimeChartOne} />
           <Route path="/metrics/table2" component={Calendar} />
           <Route path="/metrics/table3" component={TagRatio} />
+          <Route path="/metrics/table4" component={Indicator} />
           <Redirect to="/metrics" />
         </Switch>
       </div>
