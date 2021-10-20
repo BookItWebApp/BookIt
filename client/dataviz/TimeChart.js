@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
 
-export function TimeChartOne() {
+export function TimeChart() {
   const userArticles = useSelector((state) => state.userArticles);
   const SortedArticles = {};
   const sortedaddedArticles = {}
@@ -142,7 +142,6 @@ export function TimeChartOne() {
       mode: 'markers',
       market: {opacity: .75}
     };
-    console.log(tagTrace)
     data.push(tagTrace);
   }
 
