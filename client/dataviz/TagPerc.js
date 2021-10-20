@@ -9,7 +9,7 @@ export function TagRatio() {
   const userArticles = useSelector((state) => state.userArticles);
   const tagData = [];
   const yTagCount = [];
-  const articleTagsList = [];
+  const allTagsList = [];
   const sortedArticles = []
   const dateList = []
   const dateTags = [];
@@ -25,12 +25,21 @@ export function TagRatio() {
     return article;
   });
 
-  dateCleanedArticles.map((article) => {
+  readArticles.map((article) => {
     dateList.push(article.readAt);
   });
 
   dateList.sort();
 
+  //tags per article
+  const ArticleTagsList = {}
+  //provides a list of articles and associated tags
+   for (let i = 0; i < dateCleanedArticles.length; i++) {
+   let article = dateCleanedArticles[i]
+      ArticleTagsList[article.articleId] = article.taggings.map((tag) => tag.tag.name)
+      }
+
+      //sort articles by read all date
   dateList.map((date) => {
     sortedArticles[date] = dateCleanedArticles.filter(
       (article) => article.readAt === date
@@ -38,72 +47,61 @@ export function TagRatio() {
   });
 
   //Coordinated of tags, per tag, per day
+  //need this
   for (const [key, value] of Object.entries(sortedArticles)) {
     const dateTags = [];
     for (const article of value) {
       article.taggings.map(
         (tag) =>
-          dateTags.push(tag.tag.name) && articleTagsList.push(tag.tag.name)
+          dateTags.push(tag.tag.name) && allTagsList.push(tag.tag.name)
       );
     }
     yTagCount[key] = dateTags;
   }
 
-  console.log('tagcount', articleTagsList)
-  //build trace for each tag name
-  for (let i = 0; i < articleTagsList.length; i++) {
-    const yTags = [];
-    const tagDateMap = {};
+   const result = {}
+   for(let i=0 ; i <allTagsList.length; i++ ) {
+    const tag = allTagsList[i]
+    let tagCount = 0
+    for (const [key, value] of Object.entries(ArticleTagsList)){
+      if(value.includes(tag)){
+        tagCount ++
+     }
+     }
+     result[tag]=tagCount}
+
+
+
+  const yTags = [];
+  const tagDateMap = {};
+  // build trace for each tag name
+  for (let i = 0; i < allTagsList.length; i++) {
     for (const day in yTagCount) {
       tagDateMap[day] = yTagCount[day].filter(
-        (tag) => tag === articleTagsList[i]
+        (tag) => tag === allTagsList[i]
       );
-    }
-    for (const [key, value] of Object.entries(tagDateMap)) {
-      yTags.push(value.length);
+    }}
+    // for articleTagsList
+  // 'ytagCount' //need tags by article
+  //
+  for (const [key, value] of Object.entries(tagDateMap)) {
+    yTags.push(value.length);
     }
 
-    console.log('ytags',yTags)
-    const tagTrace = {
-      labels: articleTagsList,
-      values: yTags,
-      name: 'Your Tags',
-      type: 'pie',
-    };
+  const tagTrace = [{
+    labels: Object.keys(result),
+    values: Object.values(result),
+    name: 'Your Tags',
+    type: 'pie'}]
 
-    console.log(tagTrace)
+
+  return (
+    <Plot
+      data={tagTrace}
+      layout={{
+        title: 'Your Tags',
+        autosize: false,
+        height:500}}
+        />
+        )
   }
-
-
-
-// //build trace for each tag name
-// for (let i = 0; i < articleTagsList.length; i++) {
-//   const yTags = [];
-//   const tagDateMap = {};
-//   for (const day in yTagCount) {
-//     tagDateMap[day] = yTagCount[day].filter(
-//       (tag) => tag === articleTagsList[i]
-//     );
-//   }
-//   for (const [key, value] of Object.entries(tagDateMap)) {
-//     yTags.push(value.length);
-//   }
-//   const tagTrace = {
-//     x: xReadDates,
-//     y: yTags,
-//     name: articleTagsList[i],
-//     type: 'scatter',
-//     mode: 'markers',
-//     market: {opacity: .75}
-//   };
-//   console.log(tagTrace)
-//   data.push(tagTrace);
-
-return (
-  <div>
-    hello?
-  </div>
-
-
-)
-}
