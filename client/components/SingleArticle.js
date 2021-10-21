@@ -61,7 +61,7 @@ export function SingleArticle(props) {
       )}
             <span>
                 <button onClick={markAsCompleted}>mark</button>
-                <button>share</button>
+                {/* <button>share</button> */}
             </span>
             <span>{article.readAt ? "Read" : "Unread"}</span>
         </div>
