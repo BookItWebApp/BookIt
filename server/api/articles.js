@@ -50,21 +50,6 @@ const postArticle = async (req, res, next) => {
     );
 
     const createdArticle = await UserArticle.findByPk(userArticle.id, {
-            include: [
-                {
-                    model: Article,
-                    attributes: ["id", "url"]
-                },
-                {
-                    model: Tagging,
-                    include: {
-                        model: Tag
-                    }
-                }
-            ]
-        });
-    
-    const createdArticle = await UserArticle.findByPk(userArticle.id, {
       include: [
         {
           model: Article,
