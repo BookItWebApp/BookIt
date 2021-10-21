@@ -1,20 +1,19 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from 'react-router-dom'
-import { previewArticle } from "../store/SingleArticle";
-import { markUserArticle } from "../store/userArticles";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { previewArticle } from '../store/SingleArticle';
+import { markUserArticle } from '../store/userArticles';
 
 export function SingleArticle(props) {
-    const dispatch = useDispatch();
-    const articleData = useSelector((state) => state.metaData);
-    const user = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
+  const articleMetaData = useSelector((state) => state.metaData);
+  const user = useSelector((state) => state.auth);
   const article = props.article;
   const taggings = article.taggings;
 
-  useEffect(() => {
-    dispatch(previewArticle(article.article.url, article.id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(previewArticle(article.article.url, article.id));
+  // }, [dispatch]);
 
     function markAsCompleted() {
         // alert("trying to complete item with an id of " + user.id);
