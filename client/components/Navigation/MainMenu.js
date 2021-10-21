@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import FormFilters from "./FormFilters";
 import TagFilter from "./TagFilter";
 
 const MainMenu = ({ handleClick }) => {
