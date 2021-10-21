@@ -10,17 +10,18 @@ export function UserArticles() {
     const articles = useSelector((state) => state.userArticles);
     const filteredTags = useSelector((state) => state.tags.filteredTags);
     const user = useSelector((state) => state.auth);
-    console.log("USER IS ", user);
+    // console.log("USER IS ", user);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    console.log("ALL ARTICLES > ", articles);
     articles.forEach((element) => {
         // console.log("EACH ELEM > ", element);
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
+    console.log("ALL ARTICLES > ", articles);
+    console.log("ALL FILTERD TAGS > ", filteredTags);
 
     useEffect(() => {
         dispatch(getUserArticles(user.id));

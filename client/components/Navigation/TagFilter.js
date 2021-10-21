@@ -1,12 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserTags, saveSelectedTags } from "../../store/tag";
-import FormFilters from "./FormFilters";
 
 const TagFilter = () => {
     const userArticles = useSelector((state) => state.userArticles);
     const user = useSelector((state) => state.auth);
     const userTags = useSelector((state) => state.tags);
+
+    // FUNC TO REMOVE DUPLICATED TAGS DATA
+    const removeDuplicatedTags = (tagsData) => {
+        const filterdData = tagsData.tags.filter((tag, idx) => {
+            return tagsData.tags.indexOf(tag) === idx;
+        });
+        return filterdData;
+    };
+    const filteredTags = removeDuplicatedTags(userTags);
 
     const selectedTags = useRef([]);
     const dispatch = useDispatch();
@@ -24,7 +32,6 @@ const TagFilter = () => {
                 (item) => item !== tagName
             );
         }
-        console.log("SELECTED TAGS >", selectedTags.current);
     };
 
     const onsubmitFilter = () => {
@@ -33,8 +40,8 @@ const TagFilter = () => {
 
     return (
         <form className="tag-filter--form">
-            {userTags.tags.map((tag, idx) => {
-                // console.log("TAG > ", tag);
+            {filteredTags.map((tag, idx) => {
+                console.log("TAG > ", tag);
                 return (
                     <div className="tag-check" key={idx}>
                         <label className="tag-check-label">
@@ -78,7 +85,6 @@ const TagFilter = () => {
                 <input type="button" value="Submit" onClick={onsubmitFilter} />
             </div>
         </form>
-        // </div>
     );
 };
 
