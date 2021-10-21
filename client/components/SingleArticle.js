@@ -11,18 +11,17 @@ export function SingleArticle(props) {
   const article = props.article;
   const taggings = article.taggings;
 
-  useEffect(() => {
-    dispatch(previewArticle(article.article.url, article.id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(previewArticle(article.article.url, article.id));
+  // }, [dispatch]);
 
   function markAsCompleted() {
     // alert("trying to complete item with an id of " + user.id);
     article.readAt = new Date().toISOString();
-    console.log('MARK AS REEAD > ', article);
+    // console.log('MARK AS REEAD > ', article);
     dispatch(markUserArticle(user.id, article));
   }
   //
-  console.log(article)
   return (
     <div className="single-article--container">
       <a href={article.url}>

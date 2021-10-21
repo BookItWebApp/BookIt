@@ -5,17 +5,20 @@ import { SingleArticle } from "./SingleArticle";
 import Topbar from "./Navigation/Topbar";
 import { useHistory } from "react-router-dom";
 import { getUserArticles } from "../store/userArticles";
+import { _setFilteredArticlesToStore } from '../store/sharing';
+
 
 export function UserArticles() {
     const articles = useSelector((state) => state.userArticles);
     const filteredTags = useSelector((state) => state.tags.filteredTags);
     const user = useSelector((state) => state.auth);
-    console.log("USER IS ", user);
+    // console.log("USER IS ", user);
+    console.log('filtered Tags', filteredTags)
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    console.log("ALL ARTICLES > ", articles);
+    // console.log("ALL ARTICLES > ", articles);
     articles.forEach((element) => {
         // console.log("EACH ELEM > ", element);
         const tags = element.taggings.map((item) => item.tag.name);
@@ -27,8 +30,12 @@ export function UserArticles() {
     }, [dispatch]);
     //
     function clickHandlerShare() {
-        history.push("/share/message");
-    }
+        //use filter validator to build array of filtered articles and pass to share store
+        const arrToShare = articles.filter((article) => validateFilter(article));
+        console.log('array to share', arrToShare)
+        dispatch(_setFilteredArticlesToStore(arrToShare)),
+        history.push('/share/message')
+        }
 
     function clickHandlerTabView() {
         history.push("/home/tab");
