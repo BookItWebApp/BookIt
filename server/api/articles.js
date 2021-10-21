@@ -14,20 +14,17 @@ const getallArticles = async (req, res, next) => {
 
 // POST /api/articles
 const postArticle = async (req, res, next) => {
-  try {
-    console.log('POST ARTICLE BODY: ', req.body);
-
+    try {
     const url = req.body.article.url;
     const articleName = req.body.article.name;
     const isPrivate = req.body.article.isPrivate;
     const userId = req.body.userId;
     const tagsArr = req.body.article.tags;
 
-    // CREATE ARTICLE
-    const article = await Article.create({
-      url: url,
-    });
-    console.log('ARTICLE IS CREATED: ', article);
+        // CREATE ARTICLE
+        const article = await Article.create({
+            url: url
+        });
 
     // CREATE USER ARTICLE
     const userArticle = await UserArticle.create({
@@ -52,6 +49,21 @@ const postArticle = async (req, res, next) => {
       })
     );
 
+    const createdArticle = await UserArticle.findByPk(userArticle.id, {
+            include: [
+                {
+                    model: Article,
+                    attributes: ["id", "url"]
+                },
+                {
+                    model: Tagging,
+                    include: {
+                        model: Tag
+                    }
+                }
+            ]
+        });
+    
     const createdArticle = await UserArticle.findByPk(userArticle.id, {
       include: [
         {

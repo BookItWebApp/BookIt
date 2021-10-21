@@ -63,22 +63,35 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         //
-        const updatedUserArticle = await UserArticle.update(req.body, {
-            where: {
-                id: req.params.id
-            },
-            returning: true
+        const id = req.body.article.id;
+        // console.log("_USER ARRTICEL ID > ", id);
+
+        const updateArticle = await UserArticle.update(
+            { ...req.body.article },
+            {
+                where: { id: id }
+            }
+        );
+        // console.log("_ UPDATED USER ARRTICEL > ", updateArticle);
+
+        const updatedUserArticle = await UserArticle.findByPk(id, {
+            include: [
+                {
+                    model: Article,
+                    attributes: ["id", "url"]
+                },
+                {
+                    model: Tagging,
+                    include: {
+                        model: Tag
+                    }
+                }
+            ]
         });
-        const [rowsUpdate, [userArticle]] = updatedUserArticle;
-        // console.log("USER ARRTICEL > ", userArticle)
 
-        if (!rowsUpdate) {
-            res.sendStatus(404);
-        }
-
-        res.status(200).json(userArticle);
+        res.status(200).json(updatedUserArticle);
     } catch (err) {
-        // console.log('> PUT /api/useArticles/ID ERR: ', err);
+        console.log("> PUT /api/useArticles/ID ERR: ", err);
         next(err);
     }
 });
