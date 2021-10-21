@@ -24,46 +24,46 @@ export function SingleArticle(props) {
     }
     //
     return (
-        <div className="single-article--container">
-            <a href={article.url}>
-                <span className="title-name--single-article">
-                    Title: {article.name}
-                </span>
-                <br />
-            </a>
-            Private: {article.isPrivate ? "True" : "False"}
-            <br />
-            Tags:
-            {taggings.map((tagging, idx) => {
-                return <span key={idx.toString()}> {tagging.tag.name}</span>;
-            })}
-            <br />
-{article.article.authors ? (
-        article.article.authors.length > 1 ? (
-          <ul>
-            By:
-            {article.article.authors.map((author) => (
-              <li key={author.id}>
-                <NavLink to={`/authors/${author.id}`}>{author.name}</NavLink>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <span>
-            By:{' '}
-            <NavLink to={`/authors/${article.article.authors[0].id}`}>
-              {article.article.authors[0].name}
-            </NavLink>
+      <div className="single-article--container">
+        <a href={article.url}>
+          <span className="title-name--single-article">
+            Title: {article.name}
           </span>
-        )
-      ) : (
-        <React.Fragment />
-      )}
+          <br />
+        </a>
+        Private: {article.isPrivate ? 'True' : 'False'}
+        <br />
+        Tags:
+        {taggings.map((tagging, idx) => {
+          return <span key={idx.toString()}> {tagging.tag.name}</span>;
+        })}
+        <br />
+        {article.article.authors && article.article.authors.length > 0 ? (
+          article.article.authors.length > 1 ? (
+            <ul>
+              By:
+              {article.article.authors.map((author) => (
+                <li key={author.id}>
+                  <NavLink to={`/authors/${author.id}`}>{author.name}</NavLink>
+                </li>
+              ))}
+            </ul>
+          ) : (
             <span>
-                <button onClick={markAsCompleted}>mark</button>
-                <button>share</button>
+              By:{' '}
+              <NavLink to={`/authors/${article.article.authors[0].id}`}>
+                {article.article.authors[0].name}
+              </NavLink>
             </span>
-            <span>{article.readAt ? "Read" : "Unread"}</span>
-        </div>
+          )
+        ) : (
+          <React.Fragment />
+        )}
+        <span>
+          <button onClick={markAsCompleted}>mark</button>
+          <button>share</button>
+        </span>
+        <span>{article.readAt ? 'Read' : 'Unread'}</span>
+      </div>
     );
 }
