@@ -33,12 +33,14 @@ export const getArticles = () => {
  */
 export const addAuthor = (articleId) => async (dispatch) => {
   try {
-    await axios.put(`/api/articles/${articleId}`)
-    dispatch(getArticles())
+    await axios.put(`/api/articles/${articleId}`, {
+      headers: { authorization: window.localStorage.getItem(token) },
+    });
+    dispatch(getArticles());
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 
 //REDUCER
