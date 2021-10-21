@@ -11,6 +11,7 @@ export function SingleArticle(props) {
   const article = props.article;
   const taggings = article.taggings;
 
+  console.log('article', article.article)
   // useEffect(() => {
   //   dispatch(previewArticle(article.article.url, article.id));
   // }, [dispatch]);
@@ -24,12 +25,12 @@ export function SingleArticle(props) {
   //
   return (
     <div className="single-article--container">
-      <a href={article.url}>
-        <span className="title-name--single-article">
-          Title: {article.name}
-        </span>
+      <div className="title-name--single-article">
+        <a href={article.article.url}>
+          {article.name}
+        </a>
+      </div>
         <br />
-      </a>
       Private: {article.isPrivate ? 'True' : 'False'}
       <br />
       Tags:
