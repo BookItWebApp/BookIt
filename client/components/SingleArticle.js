@@ -16,9 +16,7 @@ export function SingleArticle(props) {
     }, [dispatch]);
 
     function markAsCompleted() {
-        // alert("trying to complete item with an id of " + user.id);
         article.readAt = new Date().toISOString();
-        console.log("MARK AS REEAD > ", article);
         dispatch(markUserArticle(user.id, article));
     }
     //
