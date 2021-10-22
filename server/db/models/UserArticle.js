@@ -6,42 +6,37 @@ const Tag = require('../models/Tag');
 const Author = require('./Author');
 
 const UserArticle = db.define(
-    "userArticle",
-    {
-        id: {
-            primaryKey: true,
-            type: Sequelize.UUID,
-            defaultValue: Sequelize.UUIDV4
-        },
-        featured: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
-        },
-        name: {
-            type: Sequelize.TEXT,
-            allowNull: false
-        },
-        note: {
-            type: Sequelize.TEXT,
-            allowNull: true
-        },
-        userId: {
-            type: Sequelize.UUID,
-            allowNull: false
-        },
-        articleId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        readAt: {
-            type: Sequelize.DATE,
-            allowNull: true
-        },
-        isPrivate: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
-        }
+  'userArticle',
+  {
+    id: {
+      primaryKey: true,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
     },
+    featured: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
+    name: {
+      type: Sequelize.TEXT,
+      allowNull: true,
+    },
+    note: {
+      type: Sequelize.TEXT,
+      allowNull: true,
+    },
+    userId: {
+      type: Sequelize.UUID,
+      allowNull: false,
+    },
+    articleId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    readAt: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    }},
     {
         indexes: [
             {
