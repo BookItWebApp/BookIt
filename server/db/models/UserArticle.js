@@ -18,7 +18,7 @@ const UserArticle = db.define(
     },
     name: {
       type: Sequelize.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
     note: {
       type: Sequelize.TEXT,

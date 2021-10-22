@@ -26,6 +26,7 @@ export const getTags = () => {
     }
   };
 };
+
 //REDUCER
 //Initial State
 const initialState = [];

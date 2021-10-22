@@ -58,6 +58,34 @@ export const createNewArticle = (article, userId, history) => {
         }
     };
 };
+
+// CREATE A SINGLE Extension ARTICLE
+export const createNewExtensionArticle = (url, userId, tags ) => {
+    let article = {url : url, tags:[tags.split(',')]}
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`"http://localhost:8080/api/articles`, {
+                article,
+                userId
+            });
+            dispatch(_createArticle(data));
+        } catch (err) {
+            console.log("CREATE A NEW ARTICLE ERR:", err);
+        }
+    };
+};
+
+//get all user tags
+export const getExtensionUserArticles = (id) => {
+    return async (dispatch) => {
+      try {
+        const {data} = await axios.get(`http://localhost:8080/api/userArticles/${id}`);
+        dispatch(_getUserArticles(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
 // // UPDATE A SINGLE ARTICLE
 // export const updateArticle =(articleId, updates, history)=>{
 //   return async(dispatch)=>{
