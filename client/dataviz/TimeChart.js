@@ -80,8 +80,14 @@ export function TimeChart() {
     if(i===0){
       yReadTotal.push(yhelperAdd[i])}
     else{
-      yReadTotal.push(yTotalArticles[i-1]+yhelperAdd[i])}
+      yReadTotal.push(yTotalArticles[i-1]+yhelperAdd[i])
     }
+    }
+
+    //add final date value to update graph to present
+    xAddedDates.push(DateTime.now().toISO())
+    let mostRecentValue = yTotalArticles.at(-1)
+    yTotalArticles.push(mostRecentValue)
 
   const readArticleTrace = {
     x: [xReadDates[0],...xReadDates],
@@ -91,6 +97,7 @@ export function TimeChart() {
     mode: 'lines',
     marker: { color: 'blue' },
     fill: 'tozeroy',
+    line: {shape: 'spline'}
   };
 
   const addedArticleTrace = {
@@ -100,9 +107,13 @@ export function TimeChart() {
     type: 'scatter',
     mode: 'lines',
     marker: { color: 'red' },
-    fill: 'tozeroy'
+    fill: 'tozeroy',
+    line: {shape: 'spline'}
   };
 
+
+
+  console.log('trace',addedArticleTrace )
   data.push(readArticleTrace, addedArticleTrace)
 
   // const tagData = [];
@@ -157,8 +168,8 @@ export function TimeChart() {
         barmode: 'stack',
         xaxis: {
           autorange: true,
-          tickformat: "%a %d",
-          range: ['2015-01-01', '2021-10-31'],
+          tickformat: "%B %Y",
+          range: [xAddedDates[0], DateTime.now().toISO()],
           rangeselector: {
             buttons: [
               {
@@ -176,7 +187,7 @@ export function TimeChart() {
               { step: 'all' },
             ],
           },
-          rangeslider: { range: ['2015-01-01', '2021-10-31'] },
+          rangeslider: { range: [xAddedDates[0], DateTime.now().toISO()] },
           type: 'date',
         },
         yaxis: {

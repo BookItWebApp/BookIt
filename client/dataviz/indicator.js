@@ -67,7 +67,6 @@ export function Indicator() {
       domain: { x: [0, 1], y: [0, 1] },
     },
   ];
-  // console.log(metaData)
 
   useEffect(() => {
     for (let i=0; i< articlesThisWk.length; i++)
@@ -114,7 +113,6 @@ export function Indicator() {
         {articlesThisWk.map((article) => {
           return (
             <tr key={article.id}>
-              {console.log(article)}
               <a href={article.url}> {article.name}</a>
                {article.metadata?
                <div c>
