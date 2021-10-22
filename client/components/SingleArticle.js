@@ -9,7 +9,7 @@ export function SingleArticle(props) {
     const articleData = useSelector((state) => state.metaData);
     const user = useSelector((state) => state.auth);
 
-
+    
     const article = props.article;
     const taggings = article.taggings;
 
@@ -32,11 +32,15 @@ export function SingleArticle(props) {
           </span>
           <br />
         </a>
-        <div className="addAuthorButton">
-          <button onClick={() => props.addAuthor(article.article.id)}>
-            I wrote this!
-          </button>
-        </div>
+        {user.author ? (
+          <div className="addAuthorButton">
+            <button onClick={() => props.addAuthor(article.article.id)}>
+              I wrote this!
+            </button>
+          </div>
+        ) : (
+          <React.Fragment />
+        )}
         Private: {article.isPrivate ? 'True' : 'False'}
         <br />
         Tags:
