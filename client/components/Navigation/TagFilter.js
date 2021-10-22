@@ -7,6 +7,13 @@ const TagFilter = () => {
     const user = useSelector((state) => state.auth);
     const userTags = useSelector((state) => state.tags);
 
+    const selectedTags = useRef([]);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUserTags(user.id));
+    }, [dispatch]);
+
     // FUNC TO REMOVE DUPLICATED TAGS DATA
     const removeDuplicatedTags = (tagsData) => {
         const filterdData = tagsData.tags.filter((tag, idx) => {
@@ -16,13 +23,7 @@ const TagFilter = () => {
     };
     const filteredTags = removeDuplicatedTags(userTags);
 
-    const selectedTags = useRef([]);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getUserTags(user.id));
-    }, [dispatch]);
-
+    //
     const onTagSelected = (e, tagName) => {
         const checked = e.target.checked;
         if (checked) {
@@ -59,7 +60,6 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        // checked={isPrivate}
                         onChange={(e) => onTagSelected(e, "isPrivate")}
                         className="tag-check-input"
                     />
@@ -71,8 +71,6 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        // checked={isRead}
-                        // onChange={onChangeRead}
                         onChange={(e) => onTagSelected(e, "readAt")}
                         className="tag-check-input"
                     />
