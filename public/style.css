@@ -57,7 +57,7 @@ form div {
 }
 
 .top-section--wrapper {
-    background-color: #fdfce5;
+    background-color: #ADD8E6;
     padding: 5px;
 }
 .top_navbar {
@@ -68,9 +68,10 @@ form div {
     /* margin: ; */
 }
 .top-navbar-links {
-    border: 2px solid #f4d19b;
-    background-color: #f4d19b;
-    border-radius: 5px;
+    color: white;
+    border: 3px solid #48B2E7;
+    background-color: #48B2E7;
+    border-radius: 10px;
     padding: 10px;
     margin: 10px;
 }
@@ -161,4 +162,13 @@ form div {
     background-color: #f9f3df;
     border-radius: 5px;
     height: 40px;
+}
+
+/* ----------------------------------DATAVIZ -------------------------------- */
+.dataviz-row {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+
+
 }

@@ -13,28 +13,29 @@ export function Calendar() {
   const readArticles = userArticles.filter(
     (article) => article.readAt !== null
   );
-    console.log('readArticles',readArticles)
+    // console.log('readArticles',readArticles)
 
-  const dateCleanedArticles = readArticles.map((article) => {
-    article.readAt = DateTime.fromISO(article.readAt).toFormat('yyyy-MM-dd')
-    return article;
+  // const dateCleanedArticles = readArticles.map((article) => {
+  //   article.readAt = DateTime.fromISO(article.readAt).toFormat('yyyy-MM-dd')
+  //   return article;
 
-  });
+  // });
 
-  console.log('dateCleanedArticles',dateCleanedArticles)
+  // console.log('dateCleanedArticles',dateCleanedArticles)
 
-  dateCleanedArticles.map((article) => {
+  readArticles.map((article) => {
     dateList.push(article.readAt);
   });
   dateList.sort();
+  console.log
 
   dateList.map((date) => {
-    sortedArticles[date] = dateCleanedArticles.filter(
+    sortedArticles[date] = readArticles.filter(
       (article) => article.readAt === date
     );
   });
 
-  console.log('dateList', dateList)
+  // console.log('dateList', dateList)
 
   //potentially adjustable year component
   // let curentYear = year
@@ -110,7 +111,7 @@ export function Calendar() {
     }
   }
 
-  console.log(zdata)
+  // console.log(zdata)
   const calendarTrace = [
     {
       x: weekNumber,

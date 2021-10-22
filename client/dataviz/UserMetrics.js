@@ -7,21 +7,16 @@ import { TimeChart } from './TimeChart';
 
 export function UserMetrics() {
   return (
-    <div>
-      <h1>Here Are Your Latest User Metrics</h1>
-      <h3>Visualize Your Reading Habits</h3>
-      <div>
-        <div>
-          <Indicator />
-        </div>
-        <div>
-        </div>
+    <div >
+      <h1 align="center">Here Are Your Latest User Metrics</h1 >
+      <h3 align="center">Visualize Your Reading Habits</h3>
+      <div align="center">
+        <Indicator />
       </div>
       <div>
         <TagRatio />
         <TimeChart />
       </div>
-
       <span>
         <Calendar />
       </span>

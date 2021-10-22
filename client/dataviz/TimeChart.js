@@ -19,25 +19,25 @@ export function TimeChart() {
     (article) => article.readAt !== null
   );
   //Data Cleaning
-  const dateCleanedArticles = readArticles.map((article) => {
-    DateTime.fromISO(article).toFormat('yyyy-MM-dd')
-    return article;
-  });
+  // const dateCleanedArticles = readArticles.map((article) => {
+  //   DateTime.fromISO(article).toFormat('yyyy-MM-dd')
+  //   return article;
+  // });
 
-  const allArticlesCleaned = userArticles.map((article) => {
-    if (article.readAt!==null){
-    article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
-    return article}
-    else{
-      return article
-    }
-  });
+  // const allArticlesCleaned = userArticles.map((article) => {
+  //   if (article.readAt!==null){
+  //   article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
+  //   return article}
+  //   else{
+  //     return article
+  //   }
+  // });
 
-  dateCleanedArticles.map((article) => {
+  readArticles.map((article) => {
     dateList.push(article.readAt);
   });
 
-  allArticlesCleaned.map((article) => {
+  userArticles.map((article) => {
     addedDateList.push(article.createdAt);
   });
 
@@ -47,12 +47,12 @@ export function TimeChart() {
 
 
   dateList.map((date) => {
-    SortedArticles[date] = dateCleanedArticles.filter(
+    SortedArticles[date] = readArticles.filter(
       (article) => article.readAt === date
     );
   });
   addedDateList.map((date) => {
-    sortedaddedArticles[date] = allArticlesCleaned.filter(
+    sortedaddedArticles[date] = userArticles.filter(
       (article) => article.createdAt === date
     );
   });

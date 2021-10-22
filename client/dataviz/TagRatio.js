@@ -20,10 +20,10 @@ export function TagRatio() {
   );
 
    //Data Cleaning
-   const dateCleanedArticles = readArticles.map((article) => {
-    DateTime.fromISO(article).toFormat('yyyy-MM-dd')
-    return article;
-  });
+  //  const dateCleanedArticles = readArticles.map((article) => {
+  //   DateTime.fromISO(article).toFormat('yyyy-MM-dd')
+  //   return article;
+  // });
 
   readArticles.map((article) => {
     dateList.push(article.readAt);
@@ -34,14 +34,14 @@ export function TagRatio() {
   //tags per article
   const ArticleTagsList = {}
   //provides a list of articles and associated tags
-   for (let i = 0; i < dateCleanedArticles.length; i++) {
-   let article = dateCleanedArticles[i]
+   for (let i = 0; i < readArticles.length; i++) {
+   let article = readArticles[i]
       ArticleTagsList[article.articleId] = article.taggings.map((tag) => tag.tag.name)
       }
 
       //sort articles by read all date
   dateList.map((date) => {
-    sortedArticles[date] = dateCleanedArticles.filter(
+    sortedArticles[date] = readArticles.filter(
       (article) => article.readAt === date
     );
   });

@@ -41,7 +41,6 @@ const TagFilter = () => {
     return (
         <form className="tag-filter--form">
             {filteredTags.map((tag, idx) => {
-                console.log("TAG > ", tag);
                 return (
                     <div className="tag-check" key={idx}>
                         <label className="tag-check-label">
