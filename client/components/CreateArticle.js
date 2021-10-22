@@ -98,7 +98,12 @@ class CreateArticle extends React.Component {
                         +
                     </button>
                     <br />
-                    <button type="submit">Create Article</button>
+                    <button
+                        type="submit"
+                        className="button-secondary pure-button"
+                    >
+                        Create Article
+                    </button>
                 </form>
             </div>
         );

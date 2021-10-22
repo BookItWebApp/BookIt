@@ -79,7 +79,12 @@ const TagFilter = () => {
             </div>
 
             <div>
-                <input type="button" value="Submit" onClick={onsubmitFilter} />
+                <input
+                    type="button"
+                    value="Submit"
+                    className="button-secondary pure-button"
+                    onClick={onsubmitFilter}
+                />
             </div>
         </form>
     );
