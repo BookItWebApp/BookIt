@@ -24,7 +24,6 @@ export function dataDirectory () {
 
     return (
       <div>
-        <Topbar/>
         <UserMetrics/>
       </div>
     )

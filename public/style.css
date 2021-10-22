@@ -152,6 +152,22 @@ form div {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
-
-
+    border: 1px solid black;
 }
+
+tbody{
+    display:block;
+    overflow:auto;
+    height:200px;
+    border: 1px solid black;
+}
+
+tr{
+    display:block;
+    text-align: left;
+    border: 1px solid black;
+    }
+
+    tr{
+        border: 1px solid black;
+        }

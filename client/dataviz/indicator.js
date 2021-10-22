@@ -106,21 +106,27 @@ export function Indicator() {
            }}
         />
       </div>
-      <div >
+      <table>
+        <thead>
+          <th>Articles Read</th>
+        </thead>
+        <tbody >
         {articlesThisWk.map((article) => {
           return (
-            <div key={article.id} className = "dvArticleList">
+            <tr key={article.id}>
               {console.log(article)}
-               <a href={article.url}> {article.name}</a>
+              <a href={article.url}> {article.name}</a>
                {article.metadata?
-               <div>
-                <img src={article.metadata.logo}/>
-                <div>{article.metadata.title}</div>
-                <div>{article.metadata.publisher}</div>
-               </div>:
-               <div>no</div> }
-             </div>)})}
-        </div>
+               <div c>
+                <td><img src={article.metadata.logo}/></td>
+                <td><div>{article.metadata.title}</div></td>
+                <td><div>{article.metadata.publisher}</div></td>
+                </div>:
+               <div></div>
+               }
+             </tr>)})}
+        </tbody>
+        </table>
         </div>
   )
   }

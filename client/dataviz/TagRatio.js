@@ -101,7 +101,7 @@ export function TagRatio() {
       layout={{
         title: 'Your Tags',
         autosize: false,
-        height:500}}
+        height:550}}
         />
         )
   }

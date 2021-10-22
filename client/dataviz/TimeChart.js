@@ -84,13 +84,13 @@ export function TimeChart() {
     }
 
   const readArticleTrace = {
-    x: xReadDates,
-    y: yReadTotal,
+    x: [xReadDates[0],...xReadDates],
+    y: [0,...yReadTotal],
     name: 'Total Read',
     type: 'scatter',
     mode: 'lines',
     marker: { color: 'blue' },
-    fill: 'tozeroy'
+    fill: 'tozeroy',
   };
 
   const addedArticleTrace = {
@@ -152,8 +152,8 @@ export function TimeChart() {
       data={data}
       layout={{
         title: 'Lets Look At Your Articles Read Over Time!',
-        width: 600,
-        height: 750,
+        width: 550,
+        height: 550,
         barmode: 'stack',
         xaxis: {
           autorange: true,
@@ -181,8 +181,8 @@ export function TimeChart() {
         },
         yaxis: {
           autorange: true,
-          range: [86.8700008333, 138.870004167],
-          type: 'linear',
+          type: 'linear'
+
         },
       }}
     />

@@ -13,9 +13,9 @@ export function UserMetrics() {
       <div align="center">
         <Indicator />
       </div>
-      <div>
-        <TagRatio />
+      <div className = "dataviz-row">
         <TimeChart />
+        <TagRatio />
       </div>
       <span>
         <Calendar />
