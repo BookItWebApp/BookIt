@@ -119,7 +119,11 @@ class CreateArticle extends React.Component {
                                 </div>
                             );
                         })}
-                        <button type="button" onClick={this.addTagPlaceHolder}>
+                        <button
+                            type="button"
+                            className="button-secondary pure-button"
+                            onClick={this.addTagPlaceHolder}
+                        >
                             +
                         </button>
                         <br />

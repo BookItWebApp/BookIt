@@ -71,13 +71,19 @@ export function SingleArticle(props) {
                 <React.Fragment />
             )} */}
             <span>
-                <button onClick={markAsCompleted} className="button-warning">
-                    mark
+                <button
+                    onClick={markAsCompleted}
+                    className="button-warning pure-button"
+                >
+                    read
                 </button>
             </span>
             <span>{article.readAt ? "Read" : "Unread"}</span>
             <span>
-                <button onClick={deleteBookmark} className="button-error">
+                <button
+                    onClick={deleteBookmark}
+                    className="button-error pure-button"
+                >
                     delete
                 </button>
             </span>

@@ -97,13 +97,13 @@ export function UserArticles() {
                 <button
                     onClick={(e) => clickHandlerTabView()}
                     id="tabViewButton"
-                    className="button-secondary"
+                    className="button-secondary pure-button"
                 >
                     Show me table view
                 </button>
                 <button
                     onClick={(e) => clickHandlerShare()}
-                    className="button-secondary"
+                    className="button-secondary pure-button"
                     id="shareButton"
                 >
                     Share list with my friends!

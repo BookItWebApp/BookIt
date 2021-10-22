@@ -6,18 +6,22 @@ const Topbar = () => {
         <div className="top-section--wrapper">
             <div className="top_navbar">
                 <Link to="/home">
-                    <h3 className="top-navbar-links">home</h3>
+                    <h3 className="top-navbar-links pure-button">Home</h3>
                 </Link>
                 <Link to="/metrics">
-                    <h3 className="top-navbar-links">User metrics</h3>
+                    <h3 className="top-navbar-links pure-button">
+                        User metrics
+                    </h3>
                 </Link>
                 <Link to="/create">
-                    <h3 className="top-navbar-links">Create bookmark</h3>
+                    <h3 className="top-navbar-links pure-button">
+                        Create bookmark
+                    </h3>
                 </Link>
             </div>
         </div>
 
-        //     <div className="top-section--wrapper">
+        // <div className="top-section--wrapper">
         //     <div className="top_navbar pure-menu pure-menu-horizontal pure-menu-scrollable">
         //         <ul className="pure-menu-list">
         //             <li className="pure-menu-item">
