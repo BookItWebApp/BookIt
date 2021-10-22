@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { previewArticle } from "../store/SingleArticle";
-import { markUserArticle } from "../store/userArticles";
+import { markUserArticle, deleteProduct } from "../store/userArticles";
 
 export function SingleArticle(props) {
     const dispatch = useDispatch();
@@ -18,6 +18,11 @@ export function SingleArticle(props) {
     function markAsCompleted() {
         article.readAt = new Date().toISOString();
         dispatch(markUserArticle(user.id, article));
+    }
+
+    function deleteBookmark() {
+        console.log("DELTE", user.id, article);
+        dispatch(deleteProduct(article.id, article));
     }
     //
     return (
@@ -37,9 +42,11 @@ export function SingleArticle(props) {
             <br />
             <span>
                 <button onClick={markAsCompleted}>mark</button>
-                {/* <button>share</button> */}
             </span>
             <span>{article.readAt ? "Read" : "Unread"}</span>
+            <span>
+                <button onClick={deleteBookmark}>delete</button>
+            </span>
         </div>
     );
 }
