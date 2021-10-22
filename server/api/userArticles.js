@@ -50,8 +50,7 @@ router.post("/", async (req, res, next) => {
             articleId: articleId,
             featured: featured
         });
-        console.log("CREATED ARTICLE: ", userArticles);
-
+        // console.log("CREATED ARTICLE: ", userArticles);
         res.json(userArticles);
     } catch (err) {
         console.log("CREATE ARTICLE ERR: ", err);
@@ -73,7 +72,6 @@ router.put("/:id", async (req, res, next) => {
             }
         );
         // console.log("_ UPDATED USER ARRTICEL > ", updateArticle);
-
         const updatedUserArticle = await UserArticle.findByPk(id, {
             include: [
                 {
@@ -92,6 +90,23 @@ router.put("/:id", async (req, res, next) => {
         res.status(200).json(updatedUserArticle);
     } catch (err) {
         console.log("> PUT /api/useArticles/ID ERR: ", err);
+        next(err);
+    }
+});
+
+// DELETE /api/useArticles/:id
+router.delete("/:id", async (req, res, next) => {
+    try {
+        // console.log("PRODUCT TO DELETE ID > ", req.params.id);
+        // console.log("PRODUCT TO DELETE BODY > ", req.body);
+
+        const { id } = req.params;
+        const userArticle = await UserArticle.findByPk(id);
+        // console.log("PRODUCT TO DELETE > ", userArticle);
+        await userArticle.destroy();
+        res.send(userArticle);
+    } catch (err) {
+        console.log("ERROR FROM DELETE /USEARTICLES/:ID", err);
         next(err);
     }
 });

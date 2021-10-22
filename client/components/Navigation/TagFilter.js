@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserTags, saveSelectedTags } from "../../store/tag";
-import FormFilters from "./FormFilters";
 
 const TagFilter = () => {
     const userArticles = useSelector((state) => state.userArticles);
@@ -15,6 +14,16 @@ const TagFilter = () => {
         dispatch(getUserTags(user.id));
     }, [dispatch]);
 
+    // FUNC TO REMOVE DUPLICATED TAGS DATA
+    const removeDuplicatedTags = (tagsData) => {
+        const filterdData = tagsData.tags.filter((tag, idx) => {
+            return tagsData.tags.indexOf(tag) === idx;
+        });
+        return filterdData;
+    };
+    const filteredTags = removeDuplicatedTags(userTags);
+
+    //
     const onTagSelected = (e, tagName) => {
         const checked = e.target.checked;
         if (checked) {
@@ -24,7 +33,6 @@ const TagFilter = () => {
                 (item) => item !== tagName
             );
         }
-        console.log("SELECTED TAGS >", selectedTags.current);
     };
 
     const onsubmitFilter = () => {
@@ -33,8 +41,7 @@ const TagFilter = () => {
 
     return (
         <form className="tag-filter--form">
-            {userTags.tags.map((tag, idx) => {
-                // console.log("TAG > ", tag);
+            {filteredTags.map((tag, idx) => {
                 return (
                     <div className="tag-check" key={idx}>
                         <label className="tag-check-label">
@@ -53,7 +60,6 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        // checked={isPrivate}
                         onChange={(e) => onTagSelected(e, "isPrivate")}
                         className="tag-check-input"
                     />
@@ -65,8 +71,6 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        // checked={isRead}
-                        // onChange={onChangeRead}
                         onChange={(e) => onTagSelected(e, "readAt")}
                         className="tag-check-input"
                     />
@@ -78,7 +82,6 @@ const TagFilter = () => {
                 <input type="button" value="Submit" onClick={onsubmitFilter} />
             </div>
         </form>
-        // </div>
     );
 };
 

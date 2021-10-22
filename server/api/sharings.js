@@ -32,9 +32,11 @@ router.post('/:userId', async (req, res, next) => {
       },
       { transaction: t }
     );
-
+    console.log('sharing return', sharing);
     const sharingId = sharing.id;
     const articles = req.body.articles;
+    console.log('sharingId', sharingId);
+    console.log('articles', articles);
 
     await Promise.all(
       articles.map((article) => {

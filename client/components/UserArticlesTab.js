@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserArticles } from '../store/userArticles';
-import { SingleArticle } from './SingleArticle';
 import { useHistory } from 'react-router-dom';
 import Topbar from './Navigation/Topbar';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
@@ -41,10 +40,12 @@ export function UserArticlesTab() {
     const tags = article.taggings.map((tagging) => {
       return tagging.tag.name;
     });
-    // const tagsString = tags.join(', ');
     fields.tags = tags;
     fields.note = article.note;
-    console.log(fields);
+    const ifRead = article.readAt ? 'Yes' : 'No';
+    fields.read = ifRead;
+    const isPrivate = article.isPrivate ? 'Yes' : 'No';
+    fields.private = isPrivate;
     return fields;
   });
 
@@ -76,7 +77,6 @@ export function UserArticlesTab() {
 
   return (
     <div>
-      <Topbar />
       <div className="ag-theme-alpine" style={{ height: 400, width: 1000 }}>
         <AgGridReact
           ref={grid}
@@ -86,6 +86,8 @@ export function UserArticlesTab() {
           <AgGridColumn field="name"></AgGridColumn>
           <AgGridColumn field="url"></AgGridColumn>
           <AgGridColumn field="tags"></AgGridColumn>
+          <AgGridColumn field="read"></AgGridColumn>
+          <AgGridColumn field="private"></AgGridColumn>
           <AgGridColumn field="note"></AgGridColumn>
         </AgGridReact>
       </div>
