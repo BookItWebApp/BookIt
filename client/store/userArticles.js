@@ -4,6 +4,7 @@ import axios from "axios";
 const GET_USER_ARTICLES = "GET_USER_ARTICLES";
 const CREATE_USER_ARTICLE = "CREATE_USER_ARTICLE";
 const READ_USER_ARTICLE = "READ_USER_ARTICLE";
+const DELETE_USER_ARTICLE = "DELETE_USER_ARTICLE";
 
 //ACTION CREATORS
 //Get all articles for a single user
@@ -22,10 +23,18 @@ const _createUserArticle = (article) => {
     };
 };
 
-// UPDATE THE ARTICLE
+// UPDATE THE ARTICLE(MARK AS READ)
 const _readUserArticle = (article) => {
     return {
         type: READ_USER_ARTICLE,
+        article
+    };
+};
+
+// DELETE USER ARTICLE
+const _deleteUserArticle = (article) => {
+    return {
+        type: DELETE_USER_ARTICLE,
         article
     };
 };
@@ -80,6 +89,28 @@ export const markUserArticle = (userId, article) => {
     };
 };
 
+// DELTE USER ARTICLE
+export const deleteProduct = (articleId, article) => {
+    return async (dispatch) => {
+        try {
+            // console.log("DELETED DATA USER_ID > ", articleId);
+            // console.log("DELETED DATA ARTICLE > ", article);
+
+            const { data } = await axios.delete(
+                `/api/userArticles/${articleId}`,
+                {
+                    article
+                }
+            );
+            console.log("DELETED DATA > ", data);
+            dispatch(_deleteUserArticle(data));
+            // history.push("/home");
+        } catch (err) {
+            console.log("DELETE PRODUCTS ERR:", err);
+        }
+    };
+};
+
 //REDUCER
 //Initial State
 const initialState = [];
@@ -95,6 +126,8 @@ export default function userArticleReducer(state = initialState, action) {
             return state.map((article) =>
                 article.id === action.article.id ? action.article : article
             );
+        case DELETE_USER_ARTICLE:
+            return state.filter((article) => article.id !== action.article.id);
         default:
             return state;
     }
