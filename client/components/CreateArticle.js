@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Topbar from "./Navigation/Topbar";
-import { createNewArticle, getUserArticles } from "../store/userArticles";
+import { createNewArticle } from "../store/userArticles";
 
 class CreateArticle extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class CreateArticle extends React.Component {
         let article = { ...this.state };
         article.isPrivate = article.isPrivate === "true";
 
-        console.log("_CREATE SUBMIT STATE > ", this.state);
+        // console.log("_CREATE SUBMIT STATE > ", this.state);
         this.props.createNewArticle(article, userId);
         // this.setState({})
     }
@@ -37,7 +37,7 @@ class CreateArticle extends React.Component {
 
     addTagPlaceHolder(e) {
         // e.preventDefault();
-        console.log("CREATE ADD_TAG_ STATE", this.state);
+        // console.log("CREATE ADD_TAG_ STATE", this.state);
         const { tags } = this.state;
         tags.push("");
         this.setState({ ...this.state, tags });
@@ -46,7 +46,7 @@ class CreateArticle extends React.Component {
     onTagValueChange(e, index) {
         const { value } = e.target;
         const { tags } = this.state;
-        console.log("CREATE_ON_TAG_VALUE_CHANGE=> VALUES/TAGS", value, tags);
+        // console.log("CREATE_ON_TAG_VALUE_CHANGE=> VALUES/TAGS", value, tags);
         tags[index] = value;
         this.setState({ ...this.state, tags });
     }
@@ -118,9 +118,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch, { history }) => {
     return {
         createNewArticle: (article, userId) =>
-            dispatch(createNewArticle(article, userId, history)),
-        getArticles: (id) => dispatch(getUserArticles(id))
+            dispatch(createNewArticle(article, userId, history))
     };
 };
-
 export default connect(mapState, mapDispatch)(CreateArticle);

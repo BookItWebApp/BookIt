@@ -6,6 +6,8 @@ const GET_SHARING = 'GET_SHARING';
 const SET_MESSAGE = 'SET_MESSAGE';
 const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 const CLEAR_SHARINGID = 'CLEAR_SHARINGID';
+const SET_ARTICLES = 'SET_ARTICLES';
+const CLEAR_ARTICLES = 'CLEAR_ARTICLES';
 
 //ACTION CREATORS
 //Create sharing for a specific user
@@ -48,6 +50,20 @@ export const _clearSharingId = () => {
   };
 };
 
+export const _setFilteredArticlesToStore = (filteredArticles) => {
+  return {
+    type: SET_ARTICLES,
+    filteredArticles,
+  };
+};
+
+export const _clearFilteredArticlesStore = () => {
+  return {
+    type: SET_ARTICLES,
+    filteredArticles: [],
+  };
+};
+
 //THUNKS
 //Create sharing for a specific user in db
 export const setSharing = (userId, articles, userMessage) => {
@@ -78,7 +94,12 @@ export const getSharing = (sharingId) => {
 
 //REDUCER
 //Initial State
-const initialState = { sharingId: '', sharingDetails: {}, messageText: null };
+const initialState = {
+  sharingId: '',
+  sharingDetails: {},
+  messageText: null,
+  filteredArticles: [],
+};
 
 //Reducer
 export default function sharingsReducer(state = initialState, action) {
@@ -93,6 +114,10 @@ export default function sharingsReducer(state = initialState, action) {
       return { ...state, messageText: action.messageText };
     case CLEAR_SHARINGID:
       return { ...state, sharingId: action.sharingId };
+    case SET_ARTICLES:
+      return { ...state, filteredArticles: action.filteredArticles };
+    case CLEAR_ARTICLES:
+      return { ...state, filteredArticles: action.filteredArticles };
     default:
       return state;
   }
