@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { previewArticle } from "../store/SingleArticle";
-import { markUserArticle } from "../store/userArticles";
+import { markUserArticle, deleteProduct } from "../store/userArticles";
 
 export function SingleArticle(props) {
     const dispatch = useDispatch();
@@ -19,9 +19,15 @@ export function SingleArticle(props) {
     function markAsCompleted() {
         // alert("trying to complete item with an id of " + user.id);
         article.readAt = new Date().toISOString();
-        console.log("MARK AS REEAD > ", article);
+        // console.log("MARK AS REEAD > ", article);
         dispatch(markUserArticle(user.id, article));
     }
+
+    function deleteBookmark() {
+        // console.log("DELTE", user.id, article);
+        dispatch(deleteProduct(article.id, article));
+    }
+
     //
     return (
         <div className="single-article--container">
@@ -65,9 +71,16 @@ export function SingleArticle(props) {
                 <React.Fragment />
             )} */}
             <span>
-                <button onClick={markAsCompleted}>mark</button>
+                <button onClick={markAsCompleted} className="button-warning">
+                    mark
+                </button>
             </span>
             <span>{article.readAt ? "Read" : "Unread"}</span>
+            <span>
+                <button onClick={deleteBookmark} className="button-error">
+                    delete
+                </button>
+            </span>
         </div>
     );
 }

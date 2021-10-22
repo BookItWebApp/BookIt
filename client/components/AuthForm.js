@@ -9,22 +9,39 @@ const AuthForm = (props) => {
     const { name, displayName, handleSubmit, error } = props;
 
     return (
-        <div>
-            <form onSubmit={handleSubmit} name={name}>
-                <div>
+        <div className="login-page-container">
+            <form
+                onSubmit={handleSubmit}
+                name={name}
+                className="pure-form pure-form-aligned login--form"
+            >
+                <div className="pure-control-group">
                     <label htmlFor="username">
                         <small>Username</small>
                     </label>
                     <input name="username" type="text" />
+                    <span class="pure-form-message-inline">
+                        This is a required field.
+                    </span>
                 </div>
-                <div>
+                <br />
+                <div className="pure-control-group">
                     <label htmlFor="password">
                         <small>Password</small>
                     </label>
                     <input name="password" type="password" />
+                    <span class="pure-form-message-inline">
+                        This is a required field.
+                    </span>
                 </div>
-                <div>
-                    <button type="submit">{displayName}</button>
+                <br />
+                <div className="pure-control-group">
+                    <button
+                        type="submit"
+                        className="button-secondary pure-button"
+                    >
+                        {displayName}
+                    </button>
                 </div>
                 {error && error.response && <div> {error.response.data} </div>}
             </form>

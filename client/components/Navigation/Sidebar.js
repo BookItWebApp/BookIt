@@ -13,7 +13,7 @@ const Sidebar = ({ handleClick }) => {
                     <TagFilter />
                 </div>
                 <div className="log-out-btn-container">
-                    <div className="log-out-btn">
+                    <div className="log-out-btn button-error">
                         <a href="#" onClick={handleClick}>
                             Logout
                         </a>

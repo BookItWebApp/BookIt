@@ -80,14 +80,14 @@ export function UserArticles() {
                         's articles
                     </h3>
                 </div>
-                <div className="display-articles--container">
+                <div className="display-articles--container pure-g">
                     {articles
                         .filter((article) => validateFilter(article))
                         .map((article) => {
                             return (
                                 <div
                                     key={article.id}
-                                    className="singleContainer"
+                                    className="singleContainer pure-u-1-3"
                                 >
                                     <SingleArticle article={article} />
                                 </div>
@@ -97,10 +97,15 @@ export function UserArticles() {
                 <button
                     onClick={(e) => clickHandlerTabView()}
                     id="tabViewButton"
+                    className="button-secondary"
                 >
                     Show me table view
                 </button>
-                <button onClick={(e) => clickHandlerShare()} id="shareButton">
+                <button
+                    onClick={(e) => clickHandlerShare()}
+                    className="button-secondary"
+                    id="shareButton"
+                >
                     Share list with my friends!
                 </button>
             </div>
