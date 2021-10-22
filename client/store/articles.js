@@ -25,24 +25,6 @@ export const getArticles = () => {
   };
 };
 
-/**
- * 
- * @param {string} articleId 
- * @returns a function that adds the logged-in author to the article with
- * the given id
- */
-export const addAuthor = (articleId) => async (dispatch) => {
-  try {
-    await axios.put(`/api/articles/${articleId}`, null, {
-      headers: { Authorization: window.localStorage.getItem('token') },
-    });
-    dispatch(getArticles());
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-
 //REDUCER
 //Initial State
 const initialState = [];

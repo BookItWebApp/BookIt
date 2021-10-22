@@ -5,7 +5,7 @@ import { SingleArticle } from "./SingleArticle";
 import Topbar from "./Navigation/Topbar";
 import { useHistory } from "react-router-dom";
 import { getUserArticles } from "../store/userArticles";
-import { addAuthor } from '../store/articles';
+import { addAuthor } from '../store/userArticles';
 
 export function UserArticles() {
   const articles = useSelector((state) => state.userArticles);
@@ -36,7 +36,7 @@ export function UserArticles() {
   }
 
   function clickHandlerAddAuthor(articleId) {
-    dispatch(addAuthor(articleId));
+    dispatch(addAuthor(articleId, user.id));
   }
 
   function validateFilter(article) {
