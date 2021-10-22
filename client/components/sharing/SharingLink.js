@@ -10,11 +10,15 @@ import { useHistory } from 'react-router-dom';
 
 export function SharingLink() {
   const sharingId = useSelector((state) => state.sharings.sharingId);
+  //blank
   const userId = useSelector((state) => state.auth.id);
+  //"335757bc-2a5e-4dd9-bda4-43128d4aefdc"
   const articlesIdList = useSelector(
     (state) => state.sharings.filteredArticles
   );
+  //list of articles
   const userMessage = useSelector((state) => state.sharings.messageText);
+  //"test"
   // const articlesIdList = articles.map((article) => {
   //   return article.id;
   // });

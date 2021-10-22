@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
+import AuthorPage from './components/AuthorPage';
 import Home from './components/Home';
 import SingleArticle from './components/SingleArticle';
 
@@ -37,6 +38,7 @@ class Routes extends Component {
             <Route exact path="/share/sharinglink" component={SharingLink} />
             <Route path="/share/sharinglink" component={ViewSharing} />
             <Route path="/metrics" component={dataDirectory} />
+            <Route path="/authors/:id" exact component={AuthorPage} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -45,6 +47,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/share/sharinglink" component={ViewSharing} />
+            <Route path="/authors/:id" exact component={AuthorPage} />
           </Switch>
         )}
       </div>

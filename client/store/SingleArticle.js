@@ -1,15 +1,15 @@
 //SINGLE ARTICLE REDUX STORE
-import axios from "axios";
+import axios from 'axios';
 
 //ACTION TYPES
-const PREVIEW_ARTICLE = "PREVIEW_ARTICLES";
+const PREVIEW_ARTICLE = 'PREVIEW_ARTICLES';
 
 //ACTION CREATORS
 //Display preview for a single article
 const _previewArticle = (article, articleId) => {
   return {
     type: PREVIEW_ARTICLE,
-    article: {...article, articleId}
+    article: { ...article, articleId },
   };
 };
 
@@ -19,12 +19,12 @@ const _previewArticle = (article, articleId) => {
 export const previewArticle = (articleUrl, articleId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("/api/article/preview", {
+      const response = await axios.get('/api/article/preview', {
         params: { url: articleUrl },
       });
       dispatch(_previewArticle(response.data, articleId));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -42,4 +42,3 @@ export default function ArticlePreview(state = initialState, action) {
       return state;
   }
 }
-

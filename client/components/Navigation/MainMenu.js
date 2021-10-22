@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import FormFilters from "./FormFilters";
 import TagFilter from "./TagFilter";
 
 const MainMenu = ({ handleClick }) => {
@@ -10,13 +9,17 @@ const MainMenu = ({ handleClick }) => {
             <nav>
                 <Header />
                 <div>
-                    <h1>Select Tags</h1>
+                    <div className="sidebar-tags-selector-div">
+                        <h1>Select Tags</h1>
+                    </div>
                     <TagFilter />
                 </div>
-                <div>
-                    <a href="#" onClick={handleClick}>
-                        Logout
-                    </a>
+                <div className="log-out-btn-container">
+                    <div className="log-out-btn">
+                        <a href="#" onClick={handleClick}>
+                            Logout
+                        </a>
+                    </div>
                 </div>
             </nav>
         </div>

@@ -13,11 +13,15 @@ export function Calendar() {
   const readArticles = userArticles.filter(
     (article) => article.readAt !== null
   );
+    console.log('readArticles',readArticles)
 
   const dateCleanedArticles = readArticles.map((article) => {
-    article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
+    article.readAt = DateTime.fromISO(article.readAt).toFormat('yyyy-MM-dd')
     return article;
+
   });
+
+  console.log('dateCleanedArticles',dateCleanedArticles)
 
   dateCleanedArticles.map((article) => {
     dateList.push(article.readAt);
@@ -30,7 +34,7 @@ export function Calendar() {
     );
   });
 
-  console.log('sorted articles', sortedArticles);
+  console.log('dateList', dateList)
 
   //potentially adjustable year component
   // let curentYear = year
@@ -77,12 +81,12 @@ export function Calendar() {
   const zdata = [];
   let calendarDates = getDates(startDate, endDate);
   let weekDaysinYear = calendarDates.map((day) => DateTime.fromISO(day).weekday);
-  console.log('weekdays',weekDaysinYear)
   let weekNumber = calendarDates.map((day) => DateTime.fromISO(day).weekNumber);
   const text = calendarDates.map((day) => DateTime.fromISO(day).toFormat(
     'yyyy-MM-dd'
   ))
-
+  // console.log('calendarDates',sortedArticles)
+  //    console.log('sortedArticles',sortedArticles)
   if (Object.keys(sortedArticles).length > 0) {
     // //build Z axis data
     let weekArray = [];
@@ -106,6 +110,7 @@ export function Calendar() {
     }
   }
 
+  console.log(zdata)
   const calendarTrace = [
     {
       x: weekNumber,
