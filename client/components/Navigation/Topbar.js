@@ -5,9 +5,9 @@ const Topbar = () => {
     return (
         <div className="top-section--wrapper">
             <div className="top_navbar">
-                {/* <Link to="/recomandations">
-                <h3 className="top-navbar-links">Recomandations</h3>
-              </Link> */}
+                <Link to="/home">
+                    <h1 className="app-name--header">BookIt</h1>
+                </Link>
                 <Link to="/metrics">
                     <h3 className="top-navbar-links">User metrics</h3>
                 </Link>

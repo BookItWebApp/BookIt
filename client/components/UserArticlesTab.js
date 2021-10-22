@@ -77,7 +77,6 @@ export function UserArticlesTab() {
 
   return (
     <div>
-      <Topbar />
       <div className="ag-theme-alpine" style={{ height: 400, width: 1000 }}>
         <AgGridReact
           ref={grid}

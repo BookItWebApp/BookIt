@@ -23,43 +23,14 @@ form div {
 .app-container {
     width: 100%;
 }
-
-.nav-sidebar--wrapper {
-    float: left;
-    width: 19%;
-    height: 100%;
-    display: flex;
-    border: 2px solid #f4d19b;
-    border-radius: 1px;
-    background-color: #f4d19b;
-
-    /* justify-content: center; */
-    /* align-items: center; */
-    flex-direction: row;
-}
-
-.brand-name-wrapper,
-.sidebar-tags-selector-div {
-    display: flex;
-    justify-content: center;
-}
-.app-name--header {
-    background-color: #fdfce5;
-    border: 2px solid #fdfce5;
-    border-radius: 3px;
-}
-
-.routes-div--wrapper {
-    float: right;
-    width: 80%;
-    height: 100%;
-    border: 3px solid #fdfce5;
-}
-
+/* -------------------------------------- TOP-BAR-------------------------- */
+/* WRAPPER OF TOP-BAR(BOOKIT/METRICS/CREATE-BOOKMARK) */
 .top-section--wrapper {
     background-color: #fdfce5;
     padding: 5px;
+    margin: 5px;
 }
+/* TOP-BAR WITH BOOKIT/METRICS/CREATE-BOOKMARK */
 .top_navbar {
     display: flex;
     justify-content: space-between;
@@ -67,6 +38,7 @@ form div {
     flex-direction: row;
     /* margin: ; */
 }
+
 .top-navbar-links {
     border: 2px solid #f4d19b;
     background-color: #f4d19b;
@@ -74,15 +46,26 @@ form div {
     padding: 10px;
     margin: 10px;
 }
-.menu-filter--form {
+
+/* ------------------------------- TAGs-FILTERS && USER ARTICLES ----------- */
+/* CONTAINER WITH USER ARTICLES AND TAG FILTERS */
+.main-user-article--container {
+    margin: 5px;
+    display: flex;
+}
+/* LEFT SIDE OF USER ARTICLE CONTAINER WHICH IS TAG FILTER SIDE-BAR */
+.left-side--user-article-container {
+    flex: 20%;
+}
+/* RIGHT SIDE OF USER ARTICLE CONTAINER WHICH IS ALL USER ARTICLES */
+.right-side--user-article-container {
+    flex: 77%;
     display: flex;
     flex-direction: column;
+    border: 2px solid black;
 }
 
 /* ----------------------------------- TAG SELECTOR ---------------------- */
-.yo {
-    border: 2px solid #fdfce5;
-}
 .tag-filter--form {
     /* width: 100%; */
     border: 2px solid #fdfce5;

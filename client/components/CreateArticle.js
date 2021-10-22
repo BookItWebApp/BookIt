@@ -54,56 +54,53 @@ class CreateArticle extends React.Component {
     render() {
         const { name, url, isPrivate, tags } = this.state;
         return (
-            <>
-                <Topbar />
-                <div className="create-new-article-component">
-                    <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="name">Article name:</label>
-                        <input
-                            name="name"
-                            value={name}
-                            required
-                            onChange={this.handleChange}
-                        />
-                        <br />
-                        <label htmlFor="url">Article url:</label>
-                        <input
-                            name="url"
-                            value={url}
-                            required
-                            type="text"
-                            onChange={this.handleChange}
-                        />
-                        <br />
-                        <label htmlFor="isPrivate">Private:</label>
-                        <input
-                            name="isPrivate"
-                            value={isPrivate}
-                            onChange={this.handleChange}
-                        />
-                        <br />
-                        {tags.map((tag, index) => {
-                            return (
-                                <div key={index}>
-                                    <label htmlFor="tags">Add tag</label>
-                                    <input
-                                        name="tags"
-                                        value={tag}
-                                        onChange={(e) =>
-                                            this.onTagValueChange(e, index)
-                                        }
-                                    />
-                                </div>
-                            );
-                        })}
-                        <button type="button" onClick={this.addTagPlaceHolder}>
-                            +
-                        </button>
-                        <br />
-                        <button type="submit">Create Article</button>
-                    </form>
-                </div>
-            </>
+            <div className="create-new-article-component">
+                <form onSubmit={this.handleSubmit}>
+                    <label htmlFor="name">Article name:</label>
+                    <input
+                        name="name"
+                        value={name}
+                        required
+                        onChange={this.handleChange}
+                    />
+                    <br />
+                    <label htmlFor="url">Article url:</label>
+                    <input
+                        name="url"
+                        value={url}
+                        required
+                        type="text"
+                        onChange={this.handleChange}
+                    />
+                    <br />
+                    <label htmlFor="isPrivate">Private:</label>
+                    <input
+                        name="isPrivate"
+                        value={isPrivate}
+                        onChange={this.handleChange}
+                    />
+                    <br />
+                    {tags.map((tag, index) => {
+                        return (
+                            <div key={index}>
+                                <label htmlFor="tags">Add tag</label>
+                                <input
+                                    name="tags"
+                                    value={tag}
+                                    onChange={(e) =>
+                                        this.onTagValueChange(e, index)
+                                    }
+                                />
+                            </div>
+                        );
+                    })}
+                    <button type="button" onClick={this.addTagPlaceHolder}>
+                        +
+                    </button>
+                    <br />
+                    <button type="submit">Create Article</button>
+                </form>
+            </div>
         );
     }
 }
