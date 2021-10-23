@@ -49,6 +49,9 @@ export function UserArticlesTab() {
     return fields;
   });
 
+  const myCellRenderer = (params) =>
+    `<a href="${params.value}">${params.value}</a>`;
+
   const defaultColDef = {
     flex: 1,
     resizable: true,
@@ -57,6 +60,7 @@ export function UserArticlesTab() {
     autoHeight: true,
     floatingFilter: true,
     filter: true,
+    cellRenderer: myCellRenderer,
   };
 
   const grid = useRef(null);
@@ -78,13 +82,16 @@ export function UserArticlesTab() {
             style={{ width: '100%', height: '100%;' }}
             domLayout="autoHeight"
             animateRows={true}
+            frameworkComponents={{
+              hrefRenderer: myCellRenderer,
+            }}
           >
-            <AgGridColumn field="name"></AgGridColumn>
+            <AgGridColumn field="name" cellRenderer="null"></AgGridColumn>
             <AgGridColumn field="url"></AgGridColumn>
-            <AgGridColumn field="tags"></AgGridColumn>
-            <AgGridColumn field="read"></AgGridColumn>
-            <AgGridColumn field="private"></AgGridColumn>
-            <AgGridColumn field="note"></AgGridColumn>
+            <AgGridColumn field="tags" cellRenderer="null"></AgGridColumn>
+            <AgGridColumn field="read" cellRenderer="null"></AgGridColumn>
+            <AgGridColumn field="private" cellRenderer="null"></AgGridColumn>
+            <AgGridColumn field="note" cellRenderer="null"></AgGridColumn>
           </AgGridReact>
         </div>
       </div>
