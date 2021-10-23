@@ -20,17 +20,40 @@ export function AddMessage() {
 
   return (
     <div>
-      <p>Would like to add a message?</p>
-      <input
-        id="messageInput"
-        onChange={(e) => setMessage(e.target.value)}
-      ></input>
-      <button onClick={(e) => clickHandlerAdd(e)} id="addMessage">
-        Add message
-      </button>
-      <button onClick={(e) => clickHandlerSkip(e)} id="skipMessage">
-        Skip this step
-      </button>
+      <div className="msg-header">
+        <p>Would like to add a message?</p>
+      </div>
+
+      <div className="msg-input-container">
+        <textarea
+          align="center"
+          rows="15"
+          placeholder="Tell your friend something about the links you are sharing!"
+          font="sans-serif"
+          // cols="50"
+          className="msg-input"
+          onChange={(e) => setMessage(e.target.value)}
+        ></textarea>
+      </div>
+
+      <div className="msg-add-btn-container">
+        <button
+          className="msg-add-btn"
+          onClick={(e) => clickHandlerAdd(e)}
+          id="addMessage"
+        >
+          Add message
+        </button>
+      </div>
+      <div className="msg-skip-btn-container">
+        <button
+          className="msg-skip-btn"
+          onClick={(e) => clickHandlerSkip(e)}
+          id="skipMessage"
+        >
+          Skip this step
+        </button>
+      </div>
     </div>
   );
 }

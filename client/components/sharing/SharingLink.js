@@ -55,21 +55,46 @@ export function SharingLink() {
   return (
     <div>
       {!sharingId ? (
-        <button onClick={() => clickHandlerGenerateLink()} id="generateLink">
-          Generate Link
-        </button>
+        <div>
+          <div className="msg-header">
+            <p>Let's generate a Link you can share!</p>
+          </div>
+          <div className="link-generate-btn-container">
+            <button
+              className="link-generate-btn "
+              onClick={() => clickHandlerGenerateLink()}
+              id="generateLink"
+            >
+              Generate Link
+            </button>
+          </div>
+        </div>
       ) : (
         <div>
-          <div>Here is the link you can share with your Friend!</div>
-          <div id="generatedLink">
+          <div className="msg-header">
+            <p>Here is the link you can share with your friends!</p>
+          </div>
+          <div className="link-area" id="generatedLink">
             {url}/{sharingId}
           </div>
-          <button onClick={() => copyToClipboard()} id="copyToClipboard">
-            Copy Link to the Clipboard
-          </button>
-          <button onClick={() => clickHandlerHome()} id="backHome">
-            Go back to the Homepage
-          </button>
+          <div className="msg-add-btn-container">
+            <button
+              className="msg-add-btn"
+              onClick={() => copyToClipboard()}
+              id="copyToClipboard"
+            >
+              Copy Link to the Clipboard
+            </button>
+          </div>
+          <div className="msg-skip-btn-container">
+            <button
+              className="msg-skip-btn"
+              onClick={() => clickHandlerHome()}
+              id="backHome"
+            >
+              Go back to the Homepage
+            </button>
+          </div>
         </div>
       )}
     </div>

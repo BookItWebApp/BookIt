@@ -16,7 +16,7 @@ const Sharing = db.define('sharing', {
     allowNull: true,
   },
   userMessage: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: true,
   },
 });

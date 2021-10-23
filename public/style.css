@@ -1,147 +1,337 @@
 body {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 label {
-    display: block;
+  display: block;
 }
 
 nav a {
-    display: inline-block;
-    margin: 1em;
+  display: inline-block;
+  margin: 1em;
 }
 
 form div {
-    margin: 1em;
-    display: inline-block;
+  margin: 1em;
+  display: inline-block;
 }
 
 .app-container {
-    width: 100%;
+  width: 100%;
 }
 /* -------------------------------------- TOP-BAR-------------------------- */
 /* WRAPPER OF TOP-BAR(BOOKIT/METRICS/CREATE-BOOKMARK) */
 .top-section--wrapper {
-    background-color: #fdfce5;
-    padding: 5px;
-    margin: 5px;
+  background-color: #fdfce5;
+  padding: 5px;
+  margin: 5px;
 }
 /* TOP-BAR WITH BOOKIT/METRICS/CREATE-BOOKMARK */
 .top_navbar {
-    display: flex;
-    justify-content: space-between;
-    /* align-items: flex-end; */
-    flex-direction: row;
-    /* margin: ; */
+  display: flex;
+  justify-content: space-between;
+  /* align-items: flex-end; */
+  flex-direction: row;
+  /* margin: ; */
 }
 
 .top-navbar-links {
-    border: 2px solid #f4d19b;
-    background-color: #f4d19b;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
+  border: 2px solid #f4d19b;
+  background-color: #f4d19b;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
 }
 
 /* ------------------------------- TAGs-FILTERS && USER ARTICLES ----------- */
 /* CONTAINER WITH USER ARTICLES AND TAG FILTERS */
 .main-user-article--container {
-    margin: 5px;
-    display: flex;
+  margin: 5px;
+  display: flex;
 }
 /* LEFT SIDE OF USER ARTICLE CONTAINER WHICH IS TAG FILTER SIDE-BAR */
 .left-side--user-article-container {
-    flex: 20%;
+  flex: 20%;
 }
 /* RIGHT SIDE OF USER ARTICLE CONTAINER WHICH IS ALL USER ARTICLES */
 .right-side--user-article-container {
-    flex: 77%;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
+  flex: 77%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
 }
 
 /* ----------------------------------- TAG SELECTOR ---------------------- */
 .tag-filter--form {
-    /* width: 100%; */
-    border: 2px solid #fdfce5;
-    display: flex;
-    /* align-items: flex-start; */
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-bottom: 5px;
-    margin-left: 5px;
+  /* width: 100%; */
+  border: 2px solid #fdfce5;
+  display: flex;
+  /* align-items: flex-start; */
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 .tag-check {
-    flex: 50%;
-    border: 2px solid #fdfce5;
+  flex: 50%;
+  border: 2px solid #fdfce5;
 }
 
 /* --------------------------------------USER ARTICLES ----------------*/
 .user-articles--username-div {
-    margin: 5px;
-    padding-left: 5px;
+  margin: 5px;
+  padding-left: 5px;
 }
 .display-articles--container {
-    border: 2px solid #fdfce5;
-    /* width: 100%; */
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10px;
+  border: 2px solid #fdfce5;
+  /* width: 100%; */
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
 }
 
 .user-articles--display-view {
-    border: 2px solid black;
-    color: black;
-    width: 120px;
-    margin: 5px;
+  border: 2px solid black;
+  color: black;
+  width: 120px;
+  margin: 5px;
 }
 
 .user-articles--share-list {
-    border: 2px solid black;
-    color: black;
-    width: 120px;
-    margin: 5px;
+  border: 2px solid black;
+  color: black;
+  width: 120px;
+  margin: 5px;
 }
 
 /* --------------------------------------SINGLE ARTICLE ----------------*/
 .singleContainer {
-    border: 2px solid #f9f3df;
-    background-color: #f9f3df;
-    border-radius: 5px;
+  border: 2px solid #f9f3df;
+  background-color: #f9f3df;
+  border-radius: 5px;
 
-    display: inline-block;
-    /* flex: 1;
+  display: inline-block;
+  /* flex: 1;
     width: 10%; */
-    margin: 5px;
-    /* height: 75px; */
-    padding: 10px;
+  margin: 5px;
+  /* height: 75px; */
+  padding: 10px;
 }
 .title-name--single-article {
-    background-color: #f4d19b;
-    border-radius: 5px;
+  background-color: #f4d19b;
+  border-radius: 5px;
 }
 
 /* ------------------------------ BTNS ------------------------------------- */
 .tabViewButton,
 .shareButton {
-    background-color: #f4d19b;
-    /* border-radius: 1px; */
+  background-color: #f4d19b;
+  /* border-radius: 1px; */
 }
 
 /* ----------------------------------LOGOUT -------------------------------- */
 .log-out-btn-container {
-    display: flex;
-    justify-content: center;
-    align-self: center;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
 .log-out-btn {
-    /* border: 2px solid black; */
-    background-color: #f9f3df;
-    border-radius: 5px;
-    height: 40px;
+  /* border: 2px solid black; */
+  background-color: #f9f3df;
+  border-radius: 5px;
+  height: 40px;
+}
+/* ----------------------------------TABLE VIEW -------------------------------- */
+
+.table-header {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  font-size: 25px;
+}
+
+.table-container {
+  justify-content: center;
+  align-self: center;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  /* padding: 10px; */
+}
+
+.table-btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  margin: 3%;
+}
+.table-btn {
+  display: flex;
+  padding-top: 17px;
+  padding-right: 30px;
+  padding-bottom: 19px;
+  padding-left: 30px;
+  font-size: 20px;
+  line-height: 18px;
+  color: #3a4246;
+  background-color: #dafdff;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+/* ----------------------------------ADD MESSAGE VIEW -------------------------------- */
+
+.msg-header {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  font-size: 25px;
+  margin-top: 3%;
+}
+
+.msg-input-container {
+  display: flex;
+  width: 100%;
+  height: 30%;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.msg-input {
+  /* flex: 1; */
+  display: block;
+  border: 1px solid black;
+  background-color: #fdfce5;
+  width: 30%;
+  height: 100%;
+  align-self: center;
+  align-items: center;
+  border-radius: 5px;
+  justify-content: center;
+}
+
+.msg-add-btn-container {
+  display: flex;
+  width: 100%;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3%;
+}
+
+.msg-add-btn {
+  display: flex;
+  align-self: center;
+  padding-top: 17px;
+  padding-right: 30px;
+  padding-bottom: 19px;
+  padding-left: 30px;
+  font-size: 20px;
+  line-height: 18px;
+  color: #3a4246;
+  background-color: #dafdff;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.msg-skip-btn-container {
+  display: block;
+  position: relative;
+  width: auto;
+  text-align: right;
+  align-self: right;
+  align-items: right;
+  justify-content: right;
+  margin-right: 5%;
+  margin-top: 5%;
+}
+
+.msg-skip-btn {
+  padding-top: 17px;
+  padding-right: 30px;
+  padding-bottom: 19px;
+  padding-left: 30px;
+  font-size: 20px;
+  line-height: 18px;
+  color: #3a4246;
+  background-color: #f7e590;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+/* ----------------------------------GENERATE LINK VIEW -------------------------------- */
+
+.link-generate-btn-container {
+  display: flex;
+  width: 100%;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+  margin-top: 5%;
+}
+
+.link-generate-btn {
+  display: flex;
+  padding-top: 17px;
+  padding-right: 30px;
+  padding-bottom: 19px;
+  padding-left: 30px;
+  font-size: 20px;
+  line-height: 18px;
+  color: #3a4246;
+  background-color: #f7e590;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.link-area {
+  display: block;
+  position: relative;
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  font-size: 20px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  /* line-height: 18px; */
+  color: #3a4246;
+  background-color: #fdfce5;
+  border-radius: 5px;
+  /* border: 1px solid black; */
+  margin-top: 3%;
+}
+
+/* ----------------------------------VIEW SHARED ITEMS-------------------------------- */
+
+.shared-msg-area {
+  display: block;
+  white-space: pre-wrap;
+  position: relative;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  padding-top: 15px;
+  padding-right: 30px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  font-size: 20px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  color: #3a4246;
+  background-color: #fdfce5;
+  border-radius: 5px;
 }

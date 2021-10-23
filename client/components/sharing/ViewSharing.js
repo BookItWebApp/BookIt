@@ -38,30 +38,23 @@ export function ViewSharing() {
     autoHeight: true,
     floatingFilter: true,
     filter: true,
-    headerComponentParams: {
-      template:
-        '<div class="ag-cell-label-container" role="presentation">' +
-        '  <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>' +
-        '  <div ref="eLabel" class="ag-header-cell-label" role="presentation">' +
-        '    <span ref="eSortOrder" class="ag-header-icon ag-sort-order"></span>' +
-        '    <span ref="eSortAsc" class="ag-header-icon ag-sort-ascending-icon"></span>' +
-        '    <span ref="eSortDesc" class="ag-header-icon ag-sort-descending-icon"></span>' +
-        '    <span ref="eSortNone" class="ag-header-icon ag-sort-none-icon"></span>' +
-        '    <span ref="eText" class="ag-header-cell-text" role="columnheader" style="white-space: normal;"></span>' +
-        '    <span ref="eFilter" class="ag-header-icon ag-filter-icon"></span>' +
-        '  </div>' +
-        '</div>',
-    },
   };
 
   return (
     <div>
-      <h2>Hi! Here is the articles list your friend shared with you: </h2>
-      <div>{sharing.userMessage}</div>
-      <div>
-        Articles
-        <div className="ag-theme-alpine" style={{ height: 400, width: 1000 }}>
-          <AgGridReact rowData={articlesFields} defaultColDef={defaultColDef}>
+      <div className="table-header">
+        <p>Hi! Here is the articles list your friend shared with you: </p>
+      </div>
+      <div className="shared-msg-area">{sharing.userMessage}</div>
+      <div className="table-container">
+        <div className="ag-theme-alpine">
+          <AgGridReact
+            rowData={articlesFields}
+            defaultColDef={defaultColDef}
+            domLayout="autoHeight"
+            style={{ width: '100%', height: '100%' }}
+            animateRows={true}
+          >
             <AgGridColumn field="name"></AgGridColumn>
             <AgGridColumn field="url"></AgGridColumn>
             <AgGridColumn field="note"></AgGridColumn>
