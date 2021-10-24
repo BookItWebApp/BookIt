@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 const { DateTime } = require('luxon');
-import Plot from 'react-plotly.js';
+// import Plot from 'react-plotly.js';
 import { render } from 'react-dom';
 import { previewArticle } from '../store/SingleArticle';
+import Plotly from "plotly.js-dist"
+import createPlotlyComponent from 'react-plotly.js/factory';
+const Plot = createPlotlyComponent(Plotly);
 
 export function Indicator() {
   const dispatch = useDispatch();

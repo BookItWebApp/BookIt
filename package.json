@@ -4,7 +4,8 @@
   "description": "Some boilerplate code to get you started - get shakin'!",
   "main": "index.js",
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "npm": "6.x"
   },
   "scripts": {
     "build": "webpack",
@@ -29,6 +30,7 @@
     "ag-grid-community": "^26.1.0",
     "ag-grid-enterprise": "^26.1.0",
     "ag-grid-react": "^26.1.0",
+    "as": "^0.4.1",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "bufferutil": "^4.0.4",
@@ -50,9 +52,9 @@
     "net": "^1.0.2",
     "open-graph": "^0.2.6",
     "pg": "^8.5.1",
-    "plotly": "^1.0.6",
     "plotly.js": "^2.5.1",
     "plotly.js-dist": "^2.5.1",
+    "plotly.js-dist-min": "^2.5.1",
     "react-plotly.js": "^2.5.1",
     "react-select": "^5.1.0",
     "sequelize": "^6.7.0",
