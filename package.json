@@ -4,7 +4,8 @@
   "description": "Some boilerplate code to get you started - get shakin'!",
   "main": "index.js",
   "engines": {
-    "npm": "7.x"
+    "node": "14.17.1",
+    "npm": "8.1.1"
   },
   "scripts": {
     "build": "webpack",
