@@ -5,14 +5,14 @@ import Plot from 'react-plotly.js';
 
 export function TimeChart() {
   const userArticles = useSelector((state) => state.userArticles);
-  const SortedArticles = {};
-  const sortedaddedArticles = {}
+  const SortedArticles = {}; //Sorted list of read articles by date read
+  const sortedaddedArticles = {}; //Sorted list of all articles by date added
   const yReadTotal = [];
   const dateList = [];
-  const data = []
-  const addedDateList= []
-  let yhelperAdd = []
-  const yTotalArticles =[]
+  const data = [];
+  const addedDateList = [];
+  let yhelperAdd = [];
+  const yTotalArticles = [];
 
   //Get individual read articles Count
   const readArticles = userArticles.filter(
@@ -41,16 +41,18 @@ export function TimeChart() {
     addedDateList.push(article.createdAt);
   });
 
-  addedDateList.sort()
+  addedDateList.sort();
 
   dateList.sort();
 
-
+  //creates sorted article
   dateList.map((date) => {
     SortedArticles[date] = readArticles.filter(
       (article) => article.readAt === date
     );
   });
+
+  // console.log('Sorted Articles', SortedArticles)
   addedDateList.map((date) => {
     sortedaddedArticles[date] = userArticles.filter(
       (article) => article.createdAt === date
@@ -58,46 +60,48 @@ export function TimeChart() {
   });
 
   const xReadDates = Object.keys(SortedArticles);
-  const xAddedDates =Object.keys(sortedaddedArticles)
+  const xAddedDates = Object.keys(sortedaddedArticles);
 
   for (const [key, value] of Object.entries(sortedaddedArticles)) {
     yhelperAdd.push(value.length);
   }
 
-  for (let i =0; i <yhelperAdd.length; i++) {
-    if(i===0){
-    yTotalArticles.push(yhelperAdd[i])}
-    else{
-      yTotalArticles.push(yTotalArticles[i-1]+yhelperAdd[i])}
+  for (let i = 0; i < yhelperAdd.length; i++) {
+    if (i === 0) {
+      yTotalArticles.push(yhelperAdd[i]);
+    } else {
+      yTotalArticles.push(yTotalArticles[i - 1] + yhelperAdd[i]);
     }
+  }
 
-  yhelperAdd=[]
+  yhelperAdd = [];
   for (const [key, value] of Object.entries(SortedArticles)) {
     yhelperAdd.push(value.length);
   }
 
-  for (let i =0; i <yhelperAdd.length; i++) {
-    if(i===0){
-      yReadTotal.push(yhelperAdd[i])}
-    else{
-      yReadTotal.push(yTotalArticles[i-1]+yhelperAdd[i])
+  for (let i = 0; i < yhelperAdd.length; i++) {
+    if (i === 0) {
+      yReadTotal.push(yhelperAdd[i]);
+    } else {
+      yReadTotal.push(yTotalArticles[i - 1] + yhelperAdd[i]);
     }
-    }
+  }
 
-    //add final date value to update graph to present
-    xAddedDates.push(DateTime.now().toISO())
-    let mostRecentValue = yTotalArticles.at(-1)
-    yTotalArticles.push(mostRecentValue)
+  //add final date value to update graph to present
+  xAddedDates.push(DateTime.now().toISO());
+  let mostRecentValue = yTotalArticles.at(-1);
+  yTotalArticles.push(mostRecentValue);
 
+  //TRACE DATA FOR TIMECHART
   const readArticleTrace = {
-    x: [xReadDates[0],...xReadDates],
-    y: [0,...yReadTotal],
+    x: [xReadDates[0], ...xReadDates,DateTime.now().toISO()],
+    y: [0, ...yReadTotal, yReadTotal.at(-1)],
     name: 'Total Read',
     type: 'scatter',
     mode: 'lines',
     marker: { color: 'blue' },
     fill: 'tozeroy',
-    line: {shape: 'spline'}
+    line: { shape: 'spline' },
   };
 
   const addedArticleTrace = {
@@ -108,67 +112,24 @@ export function TimeChart() {
     mode: 'lines',
     marker: { color: 'red' },
     fill: 'tozeroy',
-    line: {shape: 'spline'}
+    line: { shape: 'spline' },
   };
 
-
-
-  console.log('trace',addedArticleTrace )
-  data.push(readArticleTrace, addedArticleTrace)
-
-  // const tagData = [];
-  // //Get individual read articles Tags
-  // const yTagCount = [];
-  // const articleTagsList = [];
-
-  // //Coordinated of tags, per tag, per day
-  // for (const [key, value] of Object.entries(SortedArticles)) {
-  //   const dateTags = [];
-  //   for (const article of value) {
-  //     article.taggings.map(
-  //       (tag) =>
-  //         dateTags.push(tag.tag.name) && articleTagsList.push(tag.tag.name)
-  //     );
-  //   }
-  //   yTagCount[key] = dateTags;
-  // }
-
-  // //build trace for each tag name
-  // for (let i = 0; i < articleTagsList.length; i++) {
-  //   const yTags = [];
-  //   const tagDateMap = {};
-  //   for (const day in yTagCount) {
-  //     tagDateMap[day] = yTagCount[day].filter(
-  //       (tag) => tag === articleTagsList[i]
-  //     );
-  //   }
-  //   for (const [key, value] of Object.entries(tagDateMap)) {
-  //     yTags.push(value.length);
-  //   }
-  //   const tagTrace = {
-  //     x: xReadDates,
-  //     y: yTags,
-  //     name: articleTagsList[i],
-  //     type: 'scatter',
-  //     mode: 'markers',
-  //     market: {opacity: .75}
-  //   };
-  //   data.push(tagTrace);
-  // }
-
-
+  data.push(readArticleTrace, addedArticleTrace);
 
   return (
+    <div>
+      <h3>Total Backlog v. Amount Read</h3>
     <Plot
       data={data}
       layout={{
-        title: 'Lets Look At Your Articles Read Over Time!',
         width: 550,
         height: 550,
+        margin:{b:0},
         barmode: 'stack',
         xaxis: {
           autorange: true,
-          tickformat: "%B %Y",
+          tickformat: '%B %Y',
           range: [xAddedDates[0], DateTime.now().toISO()],
           rangeselector: {
             buttons: [
@@ -192,11 +153,10 @@ export function TimeChart() {
         },
         yaxis: {
           autorange: true,
-          type: 'linear'
-
+          type: 'linear',
         },
       }}
     />
+    </div>
   );
-  }
-
+}
