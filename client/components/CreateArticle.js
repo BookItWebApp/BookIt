@@ -16,7 +16,7 @@ class CreateArticle extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.addTagPlaceHolder = this.addTagPlaceHolder.bind(this);
         this.onTagValueChange = this.onTagValueChange.bind(this);
-        // this.cancelButton = this.cancelButton.bind(this);
+        this.cancelButton = this.cancelButton.bind(this);
     }
 
     handleSubmit(event) {
@@ -52,10 +52,10 @@ class CreateArticle extends React.Component {
         this.setState({ ...this.state, tags });
     }
 
-    // cancelButton(event) {
-    //     event.preventDefault();
-    //     history.push("/home");
-    // }
+    cancelButton(event) {
+        event.preventDefault();
+        this.props.history.push("/home");
+    }
 
     render() {
         const { name, url, isPrivate, tags } = this.state;
@@ -140,12 +140,12 @@ class CreateArticle extends React.Component {
                             >
                                 Create Article
                             </button>
-                            {/* <button
+                            <button
                                 onClick={(event) => this.cancelButton(event)}
                                 className="button-secondary pure-button"
                             >
                                 Cancel
-                            </button> */}
+                            </button>
                         </div>
                     </fieldset>
                 </form>
