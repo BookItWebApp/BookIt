@@ -101,8 +101,21 @@ router.delete("/:id", async (req, res, next) => {
         // console.log("PRODUCT TO DELETE BODY > ", req.body);
 
         const { id } = req.params;
-        const userArticle = await UserArticle.findByPk(id);
-        // console.log("PRODUCT TO DELETE > ", userArticle);
+        const userArticle = await UserArticle.findByPk(id, {
+            include: [
+                {
+                    model: Article,
+                    attributes: ["id", "url"]
+                },
+                {
+                    model: Tagging,
+                    include: {
+                        model: Tag
+                    }
+                }
+            ]
+        });
+        console.log("PRODUCT TO DELETE > ", userArticle);
         await userArticle.destroy();
         res.send(userArticle);
     } catch (err) {

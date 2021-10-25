@@ -1,42 +1,47 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
-const Article = require('../models/Article');
-const Tagging = require('../models/Tagging');
-const Tag = require('../models/Tag');
-const Author = require('./Author');
+const Sequelize = require("sequelize");
+const db = require("../db");
+const Article = require("../models/Article");
+const Tagging = require("../models/Tagging");
+const Tag = require("../models/Tag");
+const Author = require("./Author");
 
 const UserArticle = db.define(
-  'userArticle',
-  {
-    id: {
-      primaryKey: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+    "userArticle",
+    {
+        id: {
+            primaryKey: true,
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.UUIDV4
+        },
+        featured: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
+        name: {
+            type: Sequelize.TEXT,
+            allowNull: true
+        },
+        note: {
+            type: Sequelize.TEXT,
+            allowNull: true
+        },
+        userId: {
+            type: Sequelize.UUID,
+            allowNull: false
+        },
+        articleId: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        isPrivate: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
+        readAt: {
+            type: Sequelize.DATE,
+            allowNull: true
+        }
     },
-    featured: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false,
-    },
-    name: {
-      type: Sequelize.TEXT,
-      allowNull: true,
-    },
-    note: {
-      type: Sequelize.TEXT,
-      allowNull: true,
-    },
-    userId: {
-      type: Sequelize.UUID,
-      allowNull: false,
-    },
-    articleId: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    readAt: {
-      type: Sequelize.DATE,
-      allowNull: true,
-    }},
     {
         indexes: [
             {
@@ -50,25 +55,26 @@ const UserArticle = db.define(
 //MODEL METHODS
 //Find all articles belonging to a particular user
 UserArticle.findAllByUser = function (currentUserId) {
-  return this.findAll({
-    where: { userId: currentUserId },
-    include: [
-      {
-        model: Article,
-        attributes: ['id', 'url'],
-        include: {
-          model: Author,
-          attributes: ['id', 'name'],
-        },
-      },
-      {
-        model: Tagging,
-        include: {
-          model: Tag,
-        },
-      },
-    ],
-  })};
+    return this.findAll({
+        where: { userId: currentUserId },
+        include: [
+            {
+                model: Article,
+                attributes: ["id", "url"],
+                include: {
+                    model: Author,
+                    attributes: ["id", "name"]
+                }
+            },
+            {
+                model: Tagging,
+                include: {
+                    model: Tag
+                }
+            }
+        ]
+    });
+};
 UserArticle.findAllTaggingsByUser = function (currentUserId) {
     return this.findAll({
         attributes: [],

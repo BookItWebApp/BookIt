@@ -2,22 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TagFilter from "./TagFilter";
 
-const Sidebar = ({ handleClick }) => {
+const Sidebar = () => {
     return (
         <div>
             <nav>
                 <div>
                     <div className="sidebar-tags-selector-div">
-                        <h1>Select Tags</h1>
+                        <h4>Submit bookmark</h4>
                     </div>
                     <TagFilter />
-                </div>
-                <div className="log-out-btn-container">
-                    <div className="log-out-btn button-error pure-button">
-                        <a href="#" onClick={handleClick}>
-                            Logout
-                        </a>
-                    </div>
                 </div>
             </nav>
         </div>
