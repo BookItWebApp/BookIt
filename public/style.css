@@ -221,6 +221,8 @@ form div {
 .login-page-container {
     border: 2px solid var(--color-light-sand);
     text-align: center;
+    padding-bottom: 150px;
+    margin-bottom: 10px;
 }
 .login-signup-container {
     /* color: var(--color-white); */
@@ -248,6 +250,8 @@ form div {
     padding: 10px;
     background-color: var(--color-light-sand);
     border-radius: 4px;
+    height: 100px;
+    margin-top: -1px;
 }
 
 /* -----DROPBOX----------- */
