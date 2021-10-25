@@ -30,7 +30,7 @@ export function SingleArticle(props) {
     //
     return (
         <div className="single-article--container">
-            <a href={article.url}>
+            <a href={article.article.url}>
                 <div className="title-delete--single-article--container">
                     <span className="title-name--single-article">
                         <span className="bold--single-article--container">
