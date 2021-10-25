@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSharing } from '../../store/sharing';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { render } from 'react-dom';
 
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -30,6 +31,9 @@ export function ViewSharing() {
     return fields;
   });
 
+  const myCellRenderer = (params) =>
+    `<a href="${params.value}">${params.value}</a>`;
+
   const defaultColDef = {
     flex: 1,
     resizable: true,
@@ -38,33 +42,30 @@ export function ViewSharing() {
     autoHeight: true,
     floatingFilter: true,
     filter: true,
-    headerComponentParams: {
-      template:
-        '<div class="ag-cell-label-container" role="presentation">' +
-        '  <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>' +
-        '  <div ref="eLabel" class="ag-header-cell-label" role="presentation">' +
-        '    <span ref="eSortOrder" class="ag-header-icon ag-sort-order"></span>' +
-        '    <span ref="eSortAsc" class="ag-header-icon ag-sort-ascending-icon"></span>' +
-        '    <span ref="eSortDesc" class="ag-header-icon ag-sort-descending-icon"></span>' +
-        '    <span ref="eSortNone" class="ag-header-icon ag-sort-none-icon"></span>' +
-        '    <span ref="eText" class="ag-header-cell-text" role="columnheader" style="white-space: normal;"></span>' +
-        '    <span ref="eFilter" class="ag-header-icon ag-filter-icon"></span>' +
-        '  </div>' +
-        '</div>',
-    },
+    cellRenderer: myCellRenderer,
   };
 
   return (
     <div>
-      <h2>Hi! Here is the articles list your friend shared with you: </h2>
-      <div>{sharing.userMessage}</div>
-      <div>
-        Articles
-        <div className="ag-theme-alpine" style={{ height: 400, width: 1000 }}>
-          <AgGridReact rowData={articlesFields} defaultColDef={defaultColDef}>
-            <AgGridColumn field="name"></AgGridColumn>
+      <div className="table-header">
+        <p>Hi! Here is the articles list your friend shared with you: </p>
+      </div>
+      <div className="shared-msg-area">{sharing.userMessage}</div>
+      <div className="table-container">
+        <div className="ag-theme-alpine">
+          <AgGridReact
+            rowData={articlesFields}
+            defaultColDef={defaultColDef}
+            domLayout="autoHeight"
+            style={{ width: '100%', height: '100%' }}
+            animateRows={true}
+            frameworkComponents={{
+              hrefRenderer: myCellRenderer,
+            }}
+          >
+            <AgGridColumn field="name" cellRenderer="null"></AgGridColumn>
             <AgGridColumn field="url"></AgGridColumn>
-            <AgGridColumn field="note"></AgGridColumn>
+            <AgGridColumn field="note" cellRenderer="null"></AgGridColumn>
           </AgGridReact>
         </div>
       </div>

@@ -73,10 +73,13 @@ export const createNewExtensionArticle = (url, name, userId, tags ) => {
     let article = {url : url, name:name, tags:[tags.split(',')]}
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`"http://localhost:8080/api/articles`, {
-                article,
-                userId
-            });
+            const { data } = await axios.post(
+                `"http://localhost:8080/api/articles`,
+                {
+                    article,
+                    userId
+                }
+            );
             dispatch(_createUserArticle(data));
         } catch (err) {
             console.log("CREATE A NEW ARTICLE ERR:", err);
@@ -87,20 +90,16 @@ export const createNewExtensionArticle = (url, name, userId, tags ) => {
 //get all user tags
 export const getExtensionUserArticles = (id) => {
     return async (dispatch) => {
-      try {
-        const {data} = await axios.get(`http://localhost:8080/api/userArticles/${id}`);
-        dispatch(_getUserArticles(data));
-      } catch (error) {
-        console.log(error);
-      }
+        try {
+            const { data } = await axios.get(
+                `http://localhost:8080/api/userArticles/${id}`
+            );
+            dispatch(_getUserArticles(data));
+        } catch (error) {
+            console.log(error);
+        }
     };
-  };
-// // UPDATE A SINGLE ARTICLE
-// export const updateArticle =(articleId, updates, history)=>{
-//   return async(dispatch)=>{
-//     try{
-//       const {data}=await axios.put(`/api/userArticles/${articleId}`, updates);
-//       console.log("THUNK UPDATE DATA > ", data);
+};
 
 // UPDATE A USER ARTICLE AS READ
 export const markUserArticle = (userId, article) => {
