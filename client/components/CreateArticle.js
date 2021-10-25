@@ -9,7 +9,7 @@ class CreateArticle extends React.Component {
         this.state = {
             name: "",
             url: "",
-            isPrivate: false,
+            isPrivate: "",
             tags: [""]
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,50 +55,87 @@ class CreateArticle extends React.Component {
         const { name, url, isPrivate, tags } = this.state;
         return (
             <div className="create-new-article-component">
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="name">Article name:</label>
-                    <input
-                        name="name"
-                        value={name}
-                        required
-                        onChange={this.handleChange}
-                    />
-                    <br />
-                    <label htmlFor="url">Article url:</label>
-                    <input
-                        name="url"
-                        value={url}
-                        required
-                        type="text"
-                        onChange={this.handleChange}
-                    />
-                    <br />
-                    <label htmlFor="isPrivate">Private:</label>
-                    <input
-                        name="isPrivate"
-                        value={isPrivate}
-                        onChange={this.handleChange}
-                    />
-                    <br />
-                    {tags.map((tag, index) => {
-                        return (
-                            <div key={index}>
-                                <label htmlFor="tags">Add tag</label>
-                                <input
-                                    name="tags"
-                                    value={tag}
-                                    onChange={(e) =>
-                                        this.onTagValueChange(e, index)
-                                    }
-                                />
-                            </div>
-                        );
-                    })}
-                    <button type="button" onClick={this.addTagPlaceHolder}>
-                        +
-                    </button>
-                    <br />
-                    <button type="submit">Create Article</button>
+                <form
+                    onSubmit={this.handleSubmit}
+                    className="pure-form pure-form-stacked"
+                >
+                    <fieldset>
+                        <div className="pure-control-group">
+                            <label htmlFor="name">Bookmark name:</label>
+                            <input
+                                name="name"
+                                value={name}
+                                required
+                                placeholder="bookmark name"
+                                onChange={this.handleChange}
+                            />
+                            <span className="pure-form-message-inline">
+                                This is a required field.
+                            </span>
+                        </div>
+
+                        <br />
+
+                        <div className="pure-control-group">
+                            <label htmlFor="url">Bookmark url:</label>
+                            <input
+                                name="url"
+                                value={url}
+                                required
+                                placeholder="bookmark URL"
+                                type="text"
+                                onChange={this.handleChange}
+                            />
+                            <span className="pure-form-message-inline">
+                                This is a required field.
+                            </span>
+                        </div>
+
+                        <br />
+
+                        <div className="pure-control-group">
+                            <label htmlFor="isPrivate">Private bookmark?</label>
+                            <input
+                                name="isPrivate"
+                                placeholder="true or false"
+                                value={isPrivate}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+
+                        <br />
+                        {tags.map((tag, index) => {
+                            return (
+                                <div key={index} className="pure-control-group">
+                                    <label htmlFor="tags">Add tag</label>
+                                    <input
+                                        name="tags"
+                                        placeholder="ex: sport, food, etc"
+                                        value={tag}
+                                        onChange={(e) =>
+                                            this.onTagValueChange(e, index)
+                                        }
+                                    />
+                                </div>
+                            );
+                        })}
+                        <button
+                            type="button"
+                            className="button-secondary pure-button"
+                            onClick={this.addTagPlaceHolder}
+                        >
+                            +
+                        </button>
+                        <br />
+                        <div>
+                            <button
+                                type="submit"
+                                className="button-secondary pure-button"
+                            >
+                                Create Article
+                            </button>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
         );

@@ -17,14 +17,17 @@ export function SingleArticle(props) {
     // }, [dispatch]);
 
     function markAsCompleted() {
+        // alert("trying to complete item with an id of " + user.id);
         article.readAt = new Date().toISOString();
+        // console.log("MARK AS REEAD > ", article);
         dispatch(markUserArticle(user.id, article));
     }
 
     function deleteBookmark() {
-        console.log("DELTE", user.id, article);
+        // console.log("DELTE", user.id, article);
         dispatch(deleteProduct(article.id, article));
     }
+
     //
     return (
         <div className="single-article--container">
@@ -68,11 +71,21 @@ export function SingleArticle(props) {
                 <React.Fragment />
             )} */}
             <span>
-                <button onClick={markAsCompleted}>mark</button>
+                <button
+                    onClick={markAsCompleted}
+                    className="button-warning pure-button"
+                >
+                    read
+                </button>
             </span>
             <span>{article.readAt ? "Read" : "Unread"}</span>
             <span>
-                <button onClick={deleteBookmark}>delete</button>
+                <button
+                    onClick={deleteBookmark}
+                    className="button-error pure-button"
+                >
+                    delete
+                </button>
             </span>
         </div>
     );
