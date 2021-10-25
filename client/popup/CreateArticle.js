@@ -48,6 +48,7 @@ console.log('tab',tab)
   return (
     //new article is submitted to DB based on simple form POST submission direct to URL
     <div>
+      <h3  align="Center">BookIt!</h3>
       {/* <form onSubmit={handleSubmit}> */}
       <form
         name="urlPOST"
@@ -55,11 +56,11 @@ console.log('tab',tab)
         method="POST"
         target="_self"
       >
-        <label htmlFor="url">Article URL</label>
-        <input type="url" type="text" name="url" value={tab.url} />
+        <label htmlFor="url"><b>Article URL</b></label>
+        <input type="url" type="text" name="url" size="30" value={tab.url} />
 
-        <label htmlFor="name">Name Article</label>
-        <input type="ntext" type="text" name="name" />
+        <label htmlFor="name"><b>Name Article</b></label>
+        <input type="ntext" type="text" name="name" size="30" border-color/>
 
         <input
           type="hidden"
@@ -73,7 +74,7 @@ console.log('tab',tab)
           name="userId"
           value={user.id}
         />
-      <label htmlFor="tagsetter">Choose Article Tags</label>
+      <label htmlFor="tagsetter"><b>Choose Article Tags</b></label>
       <CreatableSelect id='tagsetter'
         isMulti
         onChange={handleChange}
