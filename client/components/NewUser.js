@@ -36,40 +36,62 @@ class NewUser extends Component {
         const { updateHandler, submitHandler } = this;
 
         return (
-            <div className="create-user-form">
-                <h2>Sign Up</h2>
-                <form onSubmit={submitHandler}>
-                    <div className="input-row">
-                        <label>Username</label>
+            <div className="login-page-container">
+                <form
+                    onSubmit={submitHandler}
+                    className="pure-form pure-form-aligned login--form"
+                >
+                    <div className="pure-control-group">
+                        <label htmlFor="username">
+                            <small>Username</small>
+                        </label>
                         <input
                             name="username"
                             onChange={updateHandler}
                             value={username}
-                            placeholder="Ex: carlmarx123"
                         />
+                        <span className="pure-form-message-inline">
+                            This is a required field.
+                        </span>
                     </div>
-                    <div className="input-row">
-                        <label>Email</label>
+                    <br />
+                    <div className="pure-control-group">
+                        <label htmlFor="email">
+                            <small>Email</small>
+                        </label>
                         <input
                             name="email"
                             onChange={updateHandler}
                             value={email}
-                            placeholder="Ex: carlmarx@greenshopper.com"
                         />
+                        <span className="pure-form-message-inline">
+                            This is a required field.
+                        </span>
                     </div>
-                    <div className="input-row">
-                        <label>Password</label>
+                    <br />
+                    <div className="pure-control-group">
+                        <label htmlFor="password">
+                            <small>Password</small>
+                        </label>
                         <input
                             type="password"
                             name="password"
                             onChange={updateHandler}
                             value={password}
-                            placeholder="Ex: ***"
                         />
+                        <span className="pure-form-message-inline">
+                            This is a required field.
+                        </span>
                     </div>
-                    <button className="signup-btn" type="submit">
-                        Create Account
-                    </button>
+                    <br />
+                    <div className="pure-control-group">
+                        <button
+                            type="submit"
+                            className="button-secondary pure-button"
+                        >
+                            Create Account
+                        </button>
+                    </div>
                 </form>
             </div>
         );
