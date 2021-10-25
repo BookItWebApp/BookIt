@@ -12,11 +12,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devtool: 'source-map',
   watchOptions: {
     ignored: /node_modules/,
   },
-  devtool: 'source-map',
+  devtool:false,
+  // 'source-map',
   module: {
     rules: [
       {
