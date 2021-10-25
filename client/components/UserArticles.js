@@ -59,45 +59,59 @@ export function UserArticles() {
     return true;
   }
 
-  if (articles.length === 0) {
-    return (
-      <div className="user-articles--username-div">
-        {/* <Topbar /> */}
-        <h3>You don't have any articles.</h3>
-      </div>
-    );
-  }
+   if (articles.length === 0) {
+        return (
+            <div className="user-articles--username-div">
+                <h3>You don't have any articles.</h3>
+            </div>
+        );
+    }
 
-  return (
-    <div className="main-user-article--container">
-      <div className="left-side--user-article-container">
-        <Sidebar />
-      </div>
-      <div className="right-side--user-article-container">
-        <div className="user-articles--username-div">
-          <h3>
-            {user.username[0].toUpperCase() + user.username.slice(1)}
-            's articles
-          </h3>
-        </div>
-        <div className="display-articles--container">
-          {articles
-            .filter((article) => validateFilter(article))
-            .map((article) => {
-              return (
-                <div key={article.id} className="singleContainer">
-                  <SingleArticle article={article} />
+    return (
+        <div className="main-user-article--container">
+            <div className="left-side--user-article-container">
+                <Sidebar />
+            </div>
+            <div className="right-side--user-article-container">
+                <div className="user-articles-total--username-div">
+                    <h4>
+                        {user.username[0].toUpperCase() +
+                            user.username.slice(1)}
+                        's articles
+                    </h4>
+                    <h4>Total bookmarks: {articles.length}</h4>
                 </div>
-              );
-            })}
+                <div className="display-articles--container pure-g">
+                    {articles
+                        .filter((article) => validateFilter(article))
+                        .map((article) => {
+                            return (
+                                <div
+                                    key={article.id}
+                                    className="singleContainer pure-u-1-3"
+                                >
+                                    <SingleArticle article={article} />
+                                </div>
+                            );
+                        })}
+                </div>
+                <div className="footer-btns--main-user-article--container">
+                    <button
+                        onClick={(e) => clickHandlerTabView()}
+                        id="tabViewButton"
+                        className="button-secondary pure-button show-table-view-btn"
+                    >
+                        Show me table view
+                    </button>
+                    <button
+                        onClick={(e) => clickHandlerShare()}
+                        className="button-secondary pure-button"
+                        id="shareButton"
+                    >
+                        Share list with my friends!
+                    </button>
+                </div>
+            </div>
         </div>
-        <button onClick={(e) => clickHandlerTabView()} id="tabViewButton">
-          Show me table view
-        </button>
-        <button onClick={(e) => clickHandlerShare()} id="shareButton">
-          Share list with my friends!
-        </button>
-      </div>
-    </div>
-  );
+    );
 }

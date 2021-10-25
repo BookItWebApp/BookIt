@@ -21,7 +21,8 @@ form div {
 }
 
 .app-container {
-  width: 100%;
+    width: 100%;
+    height: 100%;
 }
 /* -------------------------------------- TOP-BAR-------------------------- */
 /* WRAPPER OF TOP-BAR(BOOKIT/METRICS/CREATE-BOOKMARK) */
@@ -121,6 +122,12 @@ form div {
   /* height: 75px; */
   padding: 10px;
 }
+.single-article--container {
+    border: 5px solid rgb(66, 184, 221);
+    border-radius: 5px;
+    margin: 5px;
+}
+
 .title-name--single-article {
   background-color: #f4d19b;
   border-radius: 5px;
@@ -334,4 +341,36 @@ form div {
   color: #3a4246;
   background-color: #fdfce5;
   border-radius: 5px;
+}
+
+.button-error,
+.button-secondary,
+.button-warning {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    /* width: 100px; */
+    border-color: none;
+}
+.button-secondary {
+    background: rgb(66, 184, 221);
+}
+.button-error {
+    background: rgb(202, 60, 60);
+    color: white;
+    margin: 1px;
+}
+.button-warning {
+    background: rgb(223, 117, 20);
+}
+
+/* ------------------------ CREATE BOOKMARK  -------------------------------- */
+.create-new-article-component {
+    text-align: center;
+}
+
+/* ----------------------------- LOGIN PAGE  -------------------------------- */
+.login-page-container {
+    border: 2px solid #f9f3df;
+    text-align: center;
 }

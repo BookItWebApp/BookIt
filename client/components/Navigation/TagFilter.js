@@ -41,21 +41,6 @@ const TagFilter = () => {
 
     return (
         <form className="tag-filter--form">
-            {filteredTags.map((tag, idx) => {
-                return (
-                    <div className="tag-check" key={idx}>
-                        <label className="tag-check-label">
-                            <input
-                                type="checkbox"
-                                onChange={(e) => onTagSelected(e, tag)}
-                                className="tag-check-input"
-                            />
-                            {tag}
-                        </label>
-                    </div>
-                );
-            })}
-
             <div className="tag-check">
                 <label className="tag-check-label">
                     <input
@@ -78,8 +63,28 @@ const TagFilter = () => {
                 </label>
             </div>
 
+            {filteredTags.map((tag, idx) => {
+                return (
+                    <div className="tag-check" key={idx}>
+                        <label className="tag-check-label">
+                            <input
+                                type="checkbox"
+                                onChange={(e) => onTagSelected(e, tag)}
+                                className="tag-check-input"
+                            />
+                            {tag}
+                        </label>
+                    </div>
+                );
+            })}
+
             <div>
-                <input type="button" value="Submit" onClick={onsubmitFilter} />
+                <input
+                    type="button"
+                    value="Submit"
+                    className="button-secondary pure-button"
+                    onClick={onsubmitFilter}
+                />
             </div>
         </form>
     );
