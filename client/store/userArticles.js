@@ -79,7 +79,7 @@ export const createNewExtensionArticle = (url, userId, tags) => {
                     article,
                     userId
                 }
-            );
+            ); // verify and store error details in createFormError redux peroperty
             dispatch(_createUserArticle(data));
         } catch (err) {
             console.log("CREATE A NEW ARTICLE ERR:", err);

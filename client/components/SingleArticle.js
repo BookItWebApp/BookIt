@@ -11,7 +11,7 @@ export function SingleArticle(props) {
     const article = props.article;
     const taggings = article.taggings;
 
-    console.log("article", article.article);
+    // console.log("article", article.article);
     // useEffect(() => {
     //   dispatch(previewArticle(article.article.url, article.id));
     // }, [dispatch]);
@@ -32,17 +32,35 @@ export function SingleArticle(props) {
     return (
         <div className="single-article--container">
             <a href={article.url}>
-                <span className="title-name--single-article">
-                    Title: {article.name}
-                </span>
-                <br />
+                <div className="title-delete--single-article--container">
+                    <span className="title-name--single-article">
+                        <span className="bold--single-article--container">
+                            Title
+                        </span>
+                        : {article.name}
+                    </span>
+                    <span className="x"></span>
+                    <span>
+                        <button
+                            onClick={deleteBookmark}
+                            className="pure-button delete-btn--single-article"
+                        >
+                            x
+                        </button>
+                    </span>
+                </div>
             </a>
-            Private: {article.isPrivate ? "True" : "False"}
+            <span className="bold--single-article--container">Private</span>:{" "}
+            {article.isPrivate ? "True" : "False"}
             <br />
-            Tags:
-            {taggings.map((tagging, idx) => {
-                return <span key={idx.toString()}> {tagging.tag.name}</span>;
-            })}
+            <span className="bold--single-article--container">Tags</span>:{" "}
+            {taggings.length
+                ? taggings.map((tagging, idx) => {
+                      return (
+                          <span key={idx.toString()}> {tagging.tag.name}</span>
+                      );
+                  })
+                : "none"}
             <br />
             {/* {article.article.authors && article.article.authors.length > 0 ? (
                 article.article.authors.length > 1 ? (
@@ -70,23 +88,30 @@ export function SingleArticle(props) {
             ) : (
                 <React.Fragment />
             )} */}
-            <span>
-                <button
-                    onClick={markAsCompleted}
-                    className="button-warning pure-button"
-                >
-                    read
-                </button>
-            </span>
-            <span>{article.readAt ? "Read" : "Unread"}</span>
-            <span>
+            <div>
+                <div>
+                    <span className="bold--single-article--container">
+                        Status
+                    </span>
+                    : {article.readAt ? "Read" : "Unread"}
+                </div>
+                <div className="footer--single-article--container">
+                    <button
+                        onClick={markAsCompleted}
+                        className="pure-button read-btn--single-article"
+                    >
+                        read
+                    </button>
+                </div>
+            </div>
+            {/* <span>
                 <button
                     onClick={deleteBookmark}
                     className="button-error pure-button"
                 >
                     delete
                 </button>
-            </span>
+            </span> */}
         </div>
     );
 }

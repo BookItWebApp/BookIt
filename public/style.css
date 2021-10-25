@@ -1,3 +1,14 @@
+:root {
+    --color-white: #ffffff;
+    --color-light-yellow: #fdfce5;
+    --color-light-sand: #f9f3df;
+    --color-yellow: #f4d19b;
+    --color-bookmark-shadow: #ced2d8;
+    --color-bookmars-background: #f8f9fa;
+    --color-cancel-btn: #ff5c58;
+    --color-submit-btn: #42b8dd;
+}
+
 body {
     font-family: sans-serif;
 }
@@ -27,70 +38,94 @@ form div {
 /* -------------------------------------- TOP-BAR-------------------------- */
 /* WRAPPER OF TOP-BAR(BOOKIT/METRICS/CREATE-BOOKMARK) */
 .top-section--wrapper {
-    background-color: #fdfce5;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    background-color: var(--color-light-yellow);
     padding: 5px;
     margin: 5px;
+    border-radius: 6px;
 }
-/* TOP-BAR WITH BOOKIT/METRICS/CREATE-BOOKMARK */
+.bookmark--logo {
+    flex: 20%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.image-logo-top-section {
+    border-radius: 25px;
+}
+/*------------------ TOP-BAR WITH BOOKIT/METRICS/CREATE-BOOKMARK/LOGOUT ------*/
 .top_navbar {
+    flex: 80%;
     display: flex;
     justify-content: space-between;
-    /* align-items: flex-end; */
-    flex-direction: row;
-    /* margin: ; */
 }
 
 .top-navbar-links {
-    border: 2px solid #f4d19b;
-    background-color: #f4d19b;
+    border: 2px solid var(--color-yellow);
+    background-color: var(--color-yellow);
+    color: var(--color-white);
+    height: 50px;
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
+}
+.logo-btn-navbar--link {
+    margin: 25px;
+    font-size: 18px;
 }
 
 /* ------------------------------- TAGs-FILTERS && USER ARTICLES ----------- */
 /* CONTAINER WITH USER ARTICLES AND TAG FILTERS */
 .main-user-article--container {
+    height: 100%;
     margin: 5px;
     display: flex;
+    border: 2px solid var(--color-light-yellow);
 }
 /* LEFT SIDE OF USER ARTICLE CONTAINER WHICH IS TAG FILTER SIDE-BAR */
 .left-side--user-article-container {
-    flex: 20%;
-    border: 2px solid black;
+    height: 100%;
+    flex: 15%;
+    padding: 5px;
 }
 /* RIGHT SIDE OF USER ARTICLE CONTAINER WHICH IS ALL USER ARTICLES */
+.sidebar-tags-selector-div {
+    text-align: center;
+}
 .right-side--user-article-container {
-    flex: 77%;
+    height: 100%;
+    flex: 80%;
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
+    border-radius: 5px;
+    margin: 3px;
+    background-color: var(--color-bookmars-background);
 }
 
 /* ----------------------------------- TAG SELECTOR ---------------------- */
 .tag-filter--form {
-    /* width: 100%; */
-    border: 2px solid #fdfce5;
     display: flex;
-    /* align-items: flex-start; */
     flex-direction: column;
     flex-wrap: wrap;
     margin-bottom: 5px;
     margin-left: 5px;
 }
-.tag-check {
-    flex: 50%;
-    border: 2px solid #fdfce5;
+.text--tag-filter--form {
+    /* text-transform: uppercase; */
+    font-size: 13px;
 }
 
 /* --------------------------------------USER ARTICLES ----------------*/
-.user-articles--username-div {
+.user-articles-total--username-div {
+    display: flex;
     margin: 5px;
     padding-left: 5px;
+    padding-right: 5px;
+    justify-content: space-between;
 }
 .display-articles--container {
-    border: 2px solid #fdfce5;
-    /* width: 100%; */
     display: flex;
     flex-wrap: wrap;
     margin: 10px;
@@ -110,27 +145,52 @@ form div {
     margin: 5px;
 }
 
-/* --------------------------------------SINGLE ARTICLE ----------------*/
-.singleContainer {
-    /* border: 2px solid #f9f3df; */
-    /* background-color: #f9f3df;
-    border-radius: 5px;
-    display: inline-block;
-    margin: 5px;
-    padding: 10px; */
-    /* flex: 1;
-    width: 10%; */
-    /* height: 75px; */
-}
-.single-article--container {
-    border: 5px solid rgb(66, 184, 221);
-    border-radius: 5px;
-    margin: 5px;
+.footer-btns--main-user-article--container {
+    margin: 10px;
+    display: flex;
+    align-self: stretch;
+    justify-content: space-between;
 }
 
-.title-name--single-article {
-    background-color: #f4d19b;
-    border-radius: 5px;
+.show-table-view-btn {
+    margin-right: 5px;
+}
+
+/* --------------------------------------SINGLE ARTICLE ----------------*/
+.single-article--container {
+    border-radius: 6px;
+    margin: 5px;
+    padding: 10px;
+    box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
+    background-color: var(--color-white);
+}
+
+.title-delete--single-article--container,
+.footer--single-article--container {
+    position: relative;
+}
+.bold--single-article--container {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+}
+.delete-btn--single-article {
+    color: var(--color-white);
+    background-color: var(--color-cancel-btn);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+.read-btn--single-article {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    color: var(--color-white);
+    background-color: var(--color-yellow);
+    text-transform: uppercase;
+    font-size: 11px;
 }
 
 /* ------------------------------ BTNS ------------------------------------- */
@@ -138,31 +198,69 @@ form div {
 .button-error,
 .button-secondary,
 .button-warning {
-    color: white;
+    color: var(--color-white);
     border-radius: 4px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    /* width: 100px; */
     border-color: none;
 }
 .button-secondary {
-    background: rgb(66, 184, 221);
-}
-.button-error {
-    background: rgb(202, 60, 60);
-    color: white;
-    margin: 1px;
-}
-.button-warning {
-    background: rgb(223, 117, 20);
+    background: var(--color-submit-btn);
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
 /* ------------------------ CREATE BOOKMARK  -------------------------------- */
 .create-new-article-component {
     text-align: center;
 }
+.btns--create-new-article {
+    margin: 4px;
+}
 
-/* ----------------------------- LOGIN PAGE  -------------------------------- */
+/* ---------------- LOGIN SIGN-UP CONTAINER WHEN USER LOG-IN OR SIGN UP---- */
 .login-page-container {
-    border: 2px solid #f9f3df;
+    border: 2px solid var(--color-light-sand);
     text-align: center;
+}
+.login-signup-container {
+    /* color: var(--color-white); */
+    background-color: var(--color-light-sand);
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+.login-signup-container--right {
+    color: var(--color-white);
+    border: 2px solid var(--color-yellow);
+    background-color: var(--color-light-sand);
+    border-radius: 5px;
+    margin-left: 5px;
+}
+.login-signup-container--left {
+    color: var(--color-white);
+    border: 2px solid var(--color-yellow);
+    background-color: var(--color-light-sand);
+    border-radius: 5px;
+}
+/* -------------------------------------- FOOTER ----------------------------*/
+.footer {
+    margin: 5px;
+    padding: 10px;
+    background-color: var(--color-light-sand);
+    border-radius: 4px;
+}
+
+/* -----DROPBOX----------- */
+.css-1pcexqc-container {
+    width: 280px;
+}
+/* .css-1pcexqc-container */
+.css-1jllj6i-control {
+    width: 200px;
+    height: 50px;
+}
+
+.css-1hwfws3 {
+    /* width: 100px; */
+    /* height: 40px; */
 }

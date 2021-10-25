@@ -20,7 +20,7 @@ const AuthForm = (props) => {
                         <small>Username</small>
                     </label>
                     <input name="username" type="text" />
-                    <span class="pure-form-message-inline">
+                    <span className="pure-form-message-inline">
                         This is a required field.
                     </span>
                 </div>
@@ -30,7 +30,7 @@ const AuthForm = (props) => {
                         <small>Password</small>
                     </label>
                     <input name="password" type="password" />
-                    <span class="pure-form-message-inline">
+                    <span className="pure-form-message-inline">
                         This is a required field.
                     </span>
                 </div>

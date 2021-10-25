@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleArticle } from "./SingleArticle";
 import Sidebar from "./Navigation/Sidebar";
+import Footer from "./Navigation/Footer";
 import { useHistory } from "react-router-dom";
 import { getUserArticles } from "../store/userArticles";
 import { _setFilteredArticlesToStore } from "../store/sharing";
@@ -19,7 +20,7 @@ export function UserArticles() {
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
-    // console.log("ALL ARTICLES > ", articles);
+    console.log("ALL ARTICLES > ", articles);
     // console.log("ALL FILTERD TAGS > ", filteredTags);
 
     useEffect(() => {
@@ -61,7 +62,6 @@ export function UserArticles() {
     if (articles.length === 0) {
         return (
             <div className="user-articles--username-div">
-                {/* <Topbar /> */}
                 <h3>You don't have any articles.</h3>
             </div>
         );
@@ -73,12 +73,13 @@ export function UserArticles() {
                 <Sidebar />
             </div>
             <div className="right-side--user-article-container">
-                <div className="user-articles--username-div">
-                    <h3>
+                <div className="user-articles-total--username-div">
+                    <h4>
                         {user.username[0].toUpperCase() +
                             user.username.slice(1)}
                         's articles
-                    </h3>
+                    </h4>
+                    <h4>Total bookmarks: {articles.length}</h4>
                 </div>
                 <div className="display-articles--container pure-g">
                     {articles
@@ -94,20 +95,22 @@ export function UserArticles() {
                             );
                         })}
                 </div>
-                <button
-                    onClick={(e) => clickHandlerTabView()}
-                    id="tabViewButton"
-                    className="button-secondary pure-button"
-                >
-                    Show me table view
-                </button>
-                <button
-                    onClick={(e) => clickHandlerShare()}
-                    className="button-secondary pure-button"
-                    id="shareButton"
-                >
-                    Share list with my friends!
-                </button>
+                <div className="footer-btns--main-user-article--container">
+                    <button
+                        onClick={(e) => clickHandlerTabView()}
+                        id="tabViewButton"
+                        className="button-secondary pure-button show-table-view-btn"
+                    >
+                        Show me table view
+                    </button>
+                    <button
+                        onClick={(e) => clickHandlerShare()}
+                        className="button-secondary pure-button"
+                        id="shareButton"
+                    >
+                        Share list with my friends!
+                    </button>
+                </div>
             </div>
         </div>
     );

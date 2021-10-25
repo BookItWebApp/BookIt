@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Topbar from "./Navigation/Topbar";
-import { createNewArticle } from "../store/userArticles";
+import { createNewArticle, getUserArticles } from "../store/userArticles";
 
 class CreateArticle extends React.Component {
     constructor(props) {
@@ -10,7 +10,12 @@ class CreateArticle extends React.Component {
             name: "",
             url: "",
             isPrivate: "",
-            tags: [""]
+            tags: [""],
+            formErrors: { name: "", url: "" },
+            nameValid: false,
+            urlValid: false,
+            formValid: false,
+            allBookmarks: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -59,6 +64,9 @@ class CreateArticle extends React.Component {
 
     render() {
         const { name, url, isPrivate, tags } = this.state;
+        // console.log("=> STATE AUTH ID", this.state);
+        // console.log("=> PROPS AUTH ID", this.props);
+
         return (
             <div className="create-new-article-component">
                 <form
@@ -133,16 +141,16 @@ class CreateArticle extends React.Component {
                             +
                         </button>
                         <br />
-                        <div>
+                        <div className="btns--create-new-article-component">
                             <button
                                 type="submit"
-                                className="button-secondary pure-button"
+                                className="button-secondary pure-button btns--create-new-article"
                             >
                                 Create Article
                             </button>
                             <button
                                 onClick={(event) => this.cancelButton(event)}
-                                className="button-secondary pure-button"
+                                className="button-secondary pure-button btns--create-new-article"
                             >
                                 Cancel
                             </button>
@@ -157,14 +165,16 @@ class CreateArticle extends React.Component {
 const mapState = (state) => {
     return {
         auth: state.auth,
-        userArticles: state.userArticles
+        userArticles: state.userArticles,
+        errors: state.createFormError // streo api errors in createFormError property
     };
 };
 
 const mapDispatch = (dispatch, { history }) => {
     return {
         createNewArticle: (article, userId) =>
-            dispatch(createNewArticle(article, userId, history))
+            dispatch(createNewArticle(article, userId, history)),
+        getUserArticles: (id) => dispatch(getUserArticles(id))
     };
 };
 export default connect(mapState, mapDispatch)(CreateArticle);

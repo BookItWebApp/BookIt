@@ -9,13 +9,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <div className="nav-sidebar--wrapper">
         <nav>
             {isLoggedIn ? (
-                // <Sidebar handleClick={handleClick}/>
-                <Topbar />
+                <Topbar handleClick={handleClick} />
             ) : (
-                <div>
+                <div className="login-signup-container">
                     {/* The navbar will show these links before you log in */}
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">Sign Up</Link>
+                    <div className="login-signup-container--left pure-button">
+                        <Link to="/login">Login</Link>
+                    </div>
+                    <div className="login-signup-container--right pure-button">
+                        <Link to="/signup">Sign Up</Link>
+                    </div>
                 </div>
             )}
         </nav>
