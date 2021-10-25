@@ -1,3 +1,12 @@
+/*COLOR Palette */
+element{
+    --colorOne: #48B2E7;
+    --colorTwo: #ADD8E6;
+    --colorThree: #F7E590;
+    --colorFour: white;
+
+}
+
 body {
   font-family: sans-serif;
 }
@@ -373,4 +382,70 @@ form div {
 .login-page-container {
     border: 2px solid #f9f3df;
     text-align: center;
+}
+
+/* ----------------------------------DATAVIZ -------------------------------- */
+
+.dvSectionHeader{
+    display: flex;
+    background-color: #ADD8E6;
+    height: 70px;
+    margin: 0;
+    padding: 10;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+.dataviz-box {
+    display: flex;
+    border: 1px solid black;
+    max-width: 80%;
+    flex-direction: column;
+    min-width: 500px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.dataviz-row {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    min-width: 300px;
+    max-width: 95%
+}
+
+tbody{
+    display:block;
+    overflow:auto;
+    height:200px;
+    max-width: 800px;
+    min-width: 200px;
+    border: 1px solid black;
+}
+
+tr{
+    display:block;
+    text-align: left;
+    border: 1px solid black;
+    }
+.highlight{
+    color: #48B2E7;
+}
+
+ .articlerow{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.articledetails{
+    display: flex;
+    flex-direction: row;
+}
+
+.articledetails a:hover{
+    /* width: 100%; */
+    /* height: 100%; */
+    display: block;
 }
