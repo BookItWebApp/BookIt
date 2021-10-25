@@ -15,26 +15,28 @@ export function Calendar() {
   );
     console.log('readArticles',readArticles)
 
-  const dateCleanedArticles = readArticles.map((article) => {
-    article.readAt = DateTime.fromISO(article.readAt).toFormat('yyyy-MM-dd')
-    return article;
+  // const dateCleanedArticles = readArticles.map((article) => {
+  //   article.readAt = DateTime.fromISO(article.readAt).toFormat('yyyy-MM-dd')
+  //   return article;
 
-  });
+  // });
 
-  console.log('dateCleanedArticles',dateCleanedArticles)
+  // console.log('dateCleanedArticles',dateCleanedArticles)
 
-  dateCleanedArticles.map((article) => {
+  readArticles.map((article) => {
     dateList.push(article.readAt);
   });
   dateList.sort();
+  console.log
 
   dateList.map((date) => {
-    sortedArticles[date] = dateCleanedArticles.filter(
+    let formattedDate = DateTime.fromISO(date).toFormat('yyyy-MM-dd')
+    sortedArticles[formattedDate] = readArticles.filter(
       (article) => article.readAt === date
     );
   });
 
-  console.log('dateList', dateList)
+  // console.log('dateList', dateList)
 
   //potentially adjustable year component
   // let curentYear = year
@@ -81,7 +83,11 @@ export function Calendar() {
   const zdata = [];
   let calendarDates = getDates(startDate, endDate);
   let weekDaysinYear = calendarDates.map((day) => DateTime.fromISO(day).weekday);
-  let weekNumber = calendarDates.map((day) => DateTime.fromISO(day).weekNumber);
+  let weekNumber = calendarDates.map((day) =>{
+    let number = DateTime.fromISO(day).weekNumber
+    if(number>52){
+      number = 0}
+    return number});
   const text = calendarDates.map((day) => DateTime.fromISO(day).toFormat(
     'yyyy-MM-dd'
   ))
@@ -110,7 +116,7 @@ export function Calendar() {
     }
   }
 
-  console.log(zdata)
+  // console.log(zdata)
   const calendarTrace = [
     {
       x: weekNumber,
@@ -127,13 +133,12 @@ export function Calendar() {
         [true, '#2ECC71']]
     },
   ];
+  console.log(calendarTrace)
 
   return (
     <Plot
       data={calendarTrace}
       layout={{
-        title: 'Calendar of Activity',
-        // plot_bgcolor:('rgb(0,0,0)'),
         autosize: false,
         height:300,
         width: 1200,
@@ -151,7 +156,7 @@ export function Calendar() {
           zeroline:false,
           tickmode:'array',
           ticktext:month_names,
-          tickvals:[4,8,12,18,22,26,30,34,38,42,46,50]
+          tickvals:[1,5,9,14,18,23,27,31,36,40,44,49]
       }}}
     />
   );

@@ -69,8 +69,8 @@ export const createNewArticle = (article, userId, history) => {
 };
 
 // CREATE A SINGLE Extension ARTICLE
-export const createNewExtensionArticle = (url, userId, tags) => {
-    let article = { url: url, tags: [tags.split(",")] };
+export const createNewExtensionArticle = (url, name, userId, tags ) => {
+    let article = {url : url, name:name, tags:[tags.split(',')]}
     return async (dispatch) => {
         try {
             const { data } = await axios.post(

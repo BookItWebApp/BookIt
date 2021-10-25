@@ -14,7 +14,7 @@ import { ViewSharing } from './components/sharing/ViewSharing';
 
 import { me } from './store';
 import { UserArticlesTab } from './components/UserArticlesTab';
-import dataDirectory from './dataviz/dataDirectory';
+import {dataDirectory} from './dataviz/dataDirectory';
 
 /**
  * COMPONENT
