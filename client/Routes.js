@@ -13,9 +13,9 @@ import { SharingLink } from "./components/sharing/SharingLink";
 import { ViewSharing } from "./components/sharing/ViewSharing";
 import NewUser from "./components/NewUser";
 
-import { me } from "./store";
-import { UserArticlesTab } from "./components/UserArticlesTab";
-import dataDirectory from "./dataviz/dataDirectory";
+import { me } from './store';
+import { UserArticlesTab } from './components/UserArticlesTab';
+import {dataDirectory} from './dataviz/dataDirectory';
 
 /**
  * COMPONENT

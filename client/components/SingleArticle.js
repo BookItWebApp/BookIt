@@ -11,7 +11,6 @@ export function SingleArticle(props) {
     const article = props.article;
     const taggings = article.taggings;
 
-    // console.log("article", article.article);
     // useEffect(() => {
     //   dispatch(previewArticle(article.article.url, article.id));
     // }, [dispatch]);

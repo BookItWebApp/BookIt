@@ -7,21 +7,16 @@ import {
   _clearFilteredArticlesStore,
 } from '../../store/sharing';
 import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function SharingLink() {
   const sharingId = useSelector((state) => state.sharings.sharingId);
-  //blank
   const userId = useSelector((state) => state.auth.id);
-  //"335757bc-2a5e-4dd9-bda4-43128d4aefdc"
   const articlesIdList = useSelector(
     (state) => state.sharings.filteredArticles
   );
-  //list of articles
   const userMessage = useSelector((state) => state.sharings.messageText);
-  //"test"
-  // const articlesIdList = articles.map((article) => {
-  //   return article.id;
-  // });
   const dispatch = useDispatch();
   const history = useHistory();
   const url = window.location.href;
@@ -33,7 +28,7 @@ export function SharingLink() {
 
   function copyToClipboard() {
     copyTextToClipboard(`${url}/${sharingId}`);
-    alert('Copied!');
+    notify();
   }
 
   function copyTextToClipboard(text) {
@@ -46,6 +41,8 @@ export function SharingLink() {
     document.body.removeChild(copyFrom);
   }
 
+  const notify = () => toast('Copied!');
+
   function clickHandlerHome() {
     dispatch(_clearSharingId());
     dispatch(_clearFilteredArticlesStore());
@@ -55,21 +52,57 @@ export function SharingLink() {
   return (
     <div>
       {!sharingId ? (
-        <button onClick={() => clickHandlerGenerateLink()} id="generateLink">
-          Generate Link
-        </button>
+        <div>
+          <div className="msg-header">
+            <p>Let's generate a Link you can share!</p>
+          </div>
+          <div className="link-generate-btn-container">
+            <button
+              className="link-generate-btn "
+              onClick={() => clickHandlerGenerateLink()}
+              id="generateLink"
+            >
+              Generate Link
+            </button>
+          </div>
+        </div>
       ) : (
         <div>
-          <div>Here is the link you can share with your Friend!</div>
-          <div id="generatedLink">
+          <div className="msg-header">
+            <p>Here is the link you can share with your friends!</p>
+          </div>
+          <div className="link-area" id="generatedLink">
             {url}/{sharingId}
           </div>
-          <button onClick={() => copyToClipboard()} id="copyToClipboard">
-            Copy Link to the Clipboard
-          </button>
-          <button onClick={() => clickHandlerHome()} id="backHome">
-            Go back to the Homepage
-          </button>
+          <div className="msg-add-btn-container">
+            <button
+              className="msg-add-btn"
+              onClick={() => copyToClipboard()}
+              id="copyToClipboard"
+            >
+              Copy Link to the Clipboard
+            </button>
+            <ToastContainer
+              position="top-center"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+          </div>
+          <div className="msg-skip-btn-container">
+            <button
+              className="msg-skip-btn"
+              onClick={() => clickHandlerHome()}
+              id="backHome"
+            >
+              Go back to the Homepage
+            </button>
+          </div>
         </div>
       )}
     </div>
