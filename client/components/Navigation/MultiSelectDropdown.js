@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
-const MultiSelectDropdown = ({ props, onChangeSelection }) => {
-    // console.log("MULTI TAGS > ", props.tags);
-    const allTags = props.tags;
+const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
+    // console.log("MULTI TAGS > ", usrTagsProps.tags);
+    const allTags = usrTagsProps.tags;
 
     // FUNC TO REMOVE DUPLICATED TAGS DATA
     const removeDuplicatedTags = (tagsData) => {
@@ -13,7 +13,7 @@ const MultiSelectDropdown = ({ props, onChangeSelection }) => {
         return filterdData;
     };
     const filteredTags = removeDuplicatedTags(allTags);
-    // console.log("FILTERD TAGS > 2", filteredTags);
+    // console.log("FILTERD TAGS > ", filteredTags);
     useEffect(() => {
         const tags = filteredTags.map((tag, idx) => {
             return {
@@ -22,9 +22,9 @@ const MultiSelectDropdown = ({ props, onChangeSelection }) => {
                 label: tag
             };
         });
-        // console.log("ue ", tags);
+        // console.log("USE-EFFECT TAGS > ", tags);
         setTagObj(tags);
-    }, [props]);
+    }, [usrTagsProps]);
 
     const [tagsObj, setTagObj] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -56,8 +56,8 @@ const MultiSelectDropdown = ({ props, onChangeSelection }) => {
             selectedTags = [];
             // setSelectedOptions([]);
         } else if (event.action === "deselect-option") {
-            selectedTags = value.filter((o) => o.value !== "*");
-            // setSelectedOptions(value.filter((o) => o.value !== "*"));
+            // selectedTags = value.filter((o) => o.value !== "*");
+            setSelectedOptions(value.filter((o) => o.value !== "*"));
         } else if (value.length === tagsObj.length - 1) {
             selectedTags = [...tagsObj];
             // setSelectedOptions(tagsObj);
@@ -65,7 +65,7 @@ const MultiSelectDropdown = ({ props, onChangeSelection }) => {
             selectedTags = value;
             // setSelectedOptions(value);
         }
-        // console.log("SELECTEDTAGS CHANGE", selectedTags);
+        // console.log("SELECTED-TAGS CHANGE", selectedTags);
         onChangeSelection(selectedTags);
         setSelectedOptions(selectedTags);
     }
@@ -79,7 +79,6 @@ const MultiSelectDropdown = ({ props, onChangeSelection }) => {
             onChange={onChange}
             setState={setSelectedOptions}
             width={"150px"}
-            styles={"background-color: black"}
         />
     );
 };

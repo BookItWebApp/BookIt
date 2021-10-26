@@ -14,10 +14,24 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
                 <div className="login-signup-container">
                     {/* The navbar will show these links before you log in */}
                     <div className="login-signup-container--left pure-button">
-                        <Link to="/login">Login</Link>
+                        <Link to="/login">
+                            <span
+                                className="login-signup--link"
+                                className="login-signup--link"
+                            >
+                                LOGIN
+                            </span>
+                        </Link>
                     </div>
                     <div className="login-signup-container--right pure-button">
-                        <Link to="/signup">Sign Up</Link>
+                        <Link to="/signup">
+                            <span
+                                className="login-signup--link"
+                                className="login-signup--link"
+                            >
+                                SIGN-UP
+                            </span>
+                        </Link>
                     </div>
                 </div>
             )}
