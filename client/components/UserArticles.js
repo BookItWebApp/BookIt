@@ -63,7 +63,7 @@ export function UserArticles() {
     if (articles.length === 0) {
         return (
             <div className="no-articles--container">
-                <div className="main-user-article--no-articles">
+                <div className="no-articles--div">
                     <h3>You don't have any articles.</h3>
                 </div>
             </div>
