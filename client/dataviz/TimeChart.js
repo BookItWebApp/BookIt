@@ -5,7 +5,7 @@ import Plot from 'react-plotly.js';
 
 export function TimeChart() {
   const userArticles = useSelector((state) => state.userArticles);
-  const SortedArticles = {}; //Sorted list of read articles by date read
+  const sortedArticles = {}; //Sorted list of read articles by date read
   const sortedaddedArticles = {}; //Sorted list of all articles by date added
   const yReadTotal = [];
   const dateList = [];
@@ -18,20 +18,6 @@ export function TimeChart() {
   const readArticles = userArticles.filter(
     (article) => article.readAt !== null
   );
-  //Data Cleaning
-  // const dateCleanedArticles = readArticles.map((article) => {
-  //   DateTime.fromISO(article).toFormat('yyyy-MM-dd')
-  //   return article;
-  // });
-
-  // const allArticlesCleaned = userArticles.map((article) => {
-  //   if (article.readAt!==null){
-  //   article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
-  //   return article}
-  //   else{
-  //     return article
-  //   }
-  // });
 
   readArticles.map((article) => {
     dateList.push(article.readAt);
@@ -47,19 +33,18 @@ export function TimeChart() {
 
   //creates sorted article
   dateList.map((date) => {
-    SortedArticles[date] = readArticles.filter(
+    sortedArticles[date] = readArticles.filter(
       (article) => article.readAt === date
     );
   });
 
-  // console.log('Sorted Articles', SortedArticles)
   addedDateList.map((date) => {
     sortedaddedArticles[date] = userArticles.filter(
       (article) => article.createdAt === date
     );
   });
 
-  const xReadDates = Object.keys(SortedArticles);
+  const xReadDates = Object.keys(sortedArticles);
   const xAddedDates = Object.keys(sortedaddedArticles);
 
   for (const [key, value] of Object.entries(sortedaddedArticles)) {
@@ -75,7 +60,7 @@ export function TimeChart() {
   }
 
   yhelperAdd = [];
-  for (const [key, value] of Object.entries(SortedArticles)) {
+  for (const [key, value] of Object.entries(sortedArticles)) {
     yhelperAdd.push(value.length);
   }
 
