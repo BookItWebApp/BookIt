@@ -295,11 +295,12 @@ form div {
 }
 /* ----------------------------------ADD MESSAGE VIEW -------------------------------- */
 .top-sharing-link--container {
-    height: 450px;
+    height: 720px;
 }
 .main-add-msg-container {
     margin: 3px;
     border-radius: 5px;
+    height: 720px;
     background-color: var(--color-bookmars-background);
 }
 .msg-header {
@@ -501,7 +502,8 @@ form div {
 .login-page-container {
     border: 2px solid var(--color-light-sand);
     text-align: center;
-    padding-bottom: 150px;
+    height: 720px;
+    /* padding-bottom: 150px; */
 }
 .login-signup-container {
     background-color: var(--color-light-yellow);
@@ -521,6 +523,9 @@ form div {
 .login-signup--link {
     text-transform: capitalize;
     color: white;
+}
+.login--form {
+    padding-top: 70px;
 }
 /* -------------------------------------- FOOTER ----------------------------*/
 .footer {
