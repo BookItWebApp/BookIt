@@ -37,9 +37,8 @@ const TagFilter = () => {
 
     //
     const onSubmitFilter = () => {
-        const filters = selectedTags.current;
+        const filters = [...selectedTags.current];
         selectedTagsDD.current.forEach((item) => filters.push(item.label));
-        // console.log("=> TAG_FILTEFILTERS > ", filters);
         dispatch(saveSelectedTags(filters));
     };
 
