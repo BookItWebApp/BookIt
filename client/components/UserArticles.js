@@ -62,8 +62,10 @@ export function UserArticles() {
 
     if (articles.length === 0) {
         return (
-            <div className="user-articles--username-div">
-                <h3>You don't have any articles.</h3>
+            <div className="no-articles--container">
+                <div className="no-articles--div">
+                    <h3>You don't have any articles.</h3>
+                </div>
             </div>
         );
     }
@@ -78,7 +80,7 @@ export function UserArticles() {
                     <h4>
                         {user.username[0].toUpperCase() +
                             user.username.slice(1)}
-                        's articles
+                        's bookmark
                     </h4>
                     <h4>Total bookmarks: {articles.length}</h4>
                 </div>

@@ -10,6 +10,7 @@ export function SingleArticle(props) {
     const user = useSelector((state) => state.auth);
     const article = props.article;
     const taggings = article.taggings;
+    console.log("ARTiCLE> ", article);
 
     // useEffect(() => {
     //   dispatch(previewArticle(article.article.url, article.id));
@@ -30,27 +31,30 @@ export function SingleArticle(props) {
     //
     return (
         <div className="single-article--container">
-            <a href={article.article.url}>
-                <div className="title-delete--single-article--container">
-                    <span className="title-name--single-article">
-                        <span className="bold--single-article--container">
-                            Title
+            <div className="title-delete--single-article--container">
+                <span className="title-name--single-article">
+                    <span className="bold--single-article--container">
+                        Title
+                    </span>
+                    <a href={article.article.url}>
+                        :{" "}
+                        <span className="article-name--single-article">
+                            {article.name}
                         </span>
-                        : {article.name}
-                    </span>
-                    <span className="x"></span>
-                    <span>
-                        <button
-                            onClick={deleteBookmark}
-                            className="pure-button delete-btn--single-article"
-                        >
-                            x
-                        </button>
-                    </span>
-                </div>
-            </a>
+                    </a>
+                </span>
+                <span className="x"></span>
+                <span>
+                    <button
+                        onClick={deleteBookmark}
+                        className="pure-button delete-btn--single-article"
+                    >
+                        x
+                    </button>
+                </span>
+            </div>
             <span className="bold--single-article--container">Private</span>:{" "}
-            {article.isPrivate ? "True" : "False"}
+            {article.isPrivate ? "yes" : "no"}
             <br />
             <span className="bold--single-article--container">Tags</span>:{" "}
             {taggings.length
@@ -92,25 +96,26 @@ export function SingleArticle(props) {
                     <span className="bold--single-article--container">
                         Status
                     </span>
-                    : {article.readAt ? "Read" : "Unread"}
+                    : {article.readAt ? "read" : "unread"}
                 </div>
                 <div className="footer--single-article--container">
-                    <button
-                        onClick={markAsCompleted}
-                        className="pure-button read-btn--single-article"
-                    >
-                        read
-                    </button>
+                    {article.readAt ? (
+                        <button
+                            onClick={markAsCompleted}
+                            className="pure-button read-btn--single-article read-btn-true"
+                        >
+                            read
+                        </button>
+                    ) : (
+                        <button
+                            onClick={markAsCompleted}
+                            className="pure-button read-btn--single-article read-btn-false"
+                        >
+                            unread
+                        </button>
+                    )}
                 </div>
             </div>
-            {/* <span>
-                <button
-                    onClick={deleteBookmark}
-                    className="button-error pure-button"
-                >
-                    delete
-                </button>
-            </span> */}
         </div>
     );
 }

@@ -27,7 +27,7 @@ const TagFilter = () => {
                 (item) => item !== tagName
             );
         }
-        // console.log("SELECTEDTAGS.CURRENT >", selectedTags.current);
+        // console.log("=> SELECTEDTAGS.CURRENT >", selectedTags.current);
     };
 
     //
@@ -37,9 +37,8 @@ const TagFilter = () => {
 
     //
     const onSubmitFilter = () => {
-        const filters = selectedTags.current;
+        const filters = [...selectedTags.current];
         selectedTagsDD.current.forEach((item) => filters.push(item.label));
-        // console.log("FILTERS > ", filters);
         dispatch(saveSelectedTags(filters));
     };
 
@@ -72,7 +71,7 @@ const TagFilter = () => {
             </div>
 
             <MultiSelectDropdown
-                props={userTags}
+                usrTagsProps={userTags}
                 onChangeSelection={onDropDownSelectionChange}
             />
 
