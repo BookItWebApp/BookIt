@@ -65,7 +65,7 @@ export function TimeChart() {
 
   //TRACE DATA FOR TIMECHART
   const readArticleTrace = {
-    x: [xReadDates[0], ...xReadDates,DateTime.utc.toISO()],
+    x: [xReadDates[0], ...xReadDates,DateTime.utc().toISO()],
     y: [0, ...yReadTotal, yReadTotal.at(-1)],
     name: 'Total Read',
     type: 'scatter',
