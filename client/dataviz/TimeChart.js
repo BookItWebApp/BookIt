@@ -29,7 +29,7 @@ export function TimeChart() {
     );
   });
 
-  
+
   const xReadDates = Object.keys(sortedArticles);
   const xAddedDates = Object.keys(sortedaddedArticles);
 
@@ -59,13 +59,13 @@ export function TimeChart() {
   }
 
   //add final date value to update graph to present
-  xAddedDates.push(DateTime.now().toISO());
+  xAddedDates.push(DateTime.utc().toISO());
   let mostRecentValue = yTotalArticles.at(-1);
   yTotalArticles.push(mostRecentValue);
 
   //TRACE DATA FOR TIMECHART
   const readArticleTrace = {
-    x: [xReadDates[0], ...xReadDates,DateTime.now().toISO()],
+    x: [xReadDates[0], ...xReadDates,DateTime.utc.toISO()],
     y: [0, ...yReadTotal, yReadTotal.at(-1)],
     name: 'Total Read',
     type: 'scatter',
@@ -101,7 +101,7 @@ export function TimeChart() {
         xaxis: {
           autorange: true,
           // tickformat: '%B %Y',
-          range: [xAddedDates[0], DateTime.now().toISO()],
+          range: [xAddedDates[0], DateTime.utc().toISO()],
           rangeselector: {
             buttons: [
               {
@@ -119,7 +119,7 @@ export function TimeChart() {
               { step: 'all' },
             ],
           },
-          rangeslider: { range: [xAddedDates[0], DateTime.now().toISO()] },
+          rangeslider: { range: [xAddedDates[0], DateTime.utc().toISO()] },
           type: 'date',
         },
         yaxis: {
