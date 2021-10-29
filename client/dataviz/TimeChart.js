@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
+import {readArticlesDates} from './dataVizHelpers'
 
 export function TimeChart() {
   const userArticles = useSelector((state) => state.userArticles);
-  const sortedArticles = {}; //Sorted list of read articles by date read
   const sortedaddedArticles = {}; //Sorted list of all articles by date added
   const yReadTotal = [];
   const dateList = [];
@@ -14,36 +14,22 @@ export function TimeChart() {
   let yhelperAdd = [];
   const yTotalArticles = [];
 
-  //Get individual read articles Count
-  const readArticles = userArticles.filter(
-    (article) => article.readAt !== null
-  );
+  //Get individual read articles organized by date read
+  //Using a helper function shared between the different dataviz oomponents
+  const sortedArticles = readArticlesDates(userArticles)
 
-  readArticles.map((article) => {
-    dateList.push(article.readAt);
-  });
-
+  //Get Articles added by Date
   userArticles.map((article) => {
     addedDateList.push(article.createdAt);
   });
-
   addedDateList.sort();
-
-  dateList.sort();
-
-  //creates sorted article
-  dateList.map((date) => {
-    sortedArticles[date] = readArticles.filter(
-      (article) => article.readAt === date
-    );
-  });
-
   addedDateList.map((date) => {
     sortedaddedArticles[date] = userArticles.filter(
       (article) => article.createdAt === date
     );
   });
 
+  
   const xReadDates = Object.keys(sortedArticles);
   const xAddedDates = Object.keys(sortedaddedArticles);
 
@@ -114,7 +100,7 @@ export function TimeChart() {
         barmode: 'stack',
         xaxis: {
           autorange: true,
-          tickformat: '%B %Y',
+          // tickformat: '%B %Y',
           range: [xAddedDates[0], DateTime.now().toISO()],
           rangeselector: {
             buttons: [
