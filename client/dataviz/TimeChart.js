@@ -30,8 +30,10 @@ export function TimeChart() {
   });
 
 
-  const xReadDates = Object.keys(sortedArticles);
-  const xAddedDates = Object.keys(sortedaddedArticles);
+  let xReadDates = Object.keys(sortedArticles);
+  xReadDates = xReadDates.map(date => DateTime.fromISO(date).toFormat('yyyy-MM-dd'))
+  let xAddedDates = Object.keys(sortedaddedArticles);
+  xAddedDates = xAddedDates.map(date => DateTime.fromISO(date).toFormat('yyyy-MM-dd'))
 
   for (const [key, value] of Object.entries(sortedaddedArticles)) {
     yhelperAdd.push(value.length);
@@ -64,6 +66,7 @@ export function TimeChart() {
   xAddedDates.push(DateTime.utc().toFormat('yyyy-MM-dd'));
   let mostRecentValue = yTotalArticles.at(-1);
   yTotalArticles.push(mostRecentValue);
+  console.log('added dates',xAddedDates)
 
   //TRACE DATA FOR TIMECHART
   const readArticleTrace = {
@@ -76,7 +79,6 @@ export function TimeChart() {
     fill: 'tozeroy',
     line: { shape: 'spline' },
   };
-
   const addedArticleTrace = {
     x: xAddedDates,
     y: yTotalArticles,
