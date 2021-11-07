@@ -12,9 +12,6 @@ export function Indicator() {
   const metaData = useSelector((state) => state.metaData);
   const articlesThisWk = [];
   const articlesLastWk = [];
-  //DEBUG NOTES:  at this point "userArticles is properly running"
-  //we next pass it into "sortedArticles function"
-  console.log('user articles', userArticles)
 
   //Get individual read articles organized by date read
   //Using a helper function shared between the different dataviz oomponents
@@ -88,6 +85,7 @@ export function Indicator() {
     }
   }, [metaData.length]);
 
+  console.log('articles this week', articlesThisWk)
   //-----DISPLAY COMPONENT INDICATOR + ARTICLES READ ------//
     //Return <Plot> react-plotly.js object to be displayed on UserMetrics page.
     //A table component is used to display the scrollable list of articles read

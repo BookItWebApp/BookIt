@@ -8,9 +8,9 @@ export function TimeChart() {
   const userArticles = useSelector((state) => state.userArticles);
   const sortedaddedArticles = {}; //Sorted list of all articles by date added
   const yReadTotal = [];
-  const dateList = [];
   const data = [];
   const addedDateList = [];
+  let yhelperRead = [];
   let yhelperAdd = [];
   const yTotalArticles = [];
 
@@ -45,27 +45,29 @@ export function TimeChart() {
     }
   }
 
-  yhelperAdd = [];
+  yhelperRead = [];
   for (const [key, value] of Object.entries(sortedArticles)) {
-    yhelperAdd.push(value.length);
+    yhelperRead.push(value.length);
   }
 
-  for (let i = 0; i < yhelperAdd.length; i++) {
+  console.log('yread totals', yhelperRead)
+
+  for (let i = 0; i < yhelperRead.length; i++) {
     if (i === 0) {
-      yReadTotal.push(yhelperAdd[i]);
+      yReadTotal.push(yhelperRead[i]);
     } else {
-      yReadTotal.push(yTotalArticles[i - 1] + yhelperAdd[i]);
+      yReadTotal.push(yReadTotal[i - 1] + yhelperRead[i]);
     }
   }
 
   //add final date value to update graph to present
-  xAddedDates.push(DateTime.utc().toISO());
+  xAddedDates.push(DateTime.utc().toFormat('yyyy-MM-dd'));
   let mostRecentValue = yTotalArticles.at(-1);
   yTotalArticles.push(mostRecentValue);
 
   //TRACE DATA FOR TIMECHART
   const readArticleTrace = {
-    x: [xReadDates[0], ...xReadDates,DateTime.utc().toISO()],
+    x: [xReadDates[0], ...xReadDates,DateTime.utc().toFormat('yyyy-MM-dd')],
     y: [0, ...yReadTotal, yReadTotal.at(-1)],
     name: 'Total Read',
     type: 'scatter',
@@ -101,7 +103,7 @@ export function TimeChart() {
         xaxis: {
           autorange: true,
           // tickformat: '%B %Y',
-          range: [xAddedDates[0], DateTime.utc().toISO()],
+          range: [xAddedDates[0], DateTime.utc().toFormat('yyyy-MM-dd')],
           rangeselector: {
             buttons: [
               {
