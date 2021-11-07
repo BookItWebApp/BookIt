@@ -15,16 +15,23 @@ export function sortReadArticles(userArticles) {
 //------Read Articles Date Sorted---------//
 ///Returns object with keys made of sorted readDates and list of articles
 ///read that day
+//DEBUG NOTES: Take in 'userArticles' - Immediately pass to filter
   export function readArticlesDates(userArticles){
+    const dateList=[]
     const readArticles = sortReadArticles(userArticles)
+    //DEBUG NOTES: readArticles contains the correct articles
+    console.log('post filter read articles',readArticles )
     readArticles.map((article) => {
       dateList.push(article.readAt);
     });
     dateList.sort();
+    //DEBUG NOTES: Date List now contains propose dates. Implement map on datelist
+    console.log('date list', dateList )
     dateList.map((date) => {
       let formattedDate = DateTime.fromISO(date).toFormat('yyyy-MM-dd')
       sortedArticles[formattedDate] = readArticles.filter(
-        (article) => article.readAt === date
+        (article) => DateTime.fromISO(article.readAt).toFormat('yyyy-MM-dd') === formattedDate,
+        console.log('sortedArticles function', sortedArticles)
       );
     })
     return sortedArticles}

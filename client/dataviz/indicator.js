@@ -12,6 +12,9 @@ export function Indicator() {
   const metaData = useSelector((state) => state.metaData);
   const articlesThisWk = [];
   const articlesLastWk = [];
+  //DEBUG NOTES:  at this point "userArticles is properly running"
+  //we next pass it into "sortedArticles function"
+  console.log('user articles', userArticles)
 
   //Get individual read articles organized by date read
   //Using a helper function shared between the different dataviz oomponents
@@ -33,6 +36,7 @@ export function Indicator() {
     }
   });
 
+  console.log(sortedArticles)
   //----GET COUNT OF ARTICLES READ LAST WEEK------//
   //Luxon converts dates to their own DateTime format, so we revert back to ISO
     ///using .toISO().
