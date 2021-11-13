@@ -57,10 +57,10 @@ const postArticle = async (req, res, next) => {
     // // CREATE TAGS/TAGGING
     await Promise.all(
       tagsArr.map(async (tagName) => {
-        let tag = await Tag.create({
-          name: tagName,
+        let [tag, created] = await Tag.findOrCreate({
+          where: { name: tagName },
         });
-        // console.log("=> TAGS IS CREATED: ", tag);
+        console.log('=> TAGS IS CREATED: ', tag);
         return await Tagging.create({
           tagId: tag.id,
           userArticlesId: userArticle.id,
