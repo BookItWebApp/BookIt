@@ -7,6 +7,6 @@ You can mark your links with tags and add them to the storage through the custom
 The main technologies used to create Bookit include React.js framework and Manifest V3 for Chrome Extension. A number of supporting technologies and libraries were utilized including: Ag-grid for our table and sharing view pages, Metascrapper.js to retrieve open graph data from our collected URLS, Plotly.js to render our user metrics graphs, react-select to create our dropdowns on both the web-app and plugin and Toastify.js to create user notifications.
 
 # BookIt Extension
-You can find instructions for downloading and installing the BookIt extension in the seperate repository: 
+You can find instructions for downloading and installing the BookIt extension in the seperate repository:
 
 https://github.com/Yoshi-s-Yodelers/BookItExtension
