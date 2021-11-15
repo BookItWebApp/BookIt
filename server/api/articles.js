@@ -20,28 +20,13 @@ const postArticle = async (req, res, next) => {
   try {
     //console.log('POST ARTICLE BODY: ', req.body);
     //define in higer scope
-    let url;
-    let articleName;
-    let articleNote;
-    let isPrivate;
-    let userId;
-    let tagsArr;
-    if (req.body.article) {
-      //if using body.article param
-      url = req.body.article.url;
-      articleName = req.body.article.name;
-      isPrivate = req.body.article.isPrivate;
-      userId = req.body.userId;
-      tagsArr = req.body.article.tags;
-    } else {
-      //if using direct body param (extension)
-      url = req.body.url;
-      articleName = req.body.name;
-      articleNote = req.body.note;
-      isPrivate = req.body.isPrivate;
-      userId = req.body.userId;
-      tagsArr = req.body.tags.split(',');
-    }
+
+    let url = req.body.article.url;
+    let articleName = req.body.article.name;
+    let articleNote = req.body.article.note;
+    let isPrivate = req.body.article.isPrivate;
+    let userId = req.body.userId;
+    let tagsArr = req.body.article.tags;
 
     // CREATE ARTICLE
     const article = await Article.create(
