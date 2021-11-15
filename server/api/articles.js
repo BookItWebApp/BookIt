@@ -22,6 +22,7 @@ const postArticle = async (req, res, next) => {
     //define in higer scope
     let url;
     let articleName;
+    let articleNote;
     let isPrivate;
     let userId;
     let tagsArr;
@@ -36,6 +37,7 @@ const postArticle = async (req, res, next) => {
       //if using direct body param (extension)
       url = req.body.url;
       articleName = req.body.name;
+      articleNote = req.body.note;
       isPrivate = req.body.isPrivate;
       userId = req.body.userId;
       tagsArr = req.body.tags.split(',');
@@ -57,6 +59,7 @@ const postArticle = async (req, res, next) => {
         userId: userId,
         articleId: article.id,
         isPrivate: isPrivate,
+        note: articleNote,
       },
       { transaction: t }
     );
