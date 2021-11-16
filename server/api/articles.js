@@ -90,7 +90,7 @@ const postArticle = async (req, res, next) => {
 
     await t.commit();
 
-    res.json(createdArticle);
+    res.status(201).send();
   } catch (error) {
     console.log('CREATE ARTICLE ERR: ', error);
     await t.rollback();
