@@ -2,45 +2,18 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
+import {readArticlesDates} from './dataVizHelpers'
 
 export function Calendar() {
   const userArticles = useSelector((state) => state.userArticles);
-  const dateList = [];
-  const sortedArticles = {};
+  const zdata = [];
 
-  //REARRAGE USERARTICLES TO DATE FORMAT
-  //Get individual read articles Count
-  const readArticles = userArticles.filter(
-    (article) => article.readAt !== null
-  );
-    console.log('readArticles',readArticles)
+  //Get individual read articles organized by date read
+  //Using a helper function shared between the different dataviz oomponents
+  const sortedArticles = readArticlesDates(userArticles)
 
-  // const dateCleanedArticles = readArticles.map((article) => {
-  //   article.readAt = DateTime.fromISO(article.readAt).toFormat('yyyy-MM-dd')
-  //   return article;
-
-  // });
-
-  // console.log('dateCleanedArticles',dateCleanedArticles)
-
-  readArticles.map((article) => {
-    dateList.push(article.readAt);
-  });
-  dateList.sort();
-  console.log
-
-  dateList.map((date) => {
-    let formattedDate = DateTime.fromISO(date).toFormat('yyyy-MM-dd')
-    sortedArticles[formattedDate] = readArticles.filter(
-      (article) => article.readAt === date
-    );
-  });
-
-  // console.log('dateList', dateList)
-
-  //potentially adjustable year component
-  // let curentYear = year
-  // if (curentYear === null) {}
+  //----BUILD CALENDAR HEAT MAP------//
+  //Get current date and year
   const today = new Date();
   let curentYear = today.getFullYear();
 
@@ -50,24 +23,16 @@ export function Calendar() {
   const endDate = new Date();
   endDate.setFullYear(curentYear, 11, 31);
 
-  // const delta = endDate-startDate
-  //set timeline values
+  //set month names and date ranges to help build xAxis
   const month_names = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec',
   ];
   const month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  //get list of dates between start and end
+
+  //getDates() builds list of dates between start and end
+  ///For loop takes "start date" and 'end date',
+  ///while date not greater than end date
+  ///push date to 'DateArray' and then iterate to next date
   function getDates(startDate, endDate) {
     let dateArray = [];
     for (
@@ -80,7 +45,10 @@ export function Calendar() {
     return dateArray;
   }
 
-  const zdata = [];
+  //Use above 'getDates()' to build a list of calendar dates
+  /// For each date in calendar build a list of equal length for matching weekday
+  /// and 'weekNumber' 1-52. If weekNumber >52 it is 'extra' days from last
+  /// calendar year. Assign to start of calendar 'weekNumber = 0'
   let calendarDates = getDates(startDate, endDate);
   let weekDaysinYear = calendarDates.map((day) => DateTime.fromISO(day).weekday);
   let weekNumber = calendarDates.map((day) =>{
@@ -91,21 +59,19 @@ export function Calendar() {
   const text = calendarDates.map((day) => DateTime.fromISO(day).toFormat(
     'yyyy-MM-dd'
   ))
-  // console.log('calendarDates',sortedArticles)
-  //    console.log('sortedArticles',sortedArticles)
+
+  //-----BUILD ZDATA TO BE GRAPHED ON CALENDAR------//
+  // Start with an if clause to prevent running below code before article data
+  ///has been retrieved. Loop through calendar dates and check against article
+  //read dates in 'sortedArticles'. If found push length zdata to represent # of
+  //read articles. If nothing found for that push 0 to zdata.
+
   if (Object.keys(sortedArticles).length > 0) {
-    // //build Z axis data
-    let weekArray = [];
-    // let weekCount = 0;
     perday: for (let i = 0; i <= calendarDates.length; i++) {
       let calendarDate = DateTime.fromISO(calendarDates[i]).toFormat(
         'yyyy-MM-dd'
       );
       const keyDates = Object.keys(sortedArticles);
-      // if (i !== 0 && i % 7 === 0) {
-      //   zdata.push(weekArray);
-      //   weekArray = [];
-      // }
       for (let j = 0; j < keyDates.length; j++) {
         if (calendarDate === keyDates[j]) {
           zdata.push(sortedArticles[keyDates[j]].length);
@@ -115,8 +81,9 @@ export function Calendar() {
       zdata.push(0);
     }
   }
-
-  // console.log(zdata)
+  //-----Set Up Plotly 'TRACE' of X, Y, and Z data ------//
+  // Trace sets up information about how a particular data set will be displayed
+  //including graph type and color scale
   const calendarTrace = [
     {
       x: weekNumber,
@@ -133,8 +100,10 @@ export function Calendar() {
         [true, '#2ECC71']]
     },
   ];
-  console.log(calendarTrace)
 
+  //-----Plot Graph ------//
+  //Return <Plot> react-plotly.js object to be displayed on UserMetrics page.
+  // Sets overall graph size and display options
   return (
     <Plot
       data={calendarTrace}

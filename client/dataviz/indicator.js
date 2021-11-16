@@ -1,60 +1,55 @@
+//INDICATOR COMPONENT AND ARTICLES READ THIS WEEK
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
-import { render } from 'react-dom';
 import { previewArticle } from '../store/SingleArticle';
+import {readArticlesDates} from './dataVizHelpers'
 
 export function Indicator() {
   const dispatch = useDispatch();
   const userArticles = useSelector((state) => state.userArticles);
   const metaData = useSelector((state) => state.metaData);
-  const dateList = [];
-  const SortedArticles = [];
+  const articlesThisWk = [];
+  const articlesLastWk = [];
 
-  //Get individual read articles Count
-  const userArticlesCopy = [...userArticles];
-  const readArticles = userArticlesCopy.filter(
-    (article) => article.readAt !== null
-  );
+  //Get individual read articles organized by date read
+  //Using a helper function shared between the different dataviz oomponents
+  const sortedArticles = readArticlesDates(userArticles)
 
-  readArticles.map((article) => {
-    dateList.push(article.readAt);
-  });
-
-  dateList.sort();
-
-  dateList.map((date) => {
-    SortedArticles[date] = readArticles.filter(
-      (article) => article.readAt === date
-    );
-  });
-
-  //get this weeks time
+  //----SET DATETIME FOR THIS WEEK------//
   const thisWeekStart = DateTime.now().startOf('week').toISO();
-  const timeNow = DateTime.now().toISO();
-  const lastWeekStart = DateTime.now()
-    .startOf('week')
-    .minus({ days: 7 })
-    .toISO();
+  const lastWeekStart = DateTime.now().startOf('week').minus({ days: 7 }).toISO();
 
-  let articlesThisWk = [];
-  //get articles read this week
-  Object.keys(SortedArticles).map((key) => {
+  //----GET COUNT OF ARTICLES READ THIS WEEK------//
+    //Luxon converts dates to their own DateTime format, so we revert back to ISO
+    ///using .toISO().
+    //If date from sorted Article is >= the start of this week add article Obj
+    //to articlesThisWeek.
+  Object.keys(sortedArticles).map((key) => {
     let keyDate = DateTime.fromISO(key).toISO();
     if (keyDate >= thisWeekStart) {
-      articlesThisWk.push(...SortedArticles[key]);
+      articlesThisWk.push(...sortedArticles[key]);
     }
   });
 
-  //get article count read last week
-  const articlesLastWk = [];
-  Object.keys(SortedArticles).map((key) => {
+  console.log(sortedArticles)
+  //----GET COUNT OF ARTICLES READ LAST WEEK------//
+  //Luxon converts dates to their own DateTime format, so we revert back to ISO
+    ///using .toISO().
+    //If date from sorted Article is < the start of this week add article Obj
+    //to articlesLastWeek.
+  Object.keys(sortedArticles).map((key) => {
     let keyDate = DateTime.fromISO(key).toISO();
     if (keyDate < thisWeekStart && keyDate >= lastWeekStart) {
-      articlesLastWk.push(...SortedArticles[key]);
+      articlesLastWk.push(...sortedArticles[key]);
     }
   });
+
+  //-----Set Up Plotly 'TRACE' for Inidicator ------//
+  // Trace sets up information about how a particular data set will be displayed
+  ///including graph type and color scale. Here we graph total value read and
+  /// delta; difference between this week and last
   const indicatorTrace = [
     {
       type: 'indicator',
@@ -66,6 +61,11 @@ export function Indicator() {
     },
   ];
 
+  //-----DISPLAY ARTICLES READ THIS WEEK ------//
+  //Retrieve and Attach Metadata using Metascrapper.js and article URL
+  ///Metascrapper is attached to articles table and a prototype method.
+  ///we dispatch 'previewArticle' to make an API call to retrieve that metadata
+  /// about each article.
   useEffect(() => {
     for (let i = 0; i < articlesThisWk.length; i++)
       dispatch(
@@ -73,7 +73,9 @@ export function Indicator() {
       );
   }, [articlesThisWk.length]);
 
-  //map metadata
+  //Map Metadata to Each Article
+  ///We use article Ids to match retrieved meta data with the articles we have
+  ///read this week
   useEffect(() => {
     for (let i = 0; i < articlesThisWk.length; i++) {
       for (let j = 0; j < metaData.length; j++)
@@ -83,8 +85,12 @@ export function Indicator() {
     }
   }, [metaData.length]);
 
-  console.log(articlesThisWk)
-
+  console.log('articles this week', articlesThisWk)
+  //-----DISPLAY COMPONENT INDICATOR + ARTICLES READ ------//
+    //Return <Plot> react-plotly.js object to be displayed on UserMetrics page.
+    //A table component is used to display the scrollable list of articles read
+    //this week and attached metadata if available. If none available default
+    //is displayed
   return (
     <div className="dataviz-box">
       <h1 className="dvSectionHeader">Articles Read This Week</h1>
@@ -146,5 +152,3 @@ export function Indicator() {
     </div>
   );
 }
-
-// {article.metadata.logo? <img src={logo}/> : <div></div>} */

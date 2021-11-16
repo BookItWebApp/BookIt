@@ -4,7 +4,6 @@ module.exports = {
   mode: process.env.DEV ? 'development' : 'production',
   entry: {
     bundle: __dirname + '/client/index.js',
-    popup: __dirname + '/client/popup/index.js',
   },
   output: {
     path: __dirname,
@@ -13,11 +12,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devtool: 'source-map',
   watchOptions: {
     ignored: /node_modules/,
   },
-  devtool: 'source-map',
+  devtool:false,
+  // 'source-map',
   module: {
     rules: [
       {
