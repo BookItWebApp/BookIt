@@ -29,12 +29,10 @@ const postArticle = async (req, res, next) => {
     let tagsArr = req.body.article.tags;
 
     // CREATE ARTICLE
-    const article = await Article.create(
-      {
-        url: url,
-      },
-      { transaction: t }
-    );
+    const [article, ifCreated] = await Article.findOrCreate({
+      where: { url: url },
+      transaction: t,
+    });
     // console.log("ARTICLE IS CREATED: ", article);
 
     // CREATE USER ARTICLE
