@@ -80,7 +80,7 @@ export function UserArticles() {
                     <h4>
                         {user.username[0].toUpperCase() +
                             user.username.slice(1)}
-                        's bookmark
+                        's bookmark{articles.length > 1 ? `s` : ``}
                     </h4>
                     <h4>Total bookmarks: {articles.length}</h4>
                 </div>

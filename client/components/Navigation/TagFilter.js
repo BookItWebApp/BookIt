@@ -7,7 +7,7 @@ const TagFilter = () => {
     const userArticles = useSelector((state) => state.userArticles);
     const user = useSelector((state) => state.auth);
     const userTags = useSelector((state) => state.tags);
-    // console.log("ALL TAGS > ", userTags);
+    console.log("ALL ARTICLES > ", userArticles);
 
     const selectedTags = useRef([]);
     const selectedTagsDD = useRef([]);
@@ -18,16 +18,43 @@ const TagFilter = () => {
     }, [dispatch]);
 
     //
-    const onTagSelected = (e, tagName) => {
+    const filterReadUnread = (artilcesArr, statusRead) => {
+        let readUnreadBookmark;
+        if (statusRead) {
+            readUnreadBookmark = artilcesArr.filter((singleBookmark) => {
+                if (singleBookmark.readAt) {
+                    return singleBookmark;
+                }
+            });
+        } else {
+            readUnreadBookmark = artilcesArr.filter((singleBookmark) => {
+                if (!singleBookmark.readAt) {
+                    return singleBookmark;
+                }
+            });
+        }
+        return readUnreadBookmark;
+    };
+    console.log("TRUE>", filterReadUnread(userArticles, true));
+    console.log("FALSE>", filterReadUnread(userArticles, false));
+
+    //
+    const onTagSelected = (e, tagName, statusRead = null) => {
         const checked = e.target.checked;
-        if (checked) {
+        console.log("CHECKED > ", checked);
+        console.log("E.TARGET > ", e.target);
+        console.log("E.statusRead > ", statusRead);
+
+        if (checked && statusRead === true) {
+            selectedTags.current.push(tagName);
+        } else if (checked && statusRead === false) {
             selectedTags.current.push(tagName);
         } else {
             selectedTags.current = selectedTags.current.filter(
                 (item) => item !== tagName
             );
         }
-        // console.log("=> SELECTEDTAGS.CURRENT >", selectedTags.current);
+        console.log("=> SELECTEDTAGS.CURRENT >", selectedTags.current);
     };
 
     //
@@ -37,7 +64,10 @@ const TagFilter = () => {
 
     //
     const onSubmitFilter = () => {
+        console.log("SUBMIT: SELECTED TAGS CURRENT >", selectedTags.current);
         const filters = [...selectedTags.current];
+        console.log("SUBMIT: FILTERS >", filters);
+
         selectedTagsDD.current.forEach((item) => filters.push(item.label));
         dispatch(saveSelectedTags(filters));
     };
@@ -48,11 +78,11 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        onChange={(e) => onTagSelected(e, "isPrivate")}
+                        onChange={(e) => onTagSelected(e, "readAt", true)}
                         className="tag-check-input"
                     />{" "}
                     <span className="text--tag-filter--form">
-                        private bookmarks
+                        read bookmarks
                     </span>
                 </label>
             </div>
@@ -61,11 +91,11 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        onChange={(e) => onTagSelected(e, "readAt")}
+                        onChange={(e) => onTagSelected(e, "readAt", false)}
                         className="tag-check-input"
                     />{" "}
                     <span className="text--tag-filter--form">
-                        read bookmarks
+                        unread bookmarks
                     </span>
                 </label>
             </div>
