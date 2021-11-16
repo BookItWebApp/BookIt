@@ -20,7 +20,7 @@ export function UserArticles() {
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
-    // console.log("ALL ARTICLES > ", articles);
+    console.log("ALL ARTICLES > ", articles);
     // console.log("ALL FILTERD TAGS > ", filteredTags);
 
     useEffect(() => {
@@ -44,12 +44,14 @@ export function UserArticles() {
 
     function validateFilter(article) {
         if (filteredTags && filteredTags.length > 0) {
+            // filtering through tag array
             const containsTag = article.tags.some((tag) =>
                 filteredTags.includes(tag)
             );
             if (containsTag) {
                 return true;
             } else {
+                // filtering through properties
                 const containsKeyValue = filteredTags.every(
                     (key) => article[key] && article[key] !== false
                 );

@@ -91,7 +91,7 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        onChange={(e) => onTagSelected(e, "readAt", false)}
+                        onChange={(e) => onTagSelected(e, "unread", false)}
                         className="tag-check-input"
                     />{" "}
                     <span className="text--tag-filter--form">
