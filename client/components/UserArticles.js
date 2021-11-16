@@ -20,7 +20,7 @@ export function UserArticles() {
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
-    console.log("ALL ARTICLES > ", articles);
+    // console.log("ALL ARTICLES > ", articles);
     // console.log("ALL FILTERD TAGS > ", filteredTags);
 
     useEffect(() => {

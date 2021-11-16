@@ -39,14 +39,9 @@ export function SingleArticle(props) {
             <div className="title-delete--single-article--container">
                 <span className="title-name--single-article">
                     <span className="bold--single-article--container">
-                        Title
-                    </span>
-                    <a href={article.article.url}>
-                        :{" "}
-                        <span className="article-name--single-article">
-                            {article.name}
-                        </span>
-                    </a>
+                        Title:
+                    </span>{" "}
+                    <span>{article.name}</span>
                 </span>
                 <span className="x"></span>
                 <span>
@@ -58,9 +53,16 @@ export function SingleArticle(props) {
                     </button>
                 </span>
             </div>
-            {/* TODO: URL IS DISPLAYED, BUT TOO LONG */}
-            <span className="bold--single-article--container">Url</span>:{" "}
-            {article.article.url.slice(0, 30)}
+            <span className="bold--single-article--container">Url</span>
+            <a href={article.article.url}>
+                :{" "}
+                <span className="article-name--single-article">
+                    {article.article.url.slice(0, 30) + "..."}
+                </span>
+            </a>
+            <br />
+            <span className="bold--single-article--container">Note</span>:{" "}
+            {article.note ? `${article.note}` : "none"}
             <br />
             <span className="bold--single-article--container">Tags</span>:{" "}
             {taggings.length
@@ -91,14 +93,14 @@ export function SingleArticle(props) {
                             onClick={markAsCompleted}
                             className="pure-button read-btn--single-article read-btn-true"
                         >
-                            read
+                            mark as unread
                         </button>
                     ) : (
                         <button
                             onClick={markAsCompleted}
                             className="pure-button read-btn--single-article read-btn-false"
                         >
-                            unread
+                            mark as read
                         </button>
                     )}
                 </div>
