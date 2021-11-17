@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
   models: { Article, UserArticle, Tag, Tagging },
 } = require('../db/index');
+const sequelize = require('../db/db');
 
 const getallArticles = async (req, res, next) => {
   try {
@@ -14,79 +15,83 @@ const getallArticles = async (req, res, next) => {
 
 // POST /api/articles
 const postArticle = async (req, res, next) => {
-  console.log(req.body);
+  const t = await sequelize.transaction({ autocommit: false });
+  // console.log(req.body);
   try {
     //console.log('POST ARTICLE BODY: ', req.body);
     //define in higer scope
-    let url;
-    let articleName;
-    let isPrivate;
-    let userId;
-    let tagsArr;
-    if (req.body.article) {
-      //if using body.article param
-      url = req.body.article.url;
-      articleName = req.body.article.name;
-      isPrivate = req.body.article.isPrivate;
-      userId = req.body.userId;
-      tagsArr = req.body.article.tags;
-    } else {
-      //if using direct body param (extension)
-      url = req.body.url;
-      articleName = req.body.name;
-      isPrivate = req.body.isPrivate;
-      userId = req.body.userId;
-      tagsArr = req.body.tags.split(',');
-    }
+
+    let url = req.body.article.url;
+    let articleName = req.body.article.name;
+    let articleNote = req.body.article.note;
+    let isPrivate = req.body.article.isPrivate;
+    let userId = req.body.userId;
+    let tagsArr = req.body.article.tags;
 
     // CREATE ARTICLE
-    const article = await Article.create({
-      url: url,
+    const [article, ifCreated] = await Article.findOrCreate({
+      where: { url: url },
+      transaction: t,
     });
     // console.log("ARTICLE IS CREATED: ", article);
 
     // CREATE USER ARTICLE
-    const userArticle = await UserArticle.create({
-      name: articleName,
-      userId: userId,
-      articleId: article.id,
-      isPrivate: isPrivate,
-    });
+    const userArticle = await UserArticle.create(
+      {
+        name: articleName,
+        userId: userId,
+        articleId: article.id,
+        isPrivate: isPrivate,
+        note: articleNote,
+      },
+      { transaction: t }
+    );
     // console.log("=> USER_ARTICLE IS CREATED: ", userArticle);
 
     // // CREATE TAGS/TAGGING
     await Promise.all(
       tagsArr.map(async (tagName) => {
-        let tag = await Tag.create({
-          name: tagName,
+        let [tag, created] = await Tag.findOrCreate({
+          where: { name: tagName },
+          transaction: t,
         });
-        // console.log("=> TAGS IS CREATED: ", tag);
-        return await Tagging.create({
-          tagId: tag.id,
-          userArticlesId: userArticle.id,
-        });
+        // console.log('=> TAGS IS CREATED: ', tag);
+        return await Tagging.create(
+          {
+            tagId: tag.id,
+            userArticlesId: userArticle.id,
+          },
+          { transaction: t }
+        );
       })
     );
 
-    const createdArticle = await UserArticle.findByPk(userArticle.id, {
-      include: [
-        {
-          model: Article,
-          attributes: ['id', 'url'],
-        },
-        {
-          model: Tagging,
-          include: {
-            model: Tag,
+    const createdArticle = await UserArticle.findByPk(
+      userArticle.id,
+      {
+        include: [
+          {
+            model: Article,
+            attributes: ['id', 'url'],
           },
-        },
-      ],
-    });
+          {
+            model: Tagging,
+            include: {
+              model: Tag,
+            },
+          },
+        ],
+      },
+      { transaction: t }
+    );
     // console.log("ARTICLE TO SEND > ", createdArticle);
 
-    res.json(createdArticle);
+    await t.commit();
+
+    res.status(201).send();
   } catch (error) {
     console.log('CREATE ARTICLE ERR: ', error);
+    await t.rollback();
     next(error);
   }
 };

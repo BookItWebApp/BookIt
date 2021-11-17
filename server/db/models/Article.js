@@ -16,7 +16,7 @@ const got = require('got');
 //Articles must be unique, not empty or null, and must be URL
 const Article = db.define('article', {
   url: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     unique: true,
     validate: {
