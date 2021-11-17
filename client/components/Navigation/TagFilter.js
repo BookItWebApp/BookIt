@@ -7,7 +7,7 @@ const TagFilter = () => {
     const userArticles = useSelector((state) => state.userArticles);
     const user = useSelector((state) => state.auth);
     const userTags = useSelector((state) => state.tags);
-    // console.log("ALL TAGS > ", userTags);
+    // console.log("ALL ARTICLES > ", userArticles);
 
     const selectedTags = useRef([]);
     const selectedTagsDD = useRef([]);
@@ -48,11 +48,11 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        onChange={(e) => onTagSelected(e, "isPrivate")}
+                        onChange={(e) => onTagSelected(e, "readAt")}
                         className="tag-check-input"
                     />{" "}
                     <span className="text--tag-filter--form">
-                        private bookmarks
+                        read bookmarks
                     </span>
                 </label>
             </div>
@@ -61,11 +61,11 @@ const TagFilter = () => {
                 <label className="tag-check-label">
                     <input
                         type="checkbox"
-                        onChange={(e) => onTagSelected(e, "readAt")}
+                        onChange={(e) => onTagSelected(e, "unread")}
                         className="tag-check-input"
                     />{" "}
                     <span className="text--tag-filter--form">
-                        read bookmarks
+                        unread bookmarks
                     </span>
                 </label>
             </div>

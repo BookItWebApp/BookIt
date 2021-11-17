@@ -69,8 +69,8 @@ export const createNewArticle = (article, userId, history) => {
 };
 
 // CREATE A SINGLE Extension ARTICLE
-export const createNewExtensionArticle = (url, name, userId, tags ) => {
-    let article = {url : url, name:name, tags:[tags.split(',')]}
+export const createNewExtensionArticle = (url, name, userId, tags) => {
+    let article = { url: url, name: name, tags: [tags.split(",")] };
     return async (dispatch) => {
         try {
             const { data } = await axios.post(
@@ -152,7 +152,10 @@ const initialState = [];
 export default function userArticleReducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER_ARTICLES:
-            return action.articles;
+            let articles = action.articles.map((data) => {
+                return { ...data, unread: data.readAt === null };
+            });
+            return articles;
         case CREATE_USER_ARTICLE:
             return [...state, action.article];
         case READ_USER_ARTICLE:

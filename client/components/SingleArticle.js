@@ -10,15 +10,20 @@ export function SingleArticle(props) {
     const user = useSelector((state) => state.auth);
     const article = props.article;
     const taggings = article.taggings;
-    console.log("ARTiCLE> ", article);
+    const tags = article.tags;
+
+    // console.log("ARTiCLE> ", article);
 
     // useEffect(() => {
     //   dispatch(previewArticle(article.article.url, article.id));
     // }, [dispatch]);
 
     function markAsCompleted() {
-        // alert("trying to complete item with an id of " + user.id);
-        article.readAt = new Date().toISOString();
+        if (article.readAt) {
+            article.readAt = null;
+        } else {
+            article.readAt = new Date().toISOString();
+        }
         // console.log("MARK AS REEAD > ", article);
         dispatch(markUserArticle(user.id, article));
     }
@@ -34,14 +39,9 @@ export function SingleArticle(props) {
             <div className="title-delete--single-article--container">
                 <span className="title-name--single-article">
                     <span className="bold--single-article--container">
-                        Title
-                    </span>
-                    <a href={article.article.url}>
-                        :{" "}
-                        <span className="article-name--single-article">
-                            {article.name}
-                        </span>
-                    </a>
+                        Title:
+                    </span>{" "}
+                    <span>{article.name}</span>
                 </span>
                 <span className="x"></span>
                 <span>
@@ -53,44 +53,33 @@ export function SingleArticle(props) {
                     </button>
                 </span>
             </div>
-            <span className="bold--single-article--container">Private</span>:{" "}
-            {article.isPrivate ? "yes" : "no"}
+            <span className="bold--single-article--container">Url</span>
+            <a href={article.article.url}>
+                :{" "}
+                <span className="article-name--single-article">
+                    {article.article.url.slice(0, 30) + "..."}
+                </span>
+            </a>
+            <br />
+            <span className="bold--single-article--container">Note</span>:{" "}
+            {article.note ? `${article.note}` : "none"}
             <br />
             <span className="bold--single-article--container">Tags</span>:{" "}
             {taggings.length
-                ? taggings.map((tagging, idx) => {
-                      return (
-                          <span key={idx.toString()}> {tagging.tag.name}</span>
-                      );
-                  })
+                ? taggings
+                      .map((tagging, idx) => {
+                          return (
+                              <span key={idx.toString()}>
+                                  {" "}
+                                  {tagging.tag.name}
+                              </span>
+                          );
+                      })
+                      .reduce((prev, curr) => {
+                          return [prev, ", ", curr];
+                      })
                 : "none"}
             <br />
-            {/* {article.article.authors && article.article.authors.length > 0 ? (
-                article.article.authors.length > 1 ? (
-                    <ul>
-                        By:
-                        {article.article.authors.map((author) => (
-                            <li key={author.id}>
-                                <NavLink to={`/authors/${author.id}`}>
-                                    {author.name}
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <span>
-                        By:{" "}
-                        <NavLink
-                            to={`/authors/${article.article.authors[0].id}`}
-                        >
-                            {article.article.authors[0].name}
-                        </NavLink>
-                        <button onClick={markAsCompleted}>mark</button>
-                    </span>
-                )
-            ) : (
-                <React.Fragment />
-            )} */}
             <div>
                 <div>
                     <span className="bold--single-article--container">
@@ -104,14 +93,14 @@ export function SingleArticle(props) {
                             onClick={markAsCompleted}
                             className="pure-button read-btn--single-article read-btn-true"
                         >
-                            read
+                            mark as unread
                         </button>
                     ) : (
                         <button
                             onClick={markAsCompleted}
                             className="pure-button read-btn--single-article read-btn-false"
                         >
-                            unread
+                            mark as read
                         </button>
                     )}
                 </div>

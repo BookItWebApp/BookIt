@@ -44,12 +44,14 @@ export function UserArticles() {
 
     function validateFilter(article) {
         if (filteredTags && filteredTags.length > 0) {
+            // filtering through tag array
             const containsTag = article.tags.some((tag) =>
                 filteredTags.includes(tag)
             );
             if (containsTag) {
                 return true;
             } else {
+                // filtering through properties
                 const containsKeyValue = filteredTags.every(
                     (key) => article[key] && article[key] !== false
                 );
@@ -80,7 +82,7 @@ export function UserArticles() {
                     <h4>
                         {user.username[0].toUpperCase() +
                             user.username.slice(1)}
-                        's bookmark
+                        's bookmark{articles.length > 1 ? `s` : ``}
                     </h4>
                     <h4>Total bookmarks: {articles.length}</h4>
                 </div>

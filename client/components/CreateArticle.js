@@ -9,7 +9,8 @@ class CreateArticle extends React.Component {
         this.state = {
             name: "",
             url: "",
-            isPrivate: "",
+            // isPrivate: "",
+            note: "",
             tags: [""],
             formErrors: { name: "", url: "" },
             nameValid: false,
@@ -28,7 +29,7 @@ class CreateArticle extends React.Component {
         event.preventDefault();
         let userId = this.props.auth.id;
         let article = { ...this.state };
-        article.isPrivate = article.isPrivate === "true";
+        // article.isPrivate = article.isPrivate === "true";
 
         // console.log("_CREATE SUBMIT STATE > ", this.state);
         this.props.createNewArticle(article, userId);
@@ -63,7 +64,7 @@ class CreateArticle extends React.Component {
     }
 
     render() {
-        const { name, url, isPrivate, tags } = this.state;
+        const { name, url, note, tags } = this.state;
         // console.log("=> STATE AUTH ID", this.state);
         // console.log("=> PROPS AUTH ID", this.props);
 
@@ -108,11 +109,11 @@ class CreateArticle extends React.Component {
                         <br />
 
                         <div className="pure-control-group">
-                            <label htmlFor="isPrivate">Private bookmark?</label>
+                            <label htmlFor="note">Add a note</label>
                             <input
-                                name="isPrivate"
-                                placeholder="true or false"
-                                value={isPrivate}
+                                name="note"
+                                placeholder="add your note"
+                                value={note}
                                 onChange={this.handleChange}
                             />
                         </div>

@@ -1,16 +1,16 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
   models: { Article, UserArticle, Tag, Tagging },
 } = require('../db/index');
 const sequelize = require('../db/db');
 
 const getallArticles = async (req, res, next) => {
-  try {
-    const articles = await Article.findAll();
-    res.send(articles);
-  } catch (error) {
-    next(error);
-  }
+    try {
+        const articles = await Article.findAll();
+        res.send(articles);
+    } catch (error) {
+        next(error);
+    }
 };
 
 // POST /api/articles
@@ -111,7 +111,7 @@ const postArticle = async (req, res, next) => {
 //   }
 // };
 
-router.get('/', getallArticles);
-router.post('/', postArticle);
+router.get("/", getallArticles);
+router.post("/", postArticle);
 
 module.exports = router;

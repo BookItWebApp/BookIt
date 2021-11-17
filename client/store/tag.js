@@ -5,7 +5,7 @@ import axios from "axios";
 // -------------------------------- ACTION TYPES
 const GET_TAGS = "GET_TAGS";
 const GET_USER_TAGS = "GET_USER_TAGS";
-const SAVE_SEELTECTED_TAGS = "SAVE_SEELTECTED_TAGS";
+const SAVE_SELECTED_TAGS = "SAVE_SELECTED_TAGS";
 
 // ------------------------------- ACTION CREATORS
 // Get all tags
@@ -42,7 +42,7 @@ export const getTags = () => {
 export const saveSelectedTags = (tags) => {
     return (dispatch) => {
         dispatch({
-            type: SAVE_SEELTECTED_TAGS,
+            type: SAVE_SELECTED_TAGS,
             tags: tags
         });
     };
@@ -73,7 +73,7 @@ export default function tagsReducer(state = initialState, action) {
             return action.tags;
         case GET_USER_TAGS:
             return { ...state, tags: action.tags };
-        case SAVE_SEELTECTED_TAGS:
+        case SAVE_SELECTED_TAGS:
             return { ...state, filteredTags: [...action.tags] };
         default:
             return state;
