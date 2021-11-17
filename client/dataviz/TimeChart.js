@@ -2,65 +2,38 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
+import {readArticlesDates} from './dataVizHelpers'
 
 export function TimeChart() {
   const userArticles = useSelector((state) => state.userArticles);
-  const SortedArticles = {}; //Sorted list of read articles by date read
   const sortedaddedArticles = {}; //Sorted list of all articles by date added
   const yReadTotal = [];
-  const dateList = [];
   const data = [];
   const addedDateList = [];
+  let yhelperRead = [];
   let yhelperAdd = [];
   const yTotalArticles = [];
 
-  //Get individual read articles Count
-  const readArticles = userArticles.filter(
-    (article) => article.readAt !== null
-  );
-  //Data Cleaning
-  // const dateCleanedArticles = readArticles.map((article) => {
-  //   DateTime.fromISO(article).toFormat('yyyy-MM-dd')
-  //   return article;
-  // });
+  //Get individual read articles organized by date read
+  //Using a helper function shared between the different dataviz oomponents
+  const sortedArticles = readArticlesDates(userArticles)
 
-  // const allArticlesCleaned = userArticles.map((article) => {
-  //   if (article.readAt!==null){
-  //   article.readAt = article.readAt.substr(0, article.readAt.indexOf('T'));
-  //   return article}
-  //   else{
-  //     return article
-  //   }
-  // });
-
-  readArticles.map((article) => {
-    dateList.push(article.readAt);
-  });
-
+  //Get Articles added by Date
   userArticles.map((article) => {
     addedDateList.push(article.createdAt);
   });
-
   addedDateList.sort();
-
-  dateList.sort();
-
-  //creates sorted article
-  dateList.map((date) => {
-    SortedArticles[date] = readArticles.filter(
-      (article) => article.readAt === date
-    );
-  });
-
-  // console.log('Sorted Articles', SortedArticles)
   addedDateList.map((date) => {
     sortedaddedArticles[date] = userArticles.filter(
       (article) => article.createdAt === date
     );
   });
 
-  const xReadDates = Object.keys(SortedArticles);
-  const xAddedDates = Object.keys(sortedaddedArticles);
+
+  let xReadDates = Object.keys(sortedArticles);
+  xReadDates = xReadDates.map(date => DateTime.fromISO(date).toFormat('yyyy-MM-dd'))
+  let xAddedDates = Object.keys(sortedaddedArticles);
+  xAddedDates = xAddedDates.map(date => DateTime.fromISO(date).toFormat('yyyy-MM-dd'))
 
   for (const [key, value] of Object.entries(sortedaddedArticles)) {
     yhelperAdd.push(value.length);
@@ -74,27 +47,30 @@ export function TimeChart() {
     }
   }
 
-  yhelperAdd = [];
-  for (const [key, value] of Object.entries(SortedArticles)) {
-    yhelperAdd.push(value.length);
+  yhelperRead = [];
+  for (const [key, value] of Object.entries(sortedArticles)) {
+    yhelperRead.push(value.length);
   }
 
-  for (let i = 0; i < yhelperAdd.length; i++) {
+  console.log('yread totals', yhelperRead)
+
+  for (let i = 0; i < yhelperRead.length; i++) {
     if (i === 0) {
-      yReadTotal.push(yhelperAdd[i]);
+      yReadTotal.push(yhelperRead[i]);
     } else {
-      yReadTotal.push(yTotalArticles[i - 1] + yhelperAdd[i]);
+      yReadTotal.push(yReadTotal[i - 1] + yhelperRead[i]);
     }
   }
 
   //add final date value to update graph to present
-  xAddedDates.push(DateTime.now().toISO());
+  xAddedDates.push(DateTime.utc().toFormat('yyyy-MM-dd'));
   let mostRecentValue = yTotalArticles.at(-1);
   yTotalArticles.push(mostRecentValue);
+  console.log('added dates',xAddedDates)
 
   //TRACE DATA FOR TIMECHART
   const readArticleTrace = {
-    x: [xReadDates[0], ...xReadDates,DateTime.now().toISO()],
+    x: [xReadDates[0], ...xReadDates,DateTime.utc().toFormat('yyyy-MM-dd')],
     y: [0, ...yReadTotal, yReadTotal.at(-1)],
     name: 'Total Read',
     type: 'scatter',
@@ -103,7 +79,6 @@ export function TimeChart() {
     fill: 'tozeroy',
     line: { shape: 'spline' },
   };
-
   const addedArticleTrace = {
     x: xAddedDates,
     y: yTotalArticles,
@@ -129,8 +104,8 @@ export function TimeChart() {
         barmode: 'stack',
         xaxis: {
           autorange: true,
-          tickformat: '%B %Y',
-          range: [xAddedDates[0], DateTime.now().toISO()],
+          // tickformat: '%B %Y',
+          range: [xAddedDates[0], DateTime.utc().toFormat('yyyy-MM-dd')],
           rangeselector: {
             buttons: [
               {
@@ -148,7 +123,7 @@ export function TimeChart() {
               { step: 'all' },
             ],
           },
-          rangeslider: { range: [xAddedDates[0], DateTime.now().toISO()] },
+          rangeslider: { range: [xAddedDates[0], DateTime.utc().toISO()] },
           type: 'date',
         },
         yaxis: {

@@ -1,44 +1,25 @@
+//TAG READ UNREAD PIE CHARTS COMPONENT
 import React from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
+import {readArticlesDates, readArticlesTags, allArticlesTags,tagCounter} from './dataVizHelpers'
 
 export function TagReadUnread() {
   const userArticles = useSelector((state) => state.userArticles);
-  const SortedArticles = {}; //Sorted list of read articles by date read
-  const dateList = [];
   const data = [];
 
-  //Get individual read articles Count
-  const readArticles = userArticles.filter(
-    (article) => article.readAt !== null
-  );
+  //Get individual read articles organized by date read
+  //Using a helper function shared between the different dataviz oomponents
+  const sortedArticles = readArticlesDates(userArticles)
 
-  readArticles.map((article) => {
-    dateList.push(article.readAt);
-  });
-
-  dateList.sort();
-
-  //creates sorted article
-  dateList.map((date) => {
-    SortedArticles[date] = readArticles.filter(
-      (article) => article.readAt === date
-    );
-  });
-  //-----------------------------tagData---------------------------------------//
   //-------------------Get Tags Total --------------------//
   const allTagsList = [];
-  const ArticleTagsList = {};
 
   //tags per article
   //provides a list of articles and associated tags
-  for (let i = 0; i < userArticles.length; i++) {
-    let article = userArticles[i];
-    ArticleTagsList[article.articleId] = article.taggings.map(
-      (tag) => tag.tag.name
-    );
-  }
+  const ArticleTagsList = allArticlesTags(userArticles)
+
 
   //Coordinated of tags, per tag, per day
   for (const [key, value] of Object.entries(ArticleTagsList)) {
@@ -47,85 +28,45 @@ export function TagReadUnread() {
     }
   }
 
-  //build list that will be used in tag ratio chart
+  //Build a list of tags and their total count
   //uses allTagsList and ArticleTagsList
-  const result = {};
-  for (let i = 0; i < allTagsList.length; i++) {
-    const tag = allTagsList[i];
-    let tagCount = 0;
-    for (const [key, value] of Object.entries(ArticleTagsList)) {
-      if (value.includes(tag)) {
-        tagCount++;
-      }
-    }
-    result[tag] = tagCount;
-  }
-
+  const unreadTagsResult = tagCounter(allTagsList,ArticleTagsList);
 
     //-------------------Get Tags of Read Articles --------------------//
-
-    const yTagCount = [];
+    const dateTagCount = [];
     const allReadTagsList = [];
-    const dateTags = [];
 
-    //tags per article
-    const readArticleTagsList = {}
-    //provides a list of articles and associated tags
-     for (let i = 0; i < readArticles.length; i++) {
-     let article = readArticles[i]
-        readArticleTagsList[article.articleId] = article.taggings.map((tag) => tag.tag.name)
-        }
+    //tags per read article
+    const readArticleTagsList = readArticlesTags(userArticles)
 
-    //Coordinated of tags, per tag, per day
-    //need this
-    for (const [key, value] of Object.entries(SortedArticles)) {
+    //Build a lists of tags per date and consolidated list all read article tags
+    for (const [key, value] of Object.entries(sortedArticles)) {
       const dateTags = [];
       for (const article of value) {
         article.taggings.map(
           (tag) =>
             dateTags.push(tag.tag.name) && allReadTagsList.push(tag.tag.name)
-        );
-      }
-      yTagCount[key] = dateTags;
+        )}
+      dateTagCount[key] = dateTags;
     }
-    //build list that will be used in tag ratio chart
-      //uses allReadTagsList and readArticleTagsList
-     const readTagResult = {}
-     for(let i=0 ; i <allReadTagsList.length; i++ ) {
-      const tag = allReadTagsList[i]
-      let tagCount = 0
-      for (const [key, value] of Object.entries(readArticleTagsList)){
-        if(value.includes(tag)){
-          tagCount ++
-       }
-       }
-       readTagResult[tag]=tagCount}
 
-    const yTags = [];
-    const tagDateMap = {};
-    // build trace for each tag name
-    for (let i = 0; i < allReadTagsList.length; i++) {
-      for (const day in yTagCount) {
-        tagDateMap[day] = yTagCount[day].filter(
-          (tag) => tag === allReadTagsList[i]
-        );
-      }}
-      // for readarticleTagsList
-    // 'ytagCount' //need tags by article
-    //
-    for (const [key, value] of Object.entries(tagDateMap)) {
-      yTags.push(value.length);
-      }
+    //Build a list of tags and their total count
+    //uses allReadTagsList and readArticleTagsList
+     const readTagResult = tagCounter(allReadTagsList,readArticleTagsList)
 
-    //build "Remaining Tags variable"
+  //-----Build an object of "Unread Articles" by removing read from total ------//
+
+    //Build "Remaining Tags variable" which will be used for "Unread Article Tags"
     const remainingTagResult = {}
-    for (const [key, value] of Object.entries(result)){
-      let totalarticles = result[key]
+    for (const [key, value] of Object.entries(unreadTagsResult)){
+      let totalarticles = unreadTagsResult[key]
       let totalread = readTagResult[key]? readTagResult[key]:0
         remainingTagResult[key] = (totalarticles - totalread)
     }
 
-    //build tagTraces
+ //-----Set Up Plotly 'TRACES' for each Pie Chart ------//
+    //Build Traces for Read and Unread Article Tags
+    //Sets variables that will be used in plotly individual graphs
     const readTagTrace = {
       labels: Object.keys(readTagResult),
       values: Object.values(readTagResult),
@@ -152,6 +93,7 @@ export function TagReadUnread() {
 
     data.push(remainingTagTrace)
     data.push(readTagTrace)
+
 
   return (
     <div>

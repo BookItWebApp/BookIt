@@ -1,3 +1,4 @@
+//TOP Level DataViz Component
 import React, { useEffect } from 'react';
 import { me } from '../store';
 import { getArticles } from '../store/articles';
@@ -7,13 +8,11 @@ import { UserMetrics } from './UserMetrics';
 import { useSelector, useDispatch } from 'react-redux';
 import { previewArticle } from '../store/SingleArticle';
 
-
-
-
+//Use this component to import all needed data once to state and then pass down
+//to attached components in UserMetrics.js
 export function dataDirectory () {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth);
-    const userArticles = useSelector((state) => state.userArticles)
 
     useEffect(() => {
         dispatch(me())

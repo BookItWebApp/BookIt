@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Calendar } from './Calendar';
-import { Indicator} from './indicator';
+import { Indicator} from './indicator'
 import { TagRatio } from './TagReadUnreadRatio';
 import { TimeChart } from './TimeChart';
 import {TagReadUnread} from './TagReadUnreadRatio'

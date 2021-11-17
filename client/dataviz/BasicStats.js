@@ -20,6 +20,7 @@ export function BasicMetrics() {
   //Coordinated of tags, per tag, per day
   for (const [key, value] of Object.entries(ArticleTagsList)) {
     for (const tag of value) {
+      if (!allTagsList.includes(tag))
           allTagsList.push(tag)
     }}
 

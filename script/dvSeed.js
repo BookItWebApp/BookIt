@@ -1,5 +1,5 @@
 'use strict';
-const Faker = require('faker');
+// const Faker = require('faker');
 const urlArry = require('./urlSeedData');
 
 const {
