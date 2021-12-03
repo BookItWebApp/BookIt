@@ -4,6 +4,8 @@ const {
     models: { UserArticle, Article, Tagging, Tag }
 } = require("../db");
 
+const { isValidUser } = require("../middleware/middleware");
+
 module.exports = router;
 
 //Retrieve all articles from UserArticle Table
@@ -30,7 +32,7 @@ router.get("/", async (req, res, next) => {
 });
 
 //Retrieve all of a single user's articles
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", isValidUser, async (req, res, next) => {
     try {
         const { id } = req.params;
         const userArticles = await UserArticle.findAllByUser(id);

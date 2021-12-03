@@ -13,6 +13,9 @@ export function UserArticles() {
     const filteredTags = useSelector((state) => state.tags.filteredTags);
     const user = useSelector((state) => state.auth);
 
+    const token = window.localStorage.getItem("token");
+    // console.log("FOUND TOKEN in USER ARTICLES> ", token);
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -25,7 +28,7 @@ export function UserArticles() {
 
     useEffect(() => {
         dispatch(_clearSharingId());
-        dispatch(getUserArticles(user.id));
+        dispatch(getUserArticles(user.id, token));
     }, [dispatch]);
     //
     function clickHandlerShare() {
@@ -74,6 +77,7 @@ export function UserArticles() {
 
     return (
         <div className="main-user-article--container">
+            {!token && <div>please login</div>}
             <div className="left-side--user-article-container">
                 <Sidebar />
             </div>

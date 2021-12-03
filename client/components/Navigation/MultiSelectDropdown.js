@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
 const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
-    // console.log("MULTI TAGS > ", usrTagsProps.tags);
     const allTags = usrTagsProps.tags;
+    // console.log("MULTI ALL_TAGS > ", allTags);
 
     // FUNC TO REMOVE DUPLICATED TAGS DATA
     const removeDuplicatedTags = (tagsData) => {
@@ -12,6 +12,7 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
         });
         return filterdData;
     };
+
     const filteredTags = removeDuplicatedTags(allTags);
     // console.log("FILTERD TAGS > ", filteredTags);
     useEffect(() => {

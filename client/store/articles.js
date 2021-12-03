@@ -1,40 +1,41 @@
-import axios from 'axios';
+import axios from "axios";
 
-//ACTION TYPES
-const GET_ARTICLES = 'GET_ARTICLES';
+// => ACTION TYPES
+const GET_ARTICLES = "GET_ARTICLES";
 
-//ACTION CREATORS
-//Get all articles for a single user
+// => ACTION CREATORS
+// Get all articles for a single user
 const _getArticles = (articles) => {
-  return {
-    type: GET_ARTICLES,
-    articles,
-  };
+    return {
+        type: GET_ARTICLES,
+        articles
+    };
 };
 
-//THUNKS
-//get all articles 
+// => THUNKS
+// get all articles
 export const getArticles = () => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(`/api/articles/`);
-      dispatch(_getArticles(response.data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(`/api/articles/`);
+            dispatch(_getArticles(response.data));
+        } catch (error) {
+            console.log(error);
+        }
+    };
 };
 
-//REDUCER
-//Initial State
+// TODO: REMOVE FROM userArticles => createNewArticle/createNewExtensionArticle AND ADD THEM HERE. UPDATE: ACTION, ACTION CREATORS, THUNKS, REDUCER
+
+// => Initial State
 const initialState = [];
 
-//Reducer
+// => REDUCER
 export default function ArticlesReducer(state = initialState, action) {
-  switch (action.type) {
-    case GET_ARTICLES:
-      return action.articles;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case GET_ARTICLES:
+            return action.articles;
+        default:
+            return state;
+    }
 }

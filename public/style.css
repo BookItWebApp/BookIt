@@ -1,282 +1,283 @@
 :root {
-  --color-white: #ffffff;
-  --color-light-yellow: #fdfce5;
-  --color-light-sand: #f9f3df;
-  --color-yellow: #f4d19b;
-  --color-bookmark-shadow: #ced2d8;
-  --color-bookmars-background: #f8f9fa;
-  --color-cancel-btn: #ff5c58;
-  --color-submit-btn: #42b8dd;
-  --colorOne: #48b2e7;
-  --colorTwo: #add8e6;
-  --colorThree: #f7e590;
+    --color-white: #ffffff;
+    --color-light-yellow: #fdfce5;
+    --color-light-sand: #f9f3df;
+    --color-yellow: #f4d19b;
+    --color-bookmark-shadow: #ced2d8;
+    --color-bookmars-background: #f8f9fa;
+    --color-cancel-btn: #ff5c58;
+    --color-submit-btn: #42b8dd;
+    --colorOne: #48b2e7;
+    --colorTwo: #add8e6;
+    --colorThree: #f7e590;
 }
 
 body {
-  font-family: sans-serif;
+    font-family: sans-serif;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 label {
-  display: block;
+    display: block;
 }
 
 nav a {
-  display: inline-block;
-  margin: 1em;
+    display: inline-block;
+    margin: 1em;
 }
 
+/* todo */
 form div {
-  margin: 1em;
-  display: inline-block;
+    margin: 1em;
+    display: inline-block;
 }
 
 .app-container {
-  width: 100%;
-  height: 100%;
-  /* min-height: 50vh;
+    width: 100%;
+    height: 100%;
+    /* min-height: 50vh;
     display: flex;
     flex-direction: column; */
 }
 /* -------------------------------------- TOP-BAR-------------------------- */
 /* WRAPPER OF TOP-BAR(BOOKIT/METRICS/CREATE-BOOKMARK) */
 .top-section--wrapper {
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-  background-color: var(--color-light-yellow);
-  padding: 5px;
-  margin: 5px;
-  border-radius: 6px;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    background-color: var(--color-light-yellow);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 6px;
 }
 .bookmark--logo {
-  flex: 20%;
-  display: flex;
-  align-items: center;
-  padding: 10px;
+    flex: 20%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 .image-logo-top-section {
-  border-radius: 25px;
+    border-radius: 25px;
 }
 /*------------------ TOP-BAR WITH BOOKIT/METRICS/CREATE-BOOKMARK/LOGOUT ------*/
 .top_navbar {
-  flex: 80%;
-  display: flex;
-  justify-content: space-between;
+    flex: 80%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .top-navbar-links {
-  border: 2px solid var(--color-yellow);
-  background-color: var(--color-yellow);
-  color: var(--color-white);
-  height: 50px;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
+    border: 2px solid var(--color-yellow);
+    background-color: var(--color-yellow);
+    color: var(--color-white);
+    height: 50px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
 }
 .logo-btn-navbar--link {
-  margin: 25px;
-  font-size: 18px;
+    margin: 25px;
+    font-size: 18px;
 }
 
 /* ------------------------------- TAGs-FILTERS && USER ARTICLES ----------- */
 /* CONTAINER WITH USER ARTICLES AND TAG FILTERS */
 .no-articles--container {
-  height: 300px;
+    height: 300px;
 }
 .main-user-article--no-articles {
-  text-align: center;
-  font-size: 20px;
+    text-align: center;
+    font-size: 20px;
 }
 .no-articles--div {
-  height: 715px;
-  /* height: 100%; */
-  margin: 5px;
-  display: flex;
-  border: 2px solid var(--color-light-yellow);
+    height: 715px;
+    /* height: 100%; */
+    margin: 5px;
+    display: flex;
+    border: 2px solid var(--color-light-yellow);
 }
 
 .main-user-article--container {
-  min-height: 700px;
-  display: flex;
+    min-height: 700px;
+    display: flex;
 }
 /* LEFT SIDE OF USER ARTICLE CONTAINER WHICH IS TAG FILTER SIDE-BAR */
 .left-side--user-article-container {
-  height: 100%;
-  flex: 15%;
-  padding: 5px;
+    height: 100%;
+    flex: 15%;
+    padding: 5px;
 }
 /* RIGHT SIDE OF USER ARTICLE CONTAINER WHICH IS ALL USER ARTICLES */
 .sidebar-tags-selector-div {
-  text-align: center;
+    text-align: center;
 }
 .right-side--user-article-container {
-  height: 100%;
-  flex: 80%;
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-  margin: 3px;
-  background-color: var(--color-bookmars-background);
+    height: 100%;
+    flex: 80%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    margin: 3px;
+    background-color: var(--color-bookmars-background);
 }
 
 /* ----------------------------------- TAG SELECTOR ---------------------- */
 .tag-filter--form {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-bottom: 5px;
-  margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 .text--tag-filter--form {
-  /* text-transform: uppercase; */
-  font-size: 13px;
+    /* text-transform: uppercase; */
+    font-size: 13px;
 }
 
 /* --------------------------------------USER ARTICLES ----------------*/
 .user-articles-total--username-div {
-  display: flex;
-  margin: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  justify-content: space-between;
+    display: flex;
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    justify-content: space-between;
 }
 .display-articles--container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 10px;
-  min-height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    min-height: 500px;
 }
 
 .user-articles--display-view {
-  border: 2px solid black;
-  color: black;
-  width: 120px;
-  margin: 5px;
+    border: 2px solid black;
+    color: black;
+    width: 120px;
+    margin: 5px;
 }
 
 .user-articles--share-list {
-  border: 2px solid black;
-  color: black;
-  width: 120px;
-  margin: 5px;
+    border: 2px solid black;
+    color: black;
+    width: 120px;
+    margin: 5px;
 }
 
 .footer-btns--main-user-article--container {
-  margin: 10px;
-  display: flex;
-  align-self: stretch;
-  justify-content: space-between;
+    margin: 10px;
+    display: flex;
+    align-self: stretch;
+    justify-content: space-between;
 }
 
 .show-table-view-btn {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 /* --------------------------------------SINGLE ARTICLE ----------------*/
 .single-article--container {
-  border-radius: 6px;
-  margin: 10px;
-  padding: 7px;
-  box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
-  background-color: var(--color-white);
+    border-radius: 6px;
+    margin: 10px;
+    padding: 7px;
+    box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
+    background-color: var(--color-white);
 }
 .article-name--single-article {
-  /* color: rgb(87, 87, 87); */
-  color: var(--color-submit-btn);
+    /* color: rgb(87, 87, 87); */
+    color: var(--color-submit-btn);
 
-  font-style: italic;
+    font-style: italic;
 }
 
 .title-delete--single-article--container,
 .footer--single-article--container {
-  position: relative;
+    position: relative;
 }
 .bold--single-article--container {
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
 }
 .delete-btn--single-article {
-  color: black;
-  background-color: var(--color-cancel-btn);
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  font-size: 11px;
-  text-transform: uppercase;
+    color: black;
+    background-color: var(--color-cancel-btn);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 11px;
+    text-transform: uppercase;
 }
 .read-btn--single-article {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  color: var(--color-white);
-  text-transform: uppercase;
-  font-size: 11px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    color: var(--color-white);
+    text-transform: uppercase;
+    font-size: 11px;
 }
 .read-btn-true {
-  /* background-color: #b1e693; */
-  background-color: var(--color-submit-btn);
+    /* background-color: #b1e693; */
+    background-color: var(--color-submit-btn);
 }
 .read-btn-false {
-  background-color: var(--color-yellow);
+    background-color: var(--color-yellow);
 }
 
 /* ------------------------------ BTNS ------------------------------------- */
 .tabViewButton,
 .shareButton {
-  background-color: #f4d19b;
+    background-color: #f4d19b;
 }
 
 /* ----------------------------------LOGOUT -------------------------------- */
 .log-out-btn-container {
-  display: flex;
-  justify-content: center;
-  align-self: center;
+    display: flex;
+    justify-content: center;
+    align-self: center;
 }
 .log-out-btn {
-  /* border: 2px solid black; */
-  background-color: #f9f3df;
-  border-radius: 5px;
-  height: 40px;
+    /* border: 2px solid black; */
+    background-color: #f9f3df;
+    border-radius: 5px;
+    height: 40px;
 }
 /* ----------------------------------TABLE VIEW -------------------------------- */
 
 .table-header {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    font-size: 25px;
 }
 
 .table-container {
-  justify-content: center;
-  align-self: center;
-  margin-left: 3%;
-  margin-right: 3%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  /* padding: 10px; */
+    justify-content: center;
+    align-self: center;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    /* padding: 10px; */
 }
 
 .table-btn-container {
-  display: flex;
-  justify-content: space-between;
-  align-self: center;
-  margin: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    margin: 3%;
 }
 .table-btn {
-  color: var(--color-white);
-  background-color: var(--color-submit-btn);
-  text-transform: uppercase;
-  font-size: 14px;
-  border-radius: 3px;
+    color: var(--color-white);
+    background-color: var(--color-submit-btn);
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 3px;
 
-  /* display: flex;
+    /* display: flex;
     padding-top: 17px;
     padding-right: 30px;
     padding-bottom: 19px;
@@ -290,72 +291,72 @@ form div {
 }
 
 .ag-theme-alpine {
-  box-shadow: 6px 11px 9px var(--color-bookmark-shadow);
-  border-radius: 6px;
+    box-shadow: 6px 11px 9px var(--color-bookmark-shadow);
+    border-radius: 6px;
 }
 /* ----------------------------------ADD MESSAGE VIEW -------------------------------- */
 .top-sharing-link--container {
-  height: 720px;
+    height: 720px;
 }
 .main-add-msg-container {
-  margin: 3px;
-  border-radius: 5px;
-  height: 720px;
-  background-color: var(--color-bookmars-background);
+    margin: 3px;
+    border-radius: 5px;
+    height: 720px;
+    background-color: var(--color-bookmars-background);
 }
 .msg-header {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  font-size: 25px;
-  padding-top: 3%;
-  margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    font-size: 25px;
+    padding-top: 3%;
+    margin: 5px;
 }
 
 .btns--sharing-link-container {
-  display: flex;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 30%;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 30%;
 }
 
 .msg-input-container {
-  margin: 20px;
-  padding-top: 20px;
-  display: flex;
-  width: 100%;
-  height: 30%;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
+    margin: 20px;
+    padding-top: 20px;
+    display: flex;
+    width: 100%;
+    height: 30%;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .msg-input {
-  /* flex: 1; */
-  box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
-  display: block;
-  border: 1px solid black;
-  background-color: #fdfce5;
-  width: 30%;
-  height: 100%;
-  align-self: center;
-  align-items: center;
-  border-radius: 5px;
-  justify-content: center;
+    /* flex: 1; */
+    box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
+    display: block;
+    border: 1px solid black;
+    background-color: #fdfce5;
+    width: 30%;
+    height: 100%;
+    align-self: center;
+    align-items: center;
+    border-radius: 5px;
+    justify-content: center;
 }
 .btns-container--main-add-msg-cntainer {
-  height: 100px;
-  margin-top: 50px;
-  display: flex;
-  align-self: stretch;
-  justify-content: center;
+    height: 100px;
+    margin-top: 50px;
+    display: flex;
+    align-self: stretch;
+    justify-content: center;
 }
 .msg-add-btn-container {
-  margin: 5px;
-  /* display: flex;
+    margin: 5px;
+    /* display: flex;
     width: 100%;
     align-self: center;
     align-items: center;
@@ -363,8 +364,8 @@ form div {
     margin-top: 3%; */
 }
 .msg-skip-btn {
-  margin: 5px;
-  /* padding-top: 17px;
+    margin: 5px;
+    /* padding-top: 17px;
     padding-right: 30px;
     padding-bottom: 19px;
     padding-left: 30px;
@@ -377,7 +378,7 @@ form div {
 }
 
 .msg-add-btn {
-  /* display: flex;
+    /* display: flex;
     align-self: center;
     padding-top: 17px;
     padding-right: 30px;
@@ -406,210 +407,214 @@ form div {
 /* ----------------------------------GENERATE LINK VIEW -------------------------------- */
 
 .link-generate-btn-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  padding-top: 30px;
-  margin: 5px;
-  margin-top: 25px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    margin: 5px;
+    margin-top: 25px;
 }
 
 .link-generate-btn {
-  display: flex;
-  padding-top: 17px;
-  padding-right: 30px;
-  padding-bottom: 19px;
-  padding-left: 30px;
-  font-size: 20px;
-  line-height: 18px;
-  color: #3a4246;
-  background-color: #f7e590;
-  border-radius: 5px;
-  border: 1px solid black;
+    display: flex;
+    padding-top: 17px;
+    padding-right: 30px;
+    padding-bottom: 19px;
+    padding-left: 30px;
+    font-size: 20px;
+    line-height: 18px;
+    color: #3a4246;
+    background-color: #f7e590;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 
 .link-area {
-  display: block;
-  position: relative;
-  width: 60%;
-  margin: auto;
-  text-align: center;
-  padding-top: 30px;
-  padding-right: 30px;
-  padding-bottom: 30px;
-  padding-left: 30px;
-  font-size: 20px;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  /* line-height: 18px; */
-  color: #3a4246;
-  background-color: #fdfce5;
-  border-radius: 5px;
-  /* border: 1px solid black; */
-  margin-top: 3%;
+    display: block;
+    position: relative;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    font-size: 20px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    /* line-height: 18px; */
+    color: #3a4246;
+    background-color: #fdfce5;
+    border-radius: 5px;
+    /* border: 1px solid black; */
+    margin-top: 3%;
 }
 
 /* ----------------------------------VIEW SHARED ITEMS-------------------------------- */
 
 .shared-msg-area {
-  display: block;
-  white-space: pre-wrap;
-  position: relative;
-  width: 50%;
-  margin: auto;
-  text-align: center;
-  padding-top: 15px;
-  padding-right: 30px;
-  padding-bottom: 15px;
-  padding-left: 30px;
-  font-size: 20px;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  color: #3a4246;
-  background-color: #fdfce5;
-  border-radius: 5px;
+    display: block;
+    white-space: pre-wrap;
+    position: relative;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    font-size: 20px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    color: #3a4246;
+    background-color: #fdfce5;
+    border-radius: 5px;
 }
 
 .button-error,
 .button-secondary,
 .button-warning {
-  color: var(--color-white);
-  border-radius: 4px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  border-color: none;
+    color: var(--color-white);
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    border-color: none;
 }
 .button-secondary {
-  background: var(--color-submit-btn);
-  text-transform: uppercase;
-  font-size: 14px;
+    background: var(--color-submit-btn);
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
 /* ------------------------ CREATE BOOKMARK  -------------------------------- */
 .create-new-article-component {
-  height: 720px;
-  text-align: center;
+    height: 720px;
+    text-align: center;
 }
 .btns--create-new-article {
-  margin: 4px;
+    margin: 4px;
 }
 
 /* ---------------- LOGIN SIGN-UP CONTAINER WHEN USER LOG-IN OR SIGN UP---- */
 .login-page-container {
-  border: 2px solid var(--color-light-sand);
-  text-align: center;
-  height: 720px;
-  /* padding-bottom: 150px; */
+    border: 2px solid var(--color-light-sand);
+    text-align: center;
+    height: 720px;
+    /* padding-bottom: 150px; */
 }
 .login-signup-container {
-  background-color: var(--color-light-yellow);
-  display: flex;
-  justify-content: center;
-  padding: 5px;
+    background-color: var(--color-light-yellow);
+    display: flex;
+    justify-content: center;
+    padding: 5px;
 }
 .login-signup-container--right {
-  background-color: var(--color-yellow);
-  border-radius: 5px;
-  margin-left: 5px;
+    background-color: var(--color-yellow);
+    border-radius: 5px;
+    margin-left: 5px;
 }
 .login-signup-container--left {
-  background-color: var(--color-yellow);
-  border-radius: 5px;
+    background-color: var(--color-yellow);
+    border-radius: 5px;
 }
 .login-signup--link {
-  text-transform: capitalize;
-  color: white;
+    text-transform: capitalize;
+    color: white;
 }
 .login--form {
-  padding-top: 70px;
+    padding-top: 70px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
 }
 /* -------------------------------------- FOOTER ----------------------------*/
 .footer {
-  margin: 0px 5px 0px 5px;
-  padding: 1px 5px 0px 1px;
-  background-color: var(--color-light-yellow);
+    margin: 0px 5px 0px 5px;
+    padding: 1px 5px 0px 1px;
+    background-color: var(--color-light-yellow);
 }
 
 /* -----DROPBOX----------- */
 .css-1pcexqc-container {
-  width: 280px;
+    width: 280px;
 }
 /* .css-1pcexqc-container */
 .css-1jllj6i-control {
-  width: 200px;
-  height: 50px;
+    width: 200px;
+    height: 50px;
 }
 
 .css-1hwfws3 {
-  /* width: 100px; */
-  /* height: 40px; */
+    /* width: 100px; */
+    /* height: 40px; */
 }
 
 /* ----------------------------------DATAVIZ -------------------------------- */
 
 .dvSectionHeader {
-  display: flex;
-  background-color: #add8e6;
-  height: 70px;
-  margin: 0;
-  padding: 10;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    background-color: #add8e6;
+    height: 70px;
+    margin: 0;
+    padding: 10;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
 }
 .dataviz-box {
-  display: flex;
-  border: 1px solid black;
-  max-width: 80%;
-  flex-direction: column;
-  min-width: 500px;
-  margin: 10px;
-  border-radius: 10px;
+    display: flex;
+    border: 1px solid black;
+    max-width: 80%;
+    flex-direction: column;
+    min-width: 500px;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 .dataviz-row {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  min-width: 300px;
-  max-width: 95%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    min-width: 300px;
+    max-width: 95%;
 }
 
 tbody {
-  display: block;
-  overflow: auto;
-  height: 200px;
-  max-width: 800px;
-  min-width: 200px;
-  border: 1px solid black;
+    display: block;
+    overflow: auto;
+    height: 200px;
+    max-width: 800px;
+    min-width: 200px;
+    border: 1px solid black;
 }
 
 tr {
-  display: block;
-  text-align: left;
-  border: 1px solid black;
+    display: block;
+    text-align: left;
+    border: 1px solid black;
 }
 .highlight {
-  color: #48b2e7;
+    color: #48b2e7;
 }
 
 .articlerow {
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
 }
 
 .articledetails {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .articledetails a:hover {
-  /* width: 100%; */
-  /* height: 100%; */
-  display: block;
+    /* width: 100%; */
+    /* height: 100%; */
+    display: block;
 }
