@@ -41,8 +41,8 @@ const isValidUser = async (req, res, next) => {
     try {
         console.log("IN isValidUser MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        const authHeader = req.headers.authorization;
-        // const authHeader = "yo";
+        // const authHeader = req.headers.authorization;
+        const authHeader = "yo";
 
         // console.log("IS_VALID_USER req.headers: ", req.headers);
 

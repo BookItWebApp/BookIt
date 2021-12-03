@@ -28,62 +28,48 @@ const postArticle = async (req, res, next) => {
         let userId = req.body.userId;
         let tagsArr = req.body.article.tags;
 
+        // FIND ALL USER_ARTICLES THAT BELONG TO SPECIFIC USER
         const foundUserArticles = await UserArticle.findAllByUser(userId);
-        console.log("=> FOUND USER_ARTICLE NAMES > ", foundUserArticles);
+        // console.log("=> FOUND USER_ARTICLE NAMES > ", foundUserArticles);
+
+        // SEARCH AND COMPARE EXISTING ARTICLES_NAMES WITH REQUESTED ONE.
         let duplicateUserArticleName = foundUserArticles.some(
             (userArticle) => articleName === userArticle.name
         );
-        console.log(
-            "=> ANY DUPICATE ARTICLE NAME > ",
-            duplicateUserArticleName
-        );
+        // console.log(
+        //     "=> ANY DUPICATE ARTICLE NAME > ",
+        //     duplicateUserArticleName
+        // );
+        // IF ARTICLE EXISTS THEN RETURN MSG
         if (duplicateUserArticleName) {
             const error = Error("Bookmark name exists! Create a new name!");
             error.status = 400;
             console.log("DUPLICATED BOOKMARK NAME ERR > ", error);
             throw error;
         }
-        let duplicateUserArticleUrl = foundUserArticles.some((article) => {
-            console.log("article");
-            return articleName === article.name;
-        });
-        console.log(
-            "WHAT WE FOUND DUPLICATE ARTILCES URL > ",
-            duplicateUserArticleUrl
-        );
-        // FIND OR CREATE ARTICLE
-        const [article, isCreated] = await Article.findOrCreate({
-            where: { url: url },
-            transaction: t
-        });
-        console.log("NEW ARTICLE: ", article);
-        console.log("ARTICLE IS CREATED: ", isCreated);
 
-        // CHECK IF ARTICLE IS CREATED, IF NOT IT EXISTS
-        if (!isCreated) {
+        // SEARCH AND COMPARE EXISTING ARTICLES_URL WITH REQUESTED ONE.
+        let duplicateUserArticleUrl = foundUserArticles.some((userArticle) => {
+            console.log("userArticle.article_URL> ", userArticle.article.url);
+            return url === userArticle.article.url;
+        });
+        // console.log("FOUND DUPLICATE ARTILCES URL > ", duplicateUserArticleUrl);
+
+        // IF ARTICLE_URL EXISTS THEN RETURN MSG
+        if (duplicateUserArticleUrl) {
             const error = Error(
-                `Bookmark url:${url} exists! Please try another url!`
+                `Bookmark url: ${url} exists! Please try another url!`
             );
             error.status = 400;
             console.log("DUPLICATED URL ERR > ", error);
             throw error;
         }
 
-        // // FIND DUPLICATED USER BOOKMARKS
-        // const userBookmarks = await UserArticle.findOne({
-        //     where: {
-        //         name: articleName
-        //     }
-        // });
-
-        // // TODO: CREATE VALID BOOKMARK MIDDLEWARE
-        // console.log("FOUND DUPLICATED BOOKMARK > ", userBookmarks);
-        // if (userBookmarks) {
-        //     const error = Error("Bookmark name exists! Create a new name!");
-        //     error.status = 400;
-        //     console.log("DUPLICATED BOOKMARK NAME ERR > ", error);
-        //     throw error;
-        // }
+        // CREATE ARTICLE IF NO ERRORS
+        const article = await Article.create({
+            url: url
+        });
+        // console.log("=> NEW ARTICLE IS CREATED > ", article);
 
         // CREATE USER ARTICLE
         const userArticle = await UserArticle.create(
@@ -96,7 +82,7 @@ const postArticle = async (req, res, next) => {
             },
             { transaction: t }
         );
-        console.log("=> USER_ARTICLE IS CREATED: ", userArticle);
+        // console.log("=> USER_ARTICLE IS CREATED > ", userArticle);
 
         // // CREATE TAGS/TAGGING
         await Promise.all(
@@ -105,7 +91,7 @@ const postArticle = async (req, res, next) => {
                     where: { name: tagName },
                     transaction: t
                 });
-                console.log("=> TAGS ARE CREATED: ", tag);
+                // console.log("=> TAGS ARE CREATED > ", tag);
                 return await Tagging.create(
                     {
                         tagId: tag.id,
@@ -116,7 +102,7 @@ const postArticle = async (req, res, next) => {
             })
         );
         await t.commit();
-        // console.log('id ', userArticle.id)
+
         const createdArticle = await UserArticle.findByPk(
             userArticle.id,
             {
@@ -135,7 +121,7 @@ const postArticle = async (req, res, next) => {
             }
             // { transaction: t }
         );
-        console.log("=> ARTICLE TO SEND > ", createdArticle);
+        // console.log("=> ARTICLE TO SEND > ", createdArticle);
 
         await res.status(201).send(createdArticle);
     } catch (error) {
@@ -145,22 +131,7 @@ const postArticle = async (req, res, next) => {
     }
 };
 
-// const postArticle = async (req, res, next) => {
-//   try {
-//     const [article, created] = await Article.findOrCreate({
-//       where: { url: req.body.url },
-//     });
-//     if (created) {
-//       res.send(article).status(204);
-//     } else {
-//       res.send(article);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
-router.get("/", getallArticles);
-router.post("/", postArticle);
+router.get("/", isValidUser, getallArticles);
+router.post("/", isValidUser, postArticle);
 
 module.exports = router;

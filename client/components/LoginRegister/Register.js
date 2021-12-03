@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import { createNewUser } from "../../store/users";
 import { register } from "../../store/auth";
 
 function Register() {

@@ -14,7 +14,7 @@ function CreateArticle() {
 
     const user = useSelector((state) => state.auth);
     const articles = useSelector((state) => state.userArticles);
-    console.log("CreateArticle ARTICLES > ", articles);
+    // console.log("CreateArticle ARTICLES > ", articles);
 
     const [submitted, setSubmitted] = useState(false);
     const [bookmarkName, setBookmarkName] = useState("");
@@ -49,8 +49,8 @@ function CreateArticle() {
                 errObj = Object.assign(customErr);
                 // errObj = Object.assign(articles[articles.length - 1]);
 
-                console.log("CUSTOM OBJ ERR > ", errObj);
-                console.log("tagsArr > ", tagsArr);
+                // console.log("CUSTOM OBJ ERR > ", errObj);
+                // console.log("tagsArr > ", tagsArr);
             } else if (article.taggings) {
                 return article.taggings.map((tag) =>
                     tagsArr.push({ value: tag.tag.name, label: tag.tag.name })
@@ -65,8 +65,8 @@ function CreateArticle() {
     };
     uniqueTaggingOptions(articles);
 
-    console.log("FINAL CUSTOM OBJ > ", errObj);
-    console.log("FINAL tagOptions > ", tagOptions);
+    // console.log("FINAL CUSTOM OBJ > ", errObj);
+    // console.log("FINAL tagOptions > ", tagOptions);
 
     // TEST
     // Hook posts
