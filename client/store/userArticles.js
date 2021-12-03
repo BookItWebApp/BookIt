@@ -71,13 +71,13 @@ export const getUserArticles = (id, token) => {
 export const createNewArticle = (article, userId, history) => {
     return async (dispatch) => {
         try {
-            console.log("THUNK CREATE A NEW ARTICLE :", article);
+            // console.log("THUNK CREATE A NEW ARTICLE :", article);
 
             const { data } = await axios.post(`/api/articles`, {
                 article,
                 userId
             });
-            console.log("THUNK DATA >", data);
+            // console.log("THUNK DATA >", data);
             dispatch(_createUserBookmark(data));
             history.push("/home");
         } catch (err) {
@@ -154,7 +154,7 @@ export const deleteProduct = (articleId, article) => {
                     article
                 }
             );
-            console.log("DELETED DATA > ", data);
+            // console.log("DELETED DATA > ", data);
             dispatch(_deleteUserBookmark(data));
             // history.push("/home");
         } catch (err) {
