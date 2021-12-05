@@ -1,7 +1,7 @@
 {
   "name": "book-it",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Bookmarks managing application",
   "main": "index.js",
   "engines": {
     "node": "14.17.1",
