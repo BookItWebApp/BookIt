@@ -19,10 +19,12 @@ export function UserArticlesTab() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  //get all user's articles
   useEffect(() => {
     dispatch(getUserArticles(user.id));
   }, [dispatch]);
 
+  //set filtered bookmarks list to store for sharing and navigate to 'add sharing message' step
   function clickHandlerShare() {
     const arrToShare = grid.current.api.rowModel.rowsToDisplay.map(
       (node) => node.data.id
@@ -31,10 +33,12 @@ export function UserArticlesTab() {
     history.push('/share/message');
   }
 
+  //navigate to homepage
   function clickHandlerGridView() {
     history.push('/home');
   }
 
+  //consolidated source data for ag grid table view creation
   const articlesFields = articles.map((article) => {
     let fields = {};
     fields.id = article.id;
@@ -52,18 +56,20 @@ export function UserArticlesTab() {
     return fields;
   });
 
-  const myCellRenderer = (params) =>
-    `<a href="${params.value}">${params.value}</a>`;
+  //custom display format for url column so it's content displayed as hyperlinks
+  function urlRenderer(params) {
+    return <a href={params.value}> {params.value} </a>;
+  }
 
+  //default table column format settings
   const defaultColDef = {
-    flex: 1,
     resizable: true,
     sortable: true,
     wrapText: true,
     autoHeight: true,
     floatingFilter: true,
     filter: true,
-    cellRenderer: myCellRenderer,
+    cellRenderer: null,
   };
 
   const grid = useRef(null);
@@ -86,32 +92,20 @@ export function UserArticlesTab() {
             domLayout="autoHeight"
             animateRows={true}
             frameworkComponents={{
-              hrefRenderer: myCellRenderer,
+              hrefRenderer: urlRenderer,
               editButtonRenderer: EditButtonRenderer,
               deleteButtonRenderer: DeleteButtonRenderer,
             }}
           >
+            <AgGridColumn field="name" flex="3"></AgGridColumn>
             <AgGridColumn
-              field="name"
-              cellRenderer="null"
+              field="url"
+              cellRenderer="hrefRenderer"
               flex="3"
             ></AgGridColumn>
-            <AgGridColumn field="url" flex="3"></AgGridColumn>
-            <AgGridColumn
-              field="tags"
-              cellRenderer="null"
-              flex="2"
-            ></AgGridColumn>
-            <AgGridColumn
-              field="note"
-              cellRenderer="null"
-              flex="2"
-            ></AgGridColumn>
-            <AgGridColumn
-              field="read"
-              cellRenderer="null"
-              flex="1"
-            ></AgGridColumn>
+            <AgGridColumn field="tags" flex="2"></AgGridColumn>
+            <AgGridColumn field="note" flex="2"></AgGridColumn>
+            <AgGridColumn field="read" flex="1"></AgGridColumn>
             <AgGridColumn
               field="edit"
               cellRenderer="editButtonRenderer"
