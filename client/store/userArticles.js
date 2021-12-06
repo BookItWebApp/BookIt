@@ -71,10 +71,6 @@ export const getUserArticles = (id, token) => {
 export const createNewArticle = (article, userId, history, token) => {
     return async (dispatch) => {
         try {
-            console.log("THUNK CREATE A NEW ARTICLE :", article);
-            console.log("THUNK CREATE A NEW ARTICLE userID=", userId);
-            console.log("THUNK CREATE A NEW ARTICLE token=", token);
-
             const { data } = await axios.post(
                 `/api/articles`,
                 {
