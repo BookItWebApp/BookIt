@@ -29,8 +29,6 @@ const Login = () => {
         await dispatch(authenticate(username, password, formName));
     };
 
-    console.log("LIGIN AUTH > ", auth);
-
     return (
         <div>
             {isLoggedIn ? (

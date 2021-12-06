@@ -118,8 +118,8 @@ const postArticle = async (req, res, next) => {
                         }
                     }
                 ]
-            }
-            // { transaction: t }
+            },
+            { transaction: t }
         );
         // console.log("=> ARTICLE TO SEND > ", createdArticle);
 
@@ -127,7 +127,7 @@ const postArticle = async (req, res, next) => {
     } catch (error) {
         console.log("CREATE ARTICLE ERR: ", error);
         next(error);
-        // await t.rollback();
+        await t.rollback();
     }
 };
 

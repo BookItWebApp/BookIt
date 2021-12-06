@@ -28,7 +28,7 @@ function Register() {
         event.preventDefault();
         setSubmitted(true);
         const formName = event.target.name;
-        console.log("REGISTER USER SUBMIT < ", user);
+        // console.log("REGISTER USER SUBMIT < ", user);
 
         await dispatch(register(user, formName));
     };
