@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { EditBookmark } from './EditBookmark';
 
 export function EditButtonRenderer(params) {
-  return <button>Edit</button>;
+
+  const [editMode, setEditMode] = useState(false);
+  const [editObj, setEditObj] = useState({})
+
+  return <div>{(editMode) ? <div><EditBookmark /></div> : <button onClick={() => setEditMode(true)}>Edit</button>}</div>
+
+  // return <button>Edit</button>;
 
   //   const refresh = (param) => {
   //     return true;

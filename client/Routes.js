@@ -38,6 +38,7 @@ class Routes extends Component {
             <Route exact path="/share/sharinglink" component={SharingLink} />
             <Route path="/share/sharinglink" component={ViewSharing} />
             <Route path="/metrics" component={dataDirectory} />
+            <Route path="/" component={UserArticles} />
           </Switch>
         ) : (
           <Switch>
