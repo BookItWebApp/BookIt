@@ -74,7 +74,12 @@ export const createNewArticle = (article, userId, history, token) => {
             const { data } = await axios.post(
                 `/api/articles`,
                 {
-                    article,
+                    article: {
+                        url: article.bookmarkUrl,
+                        name: article.bookmarkName,
+                        note: article.note,
+                        tags: article.tags
+                    },
                     userId
                 },
                 {
