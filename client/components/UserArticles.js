@@ -74,10 +74,15 @@ export function UserArticles() {
             </div>
         );
     }
+    // if (!token || token === "") {
+    //     console.log("PLEASE, ADD TOKEN: ");
+    //     return <div>please login</div>;
+    // } else {
+    //     console.log("PLEASE TOKEN: ", token);
+    // }
 
     return (
         <div className="main-user-article--container">
-            {!token && <div>please login</div>}
             <div className="left-side--user-article-container">
                 <Sidebar />
             </div>

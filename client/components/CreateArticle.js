@@ -83,7 +83,7 @@ function CreateArticle() {
         }
 
         const newBookmark = { bookmarkName, bookmarkUrl, note, tags };
-        await dispatch(createNewArticle(newBookmark, user.id, history));
+        await dispatch(createNewArticle(newBookmark, user.id, history, token));
     };
 
     return (

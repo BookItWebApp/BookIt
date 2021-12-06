@@ -39,14 +39,14 @@ const validUserOrEmail = async (req, res, next) => {
 //
 const isValidUser = async (req, res, next) => {
     try {
-        // console.log("IN isValidUser MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log("IN isValidUser MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         const authHeader = req.headers.authorization;
         // const authHeader = "yo";
 
-        // console.log("IS_VALID_USER req.headers: ", req.headers);
+        console.log("IS_VALID_USER req.headers: ", req.headers);
 
-        // console.log("IS_VALID_USER authHeader: ", authHeader);
+        console.log("IS_VALID_USER authHeader: ", authHeader);
 
         if (!authHeader) {
             return res.status(403).json({
@@ -56,10 +56,12 @@ const isValidUser = async (req, res, next) => {
         }
 
         const user = await User.findByToken(authHeader);
-        // console.log("IS_VALID_USER user: ", user);
-        // console.log("IS_VALID_USER req.params: ", req.params);
+        console.log("IS_VALID_USER user: ", user);
+        console.log("IS_VALID_USER req.params: ", req.params);
+        console.log("IS_VALID_USER req.BODY: ", req.body);
+        console.log("IS_VALID_USER req.BODY_USER_ID: ", req.body.userId);
 
-        if (user.id != req.params.id) {
+        if (user.id != req.body.userId) {
             return res.status(403).json({
                 status: 403,
                 message: "Access denied! Permission required!"

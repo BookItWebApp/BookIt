@@ -68,15 +68,25 @@ export const getUserArticles = (id, token) => {
 };
 
 // CREATE A SINGLE ARTICLE
-export const createNewArticle = (article, userId, history) => {
+export const createNewArticle = (article, userId, history, token) => {
     return async (dispatch) => {
         try {
-            // console.log("THUNK CREATE A NEW ARTICLE :", article);
+            console.log("THUNK CREATE A NEW ARTICLE :", article);
+            console.log("THUNK CREATE A NEW ARTICLE userID=", userId);
+            console.log("THUNK CREATE A NEW ARTICLE token=", token);
 
-            const { data } = await axios.post(`/api/articles`, {
-                article,
-                userId
-            });
+            const { data } = await axios.post(
+                `/api/articles`,
+                {
+                    article,
+                    userId
+                },
+                {
+                    headers: {
+                        authorization: token
+                    }
+                }
+            );
             // console.log("THUNK DATA >", data);
             dispatch(_createUserBookmark(data));
             history.push("/home");

@@ -50,7 +50,7 @@ const postArticle = async (req, res, next) => {
 
         // SEARCH AND COMPARE EXISTING ARTICLES_URL WITH REQUESTED ONE.
         let duplicateUserArticleUrl = foundUserArticles.some((userArticle) => {
-            console.log("userArticle.article_URL> ", userArticle.article.url);
+            // console.log("userArticle.article_URL> ", userArticle.article.url);
             return url === userArticle.article.url;
         });
         // console.log("FOUND DUPLICATE ARTILCES URL > ", duplicateUserArticleUrl);
@@ -131,7 +131,7 @@ const postArticle = async (req, res, next) => {
     }
 };
 
-router.get("/", isValidUser, getallArticles);
+router.get("/", getallArticles);
 router.post("/", isValidUser, postArticle);
 
 module.exports = router;
