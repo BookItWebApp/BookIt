@@ -30,22 +30,6 @@ const postArticle = async (req, res, next) => {
         const foundUserArticles = await UserArticle.findAllByUser(userId);
         // console.log("=> FOUND USER_ARTICLE NAMES > ", foundUserArticles);
 
-        // SEARCH AND COMPARE EXISTING ARTICLES_NAMES WITH REQUESTED ONE.
-        let duplicateUserArticleName = foundUserArticles.some(
-            (userArticle) => articleName === userArticle.name
-        );
-        // console.log(
-        //     "=> ANY DUPICATE ARTICLE NAME > ",
-        //     duplicateUserArticleName
-        // );
-        // IF ARTICLE EXISTS THEN RETURN MSG
-        if (duplicateUserArticleName) {
-            const error = Error("Bookmark name exists! Create a new name!");
-            error.status = 400;
-            console.log("DUPLICATED BOOKMARK NAME ERR > ", error);
-            throw error;
-        }
-
         // SEARCH AND COMPARE EXISTING ARTICLES_URL WITH REQUESTED ONE.
         let duplicateUserArticleUrl = foundUserArticles.some((userArticle) => {
             // console.log("userArticle.article_URL> ", userArticle.article.url);
@@ -64,9 +48,12 @@ const postArticle = async (req, res, next) => {
         }
 
         // CREATE ARTICLE IF NO ERRORS
-        const article = await Article.create({
-            url: url
-        });
+        const article = await Article.create(
+            {
+                url: url
+            },
+            { transaction: t }
+        );
         // console.log("=> NEW ARTICLE IS CREATED > ", article);
 
         // CREATE USER ARTICLE
@@ -99,7 +86,6 @@ const postArticle = async (req, res, next) => {
                 );
             })
         );
-        await t.commit();
 
         const createdArticle = await UserArticle.findByPk(
             userArticle.id,
@@ -120,6 +106,7 @@ const postArticle = async (req, res, next) => {
             { transaction: t }
         );
         // console.log("=> ARTICLE TO SEND > ", createdArticle);
+        await t.commit();
 
         await res.status(201).send(createdArticle);
     } catch (error) {

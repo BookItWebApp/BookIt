@@ -72,7 +72,7 @@ User.findByToken = async function (token) {
         }
         return user;
     } catch (ex) {
-        const error = Error("bad token");
+        const error = Error("Your request is not authorized!");
         error.status = 401;
         throw error;
     }

@@ -2,17 +2,25 @@ const User = require("../db/models/User.js");
 
 const validUserOrEmail = async (req, res, next) => {
     try {
-        // console.log("IN validUserOrEmail MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>");
+        if (
+            req.body.username === "" ||
+            req.body.email === "" ||
+            req.body.password === ""
+        ) {
+            const error = Error("Failed! Input can not be empty!");
+            error.status = 401;
+            throw error;
+        }
+
         let existUser = await User.findOne({
             where: {
                 username: req.body.username
             }
         });
-        // console.log("INVALID_USER_OR_EMAIL FOUND EXISTING_USER > ", existUser);
+
         if (existUser) {
             const error = Error("Failed! Username is already in use!");
             error.status = 401;
-            // console.log("INVALID_USER_OR_EMAIL FOUND EXISTING_USER > ", error);
             throw error;
         }
 
@@ -21,11 +29,10 @@ const validUserOrEmail = async (req, res, next) => {
                 email: req.body.email
             }
         });
-        // console.log("INVALID_USER_OR_EMAIL FOUND EXISTING_EMAIL: ", existEmail);
+
         if (existEmail) {
             const error = Error("Failed! Email is already in use!");
             error.status = 400;
-            // console.log("INVALID_USER_OR_EMAIL FOUND EXISTING_EMAIL ERR > ", error);
             throw error;
         }
 
@@ -39,33 +46,21 @@ const validUserOrEmail = async (req, res, next) => {
 //
 const isValidUser = async (req, res, next) => {
     try {
-        console.log("IN isValidUser MIDDLEWARE >>>>>>>>>>>>>>>>>>>>>>>>>>");
-
         const authHeader = req.headers.authorization;
         // const authHeader = "yo";
 
-        // console.log("IS_VALID_USER req.headers: ", req.headers);
-
-        // console.log("IS_VALID_USER authHeader: ", authHeader);
-
         if (!authHeader) {
-            return res.status(403).json({
-                status: 403,
-                message: "Access denied! Permission required!"
-            });
+            const error = Error("Your request is not authorized!");
+            error.status = 401;
+            throw error;
         }
 
         const user = await User.findByToken(authHeader);
-        // console.log("IS_VALID_USER user: ", user);
-        // console.log("IS_VALID_USER req.params: ", req.params);
-        // console.log("IS_VALID_USER req.BODY: ", req.body);
-        // console.log("IS_VALID_USER req.BODY_USER_ID: ", req.body.userId);
 
         if (user.id != req.body.userId) {
-            return res.status(403).json({
-                status: 403,
-                message: "Access denied! Permission required!"
-            });
+            const error = Error("Your request is not authorized!");
+            error.status = 401;
+            throw error;
         }
         next();
     } catch (err) {
