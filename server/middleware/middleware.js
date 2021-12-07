@@ -7,7 +7,7 @@ const validUserOrEmail = async (req, res, next) => {
             req.body.email === "" ||
             req.body.password === ""
         ) {
-            const error = Error("Failed! Input can not be empty!");
+            const error = Error(" ");
             error.status = 401;
             throw error;
         }
