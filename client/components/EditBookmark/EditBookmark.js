@@ -1,52 +1,49 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { _setMessage } from '../../store/sharing';
 import { useHistory } from 'react-router-dom';
+import { updBookmark } from '../../store/userArticles';
 
 export function EditBookmark(props) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth);
+  const bookmark = props.bookmark;
 
-  const [url, setUrl] = useState(props.url);
-  const [bookmarkName, setBookmarkName] = useState(props.bookmarkName);
-  const [note, setNote] = useState(props.note);
-  const [tags, setTags] = useState(props.tags);
-  const [read, setRead] = useState(props.isRead);
+  const [url, setUrl] = useState(bookmark.url);
+  const [bookmarkName, setBookmarkName] = useState(bookmark.bookmarkName);
+  const [note, setNote] = useState(bookmark.note);
+  const [tags, setTags] = useState(bookmark.tags);
+  const [read, setRead] = useState(bookmark.isRead);
 
-    //performes actions after submit button is hit
-    const submitChanges = useCallback(
-      async (event) => {
-        event.preventDefault();
-        const errCallback = () => toast('Something went wrong!');
-
-        //gets the token value from the browser cookies
-        // let cookie = await chrome.cookies.get({
-        // url: `${process.env.API_URL}*`,
-        // name: 'auth',
-        // });
-        // const token = cookie.value;
-
-        try {
-          let result = await editBookmark(
-            props.id,
-            bookmarkName,
-            note,
-            tags,
-            isRead
-          );
-          if (result.status === 201 || result.status === 200) {
-            toast('Changes Saved!', {
-              onClose: () => {
-                window.close();
-              },
-            });
-          } else {
-            errCallback();
-          }
-        } catch (err) {
+  //performes actions after submit button is hit
+  const submitChanges = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const errCallback = () => toast('Something went wrong!');
+      try {
+        let bookmark = {
+          id: bookmark.id,
+          name: bookmarkName,
+          note: note,
+          readAt: read,
+          tags: tags,
+        };
+        let result = await updBookmark(bookmark, user.id);
+        if (result.status === 201 || result.status === 200) {
+          toast('Changes Saved!', {
+            onClose: () => {
+              window.close();
+            },
+          });
+        } else {
           errCallback();
         }
-      },
-      [tab, bookmarkName, note, tags]
-    );
+      } catch (err) {
+        errCallback();
+      }
+    },
+    [tab, bookmarkName, note, tags]
+  );
 
   return (
     <div className="ext-main-container">
@@ -109,7 +106,6 @@ export function EditBookmark(props) {
       </form>
     </div>
   );
-
 
   // propsId
   // const history = useHistory();

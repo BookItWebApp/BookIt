@@ -97,7 +97,11 @@ const changeArticle = async (req, res, next) => {
     const id = req.body.article.id;
 
     const updateArticle = await UserArticle.update(
-      { ...req.body.article },
+      {
+        name: req.body.article.name,
+        note: req.body.article.note,
+        readAt: req.body.article.readAt,
+      },
       {
         where: { id: id },
       }
