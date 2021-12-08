@@ -3,6 +3,7 @@ const {
   models: { Article, UserArticle, Tag, Tagging },
 } = require('../db/index');
 const sequelize = require('../db/db');
+const { date } = require("faker");
 
 const getallArticles = async (req, res, next) => {
     try {
@@ -16,11 +17,7 @@ const getallArticles = async (req, res, next) => {
 // POST /api/articles
 const postArticle = async (req, res, next) => {
   const t = await sequelize.transaction({ autocommit: false });
-  // console.log(req.body);
   try {
-    //console.log('POST ARTICLE BODY: ', req.body);
-    //define in higer scope
-
     let url = req.body.article.url;
     let articleName = req.body.article.name;
     let articleNote = req.body.article.note;
@@ -33,7 +30,6 @@ const postArticle = async (req, res, next) => {
       where: { url: url },
       transaction: t,
     });
-    // console.log("ARTICLE IS CREATED: ", article);
 
     // CREATE USER ARTICLE
     const userArticle = await UserArticle.create(
@@ -46,16 +42,15 @@ const postArticle = async (req, res, next) => {
       },
       { transaction: t }
     );
-    // console.log("=> USER_ARTICLE IS CREATED: ", userArticle);
 
-    // // CREATE TAGS/TAGGING
+    // CREATE TAGS/TAGGING
     await Promise.all(
       tagsArr.map(async (tagName) => {
         let [tag, created] = await Tag.findOrCreate({
           where: { name: tagName },
           transaction: t,
         });
-        // console.log('=> TAGS IS CREATED: ', tag);
+
         return await Tagging.create(
           {
             tagId: tag.id,
@@ -84,7 +79,6 @@ const postArticle = async (req, res, next) => {
       },
       { transaction: t }
     );
-    // console.log("ARTICLE TO SEND > ", createdArticle);
 
     await t.commit();
 
@@ -96,22 +90,102 @@ const postArticle = async (req, res, next) => {
   }
 };
 
-// const postArticle = async (req, res, next) => {
-//   try {
-//     const [article, created] = await Article.findOrCreate({
-//       where: { url: req.body.url },
-//     });
-//     if (created) {
-//       res.send(article).status(204);
-//     } else {
-//       res.send(article);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+// PUT /api/articles
+const changeArticle = async (req, res, next) => {
+  // const t = await sequelize.transaction({ autocommit: false });
+  try {
+    let bookmarkId = req.body.id
+    let bookmarkName = req.body.name;
+    let bookmarkNote = req.body.note;
+    let read = req.body.read
+    let tagsArr = req.body.tags;
+
+     const userArticle = await UserArticle.findByPk(
+      id
+      // { transaction: t }
+    );
+
+    let newRead=null;
+
+    if (userArticle.readAt && read){
+      newRead=userArticle.readAt
+    } else if (!userArticle.readAt && read) {
+      newRead = date
+    }
+
+    // UPDATE USER ARTICLE
+
+    let updatedUserArticle = await UserArticle.update({
+      name: bookmarkName,
+      note: bookmarkNote,
+      readAt: newRead
+    }, {
+      where: { id: bookmarkId }
+    });
+
+
+
+    // create(
+    //   {
+    //     name: articleName,
+    //     userId: userId,
+    //     articleId: article.id,
+    //     isPrivate: isPrivate,
+    //     note: articleNote,
+    //   },
+    //   { transaction: t }
+    // );
+
+    // UPDATE TAGS/TAGGING
+    // await Promise.all(
+    //   tagsArr.map(async (tagName) => {
+    //     let [tag, created] = await Tag.findOrCreate({
+    //       where: { name: tagName },
+    //       transaction: t,
+    //     });
+
+    //     return await Tagging.create(
+    //       {
+    //         tagId: tag.id,
+    //         userArticlesId: userArticle.id,
+    //       },
+    //       { transaction: t }
+    //     );
+    //   })
+    // );
+
+    // const createdArticle = await UserArticle.findByPk(
+    //   userArticle.id,
+    //   {
+    //     include: [
+    //       {
+    //         model: Article,
+    //         attributes: ['id', 'url'],
+    //       },
+    //       {
+    //         model: Tagging,
+    //         include: {
+    //           model: Tag,
+    //         },
+    //       },
+    //     ],
+    //   },
+    //   { transaction: t }
+    // );
+
+    // await t.commit();
+
+    res.status(201).send(updatedUserArticle);
+  } catch (error) {
+    // await t.rollback();
+    next(error);
+  }
+};
+
+
 
 router.get("/", getallArticles);
 router.post("/", postArticle);
+router.put("/", changeArticle);
 
 module.exports = router;

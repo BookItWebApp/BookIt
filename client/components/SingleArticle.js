@@ -12,28 +12,19 @@ export function SingleArticle(props) {
     const taggings = article.taggings;
     const tags = article.tags;
 
-    // console.log("ARTiCLE> ", article);
-
-    // useEffect(() => {
-    //   dispatch(previewArticle(article.article.url, article.id));
-    // }, [dispatch]);
-
     function markAsCompleted() {
         if (article.readAt) {
             article.readAt = null;
         } else {
             article.readAt = new Date().toISOString();
         }
-        // console.log("MARK AS REEAD > ", article);
         dispatch(markUserArticle(user.id, article));
     }
 
     function deleteBookmark() {
-        // console.log("DELTE", user.id, article);
         dispatch(deleteProduct(article.id, article));
     }
 
-    //
     return (
         <div className="single-article--container">
             <div className="title-delete--single-article--container">

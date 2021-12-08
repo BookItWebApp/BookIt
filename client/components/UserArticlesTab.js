@@ -58,7 +58,7 @@ export function UserArticlesTab() {
 
   //custom display format for url column so it's content displayed as hyperlinks
   function urlRenderer(params) {
-    return <a href={params.value}> {params.value} </a>;
+    return <a href={params.value}> {(params.value.length>100)? params.value.slice(0, 100) + "..." : params.value} </a>;
   }
 
   //default table column format settings
