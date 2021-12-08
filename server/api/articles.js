@@ -1,20 +1,20 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Article, UserArticle, Tag, Tagging },
 } = require('../db/index');
 const sequelize = require('../db/db');
-const { date } = require("faker");
+const { date } = require('faker');
 
 const getallArticles = async (req, res, next) => {
-    try {
-        const articles = await Article.findAll();
-        res.send(articles);
-    } catch (error) {
-        next(error);
-    }
+  try {
+    const articles = await Article.findAll();
+    res.send(articles);
+  } catch (error) {
+    next(error);
+  }
 };
 
-// POST /api/articles
+// POST /api/articles - CREATES USER ARTICLE WITH ALL ATTRIBUTES (BOTH FROM WEB AND EXTENSION)
 const postArticle = async (req, res, next) => {
   const t = await sequelize.transaction({ autocommit: false });
   try {
@@ -90,88 +90,33 @@ const postArticle = async (req, res, next) => {
   }
 };
 
-// PUT /api/articles
+// PUT /api/articles - UPDATES USER ARTICLE (ALL ATTRIBUTES, FROM EDIT BOOKMARK COMPONENT)
 const changeArticle = async (req, res, next) => {
   // const t = await sequelize.transaction({ autocommit: false });
   try {
-    let bookmarkId = req.body.id
-    let bookmarkName = req.body.name;
-    let bookmarkNote = req.body.note;
-    let read = req.body.read
-    let tagsArr = req.body.tags;
+    const id = req.body.article.id;
 
-     const userArticle = await UserArticle.findByPk(
-      id
-      // { transaction: t }
+    const updateArticle = await UserArticle.update(
+      { ...req.body.article },
+      {
+        where: { id: id },
+      }
     );
 
-    let newRead=null;
-
-    if (userArticle.readAt && read){
-      newRead=userArticle.readAt
-    } else if (!userArticle.readAt && read) {
-      newRead = date
-    }
-
-    // UPDATE USER ARTICLE
-
-    let updatedUserArticle = await UserArticle.update({
-      name: bookmarkName,
-      note: bookmarkNote,
-      readAt: newRead
-    }, {
-      where: { id: bookmarkId }
+    const updatedUserArticle = await UserArticle.findByPk(id, {
+      include: [
+        {
+          model: Article,
+          attributes: ['id', 'url'],
+        },
+        {
+          model: Tagging,
+          include: {
+            model: Tag,
+          },
+        },
+      ],
     });
-
-
-
-    // create(
-    //   {
-    //     name: articleName,
-    //     userId: userId,
-    //     articleId: article.id,
-    //     isPrivate: isPrivate,
-    //     note: articleNote,
-    //   },
-    //   { transaction: t }
-    // );
-
-    // UPDATE TAGS/TAGGING
-    // await Promise.all(
-    //   tagsArr.map(async (tagName) => {
-    //     let [tag, created] = await Tag.findOrCreate({
-    //       where: { name: tagName },
-    //       transaction: t,
-    //     });
-
-    //     return await Tagging.create(
-    //       {
-    //         tagId: tag.id,
-    //         userArticlesId: userArticle.id,
-    //       },
-    //       { transaction: t }
-    //     );
-    //   })
-    // );
-
-    // const createdArticle = await UserArticle.findByPk(
-    //   userArticle.id,
-    //   {
-    //     include: [
-    //       {
-    //         model: Article,
-    //         attributes: ['id', 'url'],
-    //       },
-    //       {
-    //         model: Tagging,
-    //         include: {
-    //           model: Tag,
-    //         },
-    //       },
-    //     ],
-    //   },
-    //   { transaction: t }
-    // );
 
     // await t.commit();
 
@@ -182,10 +127,8 @@ const changeArticle = async (req, res, next) => {
   }
 };
 
-
-
-router.get("/", getallArticles);
-router.post("/", postArticle);
-router.put("/", changeArticle);
+router.get('/', getallArticles);
+router.post('/', postArticle);
+router.put('/', changeArticle);
 
 module.exports = router;
