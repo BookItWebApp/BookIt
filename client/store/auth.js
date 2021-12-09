@@ -39,7 +39,6 @@ export const me = () => async (dispatch) => {
               .find((row) => row.startsWith("auth="))
               .split("=")[1];
 
-    // console.log("AUTH_ME TOKEN > ", token);
     if (token) {
         //checking if cooking found above. If yes we are in extension get user auth info from full localhost api url
         const res = cookie
@@ -54,6 +53,7 @@ export const me = () => async (dispatch) => {
                       authorization: token
                   }
               });
+
         //set state with auth info
         return dispatch(setAuth(res.data));
     } else {
@@ -100,20 +100,16 @@ export const authenticate =
         }
     };
 
-export const register = (user, method) => {
+export const signup = (user, method) => {
     return async (dispatch) => {
         try {
-            console.log("REGISTER THUNK USER > ", user);
-
             const { data } = await axios.post(`/auth/${method}`, user);
-            console.log("REGISTER THUNK DATA > ", data);
 
             window.localStorage.setItem(TOKEN, data.token);
             dispatch(me());
-
             history.push("/login");
         } catch (authError) {
-            console.log("THUNK CATCH REGISTER ERR:", authError);
+            console.log("THUNK CATCH signup ERR:", authError);
             return dispatch(setAuth({ error: authError }));
         }
     };

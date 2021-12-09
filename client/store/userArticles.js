@@ -88,7 +88,7 @@ export const createNewArticle = (article, userId, history, token) => {
                     }
                 }
             );
-            // console.log("THUNK DATA >", data);
+
             dispatch(_createUserBookmark(data));
             history.push("/home");
         } catch (err) {
@@ -135,14 +135,10 @@ export const getExtensionUserArticles = (id) => {
 export const markUserArticle = (userId, article) => {
     return async (dispatch) => {
         try {
-            // console.log("UPDATE USER_ID > ", userId);
-            // console.log("UPDATE ARTICLE > ", article);
-
             const { data } = await axios.put(`/api/userArticles/${userId}`, {
                 article,
                 userId
             });
-            // console.log("THUNK UPDATE DATA > ", data);
 
             dispatch(_readUserBookmark(data));
             // history.push("/home");
@@ -156,16 +152,13 @@ export const markUserArticle = (userId, article) => {
 export const deleteProduct = (articleId, article) => {
     return async (dispatch) => {
         try {
-            // console.log("DELETED DATA USER_ID > ", articleId);
-            // console.log("DELETED DATA ARTICLE > ", article);
-
             const { data } = await axios.delete(
                 `/api/userArticles/${articleId}`,
                 {
                     article
                 }
             );
-            // console.log("DELETED DATA > ", data);
+
             dispatch(_deleteUserBookmark(data));
             // history.push("/home");
         } catch (err) {
@@ -194,8 +187,6 @@ export default function userArticleReducer(state = initialState, action) {
         case DELETE_USER_BOOKMARK:
             return state.filter((article) => article.id !== action.article.id);
         case CREATE_USER_BOOKMARK_ERROR:
-            // console.log("REDUCER ERR STATE > ", state);
-            // console.log("REDUCER ERR action.error > ", action.error);
             return [...state, action.error];
         default:
             return state;

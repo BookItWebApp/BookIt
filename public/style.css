@@ -377,33 +377,6 @@ form div {
     border: 1px solid black; */
 }
 
-.msg-add-btn {
-    /* display: flex;
-    align-self: center;
-    padding-top: 17px;
-    padding-right: 30px;
-    padding-bottom: 19px;
-    padding-left: 30px;
-    font-size: 20px;
-    line-height: 18px;
-    color: #3a4246;
-    background-color: #dafdff;
-    border-radius: 5px;
-    border: 1px solid black; */
-}
-
-/* .msg-skip-btn-container {
-    display: block;
-    position: relative;
-    width: auto;
-    text-align: right;
-    align-self: right;
-    align-items: right;
-    justify-content: right;
-    margin-right: 5%;
-    margin-top: 5%;
-} */
-
 /* ----------------------------------GENERATE LINK VIEW -------------------------------- */
 
 .link-generate-btn-container {
@@ -525,12 +498,60 @@ form div {
     text-transform: capitalize;
     color: white;
 }
-.login--form {
-    padding-top: 70px;
-    display: block;
+/* new register css*/
+.signup-login--container {
+    width: 400px;
     margin: 0 auto;
+    padding: 30px 0;
+}
+.signup-login--form {
+    color: var(--color-white);
+    background-color: var(--color-bookmars-background);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    margin-bottom: 15px;
+    padding: 30px;
+}
+.signup-login-header--form {
+    color: #333;
+    font-weight: bold;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+.signup-login-header--form h2,
+p {
     text-align: center;
-    width: 50%;
+}
+.register--reset-btns {
+    display: flex;
+    justify-content: center;
+}
+.register--reset-btns button {
+    margin: 1px;
+}
+.signup-login--account-exist {
+    color: #333;
+}
+.login-click {
+    border: none;
+    color: blue;
+    background-color: var(--color-bookmars-background);
+}
+.signup-login-error-response {
+    color: red;
+    text-align: end;
+}
+.signup-login-footer--form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.signup-login--forgot-password {
+    color: blue;
+}
+.col-form-label {
+    color: #333;
+    text-align: center;
 }
 /* -------------------------------------- FOOTER ----------------------------*/
 .footer {

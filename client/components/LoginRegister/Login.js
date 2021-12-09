@@ -1,112 +1,140 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+
 import { authenticate } from "../../store";
 
 const Login = () => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state) => state.auth.id);
     const auth = useSelector((state) => state.auth);
-
-    const [inputs, setInputs] = useState({
-        username: "",
-        password: ""
-    });
-    const [submitted, setSubmitted] = useState(false);
-    const { username, password } = inputs;
-
-    //
-    function handleChange(event) {
-        const { name, value } = event.target;
-        setInputs((inputs) => ({ ...inputs, [name]: value }));
+    const history = useHistory();
+    function clickToRegister() {
+        history.push("/signup");
     }
 
-    //
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setSubmitted(true);
-        const formName = event.target.name;
-        await dispatch(authenticate(username, password, formName));
+    // SETTING FORM VALIDATION RULES
+    const validationSchema = Yup.object().shape({
+        username: Yup.string().required("Username is required"),
+        password: Yup.string().required("Password is required")
+    });
+    const formOptions = { resolver: yupResolver(validationSchema) };
+
+    // GET FUNCTIONS TO BUILD FORM WITH USEFORM() HOOK
+    const { register, handleSubmit, setError, reset, formState } =
+        useForm(formOptions);
+    const { errors, isSubmitting } = formState;
+
+    const onSubmit = async ({ username, password }) => {
+        try {
+            const formName = "login";
+            await dispatch(authenticate(username, password, formName));
+        } catch (error) {
+            console.log("CATCH ON_SUBMIT LOGIN ERR > ", error);
+            setError("inputError", { message: error });
+        }
     };
 
     return (
-        <div>
+        <div className="signup-login--container">
             {isLoggedIn ? (
                 <Redirect to="/home" />
             ) : (
-                <div className="login-page-container">
-                    <div>
-                        <h3>Sign into your account</h3>
+                <div className="signup-login--form">
+                    <div className="signup-login-header--form">
+                        <h2>Login</h2>
+                        <hr></hr>
                     </div>
-                    {auth.error ? (
-                        <label className="login-error-label">
-                            {auth.error && auth.error.response && (
-                                <div> {auth.error.response.data} </div>
-                            )}
-                        </label>
-                    ) : (
-                        ""
-                    )}
-                    <form
-                        className="pure-form pure-form-aligned login--form"
-                        onSubmit={handleSubmit}
-                        name="login"
-                    >
-                        <div className="pure-control-group">
-                            <label htmlFor="username">
-                                <small>Username</small>
-                            </label>
-                            <input
-                                name="username"
-                                type="text"
-                                value={username}
-                                onChange={handleChange}
-                            />
-                            {submitted && !username && (
-                                <div className="invalid-feedback">
-                                    Username is required
+
+                    <div className="signup-login-body--form">
+                        <form onSubmit={handleSubmit(onSubmit)} name="signup">
+                            <div className="form-group align-items-center">
+                                <div className="form-group row">
+                                    <label className="col-form-label">
+                                        Username
+                                    </label>
+                                    <input
+                                        name="username"
+                                        type="text"
+                                        {...register("username")} // REGISTER YOUR INPUT INTO THE HOOK BY INVOKING THE "REGISTER" FUNCTION
+                                        className={`form-control ${
+                                            errors.username ? "is-invalid" : ""
+                                        } `}
+                                    />
+                                    <div className="invalid-feedback">
+                                        {errors.username?.message}
+                                    </div>
                                 </div>
-                            )}
-                        </div>
-                        <br />
-                        <div className="pure-control-group">
-                            <label htmlFor="password">
-                                <small>Password</small>
-                            </label>
-                            <input
-                                name="password"
-                                type="password"
-                                value={password}
-                                onChange={handleChange}
-                            />
-                            {submitted && !password && (
-                                <div className="invalid-feedback">
-                                    Password is required
+
+                                <div className="form-group row">
+                                    <label className="col-form-label">
+                                        Password
+                                    </label>
+                                    <input
+                                        name="password"
+                                        type="password"
+                                        {...register("password")}
+                                        className={`form-control ${
+                                            errors.password ? "is-invalid" : ""
+                                        }`}
+                                    />
+
+                                    <div className="invalid-feedback">
+                                        {errors.password?.message}
+                                    </div>
                                 </div>
-                            )}
-                        </div>
-                        <br />
 
-                        <div className="pure-control-group">
-                            <button
-                                type="submit"
-                                className="button-secondary pure-button"
-                            >
-                                sign in
-                            </button>
-                        </div>
-                    </form>
-
-                    <br />
-                    <span>or</span>
-                    <br />
-                    <br />
-
-                    <Link to="/signup">
-                        <button className="button-secondary pure-button">
-                            Create a new account
-                        </button>
-                    </Link>
+                                {auth.error ? (
+                                    <div className="login-error-label">
+                                        {auth.error && auth.error.response && (
+                                            <span className="signup-login-error-response">
+                                                {" "}
+                                                {auth.error.response.data}{" "}
+                                            </span>
+                                        )}
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                                <div className="form-group register--reset-btns">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting && (
+                                            <span className="spinner-border spinner-border-sm mr-1"></span>
+                                        )}
+                                        Login
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => reset()}
+                                        className="btn btn-warning float-right"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                                <div className="signup-login-footer--form">
+                                    <div className="signup-login--account-exist">
+                                        Don't have an account?
+                                        <button
+                                            onClick={(e) => clickToRegister()}
+                                            className="login-click"
+                                        >
+                                            Register here
+                                        </button>
+                                    </div>
+                                    <div className="signup-login--forgot-password">
+                                        <p>Forgot your password?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             )}
         </div>

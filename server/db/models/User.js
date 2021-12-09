@@ -47,13 +47,13 @@ User.prototype.generateToken = function () {
  */
 User.authenticate = async function ({ username, password }) {
     const user = await this.findOne({ where: { username } });
-    // console.log("USER_authenticate > ", user);
     if (!user || user.username === "") {
         const error = Error("User not found!");
         error.status = 401;
         throw error;
     }
     const validPassword = await user.correctPassword(password);
+
     if (!validPassword) {
         const error = Error("Invalid Password!");
         error.status = 401;

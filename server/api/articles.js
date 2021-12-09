@@ -28,14 +28,11 @@ const postArticle = async (req, res, next) => {
 
         // FIND ALL USER_ARTICLES THAT BELONG TO SPECIFIC USER
         const foundUserArticles = await UserArticle.findAllByUser(userId);
-        // console.log("=> FOUND USER_ARTICLE NAMES > ", foundUserArticles);
 
         // SEARCH AND COMPARE EXISTING ARTICLES_URL WITH REQUESTED ONE.
         let duplicateUserArticleUrl = foundUserArticles.some((userArticle) => {
-            // console.log("userArticle.article_URL> ", userArticle.article.url);
             return url === userArticle.article.url;
         });
-        // console.log("FOUND DUPLICATE ARTILCES URL > ", duplicateUserArticleUrl);
 
         // IF ARTICLE_URL EXISTS THEN RETURN MSG
         if (duplicateUserArticleUrl) {
@@ -54,7 +51,6 @@ const postArticle = async (req, res, next) => {
             },
             { transaction: t }
         );
-        // console.log("=> NEW ARTICLE IS CREATED > ", article);
 
         // CREATE USER ARTICLE
         const userArticle = await UserArticle.create(
@@ -67,7 +63,6 @@ const postArticle = async (req, res, next) => {
             },
             { transaction: t }
         );
-        // console.log("=> USER_ARTICLE IS CREATED > ", userArticle);
 
         // // CREATE TAGS/TAGGING
         await Promise.all(
@@ -76,7 +71,6 @@ const postArticle = async (req, res, next) => {
                     where: { name: tagName },
                     transaction: t
                 });
-                // console.log("=> TAGS ARE CREATED > ", tag);
                 return await Tagging.create(
                     {
                         tagId: tag.id,
@@ -105,7 +99,6 @@ const postArticle = async (req, res, next) => {
             },
             { transaction: t }
         );
-        // console.log("=> ARTICLE TO SEND > ", createdArticle);
         await t.commit();
 
         await res.status(201).send(createdArticle);

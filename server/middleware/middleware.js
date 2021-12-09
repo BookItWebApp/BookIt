@@ -7,8 +7,8 @@ const validUserOrEmail = async (req, res, next) => {
             req.body.email === "" ||
             req.body.password === ""
         ) {
-            const error = Error(" ");
-            error.status = 401;
+            const error = Error("Failed! Input can not be empty!");
+            error.status = 400;
             throw error;
         }
 
@@ -20,7 +20,7 @@ const validUserOrEmail = async (req, res, next) => {
 
         if (existUser) {
             const error = Error("Failed! Username is already in use!");
-            error.status = 401;
+            error.status = 400;
             throw error;
         }
 

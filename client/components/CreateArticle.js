@@ -7,14 +7,12 @@ import { getUserArticles, createNewArticle } from "../store/userArticles";
 
 function CreateArticle() {
     const token = window.localStorage.getItem("token");
-    // console.log("CreateArticle FOUND TOKEN> ", token);
 
     const history = useHistory();
     const dispatch = useDispatch();
 
     const user = useSelector((state) => state.auth);
     const articles = useSelector((state) => state.userArticles);
-    // console.log("CreateArticle ARTICLES > ", articles);
 
     const [submitted, setSubmitted] = useState(false);
     const [bookmarkName, setBookmarkName] = useState("");
@@ -44,7 +42,6 @@ function CreateArticle() {
         articles.map((article) => {
             if (!article.taggings) {
                 let customErr = articles.pop(); // REMOVE LAST ITEM FROM ARTICLES WHICH IS AN ERR RETURNED FROM BACK-END
-                // console.log("CUSTOM ERR > ", customErr);
 
                 errObj = Object.assign(customErr);
             } else if (article.taggings) {

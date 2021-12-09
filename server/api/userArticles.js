@@ -52,7 +52,7 @@ router.post("/", async (req, res, next) => {
             articleId: articleId,
             featured: featured
         });
-        // console.log("CREATED ARTICLE: ", userArticles);
+
         res.json(userArticles);
     } catch (err) {
         console.log("CREATE ARTICLE ERR: ", err);
@@ -65,7 +65,6 @@ router.put("/:id", async (req, res, next) => {
     try {
         //
         const id = req.body.article.id;
-        // console.log("_USER ARRTICEL ID > ", id);
 
         const updateArticle = await UserArticle.update(
             { ...req.body.article },
@@ -73,7 +72,7 @@ router.put("/:id", async (req, res, next) => {
                 where: { id: id }
             }
         );
-        // console.log("_ UPDATED USER ARRTICEL > ", updateArticle);
+
         const updatedUserArticle = await UserArticle.findByPk(id, {
             include: [
                 {
@@ -99,9 +98,6 @@ router.put("/:id", async (req, res, next) => {
 // DELETE /api/useArticles/:id
 router.delete("/:id", async (req, res, next) => {
     try {
-        // console.log("PRODUCT TO DELETE ID > ", req.params.id);
-        // console.log("PRODUCT TO DELETE BODY > ", req.body);
-
         const { id } = req.params;
         const userArticle = await UserArticle.findByPk(id, {
             include: [
@@ -117,7 +113,7 @@ router.delete("/:id", async (req, res, next) => {
                 }
             ]
         });
-        console.log("PRODUCT TO DELETE > ", userArticle);
+
         await userArticle.destroy();
         res.send(userArticle);
     } catch (err) {
