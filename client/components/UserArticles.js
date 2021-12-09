@@ -14,7 +14,6 @@ export function UserArticles() {
     const user = useSelector((state) => state.auth);
 
     const token = window.localStorage.getItem("token");
-    // console.log("FOUND TOKEN in USER ARTICLES> ", token);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -23,8 +22,6 @@ export function UserArticles() {
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
-    // console.log("ALL ARTICLES > ", articles);
-    // console.log("ALL FILTERD TAGS > ", filteredTags);
 
     useEffect(() => {
         dispatch(_clearSharingId());
@@ -36,7 +33,6 @@ export function UserArticles() {
         const arrToShare = articles
             .filter((article) => validateFilter(article))
             .map((article) => article.id);
-        console.log("array to share", arrToShare);
         dispatch(_setFilteredArticlesToStore(arrToShare)),
             history.push("/share/message");
     }
@@ -74,12 +70,6 @@ export function UserArticles() {
             </div>
         );
     }
-    // if (!token || token === "") {
-    //     console.log("PLEASE, ADD TOKEN: ");
-    //     return <div>please login</div>;
-    // } else {
-    //     console.log("PLEASE TOKEN: ", token);
-    // }
 
     return (
         <div className="main-user-article--container">

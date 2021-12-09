@@ -7,7 +7,6 @@ import { authenticate } from "../store";
  */
 const AuthForm = (props) => {
     const { name, displayName, handleSubmit, error } = props;
-    console.log("AUTH_FORM PROPS > ", props);
 
     return (
         <div className="login-page-container">

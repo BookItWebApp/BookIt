@@ -29,7 +29,6 @@ export const me = () => async (dispatch) => {
             name: "auth"
         });
     }
-    // console.log("AUTH_ME COOKIE > ", cookie);
 
     //checking if we found a cookie above or not
     const token = cookie
