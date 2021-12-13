@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from '../Modal';
 
-export function DeleteButtonRenderer(params) {
-  return <button>Delete</button>;
+export function DeleteButtonRenderer(props) {
+  const [deleteMode, setDeleteMode] = useState(false);
+  const [editObj, setEditObj] = useState({});
 
-  //   const refresh = (param) => {
-  //     return true;
-  //   };
+  let actProps = { ...props, action: 'delete' };
 
-  //   const onClick = ($event) => {
-  //     if (params.onClick instanceof Function) {
-  //       const retParams = {
-  //         event: $event,
-  //         rowData: params.node.data,
-  //       };
-  //       params.onClick(retParams);
-  //     }
-  //     //   };
-  //     return (
-  //       <button className="button btn-primary" onClick={onClick}>
-  //         Edit
-  //       </button>
-  //     );
-  //   };
+  return (
+    <div>
+      {deleteMode ? (
+        <div>
+          <Modal bookmark={actProps} />
+        </div>
+      ) : (
+        <button onClick={() => setDeleteMode(true)}>Delete</button>
+      )}
+    </div>
+  );
 }

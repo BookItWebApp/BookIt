@@ -638,15 +638,19 @@ tr {
 .modal {
   position: fixed;
   z-index: 9999;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #464b5e;
-  color: white;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  background: white;
   outline: none;
   padding: 3.2rem;
   text-align: center;
+  font-family: 'Vesper Libre bold';
+  color: #364c63;
+  font-size: large;
+  border: 1px solid #364c63;
+  border-radius: 4px;
 }
 
 .modal__title {

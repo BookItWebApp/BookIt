@@ -122,6 +122,7 @@ export function UserArticlesTab() {
             <AgGridColumn
               field="delete"
               cellRenderer="deleteButtonRenderer"
+              cellRendererParams="rowData"
               flex="1"
             ></AgGridColumn>
           </AgGridReact>
