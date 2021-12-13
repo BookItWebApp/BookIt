@@ -4,12 +4,12 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import SingleArticle from './components/SingleArticle';
-
 import CreateArticle from './components/CreateArticle';
 import { UserArticles } from './components/UserArticles';
 import { AddMessage } from './components/sharing/AddMessage';
 import { SharingLink } from './components/sharing/SharingLink';
 import { ViewSharing } from './components/sharing/ViewSharing';
+import { EditBookmark } from './components/EditBookmark/EditBookmark';
 import NewUser from './components/NewUser';
 
 import { me } from './store';
@@ -34,6 +34,7 @@ class Routes extends Component {
             <Route exact path="/home" component={UserArticles} />
             <Route exact path="/home/tab" component={UserArticlesTab} />
             <Route path="/create" component={CreateArticle} />
+            <Route exact path="/edit" component={EditBookmark} />
             <Route exact path="/share/message" component={AddMessage} />
             <Route exact path="/share/sharinglink" component={SharingLink} />
             <Route path="/share/sharinglink" component={ViewSharing} />

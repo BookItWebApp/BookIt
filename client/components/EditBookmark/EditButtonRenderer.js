@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
-import { EditBookmark } from './EditBookmark';
+import Modal from '../Modal';
 
-export function EditButtonRenderer(params) {
-
+export function EditButtonRenderer(props) {
   const [editMode, setEditMode] = useState(false);
-  const [editObj, setEditObj] = useState({})
+  const [editObj, setEditObj] = useState({});
 
-  return <div>{(editMode) ? <div><EditBookmark /></div> : <button onClick={() => setEditMode(true)}>Edit</button>}</div>
+  let actProps = { ...props, action: 'edit' };
 
-  // return <button>Edit</button>;
-
-  //   const refresh = (param) => {
-  //     return true;
-  //   };
-
-  //   const onClick = ($event) => {
-  //     if (params.onClick instanceof Function) {
-  //       const retParams = {
-  //         event: $event,
-  //         rowData: params.node.data,
-  //       };
-  //       params.onClick(retParams);
-  //     }
-  //     //   };
-  //     return (
-  //       <button className="button btn-primary" onClick={onClick}>
-  //         Edit
-  //       </button>
-  //     );
-  //   };
+  return (
+    <div>
+      {editMode ? (
+        <div>
+          <Modal bookmark={actProps} />
+        </div>
+      ) : (
+        <button onClick={() => setEditMode(true)}>Edit</button>
+      )}
+    </div>
+  );
 }
