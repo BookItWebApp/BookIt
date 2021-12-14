@@ -4,12 +4,13 @@ import { _setMessage } from '../../store/sharing';
 import { useHistory } from 'react-router-dom';
 import { updBookmark } from '../../store/userArticles';
 import { ToastContainer, toast } from 'react-toastify';
+import CreatableSelect from 'react-select/creatable';
 
 export function EditBookmark(props) {
-  console.log('editcomponent props', props);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
   const bookmark = props.bookmark.data;
+  const bookmarks = useSelector((state) => state.userArticles);
 
   const [id, setId] = useState(bookmark.id);
   const [url, setUrl] = useState(bookmark.url);
@@ -17,6 +18,33 @@ export function EditBookmark(props) {
   const [note, setNote] = useState(bookmark.note);
   const [tags, setTags] = useState(bookmark.tags);
   const [read, setRead] = useState(bookmark.read);
+
+  //creates list of unique tags for the dropdown menu
+  const tagOptionsArrDupl = [];
+  bookmarks.map((bookmark) =>
+    bookmark.taggings.map((tag) => tagOptionsArrDupl.push(tag.tag.name))
+  );
+
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+  let tagOptionsArrUnique = tagOptionsArrDupl.filter(onlyUnique);
+
+  let tagOptions = [];
+  tagOptionsArrUnique.map((tag) => tagOptions.push({ value: tag, label: tag }));
+
+  //creates list of default tag values for the input
+  let tagValues = [];
+  tags.map((tag) => tagValues.push({ value: tag, label: tag }));
+
+  //tracks current tags list in local state (tags added or removed by user)
+  function handleChange(options) {
+    let tagArray = [];
+    for (let i = 0; i < options.length; i++) {
+      tagArray.push(options[i].value);
+    }
+    setTags(tagArray);
+  }
 
   //performes actions after submit button is hit
   const submitChanges = useCallback(
@@ -49,14 +77,15 @@ export function EditBookmark(props) {
   );
 
   return (
-    <div className="modal">
+    <div className="modal_edit">
+      <p>Edit Bookmark</p>
       <form onSubmit={submitChanges}>
         <label htmlFor="url">
           <b>Bookmark URL:</b>
           <p>{url}</p>
         </label>
         <label htmlFor="name">
-          <b>Bookmark Name</b>
+          <b>Bookmark Name:</b>
         </label>
         <input
           type="ntext"
@@ -67,7 +96,7 @@ export function EditBookmark(props) {
           onChange={(e) => setBookmarkName(e.target.value)}
         />
         <label htmlFor="note">
-          <b>Note</b>
+          <b>Note:</b>
         </label>
         <input
           type="ntext"
@@ -79,16 +108,20 @@ export function EditBookmark(props) {
         />
         <input type="hidden" id="tags" name="tags" value={tags} />
         <input type="hidden" id="bookmarkId" name="bookmarkId" value={id} />
-        {/* <label htmlFor="tagsetter">
+        <label htmlFor="tagsetter">
           <b>Bookmark Tags</b>
         </label>
-        <CreatableSelect
-          id="tagsetter"
-          className="select"
-          isMulti
-          onChange={handleChange}
-          options={tagOptions}
-        /> */}
+        <div className="mySelect__value-container">
+          <CreatableSelect
+            id="tagsetter"
+            className="select"
+            isMulti
+            onChange={handleChange}
+            autosize={true}
+            defaultValue={tagValues}
+            options={tagOptions}
+          />
+        </div>
         <div>
           <input type="submit" value="Submit Bookmark" className="button" />
           <ToastContainer

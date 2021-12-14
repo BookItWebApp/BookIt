@@ -48,7 +48,7 @@ export function DeleteBookmark(props) {
   );
 
   return (
-    <div className="modal">
+    <div className="modal_delete">
       <div>
         <b>Do you want to delete bookmark?</b>
         <p>{bookmarkName}</p>
