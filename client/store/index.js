@@ -10,6 +10,7 @@ import sharingsReducer from './sharing';
 import ArticlePreview from './SingleArticle';
 import ArticlesReducer from './articles';
 import usersReducer from './users';
+import modalReducer from './modals';
 
 const reducer = combineReducers({
   auth,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   metaData: ArticlePreview,
   allArticles: ArticlesReducer,
   usersReducer,
+  modalReducer,
 });
 
 const middleware = composeWithDevTools(

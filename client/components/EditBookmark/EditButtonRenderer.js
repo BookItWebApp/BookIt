@@ -3,7 +3,6 @@ import Modal from '../Modal';
 
 export function EditButtonRenderer(props) {
   const [editMode, setEditMode] = useState(false);
-  const [editObj, setEditObj] = useState({});
 
   let actProps = { ...props, action: 'edit' };
 
