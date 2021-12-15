@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { _setMessage } from '../../store/sharing';
-import { useHistory } from 'react-router-dom';
 import { updBookmark } from '../../store/userArticles';
 import { ToastContainer, toast } from 'react-toastify';
 import CreatableSelect from 'react-select/creatable';
@@ -52,14 +50,41 @@ export function EditBookmark(props) {
       event.preventDefault();
       const errCallback = () => toast('Something went wrong!');
       try {
+        //compiling tags updated data
+        let addedTags = [];
+        tags.map((tag) =>
+          !bookmark.tags.includes(tag) ? addedTags.push(tag) : 0
+        );
+
+        let removedTags = [];
+        bookmark.tags.map((tag) =>
+          !tags.includes(tag) ? removedTags.push(tag) : 0
+        );
+
+        //defining read data
+        let readAt = '';
+
+        if (read === 'Yes' && bookmark.read === 'No') {
+          readAt = new Date().toISOString();
+        }
+
+        if (read === 'No' && bookmark.read === 'Yes') {
+          readAt = null;
+        }
+
         let changedBookmark = {
-          id: bookmark.data.id,
+          id,
           name: bookmarkName,
           note: note,
-          readAt: read,
-          tags: tags,
+          readAt,
+          addedTags,
+          removedTags,
         };
-        let result = await updBookmark(changedBookmark, user.id);
+
+        let result = await dispatch(updBookmark(changedBookmark));
+
+        console.log(result);
+
         if (result.status === 201 || result.status === 200) {
           toast('Changes Saved!', {
             onClose: () => {
@@ -73,7 +98,7 @@ export function EditBookmark(props) {
         errCallback();
       }
     },
-    [bookmarkName, note, read, tags]
+    [id, bookmarkName, note, read, tags]
   );
 
   return (
@@ -108,6 +133,16 @@ export function EditBookmark(props) {
         />
         <input type="hidden" id="tags" name="tags" value={tags} />
         <input type="hidden" id="bookmarkId" name="bookmarkId" value={id} />
+        <label htmlFor="read">
+          <b>Read: {read}</b>
+        </label>
+        <input
+          type="button"
+          name="note"
+          value={read === 'Yes' ? 'Mark as Unread' : 'Mark as Read'}
+          size="30"
+          onClick={(e) => (read === 'Yes' ? setRead('No') : setRead('Yes'))}
+        />
         <label htmlFor="tagsetter">
           <b>Bookmark Tags</b>
         </label>
@@ -123,7 +158,7 @@ export function EditBookmark(props) {
           />
         </div>
         <div>
-          <input type="submit" value="Submit Bookmark" className="button" />
+          <input type="submit" value="Save Changes" className="button" />
           <ToastContainer
             position="top-right"
             autoClose={2000}

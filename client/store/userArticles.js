@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_USER_ARTICLES = 'GET_USER_ARTICLES';
 const CREATE_USER_ARTICLE = 'CREATE_USER_ARTICLE';
 const READ_USER_ARTICLE = 'READ_USER_ARTICLE';
+const UPD_USER_ARTICLE = 'UPD_USER_ARTICLE';
 const DELETE_USER_ARTICLE = 'DELETE_USER_ARTICLE';
 
 //ACTION CREATORS
@@ -27,6 +28,14 @@ const _createUserArticle = (article) => {
 const _readUserArticle = (article) => {
   return {
     type: READ_USER_ARTICLE,
+    article,
+  };
+};
+
+// UPDATE THE ARTICLE(FROM EDIT COMPONENT)
+const _updUserArticle = (article) => {
+  return {
+    type: UPD_USER_ARTICLE,
     article,
   };
 };
@@ -119,14 +128,14 @@ export const markUserArticle = (userId, article) => {
   };
 };
 
-// update bookamrk
-export const updBookmark = (article, userId) => {
-  return async () => {
+// update bookamrk (from the EditBookmark component)
+export const updBookmark = (article) => {
+  return async (dispatch) => {
     try {
-      await axios.put(`/api/articles`, {
+      let { data } = await axios.put(`/api/articles`, {
         article,
       });
-      getUserArticles(userId);
+      dispatch(_updUserArticle(data));
     } catch (err) {
       console.log('UPDATE BOOKMARK ERR:', err);
     }
@@ -167,6 +176,10 @@ export default function userArticleReducer(state = initialState, action) {
     case CREATE_USER_ARTICLE:
       return [...state, action.article];
     case READ_USER_ARTICLE:
+      return state.map((article) =>
+        article.id === action.article.id ? action.article : article
+      );
+    case UPD_USER_ARTICLE:
       return state.map((article) =>
         article.id === action.article.id ? action.article : article
       );
