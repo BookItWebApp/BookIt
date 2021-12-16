@@ -132,10 +132,11 @@ export const markUserArticle = (userId, article) => {
 export const updBookmark = (article) => {
   return async (dispatch) => {
     try {
-      let { data } = await axios.put(`/api/articles`, {
+      let result = await axios.put(`/api/articles`, {
         article,
       });
-      dispatch(_updUserArticle(data));
+      dispatch(_updUserArticle(result.data));
+      return result;
     } catch (err) {
       console.log('UPDATE BOOKMARK ERR:', err);
     }

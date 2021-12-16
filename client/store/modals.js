@@ -1,50 +1,34 @@
 //ACTION TYPES
-const OPEN_EDIT_MODAL = 'OPEN_EDIT_MODAL';
-const CLOSE_EDIT_MODAL = 'CLOSE_EDIT_MODAL';
-const OPEN_DELETE_MODAL = 'OPEN_DELETE_MODAL';
-const CLOSE_DELETE_MODAL = 'CLOSE_DELETE_MODAL';
+const OPEN_MODAL = 'OPEN_MODAL';
+const CLOSE_MODAL = 'CLOSE_MODAL';
 
 //ACTION CREATORS
 
-export const _openEdit = () => {
+export const _openModal = () => {
   return {
-    type: OPEN_EDIT_MODAL,
+    type: OPEN_MODAL,
+    modalDisplayed: true,
   };
 };
 
-export const _closeEdit = () => {
+export const _closeModal = () => {
   return {
-    type: CLOSE_EDIT_MODAL,
-  };
-};
-
-export const _openDelete = () => {
-  return {
-    type: OPEN_DELETE_MODAL,
-  };
-};
-
-export const _closeDelete = () => {
-  return {
-    type: CLOSE_DELETE_MODAL,
+    type: CLOSE_MODAL,
+    modalDisplayed: false,
   };
 };
 
 //REDUCER
 //Initial State
-const initialState = { editModalDisplayed: false, deleteModalDisplayed: false };
+const initialState = { modalDisplayed: false };
 
 //Reducer
-export default function modalReducer(state = initialState) {
+export default function modalReducer(state = initialState, action) {
   switch (action.type) {
-    case OPEN_EDIT_MODAL:
-      return { ...state, editModalDisplayed: true };
-    case CLOSE_EDIT_MODAL:
-      return { ...state, editModalDisplayed: false };
-    case OPEN_DELETE_MODAL:
-      return { ...state, deleteModalDisplayed: true };
-    case CLOSE_DELETE_MODAL:
-      return { ...state, deleteModalDisplayed: false };
+    case OPEN_MODAL:
+      return { ...state, modalDisplayed: action.modalDisplayed };
+    case CLOSE_MODAL:
+      return { ...state, modalDisplayed: action.modalDisplayed };
     default:
       return state;
   }

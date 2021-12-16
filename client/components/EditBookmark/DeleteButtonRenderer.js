@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Modal from '../Modal';
 
 export function DeleteButtonRenderer(props) {
   const [deleteMode, setDeleteMode] = useState(false);

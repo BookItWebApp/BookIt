@@ -2,11 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserArticles } from '../store/userArticles';
 import { useHistory } from 'react-router-dom';
-import Topbar from './Navigation/Topbar';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import { _setFilteredArticlesToStore } from '../store/sharing';
 import { EditBookmark } from './EditBookmark/EditBookmark';
-import { EditButtonRenderer } from './EditBookmark/EditButtonRenderer';
 import { DeleteButtonRenderer } from './EditBookmark/DeleteButtonRenderer';
 
 import 'ag-grid-enterprise';
@@ -100,7 +98,7 @@ export function UserArticlesTab() {
             animateRows={true}
             frameworkComponents={{
               hrefRenderer: urlRenderer,
-              editButtonRenderer: EditButtonRenderer,
+              editButtonRenderer: EditBookmark,
               deleteButtonRenderer: DeleteButtonRenderer,
             }}
           >
