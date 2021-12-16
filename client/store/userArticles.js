@@ -150,12 +150,12 @@ export const deleteProduct = (articleId, article) => {
       // console.log("DELETED DATA USER_ID > ", articleId);
       // console.log("DELETED DATA ARTICLE > ", article);
 
-      const { data } = await axios.delete(`/api/userArticles/${articleId}`, {
+      const result = await axios.delete(`/api/userArticles/${articleId}`, {
         article,
       });
-      console.log('DELETED DATA > ', data);
-      dispatch(_deleteUserArticle(data));
-      // history.push("/home");
+      console.log('DELETED DATA > ', result.data);
+      dispatch(_deleteUserArticle(result.data));
+      return result;
     } catch (err) {
       console.log('DELETE PRODUCTS ERR:', err);
     }

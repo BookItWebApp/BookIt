@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import { _setFilteredArticlesToStore } from '../store/sharing';
 import { EditBookmark } from './EditBookmark/EditBookmark';
-import { DeleteButtonRenderer } from './EditBookmark/DeleteButtonRenderer';
+import { DeleteBookmark } from './EditBookmark/DeleteBookmark';
 
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -99,7 +99,7 @@ export function UserArticlesTab() {
             frameworkComponents={{
               hrefRenderer: urlRenderer,
               editButtonRenderer: EditBookmark,
-              deleteButtonRenderer: DeleteButtonRenderer,
+              deleteButtonRenderer: DeleteBookmark,
             }}
           >
             <AgGridColumn field="name" flex="3"></AgGridColumn>

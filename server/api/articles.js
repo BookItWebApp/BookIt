@@ -150,8 +150,6 @@ const changeArticle = async (req, res, next) => {
           transaction: t,
         });
 
-        console.log(tag);
-
         await Tagging.destroy({
           where: { tagId: tag.id },
           transaction: t,
