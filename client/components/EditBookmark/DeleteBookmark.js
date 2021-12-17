@@ -19,7 +19,6 @@ export function DeleteBookmark(props) {
       const errCallback = () => toast('Something went wrong!');
       try {
         let result = await dispatch(deleteProduct(id, bookmark));
-        console.log(result);
 
         if (result.status === 201 || result.status === 200) {
           toast('Bookmark deleted!');
