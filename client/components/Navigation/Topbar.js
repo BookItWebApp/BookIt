@@ -6,12 +6,10 @@ const Topbar = ({ handleClick }) => {
     <div className="top-section--wrapper">
       <div className="bookmark--logo">
         <img
-          src="https://i.pinimg.com/564x/eb/ee/1b/ebee1bac4c625bfdda90cd60b03f97aa.jpg"
-          width="80px"
+          src="../../../main-transparent.png"
           height="80px"
           className="image-logo-top-section"
         />{' '}
-        <span>ookIT</span>
       </div>
       <div className="top_navbar">
         <Link to="/home">

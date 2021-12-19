@@ -143,7 +143,7 @@ export const updBookmark = (article) => {
   };
 };
 
-// DELTE USER ARTICLE
+// DELETE USER ARTICLE
 export const deleteProduct = (articleId, article) => {
   return async (dispatch) => {
     try {
