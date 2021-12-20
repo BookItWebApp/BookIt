@@ -29,8 +29,4 @@ router.get('/preview', async (req, res, next) => {
   }
 });
 
-// const metadata = await metascraper({ html, url });
-// return metadata;
 
-// const metaData = await Article.url.metaData(url);
-// console.log("MetaData", metaData);

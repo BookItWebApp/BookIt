@@ -1,26 +1,23 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Article, UserArticle, Tag, Tagging },
 } = require('../db/index');
 const sequelize = require('../db/db');
+const { date } = require('faker');
 
 const getallArticles = async (req, res, next) => {
-    try {
-        const articles = await Article.findAll();
-        res.send(articles);
-    } catch (error) {
-        next(error);
-    }
+  try {
+    const articles = await Article.findAll();
+    res.send(articles);
+  } catch (error) {
+    next(error);
+  }
 };
 
-// POST /api/articles
+// POST /api/articles - CREATES USER ARTICLE WITH ALL ATTRIBUTES (BOTH FROM WEB AND EXTENSION)
 const postArticle = async (req, res, next) => {
   const t = await sequelize.transaction({ autocommit: false });
-  // console.log(req.body);
   try {
-    //console.log('POST ARTICLE BODY: ', req.body);
-    //define in higer scope
-
     let url = req.body.article.url;
     let articleName = req.body.article.name;
     let articleNote = req.body.article.note;
@@ -33,7 +30,6 @@ const postArticle = async (req, res, next) => {
       where: { url: url },
       transaction: t,
     });
-    // console.log("ARTICLE IS CREATED: ", article);
 
     // CREATE USER ARTICLE
     const userArticle = await UserArticle.create(
@@ -46,16 +42,15 @@ const postArticle = async (req, res, next) => {
       },
       { transaction: t }
     );
-    // console.log("=> USER_ARTICLE IS CREATED: ", userArticle);
 
-    // // CREATE TAGS/TAGGING
+    // CREATE TAGS/TAGGING
     await Promise.all(
       tagsArr.map(async (tagName) => {
         let [tag, created] = await Tag.findOrCreate({
           where: { name: tagName },
           transaction: t,
         });
-        // console.log('=> TAGS IS CREATED: ', tag);
+
         return await Tagging.create(
           {
             tagId: tag.id,
@@ -84,7 +79,6 @@ const postArticle = async (req, res, next) => {
       },
       { transaction: t }
     );
-    // console.log("ARTICLE TO SEND > ", createdArticle);
 
     await t.commit();
 
@@ -96,22 +90,99 @@ const postArticle = async (req, res, next) => {
   }
 };
 
-// const postArticle = async (req, res, next) => {
-//   try {
-//     const [article, created] = await Article.findOrCreate({
-//       where: { url: req.body.url },
-//     });
-//     if (created) {
-//       res.send(article).status(204);
-//     } else {
-//       res.send(article);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+// PUT /api/articles - UPDATES USER ARTICLE (ALL ATTRIBUTES, FROM EDIT BOOKMARK COMPONENT)
+const changeArticle = async (req, res, next) => {
+  const t = await sequelize.transaction({ autocommit: false });
+  try {
+    const id = req.body.article.id;
+    //UPDATE NAME, NOTE AND READAT FIELDS
+    if (req.body.article.readAt != '') {
+      const updatedArticle = await UserArticle.update(
+        {
+          name: req.body.article.name,
+          note: req.body.article.note,
+          readAt: req.body.article.readAt,
+        },
+        {
+          where: { id: id },
+          transaction: t,
+        }
+      );
+    } else {
+      const updatedArticle = await UserArticle.update(
+        {
+          name: req.body.article.name,
+          note: req.body.article.note,
+        },
+        {
+          where: { id: id },
+          transaction: t,
+        }
+      );
+    }
 
-router.get("/", getallArticles);
-router.post("/", postArticle);
+    // CREATE TAGS/TAGGING (FOR ADDED TAGS)
+
+    let addedTags = req.body.article.addedTags;
+    await Promise.all(
+      addedTags.map(async (tagName) => {
+        let [tag, created] = await Tag.findOrCreate({
+          where: { name: tagName },
+          transaction: t,
+        });
+
+        return await Tagging.create(
+          {
+            tagId: tag.id,
+            userArticlesId: id,
+          },
+          { transaction: t }
+        );
+      })
+    );
+
+    //DELETE TAGGINGS (FOR REMOVED TAGS)
+    let removedTags = req.body.article.removedTags;
+    await Promise.all(
+      removedTags.map(async (tagName) => {
+        let tag = await Tag.findOne({
+          where: { name: tagName },
+          transaction: t,
+        });
+
+        await Tagging.destroy({
+          where: { tagId: tag.id },
+          transaction: t,
+        });
+      })
+    );
+
+    await t.commit();
+
+    const updUserArticle = await UserArticle.findByPk(id, {
+      include: [
+        {
+          model: Article,
+          attributes: ['id', 'url'],
+        },
+        {
+          model: Tagging,
+          include: {
+            model: Tag,
+          },
+        },
+      ],
+    });
+
+    res.status(201).send(updUserArticle);
+  } catch (error) {
+    await t.rollback();
+    next(error);
+  }
+};
+
+router.get('/', getallArticles);
+router.post('/', postArticle);
+router.put('/', changeArticle);
 
 module.exports = router;
