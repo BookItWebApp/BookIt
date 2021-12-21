@@ -3,7 +3,7 @@ const db = require("../db");
 const Article = require("../models/Article");
 const Tagging = require("../models/Tagging");
 const Tag = require("../models/Tag");
-const Author = require("./Author");
+
 
 const UserArticle = db.define(
     "userArticle",
@@ -60,11 +60,7 @@ UserArticle.findAllByUser = function (currentUserId) {
         include: [
             {
                 model: Article,
-                attributes: ["id", "url"],
-                include: {
-                    model: Author,
-                    attributes: ["id", "name"]
-                }
+                attributes: ["id", "url"]
             },
             {
                 model: Tagging,

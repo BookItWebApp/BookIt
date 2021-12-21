@@ -9,7 +9,6 @@ router.use("/taggings", require("./taggings"));
 router.use('/article', require('./article'))
 router.use("/articles", require("./articles"));
 router.use('/userArticles', require('./userArticles'));
-router.use('/authors', require('./authors'));
 router.use('/sharings', require('./sharings'));
 
 

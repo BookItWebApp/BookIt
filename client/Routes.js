@@ -7,9 +7,9 @@ import LoggedInRoutes from "./routes/LoggedInRoutes";
 import LoggedOutRoutes from "./routes/LoggedOutRoutes";
 import OpenRoutes from "./routes/OpenRoutes";
 class Routes extends Component {
-    componentDidMount() {
-        this.props.loadInitialData();
-    }
+  componentDidMount() {
+    this.props.loadInitialData();
+  }
 
     render() {
         const { isLoggedIn, loaded } = this.props;
@@ -35,11 +35,11 @@ const mapState = (state) => {
 };
 
 const mapDispatch = (dispatch) => {
-    return {
-        loadInitialData() {
-            dispatch(me());
-        }
-    };
+  return {
+    loadInitialData() {
+      dispatch(me());
+    },
+  };
 };
 
 // The `withRouter` wrapper makes sure that updates are not blocked

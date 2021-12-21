@@ -25,7 +25,6 @@ export function SingleArticle(props) {
         dispatch(deleteProduct(article.id, article));
     }
 
-    //
     return (
         <div className="single-article--container">
             <div className="title-delete--single-article--container">
