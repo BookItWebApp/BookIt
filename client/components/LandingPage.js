@@ -1,4 +1,7 @@
 import React from 'react';
+import bgShowcaseImage1 from '../../public/assets/bg-showcase-1.jpg';
+import bgShowcaseImage2 from '../../public/assets/bg-showcase-2.jpg';
+import bgShowcaseImage3 from '../../public/assets/bg-showcase-3.jpg';
 
 export function LandingPage() {
   return (
@@ -138,7 +141,9 @@ export function LandingPage() {
           <div className="row g-0">
             <div
               className="col-lg-6 order-lg-2 text-white showcase-img"
-              styles="background-image: url('assets/bg-showcase-1.jpg')"
+              style={{
+                backgroundImage: `url(${bgShowcaseImage1})`,
+              }}
             ></div>
             <div className="col-lg-6 order-lg-1 my-auto showcase-text">
               <h2>Fully Responsive Design</h2>
@@ -152,7 +157,9 @@ export function LandingPage() {
           <div className="row g-0">
             <div
               className="col-lg-6 text-white showcase-img"
-              // style="background-image: url('assets/img/bg-showcase-2.jpg')"
+              style={{
+                backgroundImage: `url(${bgShowcaseImage2})`,
+              }}
             ></div>
             <div className="col-lg-6 my-auto showcase-text">
               <h2>Updated For Bootstrap 5</h2>
@@ -166,7 +173,9 @@ export function LandingPage() {
           <div className="row g-0">
             <div
               className="col-lg-6 order-lg-2 text-white showcase-img"
-              // style="background-image: url('assets/img/bg-showcase-3.jpg')"
+              style={{
+                backgroundImage: `url(${bgShowcaseImage3})`,
+              }}
             ></div>
             <div className="col-lg-6 order-lg-1 my-auto showcase-text">
               <h2>Easy to Use & Customize</h2>
@@ -180,10 +189,10 @@ export function LandingPage() {
           </div>
         </div>
       </section>
-      {/* <!-- Testimonials--> */}
+      {/* <!-- Team--> */}
       <section className="testimonials text-center bg-light">
         <div className="container">
-          <h2 className="mb-5">What people are saying...</h2>
+          <h2 className="mb-5">Our Team</h2>
           <div className="row">
             <div className="col-lg-4">
               <div className="testimonial-item mx-auto mb-5 mb-lg-0">
@@ -192,7 +201,7 @@ export function LandingPage() {
                   src="assets/img/testimonials-1.jpg"
                   alt="..."
                 />
-                <h5>Margaret E.</h5>
+                <h5>Ross Kulyk</h5>
                 <p className="font-weight-light mb-0">
                   "This is fantastic! Thanks so much guys!"
                 </p>
@@ -205,7 +214,21 @@ export function LandingPage() {
                   src="assets/img/testimonials-2.jpg"
                   alt="..."
                 />
-                <h5>Fred S.</h5>
+                <h5>Elena Kot</h5>
+                <p className="font-weight-light mb-0">
+                  "Bootstrap is amazing. I've been using it to create lots of
+                  super nice landing pages."
+                </p>
+              </div>
+            </div>
+            <div className="col-lg-4">
+              <div className="testimonial-item mx-auto mb-5 mb-lg-0">
+                <img
+                  className="img-fluid rounded-circle mb-3"
+                  src="assets/img/testimonials-2.jpg"
+                  alt="..."
+                />
+                <h5>Peter Myer</h5>
                 <p className="font-weight-light mb-0">
                   "Bootstrap is amazing. I've been using it to create lots of
                   super nice landing pages."
@@ -219,7 +242,7 @@ export function LandingPage() {
                   src="assets/img/testimonials-3.jpg"
                   alt="..."
                 />
-                <h5>Sarah W.</h5>
+                <h5>Grace Tveit</h5>
                 <p className="font-weight-light mb-0">
                   "Thanks so much for making these free resources available to
                   us!"
@@ -229,136 +252,6 @@ export function LandingPage() {
           </div>
         </div>
       </section>
-      {/* <!-- Call to Action--> */}
-      <section className="call-to-action text-white text-center" id="signup">
-        <div className="container position-relative">
-          <div className="row justify-content-center">
-            <div className="col-xl-6">
-              <h2 className="mb-4">Ready to get started? Sign up now!</h2>
-              {/* <!-- Signup form-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!--> */}
-              <form
-                className="form-subscribe"
-                id="contactFormFooter"
-                data-sb-form-api-token="API_TOKEN"
-              >
-                {/* <!-- Email address input--> */}
-                <div className="row">
-                  <div className="col">
-                    <input
-                      className="form-control form-control-lg"
-                      id="emailAddressBelow"
-                      type="email"
-                      placeholder="Email Address"
-                      data-sb-validations="required,email"
-                    />
-                    <div
-                      className="invalid-feedback text-white"
-                      data-sb-feedback="emailAddressBelow:required"
-                    >
-                      Email Address is required.
-                    </div>
-                    <div
-                      className="invalid-feedback text-white"
-                      data-sb-feedback="emailAddressBelow:email"
-                    >
-                      Email Address Email is not valid.
-                    </div>
-                  </div>
-                  <div className="col-auto">
-                    <button
-                      className="btn btn-primary btn-lg disabled"
-                      id="submitButton"
-                      type="submit"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-                {/* <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted--> */}
-                <div className="d-none" id="submitSuccessMessage">
-                  <div className="text-center mb-3">
-                    <div className="fw-bolder">Form submission successful!</div>
-                    <p>To activate this form, sign up at</p>
-                    <a
-                      className="text-white"
-                      href="https://startbootstrap.com/solution/contact-forms"
-                    >
-                      https://startbootstrap.com/solution/contact-forms
-                    </a>
-                  </div>
-                </div>
-                {/* <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form--> */}
-                <div className="d-none" id="submitErrorMessage">
-                  <div className="text-center text-danger mb-3">
-                    Error sending message!
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* <!-- Footer--> */}
-      {/* <footer className="footer bg-light">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 h-100 text-center text-lg-start my-auto">
-              <ul className="list-inline mb-2">
-                <li className="list-inline-item">
-                  <a href="#!">About</a>
-                </li>
-                <li className="list-inline-item">⋅</li>
-                <li className="list-inline-item">
-                  <a href="#!">Contact</a>
-                </li>
-                <li className="list-inline-item">⋅</li>
-                <li className="list-inline-item">
-                  <a href="#!">Terms of Use</a>
-                </li>
-                <li className="list-inline-item">⋅</li>
-                <li className="list-inline-item">
-                  <a href="#!">Privacy Policy</a>
-                </li>
-              </ul>
-              <p className="text-muted small mb-4 mb-lg-0">
-                &copy; Your Website 2021. All Rights Reserved.
-              </p>
-            </div>
-            <div className="col-lg-6 h-100 text-center text-lg-end my-auto">
-              <ul className="list-inline mb-0">
-                <li className="list-inline-item me-4">
-                  <a href="#!">
-                    <i className="bi-facebook fs-3"></i>
-                  </a>
-                </li>
-                <li className="list-inline-item me-4">
-                  <a href="#!">
-                    <i className="bi-twitter fs-3"></i>
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a href="#!">
-                    <i className="bi-instagram fs-3"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer> */}
     </div>
   );
 }
