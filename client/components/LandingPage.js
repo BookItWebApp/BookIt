@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import bgShowcaseImage1 from '../../public/assets/bg-showcase-1.jpg';
 import bgShowcaseImage2 from '../../public/assets/bg-showcase-2.jpg';
 import bgShowcaseImage3 from '../../public/assets/bg-showcase-3.jpg';
@@ -8,7 +9,7 @@ export function LandingPage() {
     <div>
       <header
         className="masthead"
-        style={{ paddingBottom: '90px', paddingTop: '90px' }}
+        // style={{ paddingBottom: '90px', paddingTop: '90px' }}
       >
         <div className="container position-relative">
           <div className="row justify-content-center">
@@ -135,7 +136,7 @@ export function LandingPage() {
       {/* <!-- Team--> */}
       <section className="testimonials text-center bg-light">
         <div className="container">
-          <h2 className="mb-5">Our Team</h2>
+          <h1 className="mb-5">Our Team</h1>
           <div className="row">
             <div className="col-lg-4">
               <div className="testimonial-item mx-auto mb-5">
@@ -290,12 +291,11 @@ export function LandingPage() {
           <div class="row justify-content-center">
             <div class="col-xl-6">
               <h2 class="mb-4">Ready to get started? Sign up now!</h2>
-
-              <div className="col-auto">
-                <button className="btn btn-primary btn-lg" id="submitButton">
+              <Link to="/signup">
+                <a class="btn btn-primary" href="#signup">
                   Sign Up
-                </button>
-              </div>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
