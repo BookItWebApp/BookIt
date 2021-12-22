@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// TODO: CLEAN THE COMMENTS!!!!
 // => ACTION TYPES
 // const GET_USER_BOOKMARK = "GET_USER_BOOKMARK";
 // const CREATE_USER_BOOKMARK = "CREATE_USER_BOOKMARK";
@@ -23,7 +24,7 @@ const DELETE_USER_ARTICLE = "DELETE_USER_ARTICLE";
 //     };
 // };
 
-// Get all articles for a single user
+// GET ALL ARTICLES FOR A SINGLE USER
 const _getUserArticles = (articles) => {
     return {
         type: GET_USER_ARTICLES,
@@ -86,7 +87,7 @@ const _deleteUserArticle = (article) => {
     };
 };
 
-// // UPDATE THE ARTICLE(FROM EDIT COMPONENT)
+// UPDATE THE ARTICLE(FROM EDIT COMPONENT)
 const _updUserArticle = (article) => {
     return {
         type: UPD_USER_ARTICLE,
@@ -95,12 +96,11 @@ const _updUserArticle = (article) => {
 };
 
 // => THUNKS
-// get all articles for a single user
+// GET ALL ARTICLES FOR A SINGLE USER
 export const getUserArticles = (id, token) => {
     return async (dispatch) => {
         try {
             // console.log("getUserArticles TOKEN: ", token);
-
             const response = await axios.get(`/api/userArticles/${id}`, {
                 headers: {
                     authorization: token
@@ -118,6 +118,10 @@ export const getUserArticles = (id, token) => {
 export const createNewArticle = (article, userId, history, token) => {
     return async (dispatch) => {
         try {
+            console.log("THUNK CREATE /api/articles ARTICLE > ", article);
+            console.log("THUNK CREATE /api/articles USER_ID > ", userId);
+            console.log("THUNK CREATE /api/articles TOOKEN > ", token);
+
             const { data } = await axios.post(
                 `/api/articles`,
                 {
@@ -137,6 +141,8 @@ export const createNewArticle = (article, userId, history, token) => {
             );
 
             // dispatch(_createUserBookmark(data));
+            console.log("THUNK CREATE /api/articlesRES.DATA > ", data);
+
             dispatch(_createUserArticle(data));
             history.push("/home");
         } catch (err) {
@@ -234,7 +240,7 @@ export const deleteProduct = (articleId, article) => {
     };
 };
 
-// => Initial State
+// => INITIAL STATE
 const initialState = [];
 
 // => REDUCER
@@ -254,6 +260,10 @@ export default function userArticleReducer(state = initialState, action) {
         case DELETE_USER_ARTICLE:
             return state.filter((article) => article.id !== action.article.id);
         case CREATE_USER_ARTICLE_ERROR:
+            console.log("REDUCER [...state, action.error] > ", [
+                ...state,
+                action.article
+            ]);
             return [...state, action.error];
         case UPD_USER_ARTICLE:
             return state.map((article) =>

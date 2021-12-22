@@ -37,8 +37,7 @@ const Signup = () => {
         useForm(formOptions);
     const { errors, isSubmitting } = formState;
 
-    //
-
+    // SUBMIT FORM
     const onSubmit = async ({ username, email, password }) => {
         try {
             const formName = "signup";

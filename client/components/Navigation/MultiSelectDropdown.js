@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import { MultiSelect } from "react-multi-select-component";
 
 const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
+    console.log("MLTI_SELECT_DROP usrTagsProps > ", usrTagsProps);
+    console.log("MLTI_SELECT_DROP onChangeSelection > ", onChangeSelection);
+
     const allTags = usrTagsProps.tags;
 
     // FUNC TO REMOVE DUPLICATED TAGS DATA
@@ -68,14 +72,20 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
     }
 
     return (
-        <ReactMultiSelectCheckboxes
-            options={[{ label: "All", value: "*" }, ...tagsObj]}
-            placeholderButtonLabel="Tags"
-            getDropdownButtonLabel={getDropdownButtonLabel}
+        // <ReactMultiSelectCheckboxes
+        //     options={[{ label: "All", value: "*" }, ...tagsObj]}
+        //     placeholderButtonLabel="Tags"
+        //     getDropdownButtonLabel={getDropdownButtonLabel}
+        //     value={selectedOptions}
+        //     onChange={onChange}
+        //     setState={setSelectedOptions}
+        //     width={"150px"}
+        // />
+        <MultiSelect
+            options={tagsObj}
             value={selectedOptions}
             onChange={onChange}
-            setState={setSelectedOptions}
-            width={"150px"}
+            labelledBy={"Select"}
         />
     );
 };
