@@ -6,7 +6,10 @@ import bgShowcaseImage3 from '../../public/assets/bg-showcase-3.jpg';
 export function LandingPage() {
   return (
     <div>
-      <header className="masthead">
+      <header
+        className="masthead"
+        style={{ paddingBottom: '90px', paddingTop: '90px' }}
+      >
         <div className="container position-relative">
           <div className="row justify-content-center">
             <div className="col-xl-6">
@@ -15,11 +18,24 @@ export function LandingPage() {
                 <h1 className="mb-5">
                   Manage your bookmarks like never before!
                 </h1>
-                <div className="col-auto">
-                  <button className="btn btn-primary btn-lg" id="submitButton">
-                    Sign In
-                  </button>
+                <div
+                  className="mb-5"
+                  style={{
+                    fontSize: '1.2rem',
+                  }}
+                >
+                  <div>
+                    Tired of scrolling through dozens of saved bookmarks to find
+                    the rght one?
+                  </div>
+                  <div>Have no idea why this bookmark was saved?</div>
+                  <div>
+                    Want to share a bunch of bookmarks and have to copy them
+                    one-by-one?{' '}
+                  </div>
+                  <div>Never go back to the saved bookmark?</div>
                 </div>
+                <h1>Try BookIt!</h1>
               </div>
             </div>
           </div>
@@ -32,7 +48,10 @@ export function LandingPage() {
             <div className="col-lg-4">
               <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                 <div className="features-icons-icon d-flex">
-                  <i className="bi bi-filter-square m-auto text-primary"></i>
+                  <i
+                    className="bi bi-filter-square m-auto text-primary"
+                    style={{ color: '#ec104d' }}
+                  ></i>
                 </div>
                 <h3>Filter and sort bookmarks</h3>
                 <p className="lead mb-0">
