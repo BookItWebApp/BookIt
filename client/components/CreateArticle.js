@@ -4,7 +4,6 @@ import { useHistory, Redirect, Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import CreatableSelect from "react-select/creatable";
 import ReactSelect from "react-select";
 
 import { getUserArticles, createNewArticle } from "../store/userArticles";
@@ -17,7 +16,7 @@ function CreateArticle() {
     const isLoggedIn = useSelector((state) => state.auth.id);
     const user = useSelector((state) => state.auth);
     const articles = useSelector((state) => state.userArticles);
-    const [tags, setTags] = useState([]);
+    const [tagsState, setTags] = useState([]);
 
     useEffect(() => {
         dispatch(getUserArticles(user.id, token));
@@ -30,12 +29,10 @@ function CreateArticle() {
     // =>
     function handleTagChange(options) {
         let tagArray = [];
-        console.log("handleTagChange = OPTIONS > ", options);
 
         for (let i = 0; i < options.length; i++) {
             tagArray.push(options[i].value);
         }
-        console.log("handleTagChange = TAG_ARRAY > ", tagArray);
         setTags(tagArray);
     }
 
@@ -45,7 +42,6 @@ function CreateArticle() {
     // => FUNC TO RETURN UNIQUE TAG OPTION, NO DUPLICATES
     const uniqueTaggingOptions = (articles) => {
         let tagsArr = [];
-        // console.log("ARTICLES INPUT uniqueTaggingOptions > ", articles);
 
         articles.map((article) => {
             if (!article.taggings) {
@@ -57,23 +53,14 @@ function CreateArticle() {
                 );
             }
         });
-        // console.log("ARTICLES.TAGS_ARR FROM uniqueTaggingOptions > ", tagsArr);
 
         let vals = tagsArr.map((obj) => obj.value); // RETURN ARR OF OBJ VALUES
-
         // RETUNS UNIQUE ARRAY OF TAGGS OBJ TO DISPLAY IN SELECT-DROPDOWN
         tagOptions = tagsArr.filter(
             ({ value }, index) => !vals.includes(value, index + 1)
         );
-        // console.log("ERR.OBJ > ", errObj);
-        return tagOptions;
     };
-
     uniqueTaggingOptions(articles);
-    console.log(
-        "uniqueTaggingOptions(articles) > ",
-        uniqueTaggingOptions(articles)
-    );
 
     // SETTING FORM VALIDATION RULES
     const validationSchema = Yup.object().shape({
@@ -90,16 +77,15 @@ function CreateArticle() {
     const { errors, isSubmitting } = formState;
 
     // SUBMIT FORM
-    const onSubmit = async ({ bookmarkName, bookmarkUrl, note, tags }) => {
+    const onSubmit = async ({ bookmarkName, bookmarkUrl, note }) => {
+        const tags = tagsState;
         try {
-            console.log("ONSUBMIT_TAGS > ", tags);
             const newBookmark = { bookmarkName, bookmarkUrl, note, tags };
 
             await dispatch(
                 createNewArticle(newBookmark, user.id, history, token)
             );
         } catch (error) {
-            console.log("CATCH ON_SUBMIT CREATE_ARTILCE ERR > ", error);
             setError("inputError", { message: error });
         }
     };
@@ -111,7 +97,6 @@ function CreateArticle() {
             ) : (
                 <div className="signup-login--form">
                     <div className="signup-login-header--form">
-                        {/* <h2>Create bookmark</h2> */}
                         <p>Fill in this form to create a new bookmark!</p>
                         <hr></hr>
                     </div>
@@ -173,19 +158,7 @@ function CreateArticle() {
                                     <label className="col-form-label">
                                         Add Bookmark Tags
                                     </label>
-                                    {/* <input
-                                        type="hidden"
-                                        id="tags"
-                                        name="tags"
-                                        {...register("tags")}
-                                    /> */}
-                                    {/* <CreatableSelect
-                                        id="tagsetter"
-                                        className="select"
-                                        isMulti
-                                        onChange={handleTagChange}
-                                        options={tagOptions}
-                                    /> */}
+
                                     <Controller
                                         name="ReactSelect"
                                         control={control}
@@ -240,6 +213,7 @@ function CreateArticle() {
 }
 export default CreateArticle;
 
+// OLD CODE. TO SEE FOR LATER USAGE
 // function CreateArticle() {
 //     const token = window.localStorage.getItem("token");
 

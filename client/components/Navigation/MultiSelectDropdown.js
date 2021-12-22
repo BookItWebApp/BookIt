@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
-import { MultiSelect } from "react-multi-select-component";
 
 const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
-    console.log("MLTI_SELECT_DROP usrTagsProps > ", usrTagsProps);
-    console.log("MLTI_SELECT_DROP onChangeSelection > ", onChangeSelection);
-
     const allTags = usrTagsProps.tags;
 
     // FUNC TO REMOVE DUPLICATED TAGS DATA
@@ -15,7 +11,6 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
         });
         return filterdData;
     };
-
     const filteredTags = removeDuplicatedTags(allTags);
 
     useEffect(() => {
@@ -66,28 +61,32 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
             selectedTags = value;
             // setSelectedOptions(value);
         }
-
+        // console.log("SELECTED-TAGS CHANGE", selectedTags);
         onChangeSelection(selectedTags);
         setSelectedOptions(selectedTags);
     }
 
     return (
-        // <ReactMultiSelectCheckboxes
-        //     options={[{ label: "All", value: "*" }, ...tagsObj]}
-        //     placeholderButtonLabel="Tags"
-        //     getDropdownButtonLabel={getDropdownButtonLabel}
-        //     value={selectedOptions}
-        //     onChange={onChange}
-        //     setState={setSelectedOptions}
-        //     width={"150px"}
-        // />
-        <MultiSelect
-            options={tagsObj}
+        <ReactMultiSelectCheckboxes
+            options={[{ label: "All", value: "*" }, ...tagsObj]}
+            placeholderButtonLabel="Tags"
+            getDropdownButtonLabel={getDropdownButtonLabel}
             value={selectedOptions}
             onChange={onChange}
-            labelledBy={"Select"}
+            setState={setSelectedOptions}
+            width={"150px"}
         />
     );
 };
 
 export default MultiSelectDropdown;
+
+// TODO TRY NEW FORM
+{
+    /* <MultiSelect
+options={tagsObj}
+value={selectedOptions}
+onChange={onChange}
+labelledBy={"Select"}
+/> */
+}

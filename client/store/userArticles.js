@@ -1,11 +1,6 @@
 import axios from "axios";
 
 // TODO: CLEAN THE COMMENTS!!!!
-// => ACTION TYPES
-// const GET_USER_BOOKMARK = "GET_USER_BOOKMARK";
-// const CREATE_USER_BOOKMARK = "CREATE_USER_BOOKMARK";
-// const READ_USER_BOOKMARK = "READ_USER_BOOKMARK";
-// const DELETE_USER_BOOKMARK = "DELETE_USER_BOOKMARK";
 
 // => ACTION TYPES
 const GET_USER_ARTICLES = "GET_USER_ARTICLES";
@@ -16,14 +11,6 @@ const UPD_USER_ARTICLE = "UPD_USER_ARTICLE";
 const DELETE_USER_ARTICLE = "DELETE_USER_ARTICLE";
 
 // => ACTION CREATORS
-// Get all articles for a single user
-// const _getUserBookmarks = (articles) => {
-//     return {
-//         type: GET_USER_BOOKMARK,
-//         articles
-//     };
-// };
-
 // GET ALL ARTICLES FOR A SINGLE USER
 const _getUserArticles = (articles) => {
     return {
@@ -31,14 +18,6 @@ const _getUserArticles = (articles) => {
         articles
     };
 };
-
-// CREATE AN ARTICLE
-// const _createUserBookmark = (article) => {
-//     return {
-//         type: CREATE_USER_BOOKMARK,
-//         article
-//     };
-// };
 
 // CREATE AN ARTICLE
 const _createUserArticle = (article) => {
@@ -56,13 +35,6 @@ const _userArticleError = (error) => {
     };
 };
 
-// const _readUserBookmark = (article) => {
-//     return {
-//         type: READ_USER_BOOKMARK,
-//         article
-//     };
-// };
-
 // UPDATE THE ARTICLE(MARK AS READ)
 const _readUserArticle = (article) => {
     return {
@@ -72,14 +44,6 @@ const _readUserArticle = (article) => {
 };
 
 // DELETE USER ARTICLE
-// const _deleteUserBookmark = (article) => {
-//     return {
-//         type: DELETE_USER_BOOKMARK,
-//         article
-//     };
-// };
-
-// // DELETE USER ARTICLE
 const _deleteUserArticle = (article) => {
     return {
         type: DELETE_USER_ARTICLE,
@@ -106,7 +70,6 @@ export const getUserArticles = (id, token) => {
                     authorization: token
                 }
             });
-            // dispatch(_getUserBookmarks(response.data));
             dispatch(_getUserArticles(response.data));
         } catch (error) {
             console.log(error);
@@ -118,10 +81,6 @@ export const getUserArticles = (id, token) => {
 export const createNewArticle = (article, userId, history, token) => {
     return async (dispatch) => {
         try {
-            console.log("THUNK CREATE /api/articles ARTICLE > ", article);
-            console.log("THUNK CREATE /api/articles USER_ID > ", userId);
-            console.log("THUNK CREATE /api/articles TOOKEN > ", token);
-
             const { data } = await axios.post(
                 `/api/articles`,
                 {
@@ -139,9 +98,6 @@ export const createNewArticle = (article, userId, history, token) => {
                     }
                 }
             );
-
-            // dispatch(_createUserBookmark(data));
-            console.log("THUNK CREATE /api/articlesRES.DATA > ", data);
 
             dispatch(_createUserArticle(data));
             history.push("/home");
@@ -165,7 +121,6 @@ export const createNewExtensionArticle = (url, name, userId, tags) => {
                 }
             ); // verify and store error details in createFormError redux peroperty
 
-            // dispatch(_createUserBookmark(data));
             dispatch(_createUserArticle(data));
         } catch (err) {
             console.log("CREATE A NEW ARTICLE ERR:", err);
@@ -180,7 +135,6 @@ export const getExtensionUserArticles = (id) => {
             const { data } = await axios.get(
                 `http://localhost:8080/api/userArticles/${id}`
             );
-            // dispatch(_getUserBookmarks(data));
             dispatch(_getUserArticles(data));
         } catch (error) {
             console.log(error);
@@ -197,7 +151,6 @@ export const markUserArticle = (userId, article) => {
                 userId
             });
 
-            // dispatch(_readUserBookmark(data));
             dispatch(_readUserArticle(data));
             // history.push("/home");
         } catch (err) {
@@ -231,7 +184,6 @@ export const deleteProduct = (articleId, article) => {
                     article
                 }
             );
-            console.log("DELETED DATA > ", result.data);
             dispatch(_deleteUserArticle(result.data));
             return result;
         } catch (err) {
