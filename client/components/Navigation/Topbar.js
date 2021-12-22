@@ -3,35 +3,53 @@ import { Link } from 'react-router-dom';
 
 const Topbar = ({ handleClick }) => {
   return (
-    <div className="top-section--wrapper">
-      <div className="bookmark--logo">
-        <img
-          src="../../../main-transparent.png"
-          height="80px"
-          className="image-logo-top-section"
-        />{' '}
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item">
+                <a href="#!">About</a>
+              </li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!">Contact</a>
+              </li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!">Terms of Use</a>
+              </li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!">Privacy Policy</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2021. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-4">
+                <a href="#!">
+                  <i class="bi-facebook fs-3"></i>
+                </a>
+              </li>
+              <li class="list-inline-item me-4">
+                <a href="#!">
+                  <i class="bi-twitter fs-3"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#!">
+                  <i class="bi-instagram fs-3"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div className="top_navbar">
-        <Link to="/home">
-          <h3 className="top-navbar-links pure-button">Home</h3>
-        </Link>
-        <Link to="/metrics">
-          <h3 className="top-navbar-links pure-button">User metrics</h3>
-        </Link>
-        <Link to="/create">
-          <h3 className="top-navbar-links pure-button">Create bookmark</h3>
-        </Link>
-        {/* <h3 className="top-navbar-links pure-button"> */}
-        <a
-          href="#"
-          onClick={handleClick}
-          className="logo-btn-navbar--link top-navbar-links pure-button"
-        >
-          Logout
-        </a>
-        {/* </h3> */}
-      </div>
-    </div>
+    </footer>
   );
 };
 

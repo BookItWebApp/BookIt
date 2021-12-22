@@ -265,6 +265,22 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+      {/* <!-- Call to Action--> */}
+      <section class="call-to-action text-white text-center" id="signup">
+        <div class="container position-relative">
+          <div class="row justify-content-center">
+            <div class="col-xl-6">
+              <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+
+              <div className="col-auto">
+                <button className="btn btn-primary btn-lg" id="submitButton">
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
