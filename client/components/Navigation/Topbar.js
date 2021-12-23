@@ -3,27 +3,25 @@ import { Link } from 'react-router-dom';
 
 const Topbar = ({ handleClick }) => {
   return (
-    <div className="top-section--wrapper">
-      <div className="top_navbar">
-        <Link to="/home">
-          <h3 className="top-navbar-links pure-button">Home</h3>
-        </Link>
-        <Link to="/metrics">
-          <h3 className="top-navbar-links pure-button">User metrics</h3>
-        </Link>
-        <Link to="/create">
-          <h3 className="top-navbar-links pure-button">Create bookmark</h3>
-        </Link>
-        {/* <h3 className="top-navbar-links pure-button"> */}
-        <a
-          href="#"
-          onClick={handleClick}
-          className="logo-btn-navbar--link top-navbar-links pure-button"
-        >
-          Logout
+    <div>
+      <Link to="/home">
+        <a class="btn btn-primary" href="#signup">
+          Home
         </a>
-        {/* </h3> */}
-      </div>
+      </Link>
+      <Link to="/metrics">
+        <a class="btn btn-primary" href="#signup">
+          User Metrics
+        </a>
+      </Link>
+      <Link to="/create">
+        <a class="btn btn-primary" href="#signup">
+          Create Bookmark
+        </a>
+      </Link>
+      <a href="#" onClick={handleClick} class="btn btn-primary">
+        Logout
+      </a>
     </div>
   );
 };

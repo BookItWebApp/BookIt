@@ -5,9 +5,18 @@ import { logout } from '../store';
 import Topbar from './Navigation/Topbar';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <nav className="navbar navbar-light bg-light static-top">
+  <nav
+    className="navbar navbar-light bg-light static-top"
+    style={{ paddingTop: '0px', paddingBottom: '0px' }}
+  >
     <div class="container">
-      <Link to="/home">
+      <Link
+        to="/home"
+        style={{
+          marginTop: '0px',
+          marginBottom: '0px',
+        }}
+      >
         <a
           class="navbar-brand"
           href="#!"
