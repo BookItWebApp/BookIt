@@ -110,7 +110,6 @@ export function LandingPage() {
                 href="https://github.com/BookItWebApp/BookItExtension"
                 style={{
                   fontSize: '1.2rem',
-                  align: 'center',
                 }}
               >
                 BookIt Chrome Extension
