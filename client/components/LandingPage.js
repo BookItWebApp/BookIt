@@ -154,7 +154,7 @@ export function LandingPage() {
       {/* <!-- Team--> */}
       <section className="testimonials text-center bg-light">
         <div className="container">
-          <h1 className="mb-5">Our Team</h1>
+          <h1 className="mb-5">Our Developers Team</h1>
           <div className="row">
             <div className="col-lg-4">
               <div className="testimonial-item mx-auto mb-5">
