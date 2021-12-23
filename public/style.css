@@ -306,7 +306,7 @@ form div {
   margin: 3px;
   border-radius: 5px;
   height: 720px;
-  background-color: var(--color-bookmars-background);
+  background-color: white;
 }
 .msg-header {
   display: flex;
@@ -343,11 +343,11 @@ form div {
   box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
   display: block;
   border: 1px solid black;
-  background-color: white;
+  background-color: #f8f9fa;
   width: 30%;
   height: 100%;
-  align-self: center;
-  align-items: center;
+  /* align-self: center;
+  align-items: center; */
   border-radius: 5px;
   justify-content: center;
 }
