@@ -145,7 +145,10 @@ export function LandingPage() {
             <div className="col-lg-6 order-lg-1 my-auto showcase-text">
               <h2>Monitor your reading habits</h2>
               <p className="lead mb-0">
-                Track how many of saved bookmarks you have actually read
+                Common problem is we never get back to the bookmark again, once
+                it's saved. Now you can manage bookmark 'Read'/'Unread' status,
+                so you can easily track how many of saved bookmarks you have
+                actually read - historically, split by tags, etc.
               </p>
             </div>
           </div>
@@ -154,7 +157,7 @@ export function LandingPage() {
       {/* <!-- Team--> */}
       <section className="testimonials text-center bg-light">
         <div className="container">
-          <h1 className="mb-5">Our Developers Team</h1>
+          <h1 className="mb-5">Our Team</h1>
           <div className="row">
             <div className="col-lg-4">
               <div className="testimonial-item mx-auto mb-5">
