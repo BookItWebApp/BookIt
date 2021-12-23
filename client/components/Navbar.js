@@ -7,16 +7,19 @@ import Topbar from './Navigation/Topbar';
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <nav className="navbar navbar-light bg-light static-top">
     <div class="container">
-      <a
-        class="navbar-brand"
-        href="#!"
-        style={{
-          marginTop: '0px',
-          marginBottom: '0px',
-        }}
-      >
-        <img src="../../main-transparent.png" height="100px" />{' '}
-      </a>
+      <Link to="/home">
+        <a
+          class="navbar-brand"
+          href="#!"
+          style={{
+            marginTop: '0px',
+            marginBottom: '0px',
+          }}
+        >
+          <img src="../../main-transparent.png" height="100px" />{' '}
+        </a>
+      </Link>
+
       {isLoggedIn ? (
         <Topbar handleClick={handleClick} />
       ) : (
@@ -53,14 +56,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Navbar);
-
-<nav class="navbar navbar-light bg-light static-top">
-  <div class="container">
-    <a class="navbar-brand" href="#!">
-      Start Bootstrap
-    </a>
-    <a class="btn btn-primary" href="#signup">
-      Sign Up
-    </a>
-  </div>
-</nav>;
