@@ -148,7 +148,9 @@ export function LandingPage() {
                 Common problem is we never get back to the bookmark again, once
                 it's saved. Now you can manage bookmark 'Read'/'Unread' status,
                 so you can easily track how many of saved bookmarks you have
-                actually read - historically, split by tags, etc.
+                actually read - historically, split by tags, etc. Never miss
+                important bookmarks unread, or set goals for reading saved
+                articles to get rid of never-read backlog!
               </p>
             </div>
           </div>
