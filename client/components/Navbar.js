@@ -20,11 +20,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       {isLoggedIn ? (
         <Topbar handleClick={handleClick} />
       ) : (
-        <Link to="/signup">
-          <a class="btn btn-primary" href="#signup">
-            Sign Up
+        <div>
+          <a href="https://github.com/BookItWebApp/BookItExtension">
+            Get the BookIt Extension for Chrome Browser
           </a>
-        </Link>
+          <Link to="/signup">
+            <a class="btn btn-primary" href="#signup">
+              Sign Up
+            </a>
+          </Link>
+        </div>
       )}
     </div>
   </nav>

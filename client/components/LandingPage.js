@@ -7,10 +7,7 @@ import bgShowcaseImage3 from '../../public/assets/bg-showcase-3.jpg';
 export function LandingPage() {
   return (
     <div>
-      <header
-        className="masthead"
-        // style={{ paddingBottom: '90px', paddingTop: '90px' }}
-      >
+      <header className="masthead">
         <div className="container position-relative">
           <div className="row justify-content-center">
             <div className="col-xl-6">
@@ -34,7 +31,7 @@ export function LandingPage() {
                     Want to share a bunch of bookmarks and have to copy them
                     one-by-one?{' '}
                   </div>
-                  <div>Never go back to the saved bookmark?</div>
+                  <div>Never get back to the saved bookmark?</div>
                 </div>
                 <h1>Try BookIt!</h1>
               </div>
@@ -50,14 +47,14 @@ export function LandingPage() {
               <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                 <div className="features-icons-icon d-flex">
                   <i
-                    className="bi bi-filter-square m-auto text-primary"
+                    className="bi bi-tags m-auto text-primary"
                     style={{ color: '#ec104d' }}
                   ></i>
                 </div>
-                <h3>Filter and sort bookmarks</h3>
+                <h3>Add tags and notes to bookmarks</h3>
                 <p className="lead mb-0">
-                  You can filter and sort them by tags, notes and other
-                  attributes
+                  You can add tags and notes to the bookmark, while saving it
+                  with our BookIt Chrome Extension
                 </p>
               </div>
             </div>
@@ -66,9 +63,10 @@ export function LandingPage() {
                 <div className="features-icons-icon d-flex">
                   <i className="bi bi-share m-auto text-primary"></i>
                 </div>
-                <h3>Share your bookmarks lists with friends</h3>
+                <h3>Share bookmarks lists with one link</h3>
                 <p className="lead mb-0">
-                  Easily share filtered bookmark lists with few mouse clicks
+                  Easily filter and share bookmark lists with couple mouse
+                  clicks
                 </p>
               </div>
             </div>
@@ -97,10 +95,26 @@ export function LandingPage() {
               }}
             ></div>
             <div className="col-lg-6 order-lg-1 my-auto showcase-text">
-              <h2>Filter and sort bookmarks</h2>
+              <h2>Add tags and notes to bookmarks</h2>
               <p className="lead mb-0">
-                Filter and sort bookmarks by tags, notes and other attributes
+                Looking for a new apartment, found some promising options on a
+                different websites and want to keep them organized? Use our
+                convenient BookIt Extension for the Chrome Browser to save web
+                bookmarks. While saving, add tags (let's say 'apartment' or
+                'Brooklyn') and notes ('spacious kitchen' or 'nice location'),
+                so you could search and filter through you bookmarks list later
+                on.
               </p>
+              <p className="lead mb-0">Download the Extension from here:</p>
+              <a
+                href="https://github.com/BookItWebApp/BookItExtension"
+                style={{
+                  fontSize: '1.2rem',
+                  align: 'center',
+                }}
+              >
+                BookIt Chrome Extension
+              </a>
             </div>
           </div>
           <div className="row g-0">
@@ -111,9 +125,14 @@ export function LandingPage() {
               }}
             ></div>
             <div className="col-lg-6 my-auto showcase-text">
-              <h2>Share your bookmarks lists with friends</h2>
+              <h2>Share bookmarks lists with one link</h2>
               <p className="lead mb-0">
-                Easily share filtered bookmark lists with few mouse clicks
+                Filtered out some bookmarks with, let's say, 'apartment' tag and
+                want to share it with your friend or partner? With couple mouse
+                clicks generate a single link to your list and share it via any
+                messenger. Your friend don't have to have an account with BookIt
+                to open this link. You can also add a meaningful message to your
+                friend while sharing.
               </p>
             </div>
           </div>
