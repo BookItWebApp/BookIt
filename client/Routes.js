@@ -10,15 +10,13 @@ import { AddMessage } from './components/sharing/AddMessage';
 import { SharingLink } from './components/sharing/SharingLink';
 import { ViewSharing } from './components/sharing/ViewSharing';
 import { EditBookmark } from './components/EditBookmark/EditBookmark';
+import { LandingPage } from './components/LandingPage';
 import NewUser from './components/NewUser';
 
 import { me } from './store';
 import { UserArticlesTab } from './components/UserArticlesTab';
 import { dataDirectory } from './dataviz/dataDirectory';
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -43,7 +41,7 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/home" component={LandingPage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={NewUser} />
             <Route path="/share/sharinglink" component={ViewSharing} />

@@ -82,7 +82,12 @@ export function UserArticlesTab() {
   return (
     <div>
       <div className="table-header">
-        <p>
+        <p
+          style={{
+            marginTop: '2rem',
+            marginBottom: '1rem',
+          }}
+        >
           {user.username[0].toUpperCase() + user.username.slice(1)}
           's Bookmarks:
         </p>
@@ -128,14 +133,14 @@ export function UserArticlesTab() {
       </div>
       <div className="table-btn-container">
         <button
-          className="table-btn pure-button"
+          className="btn btn-secondary"
           onClick={(e) => clickHandlerGridView()}
           id="tabViewButton"
         >
           Show me Grid view
         </button>
         <button
-          className="table-btn pure-button"
+          className="btn btn-primary"
           onClick={(e) => clickHandlerShare()}
           id="shareButton"
         >

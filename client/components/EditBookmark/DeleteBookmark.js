@@ -55,6 +55,8 @@ export function DeleteBookmark(props) {
         )
       ) : (
         <button
+          className="btn btn-secondary"
+          style={{ fontSize: '0.7rem' }}
           onClick={() => {
             setModal(true);
           }}

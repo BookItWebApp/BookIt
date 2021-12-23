@@ -30,7 +30,6 @@ export function AddMessage() {
           rows="15"
           placeholder="Tell your friend something about the links you are sharing!"
           font="sans-serif"
-          // cols="50"
           className="msg-input"
           onChange={(e) => setMessage(e.target.value)}
         ></textarea>
@@ -38,7 +37,7 @@ export function AddMessage() {
       <div className="btns-container--main-add-msg-cntainer">
         <div className="msg-add-btn-container">
           <button
-            className="msg-add-btn button-secondary pure-button"
+            className="btn btn-primary"
             onClick={(e) => clickHandlerAdd(e)}
             id="addMessage"
           >
@@ -47,7 +46,7 @@ export function AddMessage() {
         </div>
         <div className="msg-skip-btn-container">
           <button
-            className="msg-skip-btn button-secondary pure-button"
+            className="btn btn-secondary"
             onClick={(e) => clickHandlerSkip(e)}
             id="skipMessage"
           >
