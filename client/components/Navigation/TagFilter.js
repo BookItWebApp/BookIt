@@ -7,7 +7,6 @@ const TagFilter = () => {
     const userArticles = useSelector((state) => state.userArticles);
     const user = useSelector((state) => state.auth);
     const userTags = useSelector((state) => state.tags);
-    // console.log("ALL ARTICLES > ", userArticles);
 
     const selectedTags = useRef([]);
     const selectedTagsDD = useRef([]);
@@ -27,7 +26,6 @@ const TagFilter = () => {
                 (item) => item !== tagName
             );
         }
-        // console.log("=> SELECTEDTAGS.CURRENT >", selectedTags.current);
     };
 
     //

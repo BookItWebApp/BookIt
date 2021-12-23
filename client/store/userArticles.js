@@ -143,6 +143,21 @@ export const updBookmark = (article) => {
   };
 };
 
+// update bookamrk (from the EditBookmark component)
+export const updBookmark = (article) => {
+  return async (dispatch) => {
+    try {
+      let result = await axios.put(`/api/articles`, {
+        article,
+      });
+      dispatch(_updUserArticle(result.data));
+      return result;
+    } catch (err) {
+      console.log('UPDATE BOOKMARK ERR:', err);
+    }
+  };
+};
+
 // DELETE USER ARTICLE
 export const deleteProduct = (articleId, article) => {
   return async (dispatch) => {

@@ -84,3 +84,13 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
 };
 
 export default MultiSelectDropdown;
+
+// TODO TRY NEW FORM
+{
+    /* <MultiSelect
+options={tagsObj}
+value={selectedOptions}
+onChange={onChange}
+labelledBy={"Select"}
+/> */
+}
