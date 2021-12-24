@@ -331,7 +331,7 @@ form div {
   margin: 20px;
   padding-top: 20px;
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   height: 30%;
   align-self: center;
   align-items: center;
@@ -367,7 +367,7 @@ form div {
     justify-content: center;
     margin-top: 3%; */
 }
-.msg-skip-btn {
+.msg-skip-btn-container {
   margin: 5px;
   /* padding-top: 17px;
     padding-right: 30px;
