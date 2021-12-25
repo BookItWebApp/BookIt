@@ -306,7 +306,7 @@ form div {
   margin: 3px;
   border-radius: 5px;
   height: 720px;
-  background-color: var(--color-bookmars-background);
+  background-color: white;
 }
 .msg-header {
   display: flex;
@@ -331,7 +331,7 @@ form div {
   margin: 20px;
   padding-top: 20px;
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   height: 30%;
   align-self: center;
   align-items: center;
@@ -343,7 +343,7 @@ form div {
   box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
   display: block;
   border: 1px solid black;
-  background-color: white;
+  background-color: #f8f9fa !important;
   width: 30%;
   height: 100%;
   align-self: center;
@@ -367,7 +367,7 @@ form div {
     justify-content: center;
     margin-top: 3%; */
 }
-.msg-skip-btn {
+.msg-skip-btn-container {
   margin: 5px;
   /* padding-top: 17px;
     padding-right: 30px;
