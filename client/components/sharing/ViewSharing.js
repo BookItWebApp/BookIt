@@ -48,7 +48,7 @@ export function ViewSharing() {
   return (
     <div>
       <div className="table-header">
-        <p>Hi! Here is the articles list your friend shared with you: </p>
+        <p>Hi! Here is the bookmarks list your friend shared with you: </p>
       </div>
       <div className="shared-msg-area">{sharing.userMessage}</div>
       <div className="table-container">
