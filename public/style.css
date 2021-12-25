@@ -315,7 +315,7 @@ form div {
   align-items: center;
   font-size: 25px;
   padding-top: 3%;
-  margin: 5px;
+  margin-top: 3rem;
 }
 
 .btns--sharing-link-container {
@@ -366,10 +366,6 @@ form div {
 }
 
 /* ----------------------------------GENERATE LINK VIEW -------------------------------- */
-
-.msg-header {
-  margin-top: 5rem;
-}
 
 .link-generate-btn-container {
   display: flex;
@@ -428,6 +424,9 @@ form div {
 }
 
 /* ----------------------------------VIEW SHARED ITEMS-------------------------------- */
+.table-header {
+  margin-top: 2rem;
+}
 
 .shared-msg-area {
   display: block;
@@ -435,6 +434,8 @@ form div {
   position: relative;
   width: 50%;
   margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
   text-align: center;
   padding-top: 15px;
   padding-right: 30px;
@@ -445,7 +446,7 @@ form div {
   align-items: center;
   justify-content: center;
   color: #3a4246;
-  background-color: #fdfce5;
+  background-color: #f8f9fa !important;
   border-radius: 5px;
 }
 

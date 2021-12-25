@@ -28,7 +28,7 @@ export function AddMessage() {
         <textarea
           align="center"
           rows="15"
-          placeholder="Tell your friend something about the links you are sharing!"
+          placeholder="Tell your friend something about links you are sharing!"
           font="sans-serif"
           className="msg-input"
           onChange={(e) => setMessage(e.target.value)}
