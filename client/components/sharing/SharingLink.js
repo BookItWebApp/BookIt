@@ -77,7 +77,7 @@ export function SharingLink() {
           <div className="btns--sharing-link-container">
             <div className="msg-add-btn-container">
               <button
-                className="msg-add-btn button-secondary pure-button"
+                className="btn btn-primary"
                 onClick={() => copyToClipboard()}
                 id="copyToClipboard"
               >
@@ -97,7 +97,7 @@ export function SharingLink() {
             </div>
             <div className="msg-skip-btn-container">
               <button
-                className="msg-skip-btn button-secondary pure-button"
+                className="btn btn-secondary"
                 onClick={() => clickHandlerHome()}
                 id="backHome"
               >

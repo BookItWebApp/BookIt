@@ -397,6 +397,14 @@ form div {
   border: 1px solid black;
 }
 
+.btns--sharing-link-container {
+  height: 100px;
+  margin-top: 50px;
+  display: flex;
+  align-self: stretch;
+  justify-content: center;
+}
+
 .link-area {
   display: block;
   position: relative;
@@ -413,7 +421,7 @@ form div {
   justify-content: center;
   /* line-height: 18px; */
   color: #3a4246;
-  background-color: #fdfce5;
+  background-color: #f8f9fa !important;
   border-radius: 5px;
   /* border: 1px solid black; */
   margin-top: 3%;
