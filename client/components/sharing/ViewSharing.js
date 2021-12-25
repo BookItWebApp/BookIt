@@ -50,7 +50,11 @@ export function ViewSharing() {
       <div className="table-header">
         <p>Hi! Here is the bookmarks list your friend shared with you: </p>
       </div>
-      <div className="shared-msg-area">{sharing.userMessage}</div>
+      {sharing.userMessage != '' ? (
+        <div className="shared-msg-area">{sharing.userMessage}</div>
+      ) : (
+        0
+      )}
       <div className="table-container">
         <div className="ag-theme-alpine">
           <AgGridReact
