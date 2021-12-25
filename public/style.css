@@ -360,55 +360,16 @@ form div {
 }
 .msg-add-btn-container {
   margin: 5px;
-  /* display: flex;
-    width: 100%;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-    margin-top: 3%; */
 }
 .msg-skip-btn-container {
   margin: 5px;
-  /* padding-top: 17px;
-    padding-right: 30px;
-    padding-bottom: 19px;
-    padding-left: 30px;
-    font-size: 20px;
-    line-height: 18px;
-    color: #3a4246;
-    background-color: #f7e590;
-    border-radius: 5px;
-    border: 1px solid black; */
 }
-
-.msg-add-btn {
-  /* display: flex;
-    align-self: center;
-    padding-top: 17px;
-    padding-right: 30px;
-    padding-bottom: 19px;
-    padding-left: 30px;
-    font-size: 20px;
-    line-height: 18px;
-    color: #3a4246;
-    background-color: #dafdff;
-    border-radius: 5px;
-    border: 1px solid black; */
-}
-
-/* .msg-skip-btn-container {
-    display: block;
-    position: relative;
-    width: auto;
-    text-align: right;
-    align-self: right;
-    align-items: right;
-    justify-content: right;
-    margin-right: 5%;
-    margin-top: 5%;
-} */
 
 /* ----------------------------------GENERATE LINK VIEW -------------------------------- */
+
+.msg-header {
+  margin-top: 5rem;
+}
 
 .link-generate-btn-container {
   display: flex;

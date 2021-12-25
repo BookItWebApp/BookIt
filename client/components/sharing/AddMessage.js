@@ -35,15 +35,6 @@ export function AddMessage() {
         ></textarea>
       </div>
       <div className="btns-container--main-add-msg-cntainer">
-        <div className="msg-add-btn-container">
-          <button
-            className="btn btn-primary"
-            onClick={(e) => clickHandlerAdd(e)}
-            id="addMessage"
-          >
-            Add message
-          </button>
-        </div>
         <div className="msg-skip-btn-container">
           <button
             className="btn btn-secondary"
@@ -51,6 +42,15 @@ export function AddMessage() {
             id="skipMessage"
           >
             Skip this step
+          </button>
+        </div>
+        <div className="msg-add-btn-container">
+          <button
+            className="btn btn-primary"
+            onClick={(e) => clickHandlerAdd(e)}
+            id="addMessage"
+          >
+            Add message
           </button>
         </div>
       </div>
