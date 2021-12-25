@@ -106,7 +106,7 @@ export function EditBookmark(props) {
               <div className="card card-4">
                 <div className="card-body">
                   <h2 className="title">Edit Bookmark</h2>
-                  <form onSubmit={submitChanges}>
+                  <form className="form-edit" onSubmit={submitChanges}>
                     <div
                       style={{ margin: '0' }}
                       className="row-modal row-space"
@@ -116,8 +116,8 @@ export function EditBookmark(props) {
                           <label className="label-modal">Bookmark URL:</label>
                           <a href={url}>
                             {' '}
-                            {url.length > 50
-                              ? url.slice(0, 50) + '...'
+                            {url.length > 70
+                              ? url.slice(0, 70) + '...'
                               : url}{' '}
                           </a>
                         </div>
@@ -164,19 +164,19 @@ export function EditBookmark(props) {
                       <div className="col-2-modal">
                         <div className="input-modal-group">
                           <label className="label-modal">Read:</label>
-                          <div className="p-t-10">
+                          <div>
                             <label className="radio-container m-r-45">
                               Yes
                               <input
                                 type="radio"
                                 checked="checked"
-                                name="gender"
+                                name="read"
                               />
-                              {/* <span class="checkmark"></span> */}
+                              <span className="checkmark"></span>
                             </label>
                             <label className="radio-container">
                               No
-                              <input type="radio" name="gender" />
+                              <input type="radio" name="read" />
                               <span className="checkmark"></span>
                             </label>
                           </div>
@@ -219,7 +219,7 @@ export function EditBookmark(props) {
                       name="bookmarkId"
                       value={id}
                     />
-                    <label htmlFor="read">
+                    {/* <label htmlFor="read">
                       <b>Read: {read}</b>
                     </label>
                     <input
@@ -230,8 +230,39 @@ export function EditBookmark(props) {
                       onClick={(e) =>
                         read === 'Yes' ? setRead('No') : setRead('Yes')
                       }
-                    />
-                    <label htmlFor="tagsetter">
+                    /> */}
+                    <div
+                      className="row-modal row-space "
+                      style={{ margin: '0' }}
+                    >
+                      <div className="col-2-modal">
+                        <div className="input-modal-group">
+                          <label className="label-modal">Bookmark Tags:</label>
+                          <div
+                            className="rs-select2 js-select-simple select--no-search"
+                            style={{ margin: '0' }}
+                          >
+                            <div
+                              className="mySelect__value-container"
+                              style={{ margin: '0' }}
+                            >
+                              <CreatableSelect
+                                style={{ margin: '0' }}
+                                id="tagsetter"
+                                className="select"
+                                isMulti
+                                onChange={handleChange}
+                                autosize={true}
+                                defaultValue={tagValues}
+                                options={tagOptions}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* <label htmlFor="tagsetter">
                       <b>Bookmark Tags</b>
                     </label>
                     <div className="mySelect__value-container">
@@ -244,8 +275,40 @@ export function EditBookmark(props) {
                         defaultValue={tagValues}
                         options={tagOptions}
                       />
+                    </div> */}
+                    {/* BUTTONS */}
+                    <div
+                      className="table-btn-container"
+                      style={{ marginTop: '15px' }}
+                    >
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => {
+                          setModal(false);
+                        }}
+                        id="cancel"
+                      >
+                        Cancel
+                      </button>
+                      <input
+                        className="btn btn-primary"
+                        type="submit"
+                        value="Save Changes"
+                      />
+                      <ToastContainer
+                        position="top-right"
+                        autoClose={2000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                      />
                     </div>
-                    <div>
+
+                    {/* <div>
                       <input
                         type="submit"
                         value="Save Changes"
@@ -262,16 +325,15 @@ export function EditBookmark(props) {
                         draggable
                         pauseOnHover
                       />
-                    </div>
-                    <div></div>
+                    </div> */}
                   </form>
-                  <button
+                  {/* <button
                     onClick={() => {
                       setModal(false);
                     }}
                   >
                     Cancel
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
