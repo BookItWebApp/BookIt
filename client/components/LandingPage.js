@@ -309,15 +309,13 @@ export function LandingPage() {
         </div>
       </section>
       {/* <!-- Call to Action--> */}
-      <section class="call-to-action text-white text-center" id="signup">
-        <div class="container position-relative">
-          <div class="row justify-content-center">
-            <div class="col-xl-6">
-              <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+      <section className="call-to-action text-white text-center" id="signup">
+        <div className="container position-relative">
+          <div className="row justify-content-center">
+            <div className="col-xl-6">
+              <h2 className="mb-4">Ready to get started? Sign up now!</h2>
               <Link to="/signup">
-                <a class="btn btn-primary" href="#signup">
-                  Sign Up
-                </a>
+                <button className="btn btn-primary">Sign Up</button>
               </Link>
             </div>
           </div>
