@@ -196,18 +196,6 @@ export function EditBookmark(props) {
                       name="bookmarkId"
                       value={id}
                     />
-                    {/* <label htmlFor="read">
-                      <b>Read: {read}</b>
-                    </label>
-                    <input
-                      type="button"
-                      name="note"
-                      value={read === 'Yes' ? 'Mark as Unread' : 'Mark as Read'}
-                      size="30"
-                      onClick={(e) =>
-                        read === 'Yes' ? setRead('No') : setRead('Yes')
-                      }
-                    /> */}
                     <div
                       className="row-modal row-space "
                       style={{ margin: '0' }}

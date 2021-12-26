@@ -41,10 +41,10 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/home" component={LandingPage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={NewUser} />
             <Route path="/share/sharinglink" component={ViewSharing} />
+            <Route path="/" component={LandingPage} />
           </Switch>
         )}
       </div>
