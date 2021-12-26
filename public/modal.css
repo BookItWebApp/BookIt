@@ -390,9 +390,9 @@ input-modal {
 .input-modal--style-4 {
   line-height: 30px;
   background: #fafafa;
-  -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.08);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -404,6 +404,7 @@ input-modal {
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
   width: 100%;
+  border-color: gray;
 }
 
 .input-modal--style-4::-webkit-input-modal-placeholder {

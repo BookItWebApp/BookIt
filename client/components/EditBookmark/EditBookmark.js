@@ -169,49 +169,26 @@ export function EditBookmark(props) {
                               Yes
                               <input
                                 type="radio"
-                                checked="checked"
+                                checked={read === 'Yes' ? 'checked' : 0}
                                 name="read"
+                                onChange={(e) => setRead('Yes')}
                               />
                               <span className="checkmark"></span>
                             </label>
                             <label className="radio-container">
                               No
-                              <input type="radio" name="read" />
+                              <input
+                                type="radio"
+                                checked={read === 'Yes' ? 0 : 'checked'}
+                                name="read"
+                                onChange={(e) => setRead('No')}
+                              />
                               <span className="checkmark"></span>
                             </label>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    {/* <label htmlFor="url">
-                      <b>Bookmark URL:</b>
-                      <a href={url}>
-                        {' '}
-                        {url.length > 50 ? url.slice(0, 50) + '...' : url}{' '}
-                      </a>
-                    </label> */}
-                    {/* <label htmlFor="name">
-                      <b>Bookmark Name:</b>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      size="30"
-                      value={bookmarkName}
-                      onChange={(e) => setBookmarkName(e.target.value)}
-                    /> */}
-                    {/* <label htmlFor="note">
-                      <b>Note:</b>
-                    </label>
-                    <input
-                      type="ntext"
-                      type="text"
-                      name="note"
-                      size="30"
-                      value={note}
-                      onChange={(e) => setNote(e.target.value)}
-                    /> */}
                     <input type="hidden" id="tags" name="tags" value={tags} />
                     <input
                       type="hidden"
@@ -261,25 +238,9 @@ export function EditBookmark(props) {
                         </div>
                       </div>
                     </div>
-
-                    {/* <label htmlFor="tagsetter">
-                      <b>Bookmark Tags</b>
-                    </label>
-                    <div className="mySelect__value-container">
-                      <CreatableSelect
-                        id="tagsetter"
-                        className="select"
-                        isMulti
-                        onChange={handleChange}
-                        autosize={true}
-                        defaultValue={tagValues}
-                        options={tagOptions}
-                      />
-                    </div> */}
-                    {/* BUTTONS */}
                     <div
                       className="table-btn-container"
-                      style={{ marginTop: '15px' }}
+                      style={{ marginTop: '25px' }}
                     >
                       <button
                         className="btn btn-secondary"
@@ -307,33 +268,7 @@ export function EditBookmark(props) {
                         pauseOnHover
                       />
                     </div>
-
-                    {/* <div>
-                      <input
-                        type="submit"
-                        value="Save Changes"
-                        className="button"
-                      />
-                      <ToastContainer
-                        position="top-right"
-                        autoClose={2000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                      />
-                    </div> */}
                   </form>
-                  {/* <button
-                    onClick={() => {
-                      setModal(false);
-                    }}
-                  >
-                    Cancel
-                  </button> */}
                 </div>
               </div>
             </div>
