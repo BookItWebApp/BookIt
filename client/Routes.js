@@ -26,7 +26,7 @@ class Routes extends Component {
     const { isLoggedIn } = this.props;
 
     return (
-      <div className="routes-div--wrapper">
+      <div>
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/home" component={UserArticles} />
@@ -41,10 +41,10 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/home" component={LandingPage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={NewUser} />
             <Route path="/share/sharinglink" component={ViewSharing} />
+            <Route path="/" component={LandingPage} />
           </Switch>
         )}
       </div>
