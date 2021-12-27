@@ -9,7 +9,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     className="navbar navbar-light bg-light static-top"
     style={{ paddingTop: '0px', paddingBottom: '0px' }}
   >
-    <div class="container">
+    <div className="container">
       <Link
         to="/home"
         style={{
@@ -17,16 +17,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           marginBottom: '0px',
         }}
       >
-        <a
-          class="navbar-brand"
-          href="#!"
-          style={{
-            marginTop: '0px',
-            marginBottom: '0px',
-          }}
-        >
-          <img src="../../main-transparent.png" height="100px" />{' '}
-        </a>
+        <img
+          src="../../main-transparent.png"
+          height="75px"
+          className="navbar-brand"
+        />
       </Link>
 
       {isLoggedIn ? (
@@ -37,9 +32,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             Get the BookIt Extension for Chrome Browser
           </a>
           <Link to="/signup">
-            <a class="btn btn-primary" href="#signup">
-              Sign Up
-            </a>
+            <button className="btn btn-primary">Sign Up/Log In</button>
           </Link>
         </div>
       )}

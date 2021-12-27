@@ -28,22 +28,13 @@ export function AddMessage() {
         <textarea
           align="center"
           rows="15"
-          placeholder="Tell your friend something about the links you are sharing!"
+          placeholder="Tell your friend something about links you are sharing!"
           font="sans-serif"
           className="msg-input"
           onChange={(e) => setMessage(e.target.value)}
         ></textarea>
       </div>
       <div className="btns-container--main-add-msg-cntainer">
-        <div className="msg-add-btn-container">
-          <button
-            className="btn btn-primary"
-            onClick={(e) => clickHandlerAdd(e)}
-            id="addMessage"
-          >
-            Add message
-          </button>
-        </div>
         <div className="msg-skip-btn-container">
           <button
             className="btn btn-secondary"
@@ -51,6 +42,15 @@ export function AddMessage() {
             id="skipMessage"
           >
             Skip this step
+          </button>
+        </div>
+        <div className="msg-add-btn-container">
+          <button
+            className="btn btn-primary"
+            onClick={(e) => clickHandlerAdd(e)}
+            id="addMessage"
+          >
+            Add message
           </button>
         </div>
       </div>
