@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import ReactSelect from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 import { getUserArticles, createNewArticle } from "../store/userArticles";
 
@@ -170,6 +171,7 @@ function CreateArticle() {
                                                 isMulti
                                                 onChange={handleTagChange}
                                                 options={tagOptions}
+                                                style={{ margin: "0" }}
                                             />
                                         )}
                                     />

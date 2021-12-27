@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../store";
-import Topbar from "./Navigation/Topbar";
+import { logout } from "../../store";
+import Topbar from "./Topbar";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
     <nav
