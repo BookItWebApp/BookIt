@@ -460,23 +460,6 @@ form div {
     font-size: 14px;
 }
 
-/* ------------------------ CREATE BOOKMARK  -------------------------------- */
-.create-new-article-component {
-    height: 720px;
-    text-align: center;
-}
-.create-bookmark--tags {
-    /* height: 205px; */
-    /* width: 100%; */
-    /* position: relative; */
-    /* margin: 0; */
-}
-.react-select--tags {
-    width: 0px;
-    margin: 0;
-    padding: 0px;
-}
-
 /* ---------------- LOGIN SIGN-UP CONTAINER WHEN USER LOG-IN OR SIGN UP---- */
 .login-page-container {
     border: 2px solid var(--color-light-sand);
