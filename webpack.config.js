@@ -10,12 +10,12 @@ module.exports = {
     filename: './public/[name].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.scss'],
   },
   watchOptions: {
     ignored: /node_modules/,
   },
-  devtool:false,
+  devtool: false,
   // 'source-map',
   module: {
     rules: [
@@ -32,6 +32,19 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[contenthash].[ext]',
+              outputPath: 'public/assets',
+              publicPath: '/assets',
+            },
+          },
+        ],
       },
     ],
   },

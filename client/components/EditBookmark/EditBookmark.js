@@ -101,99 +101,173 @@ export function EditBookmark(props) {
     <div>
       {isModalOpen ? (
         ReactDOM.createPortal(
-          <div className="modal_edit">
-            <p>Edit Bookmark</p>
-            <form onSubmit={submitChanges}>
-              <label htmlFor="url">
-                <b>Bookmark URL:</b>
-                <a href={url}>
-                  {' '}
-                  {url.length > 50 ? url.slice(0, 50) + '...' : url}{' '}
-                </a>
-              </label>
-              <label htmlFor="name">
-                <b>Bookmark Name:</b>
-              </label>
-              <input
-                type="ntext"
-                type="text"
-                name="name"
-                size="30"
-                value={bookmarkName}
-                onChange={(e) => setBookmarkName(e.target.value)}
-              />
-              <label htmlFor="note">
-                <b>Note:</b>
-              </label>
-              <input
-                type="ntext"
-                type="text"
-                name="note"
-                size="30"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-              />
-              <input type="hidden" id="tags" name="tags" value={tags} />
-              <input
-                type="hidden"
-                id="bookmarkId"
-                name="bookmarkId"
-                value={id}
-              />
-              <label htmlFor="read">
-                <b>Read: {read}</b>
-              </label>
-              <input
-                type="button"
-                name="note"
-                value={read === 'Yes' ? 'Mark as Unread' : 'Mark as Read'}
-                size="30"
-                onClick={(e) =>
-                  read === 'Yes' ? setRead('No') : setRead('Yes')
-                }
-              />
-              <label htmlFor="tagsetter">
-                <b>Bookmark Tags</b>
-              </label>
-              <div className="mySelect__value-container">
-                <CreatableSelect
-                  id="tagsetter"
-                  className="select"
-                  isMulti
-                  onChange={handleChange}
-                  autosize={true}
-                  defaultValue={tagValues}
-                  options={tagOptions}
-                />
+          <div className="page-wrapper font-poppins">
+            <div className="wrapper wrapper--w680">
+              <div className="card card-4">
+                <div className="card-body">
+                  <h2 className="title">Edit Bookmark</h2>
+                  <form className="form-edit" onSubmit={submitChanges}>
+                    <div
+                      style={{ margin: '0' }}
+                      className="row-modal row-space"
+                    >
+                      <div className="col-2-modal">
+                        <div className="input-modal-group">
+                          <label className="label-modal">Bookmark URL:</label>
+                          <a href={url}>
+                            {' '}
+                            {url.length > 70
+                              ? url.slice(0, 70) + '...'
+                              : url}{' '}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="row-modal row-space "
+                      style={{ margin: '0' }}
+                    >
+                      <div className="col-2-modal">
+                        <div className="input-modal-group">
+                          <label className="label-modal">Bookmark Name:</label>
+                          <input
+                            className="input-modal--style-4"
+                            type="text"
+                            name="name"
+                            value={bookmarkName}
+                            onChange={(e) => setBookmarkName(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="row-modal row-space "
+                      style={{ margin: '0' }}
+                    >
+                      <div className="col-2-modal">
+                        <div className="input-modal-group">
+                          <label className="label-modal">Note:</label>
+                          <input
+                            className="input-modal--style-4"
+                            type="text"
+                            name="note"
+                            value={note}
+                            onChange={(e) => setNote(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="row-modal row-space "
+                      style={{ margin: '0' }}
+                    >
+                      <div className="col-2-modal">
+                        <div className="input-modal-group">
+                          <label className="label-modal">Read:</label>
+                          <div>
+                            <label className="radio-container m-r-45">
+                              Yes
+                              <input
+                                type="radio"
+                                checked={read === 'Yes' ? 'checked' : 0}
+                                name="read"
+                                onChange={(e) => setRead('Yes')}
+                              />
+                              <span className="checkmark"></span>
+                            </label>
+                            <label className="radio-container">
+                              No
+                              <input
+                                type="radio"
+                                checked={read === 'Yes' ? 0 : 'checked'}
+                                name="read"
+                                onChange={(e) => setRead('No')}
+                              />
+                              <span className="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="hidden" id="tags" name="tags" value={tags} />
+                    <input
+                      type="hidden"
+                      id="bookmarkId"
+                      name="bookmarkId"
+                      value={id}
+                    />
+                    <div
+                      className="row-modal row-space "
+                      style={{ margin: '0' }}
+                    >
+                      <div className="col-2-modal">
+                        <div className="input-modal-group">
+                          <label className="label-modal">Bookmark Tags:</label>
+                          <div
+                            className="rs-select2 js-select-simple select--no-search"
+                            style={{ margin: '0' }}
+                          >
+                            <div
+                              className="mySelect__value-container"
+                              style={{ margin: '0' }}
+                            >
+                              <CreatableSelect
+                                style={{ margin: '0' }}
+                                id="tagsetter"
+                                className="select"
+                                isMulti
+                                onChange={handleChange}
+                                autosize={true}
+                                defaultValue={tagValues}
+                                options={tagOptions}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="table-btn-container"
+                      style={{ marginTop: '25px' }}
+                    >
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => {
+                          setModal(false);
+                        }}
+                        id="cancel"
+                      >
+                        Cancel
+                      </button>
+                      <input
+                        className="btn btn-primary"
+                        type="submit"
+                        value="Save Changes"
+                      />
+                      <ToastContainer
+                        position="top-right"
+                        autoClose={2000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                      />
+                    </div>
+                  </form>
+                </div>
               </div>
-              <div>
-                <input type="submit" value="Save Changes" className="button" />
-                <ToastContainer
-                  position="top-right"
-                  autoClose={2000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                />
-              </div>
-              <div></div>
-            </form>
-            <button
-              onClick={() => {
-                setModal(false);
-              }}
-            >
-              Cancel
-            </button>
+            </div>
           </div>,
+
           document.querySelector('#modal')
         )
       ) : (
         <button
+          className="btn btn-secondary"
+          style={{ fontSize: '0.7rem' }}
           onClick={() => {
             setModal(true);
           }}

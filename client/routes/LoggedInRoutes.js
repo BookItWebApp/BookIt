@@ -4,6 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import CreateArticle from "../components/CreateArticle";
 import { UserArticles } from "../components/UserArticles";
 import { UserArticlesTab } from "../components/UserArticlesTab";
+import { EditBookmark } from "../components/EditBookmark/EditBookmark";
 
 import { AddMessage } from "../components/sharing/AddMessage";
 import { SharingLink } from "../components/sharing/SharingLink";
@@ -18,6 +19,7 @@ class LoggedInRoutes extends Component {
                 <Route exact path="/home" component={UserArticles} />
                 <Route exact path="/home/tab" component={UserArticlesTab} />
                 <Route path="/create" component={CreateArticle} />
+                <Route exact path="/edit" component={EditBookmark} />
                 <Route exact path="/share/message" component={AddMessage} />
                 <Route
                     exact
@@ -26,7 +28,7 @@ class LoggedInRoutes extends Component {
                 />
                 <Route path="/share/sharinglink" component={ViewSharing} />
                 <Route path="/metrics" component={dataDirectory} />
-                <Redirect to="/home" />
+                <Route path="/" component={UserArticles} />
             </Switch>
         );
     }

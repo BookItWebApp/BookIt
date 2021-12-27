@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSharing } from '../../store/sharing';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
-import { render } from 'react-dom';
 
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -48,9 +47,11 @@ export function ViewSharing() {
   return (
     <div>
       <div className="table-header">
-        <p>Hi! Here is the articles list your friend shared with you: </p>
+        <p>Hi! Here is the bookmarks list your friend shared with you: </p>
       </div>
-      <div className="shared-msg-area">{sharing.userMessage}</div>
+      {sharing.userMessage != '' ? (
+        <div className="shared-msg-area">{sharing.userMessage}</div>
+      ) : null}
       <div className="table-container">
         <div className="ag-theme-alpine">
           <AgGridReact

@@ -29,15 +29,11 @@ nav a {
     margin: 1em;
 }
 
-<<<<<<< HEAD
-/* todo */
-=======
 /* form.pure-form div {
   margin: 1em;
   display: inline-block;
 } */
 
->>>>>>> main
 form div {
     margin: 1em;
     display: inline-block;
@@ -310,7 +306,7 @@ form div {
     margin: 3px;
     border-radius: 5px;
     height: 720px;
-    background-color: var(--color-bookmars-background);
+    background-color: white;
 }
 .msg-header {
     display: flex;
@@ -319,7 +315,7 @@ form div {
     align-items: center;
     font-size: 25px;
     padding-top: 3%;
-    margin: 5px;
+    margin-top: 3rem;
 }
 
 .btns--sharing-link-container {
@@ -335,7 +331,7 @@ form div {
     margin: 20px;
     padding-top: 20px;
     display: flex;
-    width: 100%;
+    /* width: 100%; */
     height: 30%;
     align-self: center;
     align-items: center;
@@ -347,7 +343,7 @@ form div {
     box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
     display: block;
     border: 1px solid black;
-    background-color: #fdfce5;
+    background-color: #f8f9fa !important;
     width: 30%;
     height: 100%;
     align-self: center;
@@ -364,25 +360,9 @@ form div {
 }
 .msg-add-btn-container {
     margin: 5px;
-    /* display: flex;
-    width: 100%;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-    margin-top: 3%; */
 }
-.msg-skip-btn {
+.msg-skip-btn-container {
     margin: 5px;
-    /* padding-top: 17px;
-    padding-right: 30px;
-    padding-bottom: 19px;
-    padding-left: 30px;
-    font-size: 20px;
-    line-height: 18px;
-    color: #3a4246;
-    background-color: #f7e590;
-    border-radius: 5px;
-    border: 1px solid black; */
 }
 
 /* ----------------------------------GENERATE LINK VIEW -------------------------------- */
@@ -413,6 +393,14 @@ form div {
     border: 1px solid black;
 }
 
+.btns--sharing-link-container {
+    height: 100px;
+    margin-top: 50px;
+    display: flex;
+    align-self: stretch;
+    justify-content: center;
+}
+
 .link-area {
     display: block;
     position: relative;
@@ -429,13 +417,16 @@ form div {
     justify-content: center;
     /* line-height: 18px; */
     color: #3a4246;
-    background-color: #fdfce5;
+    background-color: #f8f9fa !important;
     border-radius: 5px;
     /* border: 1px solid black; */
     margin-top: 3%;
 }
 
 /* ----------------------------------VIEW SHARED ITEMS-------------------------------- */
+.table-header {
+    margin-top: 2rem;
+}
 
 .shared-msg-area {
     display: block;
@@ -443,6 +434,8 @@ form div {
     position: relative;
     width: 50%;
     margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
     text-align: center;
     padding-top: 15px;
     padding-right: 30px;
@@ -453,7 +446,7 @@ form div {
     align-items: center;
     justify-content: center;
     color: #3a4246;
-    background-color: #fdfce5;
+    background-color: #f8f9fa !important;
     border-radius: 5px;
 }
 
@@ -651,62 +644,62 @@ tr {
 /* ----------------------------------MODAL FOR EDIT/DELETE BOOKMARKS-------------------------------- */
 
 .modal_edit {
-  position: fixed;
-  z-index: 9999;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  bottom: 10%;
-  background-color: #f2f2f2;
-  /* padding: 15px; */
-  /* background: white; */
-  outline: none;
-  padding: 3.2rem;
-  text-align: center;
-  font-family: 'Vesper Libre bold';
-  color: #364c63;
-  font-size: large;
-  border: 1px solid #364c63;
-  border-radius: 4px;
-  display: flex;
+    position: fixed;
+    z-index: 9999;
+    top: 10%;
+    left: 10%;
+    right: 10%;
+    bottom: 10%;
+    background-color: #f2f2f2;
+    /* padding: 15px; */
+    /* background: white; */
+    outline: none;
+    padding: 3.2rem;
+    text-align: center;
+    font-family: "Vesper Libre bold";
+    color: #364c63;
+    font-size: large;
+    border: 1px solid #364c63;
+    border-radius: 4px;
+    display: flex;
 }
 
 .modal_delete {
-  position: fixed;
-  z-index: 9999;
-  top: 25%;
-  left: 10%;
-  right: 10%;
-  bottom: 25%;
-  background: white;
-  outline: none;
-  padding: 3.2rem;
-  text-align: center;
-  font-family: 'Vesper Libre bold';
-  color: #364c63;
-  font-size: large;
-  border: 1px solid #364c63;
-  border-radius: 4px;
+    position: fixed;
+    z-index: 9999;
+    top: 25%;
+    left: 10%;
+    right: 10%;
+    bottom: 25%;
+    background: white;
+    outline: none;
+    padding: 3.2rem;
+    text-align: center;
+    font-family: "Vesper Libre bold";
+    color: #364c63;
+    font-size: large;
+    border: 1px solid #364c63;
+    border-radius: 4px;
 }
 
 .mySelect__value-container {
-  height: 35px;
-  position: relative;
+    height: 35px;
+    position: relative;
 }
 
 .modal_edit form div {
-  display: block;
-  height: inherit;
-  margin: 0 auto;
+    display: block;
+    height: inherit;
+    margin: 0 auto;
 }
 
 .modal__title {
-  margin: 0 0 1.6rem 0;
+    margin: 0 0 1.6rem 0;
 }
 
 .modal__body {
-  font-size: 2rem;
-  font-weight: 300;
-  margin: 0 0 3.2rem 0;
-  word-break: break-all;
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 0 3.2rem 0;
+    word-break: break-all;
 }
