@@ -29,13 +29,9 @@ nav a {
     margin: 1em;
 }
 
-/* form.pure-form div {
-  margin: 1em;
-  display: inline-block;
-} */
-
 form div {
-    margin: 1em;
+    /* margin: 1em; */
+    margin: 0;
     display: inline-block;
 }
 
@@ -469,8 +465,16 @@ form div {
     height: 720px;
     text-align: center;
 }
-.btns--create-new-article {
-    margin: 4px;
+.create-bookmark--tags {
+    /* height: 205px; */
+    /* width: 100%; */
+    /* position: relative; */
+    /* margin: 0; */
+}
+.react-select--tags {
+    width: 0px;
+    margin: 0;
+    padding: 0px;
 }
 
 /* ---------------- LOGIN SIGN-UP CONTAINER WHEN USER LOG-IN OR SIGN UP---- */
