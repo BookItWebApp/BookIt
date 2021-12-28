@@ -12,6 +12,7 @@ const Login = () => {
     const isLoggedIn = useSelector((state) => state.auth.id);
     const auth = useSelector((state) => state.auth);
     const history = useHistory();
+
     function clickToRegister() {
         history.push("/signup");
     }
@@ -47,6 +48,7 @@ const Login = () => {
                     <div className="signup-login-header--form">
                         <h2>Login</h2>
                         <hr></hr>
+                        <p>Fill in this form to create an account!</p>
                     </div>
 
                     <div className="signup-login-body--form">

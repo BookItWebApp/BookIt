@@ -9,15 +9,6 @@ import CreatableSelect from "react-select/creatable";
 
 import { getUserArticles, createNewArticle } from "../store/userArticles";
 
-const customStyles = {
-    menu: (provided, state) => ({
-        ...provided,
-        width: "150px",
-        color: "black",
-        padding: "20px"
-    })
-};
-
 function CreateArticle() {
     const token = window.localStorage.getItem("token");
     const dispatch = useDispatch();
@@ -168,23 +159,12 @@ function CreateArticle() {
                                     <label className="col-form-label">
                                         Add Bookmark Tags
                                     </label>
-
-                                    <Controller
-                                        name="ReactSelect"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <ReactSelect
-                                                className="react-select--tags"
-                                                id="tagsetter"
-                                                isClearable
-                                                className="select"
-                                                {...field}
-                                                isMulti
-                                                onChange={handleTagChange}
-                                                options={tagOptions}
-                                                styles={customStyles}
-                                            />
-                                        )}
+                                    <CreatableSelect
+                                        id="tagsetter"
+                                        className="select"
+                                        isMulti
+                                        onChange={handleTagChange}
+                                        options={tagOptions}
                                     />
                                 </div>
 
