@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
 const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
-    // console.log("MULTI TAGS > ", usrTagsProps.tags);
     const allTags = usrTagsProps.tags;
 
     // FUNC TO REMOVE DUPLICATED TAGS DATA
@@ -13,7 +12,7 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
         return filterdData;
     };
     const filteredTags = removeDuplicatedTags(allTags);
-    // console.log("FILTERD TAGS > ", filteredTags);
+
     useEffect(() => {
         const tags = filteredTags.map((tag, idx) => {
             return {
@@ -22,7 +21,7 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
                 label: tag
             };
         });
-        // console.log("USE-EFFECT TAGS > ", tags);
+
         setTagObj(tags);
     }, [usrTagsProps]);
 
@@ -34,9 +33,6 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
     }, []);
 
     function getDropdownButtonLabel({ placeholderButtonLabel, value }) {
-        // console.log("placeholderButtonLabel> ", placeholderButtonLabel);
-        // console.log("value> ", value);
-
         if (value && value.some((o) => o.value === "*")) {
             return `${placeholderButtonLabel}: All`;
         } else {
@@ -84,3 +80,13 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
 };
 
 export default MultiSelectDropdown;
+
+// TODO TRY NEW FORM
+{
+    /* <MultiSelect
+options={tagsObj}
+value={selectedOptions}
+onChange={onChange}
+labelledBy={"Select"}
+/> */
+}

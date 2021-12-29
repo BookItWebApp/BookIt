@@ -13,6 +13,8 @@ export function UserArticles() {
     const filteredTags = useSelector((state) => state.tags.filteredTags);
     const user = useSelector((state) => state.auth);
 
+    const token = window.localStorage.getItem("token");
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -20,12 +22,10 @@ export function UserArticles() {
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
-    // console.log("ALL ARTICLES > ", articles);
-    // console.log("ALL FILTERD TAGS > ", filteredTags);
 
     useEffect(() => {
         dispatch(_clearSharingId());
-        dispatch(getUserArticles(user.id));
+        dispatch(getUserArticles(user.id, token));
     }, [dispatch]);
     //
     function clickHandlerShare() {
@@ -33,7 +33,6 @@ export function UserArticles() {
         const arrToShare = articles
             .filter((article) => validateFilter(article))
             .map((article) => article.id);
-        console.log("array to share", arrToShare);
         dispatch(_setFilteredArticlesToStore(arrToShare)),
             history.push("/share/message");
     }

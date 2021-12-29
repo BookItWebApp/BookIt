@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
     models: { User }
 } = require("../db");
+const { validUserOrEmail } = require("../middleware/middleware");
 module.exports = router;
 
 //GET /api/users
@@ -20,7 +21,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // POST /api/users
-router.post("/", async (req, res, next) => {
+router.post("/", [validUserOrEmail], async (req, res, next) => {
     try {
         const { username, email, password } = req.body;
         res.status(201).send(
