@@ -9,6 +9,15 @@ import CreatableSelect from "react-select/creatable";
 
 import { getUserArticles, createNewArticle } from "../store/userArticles";
 
+const customStyles = {
+    menu: (provided, state) => ({
+        ...provided,
+        width: "150px",
+        color: "black",
+        padding: "20px"
+    })
+};
+
 function CreateArticle() {
     const token = window.localStorage.getItem("token");
     const dispatch = useDispatch();
@@ -165,6 +174,7 @@ function CreateArticle() {
                                         isMulti
                                         onChange={handleTagChange}
                                         options={tagOptions}
+                                        styles={customStyles}
                                     />
                                 </div>
 
