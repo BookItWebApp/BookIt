@@ -5,29 +5,36 @@ import Plot from 'react-plotly.js';
 
 export function BasicMetrics() {
   const userArticles = useSelector((state) => state.userArticles);
-  const allTagsList = []
+  const allTagsList = [];
   const readArticles = userArticles.filter(
-    (article) => article.readAt !== null)
+    (article) => article.readAt !== null
+  );
 
-      //tags per article
-  const ArticleTagsList = {}
+  //tags per article
+  const ArticleTagsList = {};
   //provides a list of articles and associated tags
-   for (let i = 0; i < userArticles.length; i++) {
-   let article = userArticles[i]
-      ArticleTagsList[article.articleId] = article.taggings.map((tag) => tag.tag.name)
-      }
+  for (let i = 0; i < userArticles.length; i++) {
+    let article = userArticles[i];
+    ArticleTagsList[article.articleId] = article.taggings.map(
+      (tag) => tag.tag.name
+    );
+  }
 
   //Coordinated of tags, per tag, per day
   for (const [key, value] of Object.entries(ArticleTagsList)) {
     for (const tag of value) {
-      if (!allTagsList.includes(tag))
-          allTagsList.push(tag)
-    }}
+      if (!allTagsList.includes(tag)) allTagsList.push(tag);
+    }
+  }
 
   return (
-  <div>
-    <h2>
-      You've read <span class="highlight">{readArticles.length}</span> of your <span class="highlight">{userArticles.length}</span> saved articles, using <span class="highlight">{allTagsList.length}</span>  different tags.
-    </h2>
-  </div>
-  )}
+    <div>
+      <p style={{ fontSize: 'x-large' }}>
+        You've read <span class="highlight">{readArticles.length}</span> of your{' '}
+        <span class="highlight">{userArticles.length}</span> saved articles,
+        using <span class="highlight">{allTagsList.length}</span> different
+        tags.
+      </p>
+    </div>
+  );
+}
