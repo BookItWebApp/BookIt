@@ -528,7 +528,7 @@ form div {
 
 .dvSectionHeader {
   display: flex;
-  background-color: #add8e6;
+  background-color: #f8f9fa;
   height: 70px;
   margin: 0;
   padding: 10;
@@ -539,7 +539,7 @@ form div {
 .dataviz-box {
   display: flex;
   border: 1px solid black;
-  max-width: 80%;
+  max-width: 90%;
   flex-direction: column;
   min-width: 500px;
   margin: 10px;
@@ -549,6 +549,14 @@ form div {
 .dataviz-row {
   display: flex;
   justify-content: space-around;
+  flex-direction: row;
+  min-width: 300px;
+  max-width: 95%;
+}
+
+.dataviz-row-backlog {
+  display: flex;
+  justify-content: space-between;
   flex-direction: row;
   min-width: 300px;
   max-width: 95%;
@@ -569,7 +577,7 @@ tr {
   border: 1px solid black;
 }
 .highlight {
-  color: #48b2e7;
+  color: #f14a65;
 }
 
 .articlerow {
@@ -587,6 +595,24 @@ tr {
   /* width: 100%; */
   /* height: 100%; */
   display: block;
+}
+
+.dv-header {
+  /* display: flex; */
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  font-size: 25px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dv-header p {
+  text-align: center;
+}
+
+.dv-header h4 {
+  text-align: center;
 }
 
 /* ----------------------------------MODAL FOR EDIT/DELETE BOOKMARKS-------------------------------- */
