@@ -541,17 +541,15 @@ form div {
   border: 1px solid black;
   max-width: 80%;
   flex-direction: column;
-  min-width: 500px;
   margin: 10px;
   border-radius: 10px;
 }
 
 .dataviz-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
-  min-width: 300px;
-  max-width: 95%;
+  max-width: 90%;
 }
 
 tbody {
@@ -587,6 +585,16 @@ tr {
   /* width: 100%; */
   /* height: 100%; */
   display: block;
+}
+
+.backlog-plot-container{
+  width: 50%;
+  height: 100%
+}
+
+.tag-plot-container{
+  width: 50%;
+  height: 80%
 }
 
 /* ----------------------------------MODAL FOR EDIT/DELETE BOOKMARKS-------------------------------- */
@@ -651,3 +659,4 @@ tr {
   margin: 0 0 3.2rem 0;
   word-break: break-all;
 }
+
